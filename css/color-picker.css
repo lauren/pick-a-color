@@ -1,131 +1,194 @@
 body {
-  padding:20px;
+  padding: 20px;
 }
-
 .color-text-input {
-  height:30px!important; /* ugh, not sure what from bootstrap was conflicitng with this */
-}
+  height: 30px!important;
+  /* ugh, not sure what from bootstrap was conflicitng with this */
 
+}
 /* button to open picker */
-
 .color-dropdown {
-  height:30px;
-  padding:0px 5px;
+  height: 30px;
+  padding: 0px 5px;
 }
-
 .color-preview {
-  height:15px;
-  width:15px;
-  margin:5px 0px 0px 0px;
-  display:inline-block;
-  border:1px solid #ccc;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-          transition: border linear 0.2s, box-shadow linear 0.2s;
+  border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  height: 20px;
+  width: 20px;
+  margin: 3px 0px 0px 0px;
+  display: inline-block;
+  cursor: pointer;
 }
-
 .caret {
-  vertical-align:bottom;
-  margin-bottom:12px;
+  vertical-align: bottom;
+  margin-bottom: 15px;
 }
-
 /* basic menu of colors */
-
 .color-menu {
-  padding:5px 0px; /*overwriting bootstrap default */
-  min-width:100px;
-}
+  padding: 5px 0px;
+  /*overwriting bootstrap default */
 
+}
 .color-menu .color-preview {
-  vertical-align:middle;
-  margin:0px;
+  vertical-align: middle;
+  margin: 0px;
 }
-
 .color-menu li > a {
-  padding: 5px 5px; /*overwriting bootstrap default */
-}
+  padding: 5px 6px;
+  /*overwriting bootstrap default */
 
+  cursor: default;
+}
 .color-menu li > a:hover {
   background-color: #eee;
   color: #333;
-  background-image:none; /*overwriting a bg image from bootstrap*/
-}
+  background-image: none;
+  /*overwriting a bg image from bootstrap*/
 
+}
+.color-menu .btn {
+  margin: 0px 5px;
+  border: 1px solid #cccccc !important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  -o-border-radius: 4px !important;
+  border-radius: 4px !important;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075) !important;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s !important;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s !important;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s !important;
+  transition: border linear 0.2s, box-shadow linear 0.2s !important;
+  /*overwriting the bootstrap styles for button groups to not have all rounded corners */
+
+}
 .color-label {
-  vertical-align:middle;
-  margin:0px;
-  margin-left:5px;
+  vertical-align: middle;
+  margin: 0px;
+  margin-left: 5px;
+  cursor: pointer;
 }
-
-#current-color, #white {
-  background-color:#fff;
+#current-color,
+#white {
+  background-color: #ffffff;
 }
-
 #red {
-  background-color:#FF0000;
+  background-color: #ff0000;
 }
-
 #orange {
-  background-color:#FF6600;
+  background-color: #ff6600;
 }
-
 #yellow {
-  background-color:#FFFF00;
+  background-color: #ffff00;
 }
-
 #green {
-  background-color:#008000;
+  background-color: #008000;
 }
-
 #blue {
-  background-color:#0000FF;
+  background-color: #0000ff;
 }
-
 #indigo {
-  background-color:#4B0082;
+  background-color: #4b0082;
 }
-
 #violet {
-  background-color:#EE82EE;
+  background-color: #ee82ee;
 }
-
 #purple {
-  background-color:#800080;
+  background-color: #800080;
 }
-
 #black {
-  background-color:#000;
+  background-color: #000000;
 }
-
 /* color gradients */
-
 .color-box {
-  height:20px;
-  width:200px;
-  display:none;
-  position:absolute;
-  right:5px;
-  border:1px solid #ccc;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-          transition: border linear 0.2s, box-shadow linear 0.2s;
+  height: 20px;
+  width: 200px;
+  display: none;
+  position: absolute;
+  right: 5px;
+  border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
 }
-
+/* selector box */
+.color-band {
+  border: 2px solid #000000;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  height: 20px;
+  width: 5px;
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  top: -2px;
+  left: 97.5px;
+}
 #spectrum-white {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.1, #fff), color-stop(0.9, #000));
-  background-image: -moz-linear-gradient(left center, #fff 10%, #000 90%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #808080));
+  background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);
+}
+#spectrum-white .color-band {
+  left: 0px;
+}
+#spectrum-red {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff0000), color-stop(1, #000000));
+  background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 50%, #000000 100%);
+}
+#spectrum-orange {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff6600), color-stop(1, #000000));
+  background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 50%, #000000 100%);
+}
+#spectrum-yellow {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ffff00), color-stop(1, #000000));
+  background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 50%, #000000 100%);
+}
+#spectrum-green {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(0.5, #008000), color-stop(1, #000000));
+  background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 50%, #000000 100%);
+}
+#spectrum-blue {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #0000ff), color-stop(1, #000000));
+  background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 50%, #000000 100%);
+}
+#spectrum-purple {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(0.5, #800080), color-stop(1, #000000));
+  background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 50%, #000000 100%);
+}
+#spectrum-black {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #808080));
+  background-image: -moz-linear-gradient(left center, #000000 0%, #808080 100%);
+}
+#spectrum-black .color-band {
+  left: 0px;
+  border: 2px solid #808080;
 }

@@ -1,14 +1,44 @@
-/**** variables ****/
+// variables 
 
+// basic colors 
 
+@white:#ffffff;
 
-/**** mixins ****/
+@red:#FF0000;
 
-.borders (@radius:4px,@width:1px,@color:#ccc,@style:solid) {
-	border:1px solid #ccc;
-}
+@orange:#FF6600;
 
-  border:1px solid #ccc;
+@yellow:#FFFF00;
+
+@green:#008000;
+
+@blue:#0000FF;
+
+@indigo:#4B0082;
+
+@violet:#EE82EE;
+
+@purple:#800080;
+
+@black:#000000;
+
+@bw_midpoint:lighten(@black,50%);
+
+@border_gray:#ccc;
+
+// widths
+
+@color-box-width: 200px;
+@color-band-width: 5px;
+
+// mixins
+
+.borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid) {
+	border:@width @style @color;
+	-webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+			 -o-border-radius: @radius;
+          border-radius: @radius;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -16,12 +46,19 @@
      -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
           transition: border linear 0.2s, box-shadow linear 0.2s;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+}
 
+.two-color-spectrum (@start: @white, @stop: @black) {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, @start), color-stop(1.0, @stop));
+  background-image: -moz-linear-gradient(left center, @start 0%, @stop 100%);
+}
 
-/**** actual styles ****/
+.three-color-spectrum (@mid: @red) {
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@mid,50%)), color-stop(0.5, @mid), color-stop(1.0, darken(@mid,50%)));
+	background-image: -moz-linear-gradient(left center, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
+}
+
+// actual styles 
 
 body {
   padding:20px;
@@ -39,107 +76,151 @@ body {
 }
 
 .color-preview {
-  height:15px;
-  width:15px;
-  margin:5px 0px 0px 0px;
+	.borders-shadows;
+  height:20px;
+  width:20px;
+  margin:3px 0px 0px 0px;
   display:inline-block;
+  cursor:pointer;
 }
 
 .caret {
   vertical-align:bottom;
-  margin-bottom:12px;
+  margin-bottom:15px;
 }
 
 /* basic menu of colors */
 
 .color-menu {
   padding:5px 0px; /*overwriting bootstrap default */
-  min-width:100px;
+	.color-preview {
+	  vertical-align:middle;
+	  margin:0px;
+	}
+	li > a {
+	  padding: 5px 6px; /*overwriting bootstrap default */
+	  cursor: default;
+		&:hover {
+		  background-color: #eee;
+		  color: #333;
+		  background-image:none; /*overwriting a bg image from bootstrap*/
+		}
+	}
+	.btn {
+		margin: 0px 5px;
+		.borders-shadows!important; /*overwriting the bootstrap styles for button groups to not have all rounded corners */
+	}
 }
 
-.color-menu .color-preview {
-  vertical-align:middle;
-  margin:0px;
-}
 
-.color-menu li > a {
-  padding: 5px 5px; /*overwriting bootstrap default */
-}
-
-.color-menu li > a:hover {
-  background-color: #eee;
-  color: #333;
-  background-image:none; /*overwriting a bg image from bootstrap*/
-}
 
 .color-label {
   vertical-align:middle;
   margin:0px;
   margin-left:5px;
+  cursor:pointer;
 }
 
 #current-color, #white {
-  background-color:#fff;
+  background-color:@white;
 }
 
 #red {
-  background-color:#FF0000;
+  background-color:@red;
 }
 
 #orange {
-  background-color:#FF6600;
+  background-color:@orange;
 }
 
 #yellow {
-  background-color:#FFFF00;
+  background-color:@yellow;
 }
 
 #green {
-  background-color:#008000;
+  background-color:@green;
 }
 
 #blue {
-  background-color:#0000FF;
+  background-color:@blue;
 }
 
 #indigo {
-  background-color:#4B0082;
+  background-color:@indigo
 }
 
 #violet {
-  background-color:#EE82EE;
+  background-color:@violet;
 }
 
 #purple {
-  background-color:#800080;
+  background-color:@purple;
 }
 
 #black {
-  background-color:#000;
+  background-color:@black;
 }
 
 /* color gradients */
 
 .color-box {
   height:20px;
-  width:200px;
+  width:@color-box-width;
   display:none;
   position:absolute;
   right:5px;
-  border:1px solid #ccc;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-          transition: border linear 0.2s, box-shadow linear 0.2s;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+  .borders-shadows;
+}
+
+/* selector box */
+
+.color-band {
+	.borders-shadows(4px,2px,@black,solid);
+	height:20px;
+	width:@color-band-width;
+	display:inline-block;
+	cursor:pointer;
+	position:absolute;
+	top:-2px;
+	left:(@color-box-width/2) - (@color-band-width/2);
 }
 
 #spectrum-white {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.1, #fff), color-stop(0.9, #000));
-  background-image: -moz-linear-gradient(left center, #fff 10%, #000 90%);
+  .two-color-spectrum(@white,@bw_midpoint);
+	.color-band {
+	left:0px;
+	}
 }
+
+#spectrum-red {
+	.three-color-spectrum(@red);
+}
+
+#spectrum-orange {
+	.three-color-spectrum(@orange);
+}
+
+#spectrum-yellow {
+	.three-color-spectrum(@yellow);
+}
+
+#spectrum-green {
+	.three-color-spectrum(@green);
+}
+
+#spectrum-blue {
+	.three-color-spectrum(@blue);
+}
+
+#spectrum-purple {
+	.three-color-spectrum(@purple);
+}
+
+#spectrum-black {
+  .two-color-spectrum(@black,@bw_midpoint);
+	.color-band {
+		left:0px;
+		border: 2px solid #808080
+	}
+}
+

@@ -14,7 +14,7 @@ var blackSpectrumWidth = aFewCBs; //how long the black colorbox spectrum is near
 
 /* make the current-color preview match the text field value */
 function updatePreview() {
-  typedColor = $(".color-text-input").val();
+  typedColor = tinycolor($(".color-text-input").val()).toHex();
   $("#current-color").css("background-color","#" + typedColor);
 }
 

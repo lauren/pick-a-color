@@ -40,11 +40,11 @@ function getColorMultiplier(color,position) {
     return (1 - (position / halfSpectrumWidth)) / 2; 
     
     //if the color is in the dark half of the box...
-    } else { 
+  } else { 
       
     //get the percentage position relative to half of the box and return negative value
     return -(((position - halfSpectrumWidth) / halfSpectrumWidth) / 2); 
-    }
+  }
 
 }
 
@@ -168,26 +168,21 @@ $(document).ready( function() {
     
     /* watch the position of the color band to change its border color when needed for visibility */
     
-    /* if it's not black or white, it should be lightened at the dark end of the spectrum */
+    /* if it's not black or white....  */
     if ((colorName != "white") && (colorName != "black")) {
-      if (colorBandLocation >= brightSpectrumWidth) {
-        lightenBorder($(this));
-      }
-      /* when it comes back into the bright portion, turn it black again */
-      else if (colorBandLocation < brightSpectrumWidth) {
-        darkenBorder($(this));
-      }
+      
+      /* lighten at dark end, darken at light end */
+      (colorBandLocation >= brightSpectrumWidth) ? lightenBorder($(this)) : darkenBorder($(this));
+
     } else if (colorName == "black") {
+      
       /* turn the black colorband light gray in the black section of the spectrum */
-      if (colorBandLocation > blackSpectrumWidth) {
-        darkenBorder($(this));
-      }
-      else if (colorBandLocation <= blackSpectrumWidth) {
-        lightenBorder($(this));
-      }
+      (colorBandLocation > blackSpectrumWidth) ? darkenBorder($(this)) : lightenBorder($(this));
+      
     }
 
   });
       
   
 });
+

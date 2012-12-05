@@ -49,6 +49,7 @@ body {
   /*overwriting bootstrap default */
 
   cursor: default;
+  min-height: 25px;
 }
 .color-menu li > a:hover {
   background-color: #eee;

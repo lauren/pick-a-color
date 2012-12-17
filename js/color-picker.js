@@ -16,7 +16,7 @@
       			'<span class="caret"></span>',
       		'</button>',
       	  '<ul class="color-menu dropdown-menu">',
-      	    '<h6 class="visible-phone color-menu-instructions">Tap color to lighten or darken</h6>',
+      	    '<h6 class="hidden-desktop color-menu-instructions">Tap color to lighten or darken</h6>',
       		 	'<li>',
       				'<a class="white">',
       					'<span class="color-preview white"></span>',

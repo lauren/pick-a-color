@@ -16,6 +16,7 @@
       			'<span class="caret"></span>',
       		'</button>',
       	  '<ul class="color-menu dropdown-menu">',
+      	    '<h6 class="visible-phone color-menu-instructions">Tap color to lighten or darken</h6>',
       		 	'<li>',
       				'<a class="white">',
       					'<span class="color-preview white"></span>',
@@ -258,7 +259,7 @@
     
         /* replace the color label with a 'select me' button */
         $(this).parent().prev('.color-label').replaceWith(
-          '<button class="btn btn-mini" type="button">Select</button>');
+          '<button class="btn btn-mini color-select" type="button">Select</button>');
         
         // watch the position of the color band to change its border color 
         // when needed for visibility 
@@ -309,6 +310,7 @@
       var myColorMenuLinks = $(this).find(".color-menu li a");
       var myColorPreviewButton = $(this).find(".btn-group");
       var myColorMenu = $(this).find(".color-menu");
+      var myTouchInstructions = $(this).find(".color-menu-instructions");
 
       methods.updatePreview.apply(myColorTextInput);
       
@@ -375,15 +377,19 @@
       });
       
       /* show the spectrum when you hover over a color */
-      
+            
       myColorMenuLinks.hover( function() {
         // grab the class of the a and pre-pend '#spectrum-' 
         // to make the class of the accompanying spectrum
         currentSpectrum = ".spectrum-" + $(this).attr("class"); 
         $(currentSpectrum).show();
+        // update touch instructions
+        $(myTouchInstructions).html("Tap spectrum to lighten or darken"); 
       },
       function() {
         $(currentSpectrum).hide();
+        // restore touch instructions
+        $(myTouchInstructions).html("Tap color to lighten or darken"); 
       });
       
       /* move the highlight band when you click on a spectrum */
@@ -397,6 +403,8 @@
         var newPosition = mouseX - spectrumLeft - myStyleVars.halfHighlightBandWidth;
         highlightBand.css("left",newPosition); // move mouse
         methods.calculateHighlightedColor.apply(highlightBand);
+        // update touch instructions
+        myTouchInstructions.html("Press 'select' to choose this color.");
       });
             
       methods.horizontallyDraggable.apply($(this).find(".highlight-band"));

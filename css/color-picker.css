@@ -38,6 +38,11 @@ body {
   /*overwriting bootstrap default */
 
 }
+@media only screen and (max-width: 767px) {
+  .color-menu {
+    left: -189px;
+  }
+}
 .color-menu .color-preview {
   vertical-align: middle;
   margin: 0px;
@@ -103,6 +108,11 @@ body {
   transition: border linear 0.2s, box-shadow linear 0.2s !important;
   /*overwriting the bootstrap styles for button groups to not have all rounded corners */
 
+}
+.color-menu-instructions {
+  text-align: center;
+  padding: 0px 6px;
+  margin: 0px;
 }
 .color-label {
   vertical-align: middle;
@@ -190,4 +200,8 @@ body {
 .spectrum-black .highlight-band {
   left: 0px;
   border: 2px solid #808080;
+}
+.color-select {
+  height: 22px;
+  padding-top: 0px;
 }

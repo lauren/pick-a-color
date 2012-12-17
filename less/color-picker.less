@@ -79,9 +79,11 @@ body {
 	.borders-shadows;
   height:20px;
   width:20px;
-  margin:3px 0px 0px 0px;
   display:inline-block;
   cursor:pointer;
+	&.current-color {
+		margin-top:3px;
+	}
 }
 
 .caret {
@@ -95,7 +97,7 @@ body {
   padding:5px 0px; /*overwriting bootstrap default */
 	
 	@media only screen and (max-width: 767px) {
-		left:-189px
+		left:-190px
 	}
 	
 	.color-preview {
@@ -145,15 +147,21 @@ body {
 	  padding: 5px 6px; /*overwriting bootstrap default */
 	  cursor: default;
 		min-height:25px;
+		background-color:#fff;
 		&:hover {
 		  background-color: #eee;
 		  color: #333;
-		  background-image:none; /*overwriting a bg image from bootstrap*/
+			background-image: none;
 		}
 	}
 	.btn {
 		margin: 0px 5px;
 		.borders-shadows!important; /*overwriting the bootstrap styles for button groups to not have all rounded corners */
+		.color-select {
+			height:22px;
+			padding-top:0px;
+			margin-top:1px;
+		}
 	}
 }
 
@@ -184,6 +192,7 @@ body {
   position:absolute;
   right:5px;
   .borders-shadows;
+	margin-top:1px;
 }
 
 /* selector box */
@@ -238,8 +247,4 @@ body {
 	}
 }
 
-.color-select {
-	height:22px;
-	padding-top:0px;
-}
 

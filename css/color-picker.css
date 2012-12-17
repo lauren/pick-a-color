@@ -24,9 +24,11 @@ body {
   transition: border linear 0.2s, box-shadow linear 0.2s;
   height: 20px;
   width: 20px;
-  margin: 3px 0px 0px 0px;
   display: inline-block;
   cursor: pointer;
+}
+.color-preview.current-color {
+  margin-top: 3px;
 }
 .caret {
   vertical-align: bottom;
@@ -40,7 +42,7 @@ body {
 }
 @media only screen and (max-width: 767px) {
   .color-menu {
-    left: -189px;
+    left: -190px;
   }
 }
 .color-menu .color-preview {
@@ -84,13 +86,12 @@ body {
 
   cursor: default;
   min-height: 25px;
+  background-color: #fff;
 }
 .color-menu li > a:hover {
   background-color: #eee;
   color: #333;
   background-image: none;
-  /*overwriting a bg image from bootstrap*/
-
 }
 .color-menu .btn {
   margin: 0px 5px;
@@ -108,6 +109,11 @@ body {
   transition: border linear 0.2s, box-shadow linear 0.2s !important;
   /*overwriting the bootstrap styles for button groups to not have all rounded corners */
 
+}
+.color-menu .btn .color-select {
+  height: 22px;
+  padding-top: 0px;
+  margin-top: 1px;
 }
 .color-menu-instructions {
   text-align: center;
@@ -139,6 +145,7 @@ body {
   -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
+  margin-top: 1px;
 }
 /* selector box */
 .highlight-band {
@@ -200,8 +207,4 @@ body {
 .spectrum-black .highlight-band {
   left: 0px;
   border: 2px solid #808080;
-}
-.color-select {
-  height: 22px;
-  padding-top: 0px;
 }

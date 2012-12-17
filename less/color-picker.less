@@ -65,7 +65,7 @@ body {
 }
 
 .color-text-input {
-  height:30px!important; /* ugh, not sure what from bootstrap was conflicitng with this */
+	min-height:30px;
 }
 
 /* button to open picker */
@@ -96,11 +96,50 @@ body {
 	.color-preview {
 	  vertical-align:middle;
 	  margin:0px;
+		&.current-color, &.white {
+		  background-color:@white;
+		}
+
+		&.red {
+		  background-color:@red;
+		}
+
+		&.orange {
+		  background-color:@orange;
+		}
+
+		&.yellow {
+		  background-color:@yellow;
+		}
+
+		&.green {
+		  background-color:@green;
+		}
+
+		&.blue {
+		  background-color:@blue;
+		}
+
+		&.indigo {
+		  background-color:@indigo
+		}
+
+		&.violet {
+		  background-color:@violet;
+		}
+
+		&.purple {
+		  background-color:@purple;
+		}
+
+		&.black {
+		  background-color:@black;
+		}
 	}
 	li > a {
 	  padding: 5px 6px; /*overwriting bootstrap default */
 	  cursor: default;
-		min-height:40px;
+		min-height:25px;
 		&:hover {
 		  background-color: #eee;
 		  color: #333;
@@ -122,45 +161,8 @@ body {
   cursor:pointer;
 }
 
-#current-color, #white {
-  background-color:@white;
-}
 
-#red {
-  background-color:@red;
-}
 
-#orange {
-  background-color:@orange;
-}
-
-#yellow {
-  background-color:@yellow;
-}
-
-#green {
-  background-color:@green;
-}
-
-#blue {
-  background-color:@blue;
-}
-
-#indigo {
-  background-color:@indigo
-}
-
-#violet {
-  background-color:@violet;
-}
-
-#purple {
-  background-color:@purple;
-}
-
-#black {
-  background-color:@black;
-}
 
 /* color gradients */
 
@@ -175,7 +177,7 @@ body {
 
 /* selector box */
 
-.color-band {
+.highlight-band {
 	.borders-shadows(4px,2px,@black,solid);
 	height:20px;
 	width:@color-band-width;
@@ -186,40 +188,40 @@ body {
 	left:(@color-box-width/2) - (@color-band-width/2);
 }
 
-#spectrum-white {
+.spectrum-white {
   .two-color-spectrum(@white,@bw_midpoint);
-	.color-band {
+	.highlight-band {
 	left:0px;
 	}
 }
 
-#spectrum-red {
+.spectrum-red {
 	.three-color-spectrum(@red);
 }
 
-#spectrum-orange {
+.spectrum-orange {
 	.three-color-spectrum(@orange);
 }
 
-#spectrum-yellow {
+.spectrum-yellow {
 	.three-color-spectrum(@yellow);
 }
 
-#spectrum-green {
+.spectrum-green {
 	.three-color-spectrum(@green);
 }
 
-#spectrum-blue {
+.spectrum-blue {
 	.three-color-spectrum(@blue);
 }
 
-#spectrum-purple {
+.spectrum-purple {
 	.three-color-spectrum(@purple);
 }
 
-#spectrum-black {
+.spectrum-black {
   .two-color-spectrum(@black,@bw_midpoint);
-	.color-band {
+	.highlight-band {
 		left:0px;
 		border: 2px solid #808080
 	}

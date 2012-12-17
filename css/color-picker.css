@@ -2,9 +2,7 @@ body {
   padding: 20px;
 }
 .color-text-input {
-  height: 30px!important;
-  /* ugh, not sure what from bootstrap was conflicitng with this */
-
+  min-height: 30px;
 }
 /* button to open picker */
 .color-dropdown {
@@ -44,6 +42,37 @@ body {
   vertical-align: middle;
   margin: 0px;
 }
+.color-menu .color-preview.current-color,
+.color-menu .color-preview.white {
+  background-color: #ffffff;
+}
+.color-menu .color-preview.red {
+  background-color: #ff0000;
+}
+.color-menu .color-preview.orange {
+  background-color: #ff6600;
+}
+.color-menu .color-preview.yellow {
+  background-color: #ffff00;
+}
+.color-menu .color-preview.green {
+  background-color: #008000;
+}
+.color-menu .color-preview.blue {
+  background-color: #0000ff;
+}
+.color-menu .color-preview.indigo {
+  background-color: #4b0082;
+}
+.color-menu .color-preview.violet {
+  background-color: #ee82ee;
+}
+.color-menu .color-preview.purple {
+  background-color: #800080;
+}
+.color-menu .color-preview.black {
+  background-color: #000000;
+}
 .color-menu li > a {
   padding: 5px 6px;
   /*overwriting bootstrap default */
@@ -81,37 +110,6 @@ body {
   margin-left: 5px;
   cursor: pointer;
 }
-#current-color,
-#white {
-  background-color: #ffffff;
-}
-#red {
-  background-color: #ff0000;
-}
-#orange {
-  background-color: #ff6600;
-}
-#yellow {
-  background-color: #ffff00;
-}
-#green {
-  background-color: #008000;
-}
-#blue {
-  background-color: #0000ff;
-}
-#indigo {
-  background-color: #4b0082;
-}
-#violet {
-  background-color: #ee82ee;
-}
-#purple {
-  background-color: #800080;
-}
-#black {
-  background-color: #000000;
-}
 /* color gradients */
 .color-box {
   height: 20px;
@@ -133,7 +131,7 @@ body {
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
 /* selector box */
-.color-band {
+.highlight-band {
   border: 2px solid #000000;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -154,42 +152,42 @@ body {
   top: -2px;
   left: 97.5px;
 }
-#spectrum-white {
+.spectrum-white {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);
 }
-#spectrum-white .color-band {
+.spectrum-white .highlight-band {
   left: 0px;
 }
-#spectrum-red {
+.spectrum-red {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff0000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 50%, #000000 100%);
 }
-#spectrum-orange {
+.spectrum-orange {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff6600), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 50%, #000000 100%);
 }
-#spectrum-yellow {
+.spectrum-yellow {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ffff00), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 50%, #000000 100%);
 }
-#spectrum-green {
+.spectrum-green {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(0.5, #008000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 50%, #000000 100%);
 }
-#spectrum-blue {
+.spectrum-blue {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #0000ff), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 50%, #000000 100%);
 }
-#spectrum-purple {
+.spectrum-purple {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(0.5, #800080), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 50%, #000000 100%);
 }
-#spectrum-black {
+.spectrum-black {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #000000 0%, #808080 100%);
 }
-#spectrum-black .color-band {
+.spectrum-black .highlight-band {
   left: 0px;
   border: 2px solid #808080;
 }

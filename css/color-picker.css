@@ -39,8 +39,9 @@ body {
   padding: 5px 0px;
   /*overwriting bootstrap default */
 
+  min-width: 330px;
 }
-@media only screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .color-menu {
     left: -190px;
   }
@@ -81,17 +82,14 @@ body {
   background-color: #000000;
 }
 .color-menu li > a {
-  padding: 5px 6px;
+  padding: 5px 15px;
   /*overwriting bootstrap default */
 
-  cursor: default;
   min-height: 25px;
-  background-color: #fff;
 }
 .color-menu li > a:hover {
   background-color: #eee;
   color: #333;
-  background-image: none;
 }
 .color-menu .btn {
   margin: 0px 5px;
@@ -110,10 +108,10 @@ body {
   /*overwriting the bootstrap styles for button groups to not have all rounded corners */
 
 }
-.color-menu .btn .color-select {
+.color-menu .btn.color-select {
   height: 22px;
-  padding-top: 0px;
-  margin-top: 1px;
+  padding: 0px 5px;
+  margin-top: 0px;
 }
 .color-menu-instructions {
   text-align: center;
@@ -130,9 +128,8 @@ body {
 .color-box {
   height: 20px;
   width: 200px;
-  display: none;
   position: absolute;
-  right: 5px;
+  left: 120px;
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -145,7 +142,7 @@ body {
   -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
-  margin-top: 1px;
+  cursor: pointer;
 }
 /* selector box */
 .highlight-band {
@@ -207,4 +204,85 @@ body {
 .spectrum-black .highlight-band {
   left: 0px;
   border: 2px solid #808080;
+}
+/* tabbed navigation */
+.color-menu-tabs {
+  padding: 5px;
+  font-size: 12px;
+  color: #333;
+  margin-bottom: 3px;
+}
+.color-menu-tabs span {
+  position: relative;
+  top: 3px;
+  margin: 5px;
+}
+.color-menu-tabs a {
+  color: #333;
+  text-decoration: none;
+  padding: 5px;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+}
+.color-menu-tabs a:hover {
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+.color-menu-tabs .active a {
+  background-color: #fff;
+  background-image: none;
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  -webkit-border-top-left-radius: 4px;
+  -webkit-border-top-right-radius: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+}
+.color-menu-tabs .active a:hover {
+  background-color: #fff;
+  background-image: none;
+  border-bottom: 1px solid #fff;
+}
+.active-content {
+  display: block;
+}
+.inactive-content {
+  display: none;
+}
+/*** saved colors tab ***/
+.savedColors-content {
+  width: 300px!important;
+  padding: 5px 15px;
+  white-space: normal;
+}
+.saved-color-col {
+  position: relative;
+  left: -15px;
+  float: left;
 }

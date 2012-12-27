@@ -536,13 +536,21 @@
         methods.updatePreview.apply(this); // update preview
       });
       
-      /* open dropdown menu when you click the preview button */
+      /* open toggle visibility of dropdown menu when you click the preview button */
       
       myColorPreviewButton.click(function(e) {
-        e.stopPropagation();
-        (myColorMenu.css("display") === "none") ?
-          methods.openDropdown(myColorPreviewButton,myColorMenu) :
+        e.stopPropagation(); // prevent clicks to preview button from also triggering the generic close function below
+        if (myColorMenu.css("display") === "none") { // if the related menu is currently hidden...
+          $(".color-menu").each(function() { // check all the other color menus...
+            if ($(this).css("display") === "block") { // if one is open,
+              var thisColorPreviewButton = $(this).parents(".btn-group") // find its color preview button
+              methods.closeDropdown(thisColorPreviewButton,$(this)); // close it
+            }
+          });
+          methods.openDropdown(myColorPreviewButton,myColorMenu);
+        } else {
           methods.closeDropdown(myColorPreviewButton,myColorMenu);
+        }
       });
       
       /* any click outside of a dropdown should close all open dropdowns */

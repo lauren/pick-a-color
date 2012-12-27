@@ -29,6 +29,7 @@
 // widths
 
 @color-box-width: 200px;
+@color-box-width-phone: 190px;
 @color-band-width: 5px;
 
 // mixins
@@ -79,10 +80,6 @@
 
 // actual styles 
 
-body {
-  padding:20px;
-}
-
 .color-text-input {
 	min-height:30px;
 }
@@ -117,7 +114,8 @@ body {
 	min-width: 330px;
 	
 	@media screen and (max-width: 767px) {
-		left:-190px;
+		left:-202px;
+		min-width:320px;
 	}
 	
 	.color-preview {
@@ -165,6 +163,7 @@ body {
 	}
 	li > a {
 	  padding: 5px 15px; /*overwriting bootstrap default */
+	  cursor: default;
 		min-height:25px;
 		&:hover {
 		  background-color: #eee;
@@ -201,9 +200,12 @@ body {
   height:20px;
   width:@color-box-width;
   position:absolute;
-  left:120px;
+  left:110px;
   .borders-shadows;
 	cursor:pointer;
+	@media screen and (max-width: 767px) {
+		width:@color-box-width-phone;
+	}
 }
 
 /* selector box */

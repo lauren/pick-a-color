@@ -1,6 +1,3 @@
-body {
-  padding: 20px;
-}
 .color-text-input {
   min-height: 30px;
 }
@@ -43,7 +40,8 @@ body {
 }
 @media screen and (max-width: 767px) {
   .color-menu {
-    left: -190px;
+    left: -202px;
+    min-width: 320px;
   }
 }
 .color-menu .color-preview {
@@ -85,6 +83,7 @@ body {
   padding: 5px 15px;
   /*overwriting bootstrap default */
 
+  cursor: default;
   min-height: 25px;
 }
 .color-menu li > a:hover {
@@ -129,7 +128,7 @@ body {
   height: 20px;
   width: 200px;
   position: absolute;
-  left: 120px;
+  left: 110px;
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -143,6 +142,11 @@ body {
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
   cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .color-box {
+    width: 190px;
+  }
 }
 /* selector box */
 .highlight-band {

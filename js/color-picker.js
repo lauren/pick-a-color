@@ -52,7 +52,9 @@
     
     var basicColorsMarkup = [
             '<div class="basicColors-content active-content">',
-        	    '<h6 class="hidden-desktop color-menu-instructions">Tap spectrum to lighten or darken color.</h6>',
+        	    '<h6 class="hidden-desktop color-menu-instructions">',
+        	      'Tap spectrum to lighten or darken color.',
+        	    '</h6>',
         		 	'<li>',
         				'<a class="white">',
         					'<span class="color-preview white"></span>',
@@ -130,7 +132,10 @@
     
     var savedColorsMarkup = [
             '<div class="savedColors-content inactive-content">',
-                '<p class="saved-colors-instructions">Type in a color or use the spectrums to lighten or darken an existing color. Up to 40 custom colors will be saved here.</p>',
+                '<p class="saved-colors-instructions">',
+                  'Type in a color or use the spectrums to lighten or darken an existing color. ' + 
+                  'Up to 40 custom colors will be saved here.',
+                '</p>',
             '</div>'
     ].join('\n');
                
@@ -539,11 +544,13 @@
       /* open toggle visibility of dropdown menu when you click the preview button */
       
       myColorPreviewButton.click(function(e) {
-        e.stopPropagation(); // prevent clicks to preview button from also triggering the generic close function below
+        // prevent clicks to preview button from also triggering the generic close function below
+        e.stopPropagation(); 
         if (myColorMenu.css("display") === "none") { // if the related menu is currently hidden...
           $(".color-menu").each(function() { // check all the other color menus...
             if ($(this).css("display") === "block") { // if one is open,
-              var thisColorPreviewButton = $(this).parents(".btn-group") // find its color preview button
+              // find its color preview button
+              var thisColorPreviewButton = $(this).parents(".btn-group") 
               methods.closeDropdown(thisColorPreviewButton,$(this)); // close it
             }
           });
@@ -621,7 +628,11 @@
         $(myTouchInstructions).html("Tap color to select");
         $(myColorMenu).css("left","0");
         
-      }
+      };
+      
+      /*** for using saved colors ***/
+      
+      
     
     });
 

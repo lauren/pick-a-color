@@ -17,7 +17,7 @@
     
     /*** settings ***/
     
-    var settings = $.extend( {
+    var settings = $.extend( {}, {
       'showSpectrum'        : true,
       'showSavedColors'     : true,
       'showColorWheel'      : true
@@ -571,6 +571,7 @@
         selectedColor = tinycolor(selectedColor).toHex(); // convert to hex
         $(myColorTextInput).val(selectedColor); // put it in the field 
         methods.updatePreview.apply(myColorTextInput); // update the button preview to match 
+        methods.addToSavedColors(selectedColor,mySavedColorsContent); // add to saved colors
         methods.closeDropdown(myColorPreviewButton,myColorMenu); // close the dropdown
       });
       

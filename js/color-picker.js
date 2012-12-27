@@ -169,6 +169,8 @@
       mySavedColors = [];
       mySavedColorLinks = {};
     }
+    
+    var supportsTouch = 'ontouchstart' in window || 'onmsgesturechange' in window;
      
     /*** methods ***/
     
@@ -557,43 +559,55 @@
         methods.updatePreview.apply(this); // update preview
       });
       
-      /* toggle visibility of dropdown menu when you click the preview button */
+      /* toggle visibility of dropdown menu when you click or press the preview button */
       
-      myColorPreviewButton.click(function(e) {        
-        methods.pressPreviewButton(e,myColorMenu,myColorPreviewButton);
-      });
-      
-      /* any click or touchend outside of a dropdown should close all open dropdowns */
-      
-      $("html").click(function(){
-        if (myColorMenu.css("display","block")) {
-          methods.closeDropdown(myColorPreviewButton,myColorMenu);
-        }
-      });
-      
-      
-      $("html").bind("touchend", function() {
-        if (myColorMenu.css("display","block")) {
-          methods.closeDropdown(myColorPreviewButton,myColorMenu);
-        }
-      });
+      if (supportsTouch) {
+        // toggle visibility of dropdown when you press preview button
+        myColorPreviewButton.bind("touchend", function(e) {
+          methods.pressPreviewButton(e,myColorMenu,myColorPreviewButton);
+        });
+        
+        //any touch outside of a dropdown should close all open dropdowns
+        
+        $("html").bind("touchend", function() {
+          if (myColorMenu.css("display","block")) {
+            methods.closeDropdown(myColorPreviewButton,myColorMenu);
+          }
+        });
+        
+        // Prevent touchend events to color-menu or color-text-input from closing dropdown
 
-      // Prevent click and touchend events to color-menu or color-text-input from closing dropdown
-      myColorMenu.click(function(e){
-        e.stopPropagation();
-      });
-      
-      myColorTextInput.click(function(e){
-        e.stopPropagation();
-      });
-      
-      myColorMenu.bind("touchend", function(e){
-        e.stopPropagation();
-      });
-      
-      myColorTextInput.bind("touchend", function(e){
-        e.stopPropagation();
-      });
+        myColorMenu.bind("touchend", function(e){
+          e.stopPropagation();
+        });
+
+        myColorTextInput.bind("touchend", function(e){
+          e.stopPropagation();
+        });
+        
+      } else {
+        // toggle visibility of dropdown when you click preview button
+        myColorPreviewButton.click(function(e) {        
+          methods.pressPreviewButton(e,myColorMenu,myColorPreviewButton);
+        });
+        
+        // any click outside of a dropdown should close all open dropdowns */
+
+        $("html").click(function(){
+          if (myColorMenu.css("display","block")) {
+            methods.closeDropdown(myColorPreviewButton,myColorMenu);
+          }
+        });
+        
+        // Prevent click events to color-menu or color-text-input from closing dropdown
+        myColorMenu.click(function(e){
+          e.stopPropagation();
+        });
+
+        myColorTextInput.click(function(e){
+          e.stopPropagation();
+        });
+      };
       
       /* update field and close menu when selecting from basic dropdown */
       

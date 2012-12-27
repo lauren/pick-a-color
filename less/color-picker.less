@@ -29,7 +29,7 @@
 // widths
 
 @color-box-width: 200px;
-@color-box-width-phone: 190px;
+@color-box-width-phone: 170px;
 @color-band-width: 5px;
 
 // mixins
@@ -82,6 +82,9 @@
 
 .color-text-input {
 	min-height:30px;
+	@media screen and (max-width: 767px) {
+		min-width:230px;
+	}
 }
 
 /* button to open picker */
@@ -114,8 +117,8 @@
 	min-width: 330px;
 	
 	@media screen and (max-width: 767px) {
-		left:-202px;
-		min-width:320px;
+		left:-257px;
+		min-width:300px;
 	}
 	
 	.color-preview {

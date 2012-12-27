@@ -159,6 +159,11 @@
       rowsInDropdown          : 8,
       maxColsInDropdown       : 5
     };
+    
+    if (settings.showSavedColors === true) {
+      mySavedColors = [];
+      mySavedColorLinks = {};
+    }
      
     /*** methods ***/
     
@@ -489,12 +494,7 @@
     
     return this.each(function () {
       
-      
-      
-      if (settings.showSavedColors === true) {
-        mySavedColors = [];
-        mySavedColorLinks = {};
-      }
+    
       
       /*** initialize  ***/
       methods.initialize.apply(this);      

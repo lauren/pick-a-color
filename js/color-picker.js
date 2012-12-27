@@ -264,6 +264,22 @@
         "#" + myColorVars.typedColor);
       },
       
+      pressPreviewButton: function(event,myColorMenu,myColorPreviewButton) {
+        event.stopPropagation(); 
+        if (myColorMenu.css("display") === "none") { // if the related menu is currently hidden...
+          $(".color-menu").each(function() { // check all the other color menus...
+            if ($(this).css("display") === "block") { // if one is open,
+              // find its color preview button
+              var thisColorPreviewButton = $(this).parents(".btn-group") 
+              methods.closeDropdown(thisColorPreviewButton,$(this)); // close it
+            }
+          });
+          methods.openDropdown(myColorPreviewButton,myColorMenu);
+        } else {
+          methods.closeDropdown(myColorPreviewButton,myColorMenu);
+        }
+      },
+      
       /* open and close dropdown menu */
       
       openDropdown: function(button,menu) {
@@ -541,39 +557,41 @@
         methods.updatePreview.apply(this); // update preview
       });
       
-      /* open toggle visibility of dropdown menu when you click the preview button */
+      /* toggle visibility of dropdown menu when you click the preview button */
       
-      myColorPreviewButton.click(function(e) {
-        // prevent clicks to preview button from also triggering the generic close function below
-        e.stopPropagation(); 
-        if (myColorMenu.css("display") === "none") { // if the related menu is currently hidden...
-          $(".color-menu").each(function() { // check all the other color menus...
-            if ($(this).css("display") === "block") { // if one is open,
-              // find its color preview button
-              var thisColorPreviewButton = $(this).parents(".btn-group") 
-              methods.closeDropdown(thisColorPreviewButton,$(this)); // close it
-            }
-          });
-          methods.openDropdown(myColorPreviewButton,myColorMenu);
-        } else {
-          methods.closeDropdown(myColorPreviewButton,myColorMenu);
-        }
+      myColorPreviewButton.click(function(e) {        
+        methods.pressPreviewButton(e,myColorMenu,myColorPreviewButton);
       });
       
-      /* any click outside of a dropdown should close all open dropdowns */
+      /* any click or touchend outside of a dropdown should close all open dropdowns */
       
       $("html").click(function(){
         if (myColorMenu.css("display","block")) {
           methods.closeDropdown(myColorPreviewButton,myColorMenu);
         }
       });
+      
+      
+      $("html").bind("touchend", function() {
+        if (myColorMenu.css("display","block")) {
+          methods.closeDropdown(myColorPreviewButton,myColorMenu);
+        }
+      });
 
-      // Prevent click events to color-menu or color-text-input from closing dropdown
+      // Prevent click and touchend events to color-menu or color-text-input from closing dropdown
       myColorMenu.click(function(e){
         e.stopPropagation();
       });
       
       myColorTextInput.click(function(e){
+        e.stopPropagation();
+      });
+      
+      myColorMenu.bind("touchend", function(e){
+        e.stopPropagation();
+      });
+      
+      myColorTextInput.bind("touchend", function(e){
         e.stopPropagation();
       });
       

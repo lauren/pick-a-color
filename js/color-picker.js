@@ -486,7 +486,6 @@
           (mySavedColors.indexOf(color) === -1)) { // it's not already saved
           mySavedColors.push(color); // put it in the saved colors array
           methods.updateSavedColorMarkup(mySavedColorsContent);
-          console.log(mySavedColorsContent);
         }
       }
       

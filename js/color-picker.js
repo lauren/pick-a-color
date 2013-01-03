@@ -18,9 +18,10 @@
     /*** settings ***/
     
     var settings = $.extend( {}, {
-      'showSpectrum'        : true,
-      'showSavedColors'     : true,
-      'showColorWheel'      : true
+      'showSpectrum'          : true,
+      'showSavedColors'       : true,
+      'showColorWheel'        : true,
+      'saveColorsPerElement'  : true
     }, options);
     
     /*** color picker markup ***/
@@ -165,9 +166,9 @@
       maxColsInDropdown       : 5
     };
     
-    if (settings.showSavedColors === true) {
-      mySavedColors = [];
-      mySavedColorLinks = {};
+    if ((settings.showSavedColors === true) && settings.saveColorsPerElement === true) {
+      var allSavedColors = [];
+      var allColorLinks = [];
     }
     
     var supportsTouch = 'ontouchstart' in window || 'onmsgesturechange' in window;
@@ -446,7 +447,7 @@
         };
       },
       
-      updateSavedColorMarkup: function(savedColorsContent) {
+      updateSavedColorMarkup: function(savedColorsContent,mySavedColors) {
         if (mySavedColors.length > 0) {
           
           var savedColors = mySavedColors; // array to iterate through
@@ -456,17 +457,17 @@
           // split into up to max number of columns by max number of rows
           var i = 0;
           var perCol = myStyleVars.rowsInDropdown; // number of colors we can pull into a column
-          var colStart = 0; // used to keep track of where to start slicing the array
-          var colEnd = perCol; // used to keep track of where to stop slicing the array
+          // used to keep track of where to start slicing the array
+          // starting at the end of the array to show more recently saved colors first
+          var colStart = savedColors.length - perCol; 
           // number of columns is the number of saved colors over available rows
           var numCols = Math.ceil(savedColors.length/perCol);
           // limit that to the maximum number of columns
           var numCols = Math.min(numCols,myStyleVars.maxColsInDropdown);
           while (i < numCols) {
-            columns.push(savedColors.slice(colStart,colEnd));
+            columns.push(savedColors.slice(colStart,(colStart+perCol)));
             i++;
-            colStart += perCol;
-            colEnd += perCol;
+            colStart -= perCol; // move start back by the number of items per column
           }
           
           // create markup for each column and put it into the markup array
@@ -494,21 +495,20 @@
           // put the new html into the saved colors div
           savedColorsContent.html(savedColorsMarkup.join('\n'));
           
-          // update previews of saved colors and add them to the saved color links object
-          var savedColorLinks = $(".savedColors-content a");
+          // update previews of saved colors 
+          var savedColorLinks = $(savedColorsContent).find("a");
           methods.updateSavedColorPreview(savedColorLinks);
-          mySavedColorLinks = savedColorLinks;
           
         };
       },
       
-      addToSavedColors: function(color,mySavedColorsContent) {
+      addToSavedColors: function(color,mySavedColorsContent,mySavedColors) {
         // make sure that...
         if ((settings.showSavedColors === true) && // we're saving colors
           (presetColors.indexOf(color) === -1) && // it's not in the presets
           (mySavedColors.indexOf(color) === -1)) { // it's not already saved
           mySavedColors.push(color); // put it in the saved colors array
-          methods.updateSavedColorMarkup(mySavedColorsContent);
+          methods.updateSavedColorMarkup(mySavedColorsContent,mySavedColors);
         }
       }
       
@@ -534,6 +534,10 @@
       }
       if (settings.showSavedColors === true) {
         var mySavedColorsContent = $(this).find(".savedColors-content");
+        if (settings.saveColorsPerElement === true) {
+          var mySavedColors = [];
+          var mySavedColorsLinks = [];
+        };
       }
 
       methods.updatePreview.apply(myColorTextInput);
@@ -554,7 +558,9 @@
         } else { // otherwise...
           myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
           $(this).val(myColorVars.newValue); // put the new value in the field
-          methods.addToSavedColors(myColorVars.newValue,mySavedColorsContent); // save to saved colors
+          // save to saved colors
+          methods.addToSavedColors(myColorVars.newValue,mySavedColorsContent,mySavedColors); 
+          mySavedColorsLinks = $(mySavedColorsContent).find("a"); // update links object
         }
         methods.updatePreview.apply(this); // update preview
       });
@@ -616,11 +622,13 @@
         var selectedColor = $(this).find("span:first").css("background-color"); 
         selectedColor = tinycolor(selectedColor).toHex(); // convert to hex
         $(myColorTextInput).val(selectedColor); // put it in the field 
-        methods.updatePreview.apply(myColorTextInput); // update the button preview to match 
-        methods.addToSavedColors(selectedColor,mySavedColorsContent); // add to saved colors
+        methods.updatePreview.apply(myColorTextInput); // update the button preview to match
+        // add to saved colors 
+        methods.addToSavedColors(selectedColor,mySavedColorsContent,mySavedColors); 
+        mySavedColorsLinks = $(mySavedColorsContent).find("a"); // update links object
         methods.closeDropdown(myColorPreviewButton,myColorMenu); // close the dropdown
       });
-      
+            
       /* make the tabs tabbable */
       
       if ((settings.showSavedColors === true) || (settings.showColorWheel === true)) {
@@ -663,9 +671,21 @@
       };
       
       /*** for using saved colors ***/
-      
-      
-    
+                  
+      $(mySavedColorsContent).click( function(event) {
+
+        // make sure click happened on a link or span
+        if ($(event.target).is("SPAN") || $(event.target).is("A")) { 
+          //grab the color the link's class or span's parent link's class
+          var selectedColor = $(event.target).is("SPAN") ? 
+            $(event.target).parent().attr("class") :
+            $(event.target).attr("class");
+          $(myColorTextInput).val(selectedColor); // put it in the field 
+          methods.updatePreview.apply(myColorTextInput); // update the button preview to match 
+          methods.closeDropdown(myColorPreviewButton,myColorMenu); // close the dropdown
+        }
+      });
+          
     });
 
   };

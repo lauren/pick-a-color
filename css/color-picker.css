@@ -3,7 +3,7 @@
 }
 @media screen and (max-width: 767px) {
   .color-text-input {
-    min-width: 230px;
+    min-width: 219px;
   }
 }
 /* button to open picker */
@@ -45,8 +45,9 @@
 }
 @media screen and (max-width: 767px) {
   .color-menu {
-    left: -257px;
-    min-width: 300px;
+    left: -246px;
+    min-width: 290px;
+    max-width: 290px;
   }
 }
 .color-menu .color-preview {

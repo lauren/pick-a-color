@@ -172,7 +172,8 @@
     }
     
     var supportsTouch = 'ontouchstart' in window || 'onmsgesturechange' in window;
-     
+    var smallScreen = (parseInt($(window).width()) < 767) ? true : false;
+
     /*** methods ***/
     
     var methods = {
@@ -250,13 +251,20 @@
         myStyleVars.halfHighlightBandWidth = myStyleVars.highlightBandWidth / 2;
         myStyleVars.threeFourthsHBW = myStyleVars.highlightBandWidth * .75;
         // for defining things relative to a few drags' worth of color band
+        myStyleVars.threeHighlightBands = myStyleVars.highlightBandWidth * 3;
         myStyleVars.eightHighlightBands = myStyleVars.highlightBandWidth * 8; 
-        // how long the colorbox spectrums for non-B/W color spectrums are bright, 
-        // relative to the width of the band
-        myStyleVars.brightSpectrumWidth = myStyleVars.spectrumWidth -
-          myStyleVars.eightHighlightBands; 
-        //how long the black colorbox spectrum is nearly black
-        myStyleVars.blackSpectrumWidth = myStyleVars.eightHighlightBands;
+        if (smallScreen) {
+          myStyleVars.brightSpectrumWidth = myStyleVars.spectrumWidth - 
+          myStyleVars.threeHighlightBands;
+          myStyleVars.blackSpectrumWidth = myStyleVars.threeHighlightBands;
+        } else {
+          // how long the colorbox spectrums for non-B/W color spectrums are bright, 
+          // relative to the width of the band
+          myStyleVars.brightSpectrumWidth = myStyleVars.spectrumWidth -
+            myStyleVars.eightHighlightBands; 
+          //how long the black colorbox spectrum is nearly black
+          myStyleVars.blackSpectrumWidth = myStyleVars.eightHighlightBands;
+        }
                 
       },
       

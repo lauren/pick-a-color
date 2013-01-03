@@ -179,6 +179,7 @@
 @media screen and (max-width: 767px) {
   .highlight-band {
     width: 15px;
+    left: 77.5px;
   }
 }
 .spectrum-white {

@@ -21,7 +21,7 @@
       'showSpectrum'          : true,
       'showSavedColors'       : true,
       'showColorWheel'        : true,
-      'saveColorsPerElement'  : true
+      'saveColorsPerElement'  : false
     }, options);
     
     /*** color picker markup ***/
@@ -42,7 +42,7 @@
     
     var tabsBeginningMarkup = [
             '<div class="color-menu-tabs nav-tabs">',
-              '<span class="basicColors-tab tab active"><a>Basic Colors</a></span>'
+              '<span class="basicColors-tab tab tab-active"><a>Basic Colors</a></span>'
     ].join('\n');
 
     var tabsSavedColorsMarkup = '<span class="savedColors-tab tab"><a>Your Saved Colors</a></span>';
@@ -135,7 +135,7 @@
             '<div class="savedColors-content inactive-content">',
                 '<p class="saved-colors-instructions">',
                   'Type in a color or use the spectrums to lighten or darken an existing color. ' + 
-                  'Up to 40 custom colors will be saved here.',
+                  'Up to 16 custom colors will be saved here.',
                 '</p>',
             '</div>'
     ].join('\n');
@@ -163,10 +163,10 @@
       brightSpectrumWidth     : "", 
       blackSpectrumWidth      : "",
       rowsInDropdown          : 8,
-      maxColsInDropdown       : 5
+      maxColsInDropdown       : 2
     };
     
-    if ((settings.showSavedColors === true) && settings.saveColorsPerElement === true) {
+    if ((settings.showSavedColors === true) && (settings.saveColorsPerElement === false)) {
       var allSavedColors = [];
       var allColorLinks = [];
     }
@@ -270,13 +270,6 @@
       pressPreviewButton: function(event,myColorMenu,myColorPreviewButton) {
         event.stopPropagation(); 
         if (myColorMenu.css("display") === "none") { // if the related menu is currently hidden...
-          $(".color-menu").each(function() { // check all the other color menus...
-            if ($(this).css("display") === "block") { // if one is open,
-              // find its color preview button
-              var thisColorPreviewButton = $(this).parents(".btn-group") 
-              methods.closeDropdown(thisColorPreviewButton,$(this)); // close it
-            }
-          });
           methods.openDropdown(myColorPreviewButton,myColorMenu);
         } else {
           methods.closeDropdown(myColorPreviewButton,myColorMenu);
@@ -286,6 +279,13 @@
       /* open and close dropdown menu */
       
       openDropdown: function(button,menu) {
+        $(".color-menu").each(function() { // check all the other color menus...
+          if ($(this).css("display") === "block") { // if one is open,
+            // find its color preview button
+            var thisColorPreviewButton = $(this).parents(".btn-group") 
+            methods.closeDropdown(thisColorPreviewButton,$(this)); // close it
+          }
+        });
         $(menu).css("display","block");
         $(button).addClass("open");
       },
@@ -303,12 +303,13 @@
           // interpret the associated content class from the tab class and get that content div
           var contentClass = $(this).attr("class").split(" ")[0].split("-")[0] + "-content";
           var myContent = $(this).parents(".dropdown-menu").find("." + contentClass);
-          if ($(this).hasClass("active") === false) {
-            myContainer.find(".active").removeClass("active"); // make all active tabs inactive
+          if ($(this).hasClass("tab-active") === false) {
+            // make all active tabs inactive
+            myContainer.find(".tab-active").removeClass("tab-active"); 
             // toggle visibility of active content
             myContainer.find(".active-content").
               removeClass("active-content").addClass("inactive-content");
-            $(this).addClass("active"); // make current tab and content active
+            $(this).addClass("tab-active"); // make current tab and content active
             $(myContent).addClass("active-content").removeClass("inactive-content");
           };
         })
@@ -458,8 +459,7 @@
           var i = 0;
           var perCol = myStyleVars.rowsInDropdown; // number of colors we can pull into a column
           // used to keep track of where to start slicing the array
-          // starting at the end of the array to show more recently saved colors first
-          var colStart = savedColors.length - perCol; 
+          var colStart = 0; 
           // number of columns is the number of saved colors over available rows
           var numCols = Math.ceil(savedColors.length/perCol);
           // limit that to the maximum number of columns
@@ -467,7 +467,7 @@
           while (i < numCols) {
             columns.push(savedColors.slice(colStart,(colStart+perCol)));
             i++;
-            colStart -= perCol; // move start back by the number of items per column
+            colStart += perCol; // move start back by the number of items per column
           }
           
           // create markup for each column and put it into the markup array
@@ -503,13 +503,20 @@
       },
       
       addToSavedColors: function(color,mySavedColorsContent,mySavedColors) {
-        // make sure that...
-        if ((settings.showSavedColors === true) && // we're saving colors
-          (presetColors.indexOf(color) === -1) && // it's not in the presets
-          (mySavedColors.indexOf(color) === -1)) { // it's not already saved
-          mySavedColors.push(color); // put it in the saved colors array
-          methods.updateSavedColorMarkup(mySavedColorsContent,mySavedColors);
-        }
+        // make sure we're saving colors and the current color is not in the pre-sets
+        if ((settings.showSavedColors === true) && (presetColors.indexOf(color) === -1)) {
+          // if we're saving colors per element and the current color is not already saved...
+          if ((settings.saveColorsPerElement === true) && (mySavedColors.indexOf(color) === -1)) {
+            mySavedColors.unshift(color); // put it in the array for this element
+            methods.updateSavedColorMarkup(mySavedColorsContent,mySavedColors);
+            console.log(mySavedColors);
+          } else if 
+          ((settings.saveColorsPerElement === false) && (allSavedColors.indexOf(color) === -1)) {
+            allSavedColors.unshift(color);
+            methods.updateSavedColorMarkup($(".savedColors-content"),allSavedColors);
+            console.log(allSavedColors);
+          };
+        };
       }
       
     };

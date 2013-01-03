@@ -217,15 +217,15 @@
 }
 /* tabbed navigation */
 .color-menu-tabs {
-  padding: 5px;
+  padding: 5px 5px 2px 5px;
   font-size: 12px;
   color: #333;
   margin-bottom: 3px;
+  z-index: 1;
 }
 .color-menu-tabs span {
-  position: relative;
-  top: 3px;
-  margin: 5px;
+  margin: 3px;
+  z-index: 2;
 }
 .color-menu-tabs a {
   color: #333;
@@ -253,10 +253,8 @@
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
-.color-menu-tabs .active a {
-  background-color: #fff;
-  background-image: none;
-  border-bottom: 1px solid #fff;
+.color-menu-tabs .tab-active a {
+  border-bottom: 2px solid #fff;
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -274,11 +272,6 @@
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
-.color-menu-tabs .active a:hover {
-  background-color: #fff;
-  background-image: none;
-  border-bottom: 1px solid #fff;
-}
 .active-content {
   display: block;
 }
@@ -287,7 +280,6 @@
 }
 /*** saved colors tab ***/
 .savedColors-content {
-  width: 300px!important;
   padding: 5px 15px;
   white-space: normal;
 }

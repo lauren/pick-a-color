@@ -376,49 +376,74 @@
       },
       
       horizontallyDraggable: function(element) {
-        $(this).mousedown(function (event) {
-          // specify event target so we don't affect all elements with a certain class
-          event.preventDefault(); // keep cursor from turning into text selector
-          var this_el = $(event.delegateTarget);
-          $(this_el).css("position","absolute");
-          var highlightBandWidth = $(this_el).width() + 4;
-          var parentWidth = $(this_el).parent().width();
-          var parentLocation = $(this_el).parent().offset();
-          var minX = parentLocation.left; // this is the furthest left it can go 
-          var maxX = parentWidth - highlightBandWidth; // this is the furthest right it can go
-          $(document).bind("mousemove", function(e) {
-            $(this_el).trigger("dragging");
-            // where's my mouse at (relative to highlight band width)?
-            var mouseX = e.pageX - myStyleVars.threeFourthsHBW; 
-            // constrain mouse positions to min and max values
-            var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX))); 
-            $(this_el).css("left", relativeX); // put the draggable element there
-          }).mouseup(function() {
-            $(document).unbind("mousemove"); // stop dragging
+        // for touch
+        if (supportsTouch) {
+          $(this).bind("touchstart", function (event) {
+            $(document).unbind("touchmove"); // unbind previous drags
+            event.preventDefault(); // keep cursor from turning into text selector
+            // specify event target so we don't affect all elements with a certain class
+            var this_el = $(event.delegateTarget);
+            $(this_el).css("position","relative");
+            var highlightBandWidth = $(this_el).width() + 4;
+            var parentWidth = $(this_el).parent().width();
+            var parentLocation = $(this_el).parent().offset();
+            var minX = parentLocation.left; // this is the furthest left it can go 
+            var maxX = parentWidth - highlightBandWidth; // this is the furthest right it can go
+            $(document).bind("touchmove", function(e) {
+              $(this_el).trigger("dragging");
+              // where's my mouse at (relative to highlight band width)?
+              var mouseX = e.originalEvent.pageX - myStyleVars.threeFourthsHBW; 
+              // constrain mouse positions to min and max values
+              var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX))); 
+              $(this_el).css("left", relativeX); // put the draggable element there
+            }).bind("touchend", function() {
+              $(document).unbind("touchmove"); // stop dragging
+            });
           });
-        });
+        // for desktop
+        } else {
+          $(this).mousedown(function (event) {
+            event.preventDefault(); // keep cursor from turning into text selector
+            // specify event target so we don't affect all elements with a certain class
+            var this_el = $(event.delegateTarget);
+            $(this_el).css("position","relative");
+            var highlightBandWidth = $(this_el).width() + 4;
+            var parentWidth = $(this_el).parent().width();
+            var parentLocation = $(this_el).parent().offset();
+            var minX = parentLocation.left; // this is the furthest left it can go 
+            var maxX = parentWidth - highlightBandWidth; // this is the furthest right it can go
+            $(document).bind("mousemove", function(e) {
+              $(this_el).trigger("dragging");
+              // where's my mouse at (relative to highlight band width)?
+              var mouseX = e.pageX - myStyleVars.threeFourthsHBW; 
+              // constrain mouse positions to min and max values
+              var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX))); 
+              $(this_el).css("left", relativeX); // put the draggable element there
+            }).mouseup(function() {
+              $(document).unbind("mousemove"); // stop dragging
+            });
+          });
+        }
       },
       
-      calculateHighlightedColor: function(highlightBand) {
-        console.log(highlightBand);
+      calculateHighlightedColor: function() {
         // get the class of the parent color box and slice off "spectrum"  
         var colorName = $(this).parent().attr("class").split("-")[2];
-        var colorNumbers = tinycolor(colorName).toHsl();
+        var colorHex = tinycolor(colorName).toHex();
+        var colorHsl = tinycolor(colorHex).toHsl();
         console.log(colorName);
-        console.log(colorNumbers);
-
+        console.log(colorHex);
+        console.log(colorHsl);
+        
         // midpoint of the current left position of the color band 
         var colorBandLocation = parseInt($(this).css("left")) + 
           myStyleVars.halfHighlightBandWidth; 
-        console.log(colorBandLocation);
           
         // based on the color of the color box and location of the color band, 
         // figure out how multiply the base color to get the new color 
         var colorMultiplier = methods.getColorMultiplier(colorName,colorBandLocation); 
-        console.log(colorMultiplier);
         // figure out what color is being highlighted 
-        var highlightedColor = methods.modifyHSL(colorNumbers,colorMultiplier);
-        console.log(highlightedColor);
+        var highlightedColor = methods.modifyHSL(colorHsl,colorMultiplier);
         // change the color preview to the color being highlighted 
         $(this).parent().siblings(".color-preview").css("background-color",highlightedColor); 
     
@@ -514,12 +539,10 @@
           if ((settings.saveColorsPerElement === true) && (mySavedColors.indexOf(color) === -1)) {
             mySavedColors.unshift(color); // put it in the array for this element
             methods.updateSavedColorMarkup(mySavedColorsContent,mySavedColors);
-            console.log(mySavedColors);
           } else if 
           ((settings.saveColorsPerElement === false) && (allSavedColors.indexOf(color) === -1)) {
             allSavedColors.unshift(color);
             methods.updateSavedColorMarkup($(".savedColors-content"),allSavedColors);
-            console.log(allSavedColors);
           };
         };
       }
@@ -668,7 +691,6 @@
           var highlightBand = $(this).find(".highlight-band");
           var newPosition = mouseX - spectrumLeft - (myStyleVars.threeFourthsHBW);
           highlightBand.css("left",newPosition); // move mouse
-          console.log(highlightBand);
           var highlightedColor = methods.calculateHighlightedColor.apply(highlightBand);
           methods.addToSavedColors(highlightedColor,mySavedColorsContent,mySavedColors);
           // update touch instructions

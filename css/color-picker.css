@@ -176,6 +176,11 @@
   top: -2px;
   left: 97.5px;
 }
+@media screen and (max-width: 767px) {
+  .highlight-band {
+    width: 15px;
+  }
+}
 .spectrum-white {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);

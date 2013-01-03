@@ -31,6 +31,7 @@
 @color-box-width: 200px;
 @color-box-width-phone: 170px;
 @color-band-width: 5px;
+@phone-color-band-width: 15px;
 
 // mixins
 
@@ -223,6 +224,9 @@
 	position:absolute;
 	top:-2px;
 	left:(@color-box-width/2) - (@color-band-width/2);
+	@media screen and (max-width: 767px) {
+		width:@phone-color-band-width;
+	}
 }
 
 .spectrum-white {

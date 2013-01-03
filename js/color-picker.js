@@ -400,21 +400,25 @@
       },
       
       calculateHighlightedColor: function(highlightBand) {
+        console.log(highlightBand);
         // get the class of the parent color box and slice off "spectrum"  
         var colorName = $(this).parent().attr("class").split("-")[2];
         var colorNumbers = tinycolor(colorName).toHsl();
+        console.log(colorName);
+        console.log(colorNumbers);
 
         // midpoint of the current left position of the color band 
         var colorBandLocation = parseInt($(this).css("left")) + 
           myStyleVars.halfHighlightBandWidth; 
+        console.log(colorBandLocation);
           
         // based on the color of the color box and location of the color band, 
         // figure out how multiply the base color to get the new color 
         var colorMultiplier = methods.getColorMultiplier(colorName,colorBandLocation); 
-    
+        console.log(colorMultiplier);
         // figure out what color is being highlighted 
         var highlightedColor = methods.modifyHSL(colorNumbers,colorMultiplier);
-    
+        console.log(highlightedColor);
         // change the color preview to the color being highlighted 
         $(this).parent().siblings(".color-preview").css("background-color",highlightedColor); 
     
@@ -642,6 +646,13 @@
         methods.tabbable.apply(myTabs);
       };
       
+      
+      /*** hide the spectrums if they aren't shown ***/
+      
+      if (settings.showSpectrum === false) {
+        $(".color-box").hide();        
+      }
+      
       /*** for using the light/dark spectrums ***/
       
       if (settings.showSpectrum === true) {
@@ -656,6 +667,7 @@
           var highlightBand = $(this).find(".highlight-band");
           var newPosition = mouseX - spectrumLeft - (myStyleVars.threeFourthsHBW);
           highlightBand.css("left",newPosition); // move mouse
+          console.log(highlightBand);
           methods.calculateHighlightedColor.apply(highlightBand);
           // update touch instructions
           myTouchInstructions.html("Press 'select' to choose this color.");

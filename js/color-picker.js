@@ -443,6 +443,7 @@
             methods.darkenBorder($(this)) : methods.lightenBorder($(this));
           
         };
+        return highlightedColor;
       },
       
       updateSavedColorPreview: function(elements) {
@@ -668,7 +669,8 @@
           var newPosition = mouseX - spectrumLeft - (myStyleVars.threeFourthsHBW);
           highlightBand.css("left",newPosition); // move mouse
           console.log(highlightBand);
-          methods.calculateHighlightedColor.apply(highlightBand);
+          var highlightedColor = methods.calculateHighlightedColor.apply(highlightBand);
+          methods.addToSavedColors(highlightedColor,mySavedColorsContent,mySavedColors);
           // update touch instructions
           myTouchInstructions.html("Press 'select' to choose this color.");
         });
@@ -714,9 +716,10 @@
 $(document).ready(function() {
   
   $(".color-picker").colorPicker({
-    'showSpectrum'      : true,
-    'showColorWheel'    : false,
-    'showSavedColors'   : true
+    'showSpectrum'            : true,
+    'showColorWheel'          : false,
+    'showSavedColors'         : true,
+    'saveColorsPerElement'    : true
   });
   
 });

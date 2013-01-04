@@ -54,6 +54,12 @@
   vertical-align: middle;
   margin: 0px;
 }
+@media screen and (max-width: 767px) {
+  .color-menu .color-preview {
+    height: 30px;
+    width: 30px;
+  }
+}
 .color-menu .color-preview.current-color,
 .color-menu .color-preview.white {
   background-color: #ffffff;
@@ -97,6 +103,11 @@
   color: #333;
   background-image: none;
 }
+@media screen and (max-width: 767px) {
+  .color-menu li > a {
+    min-height: 35px;
+  }
+}
 .color-menu li:hover a {
   background-color: #eee;
   color: #333;
@@ -123,6 +134,11 @@
   height: 22px;
   padding: 0px 5px;
   margin-top: 0px;
+}
+@media screen and (max-width: 767px) {
+  .color-menu .btn.color-select {
+    height: 32px;
+  }
 }
 .color-menu-instructions {
   text-align: center;
@@ -158,6 +174,7 @@
 @media screen and (max-width: 767px) {
   .color-box {
     width: 170px;
+    height: 30px;
   }
 }
 /* selector box */
@@ -186,6 +203,7 @@
   .highlight-band {
     width: 15px;
     left: 77.5px;
+    height: 30px;
   }
 }
 .spectrum-white {

@@ -133,6 +133,11 @@
 	.color-preview {
 	  vertical-align:middle;
 	  margin:0px;
+		@media screen and (max-width: 767px) {
+		height: 30px;
+		width: 30px;
+		}
+	
 		&.current-color, &.white {
 		  background-color:@white;
 		}
@@ -182,6 +187,9 @@
 		  color: #333;
 			background-image:none;
 		}
+		@media screen and (max-width: 767px) {
+			min-height:35px;
+		}
 	}
 	li:hover a {
 		background-color:#eee;
@@ -195,6 +203,9 @@
 			height:22px;
 			padding:0px 5px;
 			margin-top:0px;
+		@media screen and (max-width: 767px) {
+			height:32px;
+		}
 		}
 	}
 }
@@ -223,6 +234,7 @@
 	cursor:pointer;
 	@media screen and (max-width: 767px) {
 		width:@color-box-width-phone;
+		height:30px;
 	}
 }
 
@@ -240,6 +252,7 @@
 	@media screen and (max-width: 767px) {
 		width:@phone-color-band-width;
 		left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
+		height:30px;
 	}
 }
 

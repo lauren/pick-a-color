@@ -167,20 +167,44 @@
     };
     
     var myCookies = document.cookie;
-        
+    
+    // if we're saving colors once per page    
     if ((settings.showSavedColors === true) && (settings.saveColorsPerElement === false)) {
-      var allSavedColors = [];
+      var allSavedColors = []; // make an array for all saved colors
       if (myCookies.indexOf("saved_colors") > -1) { // if there's a saved_colors cookie...
         myCookies = myCookies.split(";"); // split into array of cookies...
         for (var i = 0; i < myCookies.length; i++) {
           if (myCookies[i].match("saved_colors")) { // look for the saved colors cookie...
             // take out the name, turn it into an array, and set saved colors equal to it
             allSavedColors = myCookies[i].split("=")[1].split(","); 
-          }
-        }
+          };
+        };
       };
-      var allColorLinks = [];
-    }
+      var allColorLinks = []; // make an array for saved colors links
+    } else if ((settings.showSavedColors === true) && (settings.saveColorsPerElement === true)) {
+      myElements = this;
+      numElements = myElements.length
+      for (var i = 0; i < numElements; i++) {
+        // give each color picker element a class with a unique number 
+        // will be used for retrieving saved color cookies for each element
+        $(myElements[i]).addClass("savedColors-" + i);    
+      };
+      // if there's an element-specific saved color cookie
+      if (myCookies.indexOf("saved_colors-") > -1) { 
+        var savedColorsByElement = {}; // make an object to store the colors for each element...
+        myCookies = myCookies.split(";"); // split into array of cookies...
+        for (var i = 0; i < numElements; i++) {
+          var myCookieColorData = [];
+          for (var j = 0; j < myCookies.length; j++) {
+            if (myCookies[j].match("saved_colors-" + i)) { // look for the cookie for each element...
+              // take out the name, turn it into an array, and set myCookieColorData equal to it
+              myCookieColorData = myCookies[j].split("=")[1].split(",");
+            };
+          };
+          savedColorsByElement[i] = myCookieColorData; // add to colors by element object          
+        };
+      };      
+    };
     
     var supportsTouch = 'ontouchstart' in window || 'onmsgesturechange' in window;
     var smallScreen = (parseInt($(window).width()) < 767) ? true : false;
@@ -341,8 +365,9 @@
       
       getColorMultiplier: function(color,position) {
         // position of the color band as a percentage of the width of the color box
-        var percent_of_box = position / myStyleVars.spectrumWidth; 
-    
+        var spectrumWidth = parseInt($(".color-box").width());
+        var percent_of_box = position / spectrumWidth; 
+
         // white only gets darkened up to 50%, 
         // so divide multiplier in half and return negative value
         if (color === "white") {
@@ -451,22 +476,18 @@
         var colorName = $(this).parent().attr("class").split("-")[2];
         var colorHex = tinycolor(colorName).toHex();
         var colorHsl = tinycolor(colorHex).toHsl();
-        console.log(colorName);
-        console.log(colorHex);
-        console.log(colorHsl);
         
         // midpoint of the current left position of the color band 
         var colorBandLocation = parseInt($(this).css("left")) + 
           myStyleVars.halfHighlightBandWidth; 
-        console.log(colorBandLocation);
           
         // based on the color of the color box and location of the color band, 
         // figure out how multiply the base color to get the new color 
         var colorMultiplier = methods.getColorMultiplier(colorName,colorBandLocation); 
         // figure out what color is being highlighted 
-        console.log(colorMultiplier);
+
         var highlightedColor = methods.modifyHSL(colorHsl,colorMultiplier);
-        console.log(highlightedColor);
+
         // change the color preview to the color being highlighted 
         $(this).parent().siblings(".color-preview").css("background-color",highlightedColor); 
     
@@ -555,25 +576,30 @@
         };
       },
       
-      setSavedColorsCookie: function(savedColors) {
+      setSavedColorsCookie: function(savedColors,savedColorsNumber) {
         var now = new Date();
         var expiresOn = new Date(now.getTime() + tenYearsInMilliseconds);
         expiresOn = expiresOn.toGMTString();
-        document.cookie = "saved_colors" + "=" + savedColors + ";expires=" + expiresOn;
+        if (settings.saveColorsPerElement === false) {
+          document.cookie = "saved_colors=" + savedColors + ";expires=" + expiresOn;
+        } else {
+          document.cookie = "saved_colors-" + savedColorsNumber + "=" + savedColors + 
+          ";expires=" + expiresOn;
+        }
       },
       
-      addToSavedColors: function(color,mySavedColorsContent,mySavedColors) {
+      addToSavedColors: function(color,mySavedColorsContent,mySavedColors,savedColorsNumber) {
         // make sure we're saving colors and the current color is not in the pre-sets
         if ((settings.showSavedColors === true) && (presetColors.indexOf(color) === -1)) {
           // if we're saving colors per element and the current color is not already saved...
           if ((settings.saveColorsPerElement === true) && (mySavedColors.indexOf(color) === -1)) {
             mySavedColors.unshift(color); // put it in the array for this element
-            methods.setSavedColorsCookie(mySavedColors);
+            methods.setSavedColorsCookie(mySavedColors,savedColorsNumber);
             methods.updateSavedColorMarkup(mySavedColorsContent,mySavedColors);
-          } else if 
+          } else if  // if we're saving colors per page and the current color is not saved...
           ((settings.saveColorsPerElement === false) && (allSavedColors.indexOf(color) === -1)) {
             allSavedColors.unshift(color);
-            methods.setSavedColorsCookie(allSavedColors);
+            methods.setSavedColorsCookie(allSavedColors,savedColorsNumber);
             methods.updateSavedColorMarkup($(".savedColors-content"),allSavedColors);
           };
         };
@@ -599,9 +625,20 @@
       }
       if (settings.showSavedColors === true) {
         var mySavedColorsContent = $(this).find(".savedColors-content");
+        var mySavedColorsNumber = -1; //placeholder number for retrieving colors from cookies
         if (settings.saveColorsPerElement === true) {
-          var mySavedColors = [];
           var mySavedColorsLinks = [];
+          // get the ID used to retrieve this element's saved colors from its class
+          var mySavedColorsClass = $(myContainer).attr("class").split(" ");
+          for (var i = 0; i < mySavedColorsClass.length; i++) {
+            if (mySavedColorsClass[i].match("savedColors")) {
+              mySavedColorsNumber = mySavedColorsClass[i].split("-")[1];
+            };
+          };
+
+          // get mySavedColors from savedColorsByElement, or set to an empty array
+          var mySavedColors = (!savedColorsByElement) ? [] : 
+          savedColorsByElement[mySavedColorsNumber];
         };
       }
 
@@ -624,7 +661,8 @@
           myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
           $(this).val(myColorVars.newValue); // put the new value in the field
           // save to saved colors
-          methods.addToSavedColors(myColorVars.newValue,mySavedColorsContent,mySavedColors); 
+          methods.addToSavedColors
+          (myColorVars.newValue,mySavedColorsContent,mySavedColors,mySavedColorsNumber); 
           mySavedColorsLinks = $(mySavedColorsContent).find("a"); // update links object
         }
         methods.updatePreview.apply(this); // update preview
@@ -689,7 +727,8 @@
         $(myColorTextInput).val(selectedColor); // put it in the field 
         methods.updatePreview.apply(myColorTextInput); // update the button preview to match
         // add to saved colors 
-        methods.addToSavedColors(selectedColor,mySavedColorsContent,mySavedColors); 
+        methods.addToSavedColors
+        (selectedColor,mySavedColorsContent,mySavedColors,mySavedColorsNumber); 
         mySavedColorsLinks = $(mySavedColorsContent).find("a"); // update links object
         methods.closeDropdown(myColorPreviewButton,myColorMenu); // close the dropdown
       });
@@ -722,7 +761,8 @@
           var newPosition = mouseX - spectrumLeft - (myStyleVars.threeFourthsHBW);
           highlightBand.css("left",newPosition); // move mouse
           var highlightedColor = methods.calculateHighlightedColor.apply(highlightBand);
-          methods.addToSavedColors(highlightedColor,mySavedColorsContent,mySavedColors);
+          methods.addToSavedColors
+          (highlightedColor,mySavedColorsContent,mySavedColors,mySavedColorsNumber);
           // update touch instructions
           myTouchInstructions.html("Press 'select' to choose this color.");
         });
@@ -762,11 +802,11 @@
           }
         });
         
-        // if colors are saved once per page
+        // update saved color markup with content from cookies, if available
         if (settings.saveColorsPerElement === false) {
-          console.log(allSavedColors);
-          // update saved color markup with content from cookie
           methods.updateSavedColorMarkup(mySavedColorsContent,allSavedColors);
+        } else if (settings.saveColorsPerElement === true) {
+          methods.updateSavedColorMarkup(mySavedColorsContent,mySavedColors);
         };
       }
           

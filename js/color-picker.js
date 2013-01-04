@@ -41,7 +41,7 @@
     ].join('\n');
     
     var tabsBeginningMarkup = [
-            '<div class="color-menu-tabs nav-tabs">',
+            '<div class="color-menu-tabs">',
               '<span class="basicColors-tab tab tab-active"><a>Basic Colors</a></span>'
     ].join('\n');
 
@@ -365,7 +365,7 @@
       
       getColorMultiplier: function(color,position) {
         // position of the color band as a percentage of the width of the color box
-        var spectrumWidth = parseInt($(".color-box").width());
+        var spectrumWidth = smallScreen ? 170 : 200;
         var percent_of_box = position / spectrumWidth; 
 
         // white only gets darkened up to 50%, 

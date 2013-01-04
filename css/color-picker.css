@@ -86,7 +86,7 @@
   background-color: #000000;
 }
 .color-menu li > a {
-  padding: 5px 15px;
+  padding: 5px 15px 3px 15px;
   /*overwriting bootstrap default */
 
   cursor: default;
@@ -95,6 +95,12 @@
 .color-menu li > a:hover {
   background-color: #eee;
   color: #333;
+  background-image: none;
+}
+.color-menu li:hover a {
+  background-color: #eee;
+  color: #333;
+  background-image: none;
 }
 .color-menu .btn {
   margin: 0px 5px;
@@ -223,25 +229,20 @@
 }
 /* tabbed navigation */
 .color-menu-tabs {
-  padding: 5px 5px 2px 5px;
+  padding: 5px 3px 3px 10px;
   font-size: 12px;
   color: #333;
-  margin-bottom: 3px;
-  z-index: 1;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 5px;
 }
 .color-menu-tabs span {
-  margin: 3px;
-  z-index: 2;
-}
-.color-menu-tabs a {
-  color: #333;
-  text-decoration: none;
   padding: 5px;
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   cursor: pointer;
+  background-color: #fff;
 }
-.color-menu-tabs a:hover {
+.color-menu-tabs span:hover {
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -259,8 +260,12 @@
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
-.color-menu-tabs .tab-active a {
-  border-bottom: 2px solid #fff;
+.color-menu-tabs a {
+  color: #333;
+  text-decoration: none;
+}
+.color-menu-tabs .tab-active {
+  border-bottom: 3px solid #fff;
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -288,6 +293,14 @@
 .savedColors-content {
   padding: 5px 15px;
   white-space: normal;
+}
+.savedColors-content li > a {
+  margin-left: 7px;
+  padding-left: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
 }
 .saved-color-col {
   position: relative;

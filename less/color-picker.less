@@ -35,12 +35,19 @@
 
 // mixins
 
+.borders (@radius: 4px) {
+-webkit-border-radius: @radius;
+   -moz-border-radius: @radius;
+		 -o-border-radius: @radius;
+        border-radius: @radius;
+}
+
 .borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid) {
 	border:@width @style @color;
 	-webkit-border-radius: @radius;
-     -moz-border-radius: @radius;
+	   -moz-border-radius: @radius;
 			 -o-border-radius: @radius;
-          border-radius: @radius;
+	        border-radius: @radius;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
      -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -167,13 +174,19 @@
 		}
 	}
 	li > a {
-	  padding: 5px 15px; /*overwriting bootstrap default */
+	  padding: 5px 15px 3px 15px; /*overwriting bootstrap default */
 	  cursor: default;
 		min-height:25px;
 		&:hover {
 		  background-color: #eee;
 		  color: #333;
+			background-image:none;
 		}
+	}
+	li:hover a {
+		background-color:#eee;
+		color: #333;
+		background-image:none;
 	}
 	.btn {
 		margin: 0px 5px;
@@ -272,31 +285,29 @@
 /* tabbed navigation */
 
 .color-menu-tabs {
-	padding:5px 5px 2px 5px;
+	padding:5px 3px 3px 10px;
 	font-size: 12px;
 	color: #333;
-	margin-bottom:3px;
-	z-index:1;
+	border-bottom:1px solid @border_gray;
+	margin-bottom:5px;
 	span {
-		margin:3px;
-		z-index:2;
-	}
-	a {
-		color: #333;
-		text-decoration:none;
+		padding:5px;
 		padding:5px;
 		border-left:1px solid #fff;
 		border-right:1px solid #fff;
 		cursor:pointer;
+		background-color:#fff;
 		&:hover {
 		.tab-borders-shadows;
 		}
 	}
+	a {
+		color: #333;
+		text-decoration:none;
+	}
 	.tab-active {
-		a {
-		border-bottom:2px solid #fff;
+		border-bottom:3px solid #fff;
 		.tab-borders-shadows;
-		}
 	}
 }
 
@@ -313,6 +324,11 @@
 .savedColors-content {
 	padding:5px 15px;
 	white-space:normal;
+	li > a {
+	margin-left:7px;
+	padding-left:8px;
+	.borders;
+	}
 }
 
 .saved-color-col {
@@ -320,4 +336,5 @@
 	left:-15px;
 	float:left;
 }
+
 

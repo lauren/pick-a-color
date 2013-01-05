@@ -3,13 +3,23 @@
 }
 @media screen and (max-width: 767px) {
   .color-text-input {
-    min-width: 219px;
+    min-width: 236px;
+  }
+}
+@media screen and (max-width: 767px) {
+  #appendedDropdownButton {
+    height: 40px;
   }
 }
 /* button to open picker */
 .color-dropdown {
   height: 30px;
   padding: 0px 5px;
+}
+@media screen and (max-width: 767px) {
+  .color-dropdown {
+    height: 40px;
+  }
 }
 .color-preview {
   border: 1px solid #cccccc;
@@ -32,9 +42,20 @@
 .color-preview.current-color {
   margin-top: 3px;
 }
+@media screen and (max-width: 767px) {
+  .color-preview {
+    height: 30px;
+    width: 30px;
+  }
+}
 .caret {
   vertical-align: bottom;
   margin-bottom: 15px;
+}
+@media screen and (max-width: 767px) {
+  .caret {
+    margin-bottom: 20px;
+  }
 }
 /* basic menu of colors */
 .color-menu {
@@ -45,7 +66,7 @@
 }
 @media screen and (max-width: 767px) {
   .color-menu {
-    left: -246px;
+    left: -236px;
     min-width: 290px;
     max-width: 290px;
   }
@@ -105,13 +126,18 @@
 }
 @media screen and (max-width: 767px) {
   .color-menu li > a {
-    min-height: 35px;
+    min-height: 40px;
   }
 }
 .color-menu li:hover a {
   background-color: #eee;
   color: #333;
   background-image: none;
+}
+@media screen and (max-width: 767px) {
+  .color-menu li:hover a {
+    background-color: #fff;
+  }
 }
 .color-menu .btn {
   margin: 0px 5px;

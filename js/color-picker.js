@@ -27,8 +27,7 @@
     /*** color picker markup ***/
 
     var markupBeforeInputLineWithVariable = [
-      '<div class="input-prepend input-append color-picker-markup">',
-      	'<span class="add-on">#</span>'
+      '<div class="input-append color-picker-markup">',
     ].join('\n');
 
     var markupAfterInputLineWithVariable = [
@@ -222,7 +221,7 @@
         myColorVars.typedColor = myColorVars.defaultColor;
         
         // use the default color to construct the markup for the color picker
-        var inputMarkup = '<input id="appendedPrependedDropdownButton"' + 
+        var inputMarkup = '<input id="appendedDropdownButton"' + 
         'type="text" class="span2 color-text-input" value="' + 
         myColorVars.defaultColor + '">';
         

@@ -89,9 +89,15 @@
 // actual styles 
 
 .color-text-input {
-	min-height:30px;
+  min-height: 30px;
 	@media screen and (max-width: 767px) {
-		min-width:219px;
+		min-width:236px;
+	}
+}
+
+#appendedDropdownButton {
+	@media screen and (max-width: 767px) {
+		height:40px;
 	}
 }
 
@@ -100,6 +106,9 @@
 .color-dropdown {
   height:30px;
   padding:0px 5px;
+	@media screen and (max-width: 767px) {
+		height:40px;
+	}
 }
 
 .color-preview {
@@ -111,11 +120,18 @@
 	&.current-color {
 		margin-top:3px;
 	}
+	@media screen and (max-width: 767px) {
+		height:30px;
+		width: 30px;
+	}
 }
 
 .caret {
   vertical-align:bottom;
   margin-bottom:15px;
+	@media screen and (max-width: 767px) {
+		margin-bottom:20px;
+	}
 }
 
 /* basic menu of colors */
@@ -125,7 +141,7 @@
 	min-width: 330px;
 	
 	@media screen and (max-width: 767px) {
-		left:-246px;
+		left:-236px;
 		min-width:290px;
 		max-width:290px;
 	}
@@ -134,8 +150,8 @@
 	  vertical-align:middle;
 	  margin:0px;
 		@media screen and (max-width: 767px) {
-		height: 30px;
-		width: 30px;
+			height: 30px;
+			width: 30px;
 		}
 	
 		&.current-color, &.white {
@@ -188,13 +204,16 @@
 			background-image:none;
 		}
 		@media screen and (max-width: 767px) {
-			min-height:35px;
+			min-height:40px;
 		}
 	}
 	li:hover a {
 		background-color:#eee;
 		color: #333;
 		background-image:none;
+		@media screen and (max-width: 767px) {
+			background-color:#fff;
+		}
 	}
 	.btn {
 		margin: 0px 5px;

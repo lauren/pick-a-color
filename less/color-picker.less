@@ -1,4 +1,4 @@
-// variables 
+//// variables 
 
 // basic colors 
 
@@ -29,11 +29,11 @@
 // widths
 
 @color-box-width: 200px;
-@color-box-width-phone: 170px;
+@color-box-width-phone: 180px;
 @color-band-width: 5px;
-@phone-color-band-width: 15px;
+@phone-color-band-width: 20px;
 
-// mixins
+//// mixins
 
 .borders (@radius: 4px) {
 -webkit-border-radius: @radius;
@@ -88,10 +88,45 @@
 
 // actual styles 
 
+.color-picker-markup {
+	@media screen and (max-width: 767px) {
+		margin:20px 0px;
+	}
+}
+
+.hex-pound {
+ 	display: inline-block;
+  height:20px;
+  font-size: 14px;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: 0 1px 0 #ffffff;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  margin-right: -1px;
+  -webkit-border-radius: 4px 0 0 4px;
+     -moz-border-radius: 4px 0 0 4px;
+          border-radius: 4px 0 0 4px;
+  padding: 4px 5px;
+	@media screen and (max-width: 767px) {
+		padding:8px 5px 0px 5px;
+		min-height:30px;
+		vertical-align:middle;
+	}
+}
+
+.add-on {
+	@media screen and (max-width: 767px) {
+		padding:8px 5px 0px 5px;
+	}
+}
+
 .color-text-input {
 	min-height:30px;
+	width:200px;
 	@media screen and (max-width: 767px) {
-		min-width:219px;
+		min-width:228px;
+		min-height:40px;
 	}
 }
 
@@ -100,6 +135,13 @@
 .color-dropdown {
   height:30px;
   padding:0px 5px;
+	@media screen and (max-width: 767px) {
+		min-height:40px;
+	}
+	@media screen and (min-width: 768px) {
+		position:relative;
+		top:-2px;
+	}
 }
 
 .color-preview {
@@ -111,11 +153,18 @@
 	&.current-color {
 		margin-top:3px;
 	}
+	@media screen and (max-width: 767px) {
+		height:30px;
+		width:30px;
+	}
 }
 
 .caret {
   vertical-align:bottom;
   margin-bottom:15px;
+	@media screen and (max-width: 767px) {
+		margin-bottom:20px;
+	}
 }
 
 /* basic menu of colors */
@@ -126,16 +175,16 @@
 	
 	@media screen and (max-width: 767px) {
 		left:-246px;
-		min-width:290px;
-		max-width:290px;
+		min-width:301px;
+		max-width:301px;
 	}
 	
 	.color-preview {
 	  vertical-align:middle;
 	  margin:0px;
 		@media screen and (max-width: 767px) {
-		height: 30px;
-		width: 30px;
+		height: 35px;
+		width: 35px;
 		}
 	
 		&.current-color, &.white {
@@ -186,15 +235,21 @@
 		  background-color: #eee;
 		  color: #333;
 			background-image:none;
+			@media screen and (max-width: 767px) {
+			 background-color: #fff;
+			}
 		}
 		@media screen and (max-width: 767px) {
-			min-height:35px;
+			min-height:40px;
 		}
 	}
 	li:hover a {
 		background-color:#eee;
 		color: #333;
 		background-image:none;
+		@media screen and (max-width: 767px) {
+		 background-color: #fff;
+		}
 	}
 	.btn {
 		margin: 0px 5px;
@@ -204,7 +259,7 @@
 			padding:0px 5px;
 			margin-top:0px;
 		@media screen and (max-width: 767px) {
-			height:32px;
+			height:37px;
 		}
 		}
 	}
@@ -234,7 +289,7 @@
 	cursor:pointer;
 	@media screen and (max-width: 767px) {
 		width:@color-box-width-phone;
-		height:30px;
+		height:35px;
 	}
 }
 
@@ -252,7 +307,7 @@
 	@media screen and (max-width: 767px) {
 		width:@phone-color-band-width;
 		left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
-		height:30px;
+		height:35px;
 	}
 }
 

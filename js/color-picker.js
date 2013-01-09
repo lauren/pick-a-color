@@ -122,7 +122,6 @@
         allSavedColors = JSON.parse(localStorage["allSavedColors"]);
       };
       var allColorLinks = []; // make an array for saved colors links
-      console.log(allSavedColors);
     };
     
     var myCookies = document.cookie;

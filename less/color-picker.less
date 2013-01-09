@@ -75,7 +75,7 @@
        -o-transition: border linear 0.2s, box-shadow linear 0.2s;
           transition: border linear 0.2s, box-shadow linear 0.2s;
 }
-
+ 
 .two-color-spectrum (@start: @white, @stop: @black) {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, @start), color-stop(1.0, @stop));
   background-image: -moz-linear-gradient(left center, @start 0%, @stop 100%);
@@ -127,6 +127,12 @@
 	@media screen and (max-width: 767px) {
 		min-width:228px;
 		min-height:40px;
+	}
+}
+
+#appendedDropdownButton {
+	@media screen and (max-width: 767px) {
+		height:40px;
 	}
 }
 
@@ -248,7 +254,7 @@
 		color: #333;
 		background-image:none;
 		@media screen and (max-width: 767px) {
-		 background-color: #fff;
+			background-color: #fff;
 		}
 	}
 	.btn {

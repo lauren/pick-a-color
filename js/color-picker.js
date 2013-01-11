@@ -533,7 +533,7 @@
       
       removeFromArray: function(array, item) {
         if (array.indexOf(item) != -1) { // make sure it's in there
-          array.splice(array.indexOf(item)); // take it out, eh?
+          array.splice(array.indexOf(item),1); // take it out, eh?
         };
       },
       

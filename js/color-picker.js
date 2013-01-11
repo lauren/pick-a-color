@@ -31,6 +31,8 @@
       showColorWheel        : true,
       saveColorsPerElement  : false
     }, options);
+        
+    var useTabs = settings.showSavedColors || settings.showColorWheel;
     
     /*** color picker markup ***/
 
@@ -152,21 +154,26 @@
         myColorVars.defaultColor + '">';
         
         /** put together the markup strings according to the settings **/
+        
+        var beginningMarkup = [
+          markupBeforeInputLineWithVariable, 
+          inputMarkup, 
+          markupAfterInputLineWithVariable
+        ].join('\n');
+        var beginningMarkupWithTabs = [
+          beginningMarkup,
+          tabsBeginningMarkup
+        ].join('\n');
                 
         if (!settings.showSavedColors && !settings.showColorWheel) {
           var colorPickerMarkup = [
-            markupBeforeInputLineWithVariable, 
-            inputMarkup, 
-            markupAfterInputLineWithVariable,
+            beginningMarkup,
             basicColorsMarkup,
             endingMarkup
           ].join('\n');
         } else if (settings.showSavedColors && settings.showColorWheel) {
           var colorPickerMarkup = [
-            markupBeforeInputLineWithVariable, 
-            inputMarkup, 
-            markupAfterInputLineWithVariable,
-            tabsBeginningMarkup,
+            beginningMarkupWithTabs,
             tabsSavedColorsMarkup,
             tabsFullColorWheelMarkup,
             tabsEndingMarkup,
@@ -176,10 +183,7 @@
           ].join('\n');
         } else if (settings.showSavedColors && !settings.showColorWheel) {
           var colorPickerMarkup = [
-            markupBeforeInputLineWithVariable, 
-            inputMarkup, 
-            markupAfterInputLineWithVariable,
-            tabsBeginningMarkup,
+            beginningMarkupWithTabs,
             tabsSavedColorsMarkup,
             tabsEndingMarkup,
             basicColorsMarkup,
@@ -188,10 +192,7 @@
           ].join('\n');
         } else if (!settings.showSavedColors && settings.showColorWheel) {
           var colorPickerMarkup = [
-            markupBeforeInputLineWithVariable, 
-            inputMarkup, 
-            markupAfterInputLineWithVariable,
-            tabsBeginningMarkup,
+            beginningMarkupWithTabs,
             tabsFullColorWheelMarkup,
             tabsEndingMarkup,
             basicColorsMarkup,
@@ -569,6 +570,7 @@
       var $myColorMenuLinks = $($myContainer).find(".color-menu li a");
       var $myColorPreviewButton = $($myContainer).find(".btn-group");
       var $myColorMenu = $($myContainer).find(".color-menu");
+      var $myColorSpectrums = $($myContainer).find(".color-box");
       var $myTouchInstructions = $($myContainer).find(".color-menu-instructions");
       var $myHighlightBands = $($myContainer).find(".highlight-band");
       if (settings.showSavedColors || settings.showColorWheel) {
@@ -691,18 +693,15 @@
         methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors)
         methods.closeDropdown($myColorPreviewButton,$myColorMenu); // close the dropdown
       });
-            
-      /* make the tabs tabbable */
-      
-      if (settings.showSavedColors || settings.showColorWheel) {
+                  
+      if (useTabs) { // make tabs tabbable
         methods.tabbable.apply($myTabs);
       };
-      
-      
-      /*** hide the spectrums if they aren't shown ***/
-      
-      if (!settings.showSpectrum) {
-        $(".color-box").hide();        
+            
+      if (!settings.showSpectrum) { // hide spectrums if we won't show them
+        $myColorSpectrums.hide();
+        if (!useTabs) // smaller menu if no spectrums or tabs
+          $myColorMenu.css("min-width","100px"); 
       }
       
       /*** for using the light/dark spectrums ***/

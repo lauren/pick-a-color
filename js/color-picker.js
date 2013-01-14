@@ -347,7 +347,6 @@
           var dragEvent = supportsTouch ? "e.originalEvent" : "e";
           
           $(this).bind(startEvent, function (event) {
-            $(document).unbind(moveEvent); // unbind previous drags
             event.preventDefault(); // keep cursor from turning into text selector
             var $this_el = $(event.delegateTarget);
             var $this_parent = $this_el.parent();
@@ -362,9 +361,9 @@
                 e.pageX - myStyleVars.highlightBandWidth;
               var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX)));
               $this_el.css("left",relativeX);
-            }).bind(endEvent, function () {
-              $(document).unbind(moveEvent);
             });
+          }).bind(endEvent, function () {
+            $(document).unbind(moveEvent);
           });
         },
     

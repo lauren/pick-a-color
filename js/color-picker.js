@@ -340,55 +340,32 @@
           methods.changeBorderColor(element,"#000");
         },
     
-        horizontallyDraggable: function (element) {
-          // for touch
-          if (supportsTouch) {
-            $(this).bind("touchstart", function (event) {
-              $(document).unbind("touchmove"); // unbind previous drags
-              event.preventDefault(); // keep cursor from turning into text selector
-              // specify event target so we don't affect all elements with a certain class
-              var this_el = $(event.delegateTarget);
-              $(this_el).css("position","relative");
-              var highlightBandWidth = $(this_el).width();
-              var parentWidth = $(this_el).parent().width();
-              var parentLocation = $(this_el).parent().offset();
-              var minX = parentLocation.left; // this is the furthest left it can go 
-              var maxX = parentWidth - highlightBandWidth; // this is the furthest right it can go
-              $(document).bind("touchmove", function (e) {
-                $(this_el).trigger("dragging");
-                // where's my mouse at (relative to highlight band width)?
-                var mouseX = e.originalEvent.pageX - myStyleVars.threeFourthsHBW; 
-                // constrain mouse positions to min and max values
-                var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX))); 
-                $(this_el).css("left", relativeX); // put the draggable element there
-              }).bind("touchend", function () {
-                $(document).unbind("touchmove"); // stop dragging
-              });
+        horizontallyDraggable: function () {
+          var startEvent = supportsTouch ? "touchstart" : "mousedown";
+          var moveEvent = supportsTouch ? "touchmove" : "mousemove";
+          var endEvent = supportsTouch ? "touchend" : "mouseup";
+          var dragEvent = supportsTouch ? "e.originalEvent" : "e";
+          
+          $(this).bind(startEvent, function (event) {
+            $(document).unbind(moveEvent); // unbind previous drags
+            event.preventDefault(); // keep cursor from turning into text selector
+            var $this_el = $(event.delegateTarget);
+            var $this_parent = $this_el.parent();
+            $this_el.css("position","relative");
+            var parentWidth = $this_parent.width();
+            var parentLocation = $this_parent.offset();
+            var minX = parentLocation.left;
+            var maxX = parentWidth - myStyleVars.highlightBandWidth;
+            $(document).bind(moveEvent, function (e) {
+              $this_el.trigger("dragging");
+              var mouseX = supportsTouch ? e.originalEvent.pageX - myStyleVars.highlightBandWidth : 
+                e.pageX - myStyleVars.highlightBandWidth;
+              var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX)));
+              $this_el.css("left",relativeX);
+            }).bind(endEvent, function () {
+              $(document).unbind(moveEvent);
             });
-          // for desktop
-          } else {
-            $(this).mousedown(function (event) {
-              event.preventDefault(); // keep cursor from turning into text selector
-              // specify event target so we don't affect all elements with a certain class
-              var this_el = $(event.delegateTarget);
-              $(this_el).css("position","relative");
-              var highlightBandWidth = $(this_el).width() + 4;
-              var parentWidth = $(this_el).parent().width();
-              var parentLocation = $(this_el).parent().offset();
-              var minX = parentLocation.left; // this is the furthest left it can go 
-              var maxX = parentWidth - highlightBandWidth; // this is the furthest right it can go
-              $(document).bind("mousemove", function (e) {
-                $(this_el).trigger("dragging");
-                // where's my mouse at (relative to highlight band width)?
-                var mouseX = e.pageX - myStyleVars.threeFourthsHBW; 
-                // constrain mouse positions to min and max values
-                var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX))); 
-                $(this_el).css("left", relativeX); // put the draggable element there
-              }).mouseup(function () {
-                $(document).unbind("mousemove"); // stop dragging
-              });
-            });
-          }
+          });
         },
     
         calculateHighlightedColor: function () {

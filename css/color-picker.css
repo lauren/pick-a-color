@@ -112,6 +112,14 @@
     max-width: 301px;
   }
 }
+.color-menu.small {
+  min-width: 100px;
+}
+@media screen and (max-width: 767px) {
+  .color-menu.small {
+    left: -63px;
+  }
+}
 .color-menu .color-preview {
   vertical-align: middle;
   margin: 0px;

@@ -80,7 +80,8 @@
   cursor: pointer;
 }
 .color-preview.current-color {
-  margin-top: 3px;
+  margin-bottom: 1px;
+  margin-right: 3px;
 }
 @media screen and (max-width: 767px) {
   .color-preview {
@@ -90,11 +91,11 @@
 }
 .caret {
   vertical-align: bottom;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 @media screen and (max-width: 767px) {
   .caret {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 }
 /* basic menu of colors */
@@ -326,6 +327,7 @@
 }
 .color-menu-tabs span {
   padding: 5px;
+  margin: 5px;
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   cursor: pointer;

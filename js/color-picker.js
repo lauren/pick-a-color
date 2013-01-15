@@ -34,73 +34,62 @@
       }, options);
       
       var useTabs = settings.showSavedColors || settings.showColorWheel;
-  
-      /*** color picker markup ***/
-
-      var markupBeforeInputLineWithVariable = [
-        '<div class="input-prepend input-append color-picker-markup">',
-        	'<span class="hex-pound">#</span>'
-      ].join('\n');
-
-      var markupAfterInputLineWithVariable = [
-        	'<div class="btn-group">',
-        		'<button class="btn color-dropdown dropdown-toggle">',			
-        			'<span class="color-preview current-color"></span>',
-        			'<span class="caret"></span>',
-        		'</button>',
-        	  '<ul class="color-menu dropdown-menu">'
-      ].join('\n');
-  
-      var tabsBeginningMarkup = [
-              '<div class="color-menu-tabs">',
-                '<span class="basicColors-tab tab tab-active"><a>Basic Colors</a></span>'
-      ].join('\n');
-
-      var tabsSavedColorsMarkup = '<span class="savedColors-tab tab"><a>Your Saved Colors</a></span>';
-  
-      var tabsFullColorWheelMarkup = '<span class="fullColorWheel-tab tab"><a>Full Color Wheel</a></span>';
-  
-      var tabsEndingMarkup = '</div>';
-  
-      var basicColorsMarkup = [
-              '<div class="basicColors-content active-content">',
-                '<h6 class="hidden-desktop color-menu-instructions">',
-                  'Tap spectrum to lighten or darken color.',
-                '</h6>'
-      ];
-  
-      $.each(presetColors, function (index, value) {
-        var singleColorMarkup = [
-          '<li>',
-            '<a class="' + index + '">',
-              '<span class="color-preview ' + index + '"></span>',
-              '<span class="color-label">' + index + "</span>",
-              '<span class="color-box spectrum-' + index + '">',
-                '<span class="highlight-band"></span>',
-              '</span>',
-            '</a>',
-          '</li>'
-        ].join('\n');
-        basicColorsMarkup.push(singleColorMarkup);
-      });
-  
-      basicColorsMarkup.push('</div>');
-      basicColorsMarkup = basicColorsMarkup.join('\n');
-  
-      var savedColorsMarkup = [
-              '<div class="savedColors-content inactive-content">',
-                  '<p class="saved-colors-instructions">',
-                    'Type in a color or use the spectrums to lighten or darken an existing color. ' + 
-                    'Up to 16 custom colors will be saved here.',
-                  '</p>',
-              '</div>'
-      ].join('\n');
-             
-      var endingMarkup = [
-        	  '</ul>',
-        	'</div>',
-        '</div>'
-      ].join('\n');
+      
+      /*** markup ***/
+      
+      var markupBeforeInput = function () {
+        var $markup = $("<div>").addClass("input-prepend input-append color-picker-markup");
+        $markup.append($("<span>").addClass("hex-pound").text("#"));
+        return $markup;
+      };
+      
+      var markupAfterInput = function () {
+        var $markup = $("<div>").addClass("btn-group");
+        var $button = $("<button>").addClass("btn color-dropdown dropdown-toggle");
+        $button.append($("<span>").addClass("color-preview current-color"));
+        $button.append($("<span>").addClass("caret"));
+        $markup.append($button);
+        var $listContainer = $("<ul>").addClass("color-menu dropdown-menu");
+        if (useTabs) {
+          var $tabContainer = $("<div>").addClass("color-menu-tabs");
+          $tabContainer.append($("<span>").addClass("basicColors-tab tab tab-active").
+            append($("<a>").text("Basic Colors")));
+          if (settings.showSavedColors) {
+            $tabContainer.append($("<span>").addClass("savedColors-tab tab").
+            append($("<a>").text("Your Saved Colors")));
+          };
+          if (settings.showColorWheel) {
+            $tabContainer.append($("<span>").addClass("fullColorWheel-tab tab").
+            append("<a>").text("Full Color Wheel"));
+          };
+          $listContainer.append($tabContainer);
+        };
+        var $basicColors = $("<div>").addClass("basicColors-content active-content");
+        $basicColors.append($("<h6>").addClass("hidden-dekstop color-menu-instructions").
+          text("Tap spectrum to lighten or darken color"));
+        $.each(presetColors, function (index, value) {
+          var $thisColor = $("<li>");
+          var $thisLink = $("<a>").addClass(index);
+          $thisLink.append($("<span>").addClass("color-preview " + index));
+          $thisLink.append($("<span>").addClass("color-label").text(index));
+          if (settings.showSpectrum) {
+            var $thisSpectrum = $("<span>").addClass("color-box spectrum-" + index);
+            $thisSpectrum.append($("<span>").addClass("highlight-band"));
+            $thisLink.append($thisSpectrum);
+          };
+          $thisColor.append($thisLink);
+          $basicColors.append($thisColor);
+        });
+        $listContainer.append($basicColors);
+        if (settings.showSavedColors) {
+          var $savedColors = $("<div>").addClass("savedColors-content inactive-content");
+          $savedColors.append($("<p>").addClass("saved-colors-instructions").
+            text("Type in a color or use the spectrums to lighten or darken an existing color."));
+          $listContainer.append($savedColors);
+        };
+        $markup.append($listContainer);
+        return $markup;
+      };    
   
       var myColorVars = {
         typedColor              : "",
@@ -142,68 +131,21 @@
       /*** methods ***/
   
       var methods = {
-    
+            
         initialize: function () {           
            
           // get the default color from the content of each div
           myColorVars.defaultColor = $(this).text().match(/^\s+$|^$/) ? "000" : $(this).text();
           myColorVars.typedColor = myColorVars.defaultColor;
+          
+          var $inputMarkup = $('<input id="appendedPrependedDropdownButton" type="text" value="' + 
+            myColorVars.defaultColor + '">').addClass("color-text-input");
+          
+          var colorPickerMarkup = 
+            markupBeforeInput().append($inputMarkup).append(markupAfterInput());
       
-          // use the default color to construct the markup for the color picker
-          var inputMarkup = '<input id="appendedPrependedDropdownButton"' + 
-          'type="text" class="color-text-input" value="' + 
-          myColorVars.defaultColor + '">';
-      
-          /** put together the markup strings according to the settings **/
-      
-          var beginningMarkup = [
-            markupBeforeInputLineWithVariable, 
-            inputMarkup, 
-            markupAfterInputLineWithVariable
-          ].join('\n');
-          var beginningMarkupWithTabs = [
-            beginningMarkup,
-            tabsBeginningMarkup
-          ].join('\n');
-              
-          if (!settings.showSavedColors && !settings.showColorWheel) {
-            var colorPickerMarkup = [
-              beginningMarkup,
-              basicColorsMarkup,
-              endingMarkup
-            ].join('\n');
-          } else if (settings.showSavedColors && settings.showColorWheel) {
-            var colorPickerMarkup = [
-              beginningMarkupWithTabs,
-              tabsSavedColorsMarkup,
-              tabsFullColorWheelMarkup,
-              tabsEndingMarkup,
-              basicColorsMarkup,
-              savedColorsMarkup,
-              endingMarkup
-            ].join('\n');
-          } else if (settings.showSavedColors && !settings.showColorWheel) {
-            var colorPickerMarkup = [
-              beginningMarkupWithTabs,
-              tabsSavedColorsMarkup,
-              tabsEndingMarkup,
-              basicColorsMarkup,
-              savedColorsMarkup,
-              endingMarkup
-            ].join('\n');
-          } else if (!settings.showSavedColors && settings.showColorWheel) {
-            var colorPickerMarkup = [
-              beginningMarkupWithTabs,
-              tabsFullColorWheelMarkup,
-              tabsEndingMarkup,
-              basicColorsMarkup,
-              endingMarkup
-            ].join('\n');
-          };
-      
-          // swap in the markup
           $(this).html(colorPickerMarkup);
-      
+                
           /*** style-related variables ***/
 
           myStyleVars.spectrumWidth = parseInt($(".color-box").width(), 10); 
@@ -288,7 +230,11 @@
     
         getColorMultiplier: function (color,position) {
           // position of the color band as a percentage of the width of the color box
-          var spectrumWidth = smallScreen ? 170 : 200;
+          var spectrumWidth = myStyleVars.spectrumWidth;
+          if (spectrumWidth === 0) {
+            
+            console.log(myStyleVars);
+          }
           var percent_of_box = position / spectrumWidth; 
 
           // white only gets darkened up to 50%, 
@@ -344,7 +290,6 @@
           var startEvent = supportsTouch ? "touchstart" : "mousedown";
           var moveEvent = supportsTouch ? "touchmove" : "mousemove";
           var endEvent = supportsTouch ? "touchend" : "mouseup";
-          var dragEvent = supportsTouch ? "e.originalEvent" : "e";
           
           $(this).bind(startEvent, function (event) {
             event.preventDefault(); // keep cursor from turning into text selector
@@ -420,16 +365,38 @@
     
         updateSavedColorMarkup: function ($savedColorsContent,mySavedColors) {
           if (mySavedColors.length > 0) {
-        
+                    
             if (!settings.saveColorsPerElement) {
-              $savedColorsContent = $(".savedColors-conten");
+              $savedColorsContent = $(".savedColors-content");
               mySavedColors = allSavedColors;
             }
-        
+                    
             var savedColors = mySavedColors; // array to iterate through
             var columns = [];
-            var savedColorsMarkup = [];
-        
+            var savedColorsMarkup = [];         
+            
+            // $savedColorsContent.html(
+            //   '<div class="saved-color-col 0"></div><div class="saved-color-col 1"></div>'
+            // );
+            // var $savedCol0 = $(".saved-color-col 0");
+            // var $savedCol1 = $(".saved-color-col 1");
+            // 
+            // $.each(savedColors, function (index) {
+            //   var itemMarkup = [
+            //     '<li>',
+            //                  '<a class="' + savedColors[index] + '">',
+            //                    '<span class="color-preview"></span>',
+            //                    '<span class="color-label">#' + savedColors[index] + '</span>',
+            //                  '</a>',
+            //                '</li>'
+            //   ].join('\n');
+            //   if (index % 2 === 0) {
+            //     $savedCol0.append(itemMarkup);
+            //   } else {
+            //     $savedCol1.append(itemMarkup);
+            //   }
+            // });
+                    
             // split into up to max number of columns by max number of rows
             var i = 0;
             var perCol = myStyleVars.rowsInDropdown; // number of colors we can pull into a column
@@ -444,7 +411,7 @@
               i++;
               colStart += perCol; // move start back by the number of items per column
             }
-        
+                    
             for (var a = 0; a < columns.length; a++) {
               for (var b = 0; b < columns[a].length; b++) {
                 var itemMarkup = [];
@@ -453,11 +420,11 @@
                 };
                 itemMarkup.push([
                   '<li>',
-            				'<a class="' + columns[a][b] + '">',
-            					'<span class="color-preview"></span>',
-            					'<span class="color-label">#' + columns[a][b] + '</span>',
-            				'</a>',
-            			'</li>',
+                   '<a class="' + columns[a][b] + '">',
+                     '<span class="color-preview"></span>',
+                     '<span class="color-label">#' + columns[a][b] + '</span>',
+                   '</a>',
+                 '</li>',
                   ].join('\n'));
                 if (b === (columns[a].length - 1)) {
                   itemMarkup.push('</div>')
@@ -465,7 +432,7 @@
                 savedColorsMarkup.push(itemMarkup.join('\n'));
               };
             };
-        
+                    
             $savedColorsContent.html(savedColorsMarkup.join('\n'));
         
             var savedColorLinks = $($savedColorsContent).find("a");

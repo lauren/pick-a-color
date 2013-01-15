@@ -244,8 +244,7 @@
           }
           var percent_of_box = position / spectrumWidth; 
 
-          // white only gets darkened up to 50%, 
-          // so divide multiplier in half and return negative value
+          // white only gets darkened up to 50%, so halve multiplier and return negative value
           if (color === "white") {
             return -percent_of_box / 2; 
   
@@ -254,8 +253,7 @@
             return percent_of_box / 2; 
   
             // non B/W colors can be lightened OR darkened, but only to 50%, 
-            // so both multipliers are divided by two
-        
+                    
             // if the color band is in the light half of the box...
           } else if (percent_of_box <= 0.5) {   
   
@@ -619,11 +617,12 @@
           /* move the highlight band when you click on a spectrum */
     
           $(this).find(".color-box").click( function (e) {
+            var $this_el = $(this);
             e.stopPropagation(); // stop this click from closing the dropdown
-            var spectrumLocation = $(this).offset();
+            var spectrumLocation = $this_el.offset();
             var spectrumLeft = spectrumLocation.left;
             var mouseX = e.pageX; // find mouse
-            var highlightBand = $(this).find(".highlight-band");
+            var highlightBand = $this_el.find(".highlight-band");
             var newPosition = mouseX - spectrumLeft - (myStyleVars.threeFourthsHBW);
             highlightBand.css("left",newPosition); // move mouse
             var highlightedColor = methods.calculateHighlightedColor.apply(highlightBand);

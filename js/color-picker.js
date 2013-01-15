@@ -174,8 +174,7 @@
               
         },
     
-        updatePreview: function () {
-          var $this_el = $(this);        
+        updatePreview: function ($this_el) {
           myColorVars.typedColor = tinycolor($this_el.val()).toHex();
           $this_el.siblings(".btn-group").find(".current-color").css("background-color",
             "#" + myColorVars.typedColor);
@@ -235,7 +234,7 @@
         returns the value by which the color should be multiplied to 
         get the color currently being highlighted by the band */
     
-        getColorMultiplier: function (color,position) {
+        getColorMultiplier: function (colorHex,position) {
           // position of the color band as a percentage of the width of the color box
           var spectrumWidth = myStyleVars.spectrumWidth;
           if (spectrumWidth === 0) {
@@ -245,31 +244,29 @@
           var percent_of_box = position / spectrumWidth; 
 
           // white only gets darkened up to 50%, so halve multiplier and return negative value
-          if (color === "white") {
+          if (colorHex === "fff") {
             return -percent_of_box / 2; 
   
             // black only gets lightened up to 50%, so divide multiplier in half
-          } else if (color === "black") { 
+          } else if (colorHex === "000") { 
             return percent_of_box / 2; 
   
             // non B/W colors can be lightened OR darkened, but only to 50%, 
                     
-            // if the color band is in the light half of the box...
-          } else if (percent_of_box <= 0.5) {   
+          } else if (percent_of_box <= 0.5) { // if the color band is in the light half of the box...   
   
-            // get the percentage position relative half of the box, 
+            // get the percentage position relative to half of the box, 
             // then subtract from one to account for the fact that we're 
             // lightening as we move away from center, not away from left
             return (1 - (position / myStyleVars.halfSpectrumWidth)) / 2; 
   
-            // if the color is in the dark half of the box...
-          } else { 
+          } else {  // if the color is in the dark half of the box...
   
             // get the percentage position relative to half of the box 
             // and return negative value
             return -(((position - myStyleVars.halfSpectrumWidth) / 
               myStyleVars.halfSpectrumWidth) / 2); 
-          }
+          };
   
         },
   
@@ -321,6 +318,7 @@
           // get the class of the parent color box and slice off "spectrum"  
           var colorName = $this_parent.attr("class").split("-")[2];
           var colorHsl = tinycolor(colorName).toHsl();
+          var colorHex = tinycolor(colorName).toHex();
       
           // midpoint of the current left position of the color band 
           var colorBandLocation = parseInt($this_el.css("left"),10) + 
@@ -328,7 +326,7 @@
         
           // based on the color of the color box and location of the color band, 
           // figure out how multiply the base color to get the new color 
-          var colorMultiplier = methods.getColorMultiplier(colorName,colorBandLocation); 
+          var colorMultiplier = methods.getColorMultiplier(colorHex,colorBandLocation); 
           // figure out what color is being highlighted 
 
           var highlightedColor = methods.modifyHSL(colorHsl,colorMultiplier);
@@ -344,13 +342,13 @@
           // when needed for visibility 
       
           // if it's not black or white....  
-          if ((colorName != "white") && (colorName != "black")) {
+          if ((colorHex != "000") && (colorHex != "fff")) {
         
             // lighten at dark end, darken at light end 
             (colorBandLocation >= myStyleVars.brightSpectrumWidth) ? 
               methods.lightenBorder($(this)) : methods.darkenBorder($(this));
   
-          } else if (colorName == "black") {
+          } else if (colorHex == "000") {
         
             // turn the black colorband light gray in the black section of the spectrum 
             (colorBandLocation > myStyleVars.blackSpectrumWidth) ? 
@@ -361,10 +359,10 @@
         },
     
         updateSavedColorPreview: function (elements) {
-          for (var i = 0; i < elements.length; i++) { 
-            var thisColor = $(elements[i]).attr("class");
-            $(elements[i]).find(".color-preview").css("background-color",thisColor);
-          };
+          $.each(elements, function (index) {
+            var thisColor = $(elements[index]).attr("class");
+            $(elements[index]).find(".color-preview").css("background-color",thisColor);
+          });
         },
     
         updateSavedColorMarkup: function ($savedColorsContent,mySavedColors) {
@@ -542,13 +540,7 @@
     
         // add the default color to saved colors
         methods.addToSavedColors(myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
-        methods.updatePreview.apply($myColorTextInput);
-        
-        /* toggle visibility of dropdown menu when you click or press the preview button */
-
-        $myColorPreviewButton.bind(endEvent, function (e) {
-          methods.pressPreviewButton(e,$myColorMenu,$myColorPreviewButton);
-        });
+        methods.updatePreview($myColorTextInput);
     
         /* input field focus: clear content
         input field blur: update preview, restore previous content if no value entered */
@@ -574,13 +566,19 @@
             methods.addToSavedColors(myColorVars.newValue,mySavedColors,mySavedColorsDataAttr); 
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors)
           }
-          methods.updatePreview.apply(this); // update preview
+          methods.updatePreview($this_el); // update preview
+        });
+        
+        /* toggle visibility of dropdown menu when you click or press the preview button */
+
+        $myColorPreviewButton.bind(endEvent, function (e) {
+          methods.pressPreviewButton(e,$myColorMenu,$myColorPreviewButton);
         });
         
         // any touch or click outside of a dropdown should close all dropdowns
         
-        $("html").bind(endEvent, function () {
-          if ($myColorMenu.css("display","block")) {
+        $("html").bind(endEvent, function (e) {
+          if ($myColorMenu.css("display") === "block") {
             methods.closeDropdown($myColorPreviewButton,$myColorMenu);
           }
         });
@@ -600,7 +598,7 @@
           var selectedColor = $(this).find("span:first").css("background-color"); 
           selectedColor = tinycolor(selectedColor).toHex(); 
           $($myColorTextInput).val(selectedColor); 
-          methods.updatePreview.apply($myColorTextInput); 
+          methods.updatePreview($myColorTextInput); 
           methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
           methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors)
           methods.closeDropdown($myColorPreviewButton,$myColorMenu); // close the dropdown
@@ -657,7 +655,7 @@
                 $(event.target).parent().attr("class") :
                 $(event.target).attr("class");
               $($myColorTextInput).val(selectedColor); 
-              methods.updatePreview.apply($myColorTextInput);  
+              methods.updatePreview($myColorTextInput);  
               methods.closeDropdown($myColorPreviewButton,$myColorMenu); 
               methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr);
             }
@@ -673,7 +671,7 @@
         
       });
 
-    }
+    };
   
 })( jQuery );
 

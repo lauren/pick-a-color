@@ -545,6 +545,12 @@
         // add the default color to saved colors
         methods.addToSavedColors(myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
         methods.updatePreview.apply($myColorTextInput);
+        
+        /* toggle visibility of dropdown menu when you click or press the preview button */
+
+        $myColorPreviewButton.bind(endEvent, function (e) {
+          methods.pressPreviewButton(e,$myColorMenu,$myColorPreviewButton);
+        });
     
         /* input field focus: clear content
         input field blur: update preview, restore previous content if no value entered */
@@ -556,7 +562,9 @@
           methods.openDropdown($myColorPreviewButton,$myColorMenu); 
         }).blur(function (e) {
           var $this_el = $(this);
-          methods.closeDropdown($myColorPreviewButton,$myColorMenu); 
+          setTimeout(function () {
+            methods.closeDropdown($myColorPreviewButton,$myColorMenu);
+          }, 150); // delay menu close to allow pressPreviewButton to trigger if it caused blur
           myColorVars.newValue = $this_el.val(); // on blur, check the field's value
           // if the field is empty, put the original value back in the field
           if (myColorVars.newValue.match(/^\s+$|^$/)) {
@@ -569,12 +577,6 @@
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors)
           }
           methods.updatePreview.apply(this); // update preview
-        });
-    
-        /* toggle visibility of dropdown menu when you click or press the preview button */
-
-        $myColorPreviewButton.bind(endEvent, function (e) {
-          methods.pressPreviewButton(e,$myColorMenu,$myColorPreviewButton);
         });
         
         // any touch or click outside of a dropdown should close all dropdowns

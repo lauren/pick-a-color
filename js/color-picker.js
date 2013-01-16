@@ -303,6 +303,8 @@
             var $this_el = $(event.delegateTarget);
             var $this_parent = $this_el.parent();
             $this_el.css("position","relative");
+            $this_el.css("cursor","-webkit-grabbing");
+            $this_el.css("cursor","-moz-grabbing");
             var myWidth = $this_el.width() + 4;
             var parentWidth = $this_parent.width();
             var parentLocation = $this_parent.offset();
@@ -313,10 +315,13 @@
               var mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX;
               var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX)));
               $this_el.css("left",relativeX);
+            }).on(endEvent, function(event) { 
+              $(document).unbind(moveEvent); 
+              $this_el.css("cursor","-webkit-grab");
+              $this_el.css("cursor","-moz-grab");
             });
-          });
-          $(document).on(endEvent, function(event) {//bind mouseup to the document
-            $(document).unbind(moveEvent);//remove mousemove event
+          }).on(endEvent, function(event) { 
+            $(document).unbind(moveEvent); 
           });
         },
     
@@ -368,8 +373,9 @@
     
         updateSavedColorPreview: function (elements) {
           $.each(elements, function (index) {
-            var thisColor = $(elements[index]).attr("class");
-            $(elements[index]).find(".color-preview").css("background-color",thisColor);
+            var $this_el = $(elements[index]);
+            var thisColor = "#" + $this_el.attr("class");
+            $this_el.find(".color-preview").css("background-color",thisColor);
           });
         },
     

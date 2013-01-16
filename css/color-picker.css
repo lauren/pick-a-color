@@ -31,13 +31,12 @@
   }
 }
 .color-text-input {
-  min-height: 30px;
   width: 200px;
 }
 @media screen and (max-width: 767px) {
   .color-text-input {
     min-width: 228px;
-    min-height: 40px;
+    min-height: 30px;
   }
 }
 @media screen and (max-width: 767px) {
@@ -48,7 +47,7 @@
 /* button to open picker */
 .color-dropdown {
   height: 30px;
-  padding: 0px 5px;
+  padding: 3px 5px;
 }
 @media screen and (max-width: 767px) {
   .color-dropdown {
@@ -87,11 +86,11 @@
 }
 .caret {
   vertical-align: bottom;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 @media screen and (max-width: 767px) {
   .caret {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 }
 /* basic menu of colors */
@@ -253,6 +252,8 @@
   width: 11px;
   display: inline-block;
   cursor: pointer;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
   position: absolute;
   top: -2px;
   left: 94.5px;

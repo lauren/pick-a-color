@@ -84,7 +84,11 @@
           $thisLink.append($("<span>").addClass("color-label").text(index));
           if (settings.showSpectrum) {
             var $thisSpectrum = $("<span>").addClass("color-box spectrum-" + index);
-            $thisSpectrum.append($("<span>").addClass("highlight-band"));
+            var $thisHighlightBand = $("<span>").addClass("highlight-band");
+            $.each([1,2,3], function () {
+              $thisHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
+            });
+            $thisSpectrum.append($thisHighlightBand);
             $thisLink.append($thisSpectrum);
           }
           $thisColor.append($thisLink);
@@ -180,9 +184,9 @@
         },
     
         updatePreview: function ($this_el) {
-            myColorVars.typedColor = tinycolor($this_el.val()).toHex();
-            $this_el.siblings(".btn-group").find(".current-color").css("background-color",
-              "#" + myColorVars.typedColor);
+          myColorVars.typedColor = tinycolor($this_el.val()).toHex();
+          $this_el.siblings(".btn-group").find(".current-color").css("background-color",
+            "#" + myColorVars.typedColor);
         },
     
         pressPreviewButton: function (event,$myColorMenu,$myColorPreviewButton) {
@@ -299,14 +303,14 @@
             var $this_el = $(event.delegateTarget);
             var $this_parent = $this_el.parent();
             $this_el.css("position","relative");
+            var myWidth = $this_el.width() + 4;
             var parentWidth = $this_parent.width();
             var parentLocation = $this_parent.offset();
             var minX = parentLocation.left;
-            var maxX = parentWidth - myStyleVars.highlightBandWidth;
+            var maxX = parentWidth - myWidth;
             $(document).on(moveEvent, function (e) {
               $this_el.trigger("dragging");
-              var mouseX = supportsTouch ? e.originalEvent.pageX - myStyleVars.highlightBandWidth :
-                e.pageX - myStyleVars.highlightBandWidth;
+              var mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX;
               var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX)));
               $this_el.css("left",relativeX);
             });
@@ -663,6 +667,7 @@
               methods.updatePreview($myColorTextInput);
               methods.closeDropdown($myColorPreviewButton,$myColorMenu);
               methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr);
+              methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
             }
           });
               

@@ -26,12 +26,14 @@
 
 @border_gray:#ccc;
 
+@dark_gray:ligthen(@black,25%);
+
 // widths
 
 @color-box-width: 200px;
 @color-box-width-phone: 180px; 
-@color-band-width: 5px;
-@phone-color-band-width: 20px;
+@color-band-width: 11px;
+@phone-color-band-width: 21px;
 
 //// mixins
 
@@ -309,12 +311,29 @@
 	position:absolute;
 	top:-2px;
 	left:(@color-box-width/2) - (@color-band-width/2);
+	text-align:center;
 	@media screen and (max-width: 767px) {
 		width:@phone-color-band-width;
 		left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
 		height:35px;
 		.borders-shadows(4px,2px,@black,solid, 1px 1px 3px #333);
 	}
+}
+
+.highlight-band-stripe {
+	min-height: 75%;
+	min-width: 1px;
+	background-color:@black;
+	opacity: 0.25;
+	margin: 4px 2px;
+	display:inline-block;
+	@media screen and (min-width: 768px) {
+		margin: 2px 1px;
+	}
+}
+
+.black .highlight-band-stripe {
+	background-color:@white;
 }
 
 .spectrum-white {

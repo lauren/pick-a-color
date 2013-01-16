@@ -29,35 +29,39 @@
 // widths
 
 @color-box-width: 200px;
-@color-box-width-phone: 180px;
+@color-box-width-phone: 180px; 
 @color-band-width: 5px;
 @phone-color-band-width: 20px;
 
 //// mixins
 
-.borders (@radius: 4px) {
--webkit-border-radius: @radius;
-   -moz-border-radius: @radius;
-		 -o-border-radius: @radius;
-        border-radius: @radius;
-}
-
-.borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid) {
-	border:@width @style @color;
+.rounded-corners (@radius: 4px) {
 	-webkit-border-radius: @radius;
 	   -moz-border-radius: @radius;
 			 -o-border-radius: @radius;
 	        border-radius: @radius;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-          transition: border linear 0.2s, box-shadow linear 0.2s;
 }
 
-.tab-borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid) {
+.shadows (@shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)) {
+	-webkit-box-shadow: @shadow;
+	   -moz-box-shadow: @shadow;
+	        box-shadow: @shadow;
+}
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+     -moz-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+
+.borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid,@shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)) {
+	border: @width @style @color;
+	.rounded-corners(@radius);
+  .shadows(@shadow);
+}
+
+.tab-borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid,@shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)) {
 	border-top:@width @style @color;
 	border-right:@width @style @color;
 	border-left:@width @style @color;
@@ -67,13 +71,7 @@
 	    -moz-border-radius-topright: @radius;
            border-top-left-radius: @radius;
 	        border-top-right-radius: @radius;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
-     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
-       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
-          transition: border linear 0.2s, box-shadow linear 0.2s;
+  .shadows(@shadow);
 }
  
 .two-color-spectrum (@start: @white, @stop: @black) {
@@ -245,20 +243,13 @@
 	  padding: 5px 15px 3px 15px; /*overwriting bootstrap default */
 	  cursor: default;
 		min-height:25px;
-		&:hover {
-		  background-color: #eee;
-		  color: #333;
-			background-image:none;
-			@media screen and (max-width: 767px) {
-			 background-color: #fff;
-			}
-		}
 		@media screen and (max-width: 767px) {
 			min-height:40px;
 		}
 	}
 	li:hover a {
 		background-color:#eee;
+		.transition(background-color .5s ease-in);
 		color: #333;
 		background-image:none;
 		@media screen and (max-width: 767px) {
@@ -310,7 +301,7 @@
 /* selector box */
 
 .highlight-band {
-	.borders-shadows(4px,2px,@black,solid);
+	.borders-shadows(4px,2px,@black,solid, 1px 1px 1px #555);
 	height:20px;
 	width:@color-band-width;
 	display:inline-block;
@@ -322,6 +313,7 @@
 		width:@phone-color-band-width;
 		left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
 		height:35px;
+		.borders-shadows(4px,2px,@black,solid, 1px 1px 3px #333);
 	}
 }
 
@@ -381,6 +373,7 @@
 		background-color:#fff;
 		&:hover {
 		.tab-borders-shadows;
+		.transition(border .25s linear);
 		}
 	}
 	a {
@@ -409,7 +402,7 @@
 	li > a {
 	margin-left:7px;
 	padding-left:8px;
-	.borders;
+	.rounded-corners;
 	}
 }
 

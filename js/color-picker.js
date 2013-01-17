@@ -28,6 +28,17 @@
       var moveEvent   = supportsTouch ? "touchmove.colorPicker"   : "mousemove.colorPicker";
       var endEvent    = supportsTouch ? "touchend.colorPicker"    : "mouseup.colorPicker";
       var clickEvent  = supportsTouch ? "touchend.colorPicker"    : "click.colorPicker";
+      
+      if (!Array.prototype.indexOf) {
+        Array.prototype.indexOf = function(obj, start) {
+          for (var i = (start || 0), j = this.length; i < j; i++) {
+            if (this[i] === obj) { 
+              return i; 
+            }
+          };
+          return -1;
+        };
+      }
   
       /*** settings ***/
   
@@ -105,22 +116,9 @@
         return $markup;
       };
   
-      var myColorVars = {
-        typedColor              : "",
-        defaultColor            : "",
-        newColor                : "",
-        selectedColor           : ""
-      };
+      var myColorVars = {};
       
       var myStyleVars = {
-        spectrumWidth           : "",
-        halfSpectrumWidth       : "",
-        highlightBandWidth      : "",
-        halfHighlightBandWidth  : "",
-        threeFourthsHBW         : "",
-        eightHighlightBands     : "",
-        brightSpectrumWidth     : "",
-        blackSpectrumWidth      : "",
         rowsInDropdown          : 8,
         maxColsInDropdown       : 2
       };
@@ -160,14 +158,18 @@
                 
           /*** style-related variables ***/
           
-          myStyleVars.spectrumWidth = parseInt($(".color-box").width(), 10);
+          console.log($(".color-box").first());
+          console.log($(".color-box").first().width());
+          console.log(parseInt($(".color-box").first().width(),10));
+          
+          myStyleVars.spectrumWidth = parseInt($(".color-box").first().width(), 10);
           if (myStyleVars.spectrumWidth === 0) {
-            console.log($(".color-box"));
-            console.log($(".color-box").width());
-            console.log(parseInt($(".color-box").width(),10));
+            console.log(myStyleVars.spectrumWidth);
           }
           myStyleVars.halfSpectrumWidth = myStyleVars.spectrumWidth / 2;
-          myStyleVars.highlightBandWidth = parseInt($(".highlight-band").width(), 10) + 4;
+          // highlightBandWidth is width plus 2x border-width
+          myStyleVars.highlightBandWidth = parseInt($(".highlight-band").first().width(), 10) +
+            (2 * parseInt($(".highlight-band").first().css("border-width"), 10));
           myStyleVars.halfHighlightBandWidth = myStyleVars.highlightBandWidth / 2;
           myStyleVars.threeFourthsHBW = myStyleVars.highlightBandWidth * 0.75;
           myStyleVars.threeHighlightBands = myStyleVars.highlightBandWidth * 3;
@@ -296,32 +298,47 @@
         darkenBorder: function (element) {
           methods.changeBorderColor(element,"#000");
         },
+        
+        /* defines the area within which a colorBand can be moved */
+        getMoveableArea: function ($colorBand) {
+          var dimensions = {};
+          var $cbParent = $colorBand.parent();
+          var myWidth = myStyleVars.highlightBandWidth;
+          var parentWidth = $cbParent.width(); // don't include borders for parent width
+          var parentLocation = $cbParent.offset();
+          dimensions.minX = parentLocation.left;
+          dimensions.maxX = parentWidth - myWidth; //subtract myWidth to avoid pushing out of parent
+          return dimensions;
+        },
+        
+        moveColorBand: function ($colorBand, moveableArea, e) {
+          var mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX; // find the mouse!
+          // mouse position relative to width of colorBand
+          var newPosition = mouseX - moveableArea.minX - myStyleVars.threeFourthsHBW;
+          // don't move beyond moveable area
+          newPosition = Math.max(0,(Math.min(newPosition,moveableArea.maxX))); 
+          $colorBand.css("position","relative");
+          $colorBand.css("left", newPosition);
+        },
     
         horizontallyDraggable: function () {
           $(this).on(startEvent, function (event) {
             event.preventDefault();
             var $this_el = $(event.delegateTarget);
-            var $this_parent = $this_el.parent();
             $this_el.css("position","relative");
             $this_el.css("cursor","-webkit-grabbing");
             $this_el.css("cursor","-moz-grabbing");
-            var myWidth = $this_el.width() + 4;
-            var parentWidth = $this_parent.width();
-            var parentLocation = $this_parent.offset();
-            var minX = parentLocation.left;
-            var maxX = parentWidth - myWidth;
+            var dimensions = methods.getMoveableArea($this_el);
             $(document).on(moveEvent, function (e) {
               $this_el.trigger("dragging");
-              var mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX;
-              var relativeX = Math.max(0,(Math.min(mouseX-minX,maxX)));
-              $this_el.css("left",relativeX);
+              methods.moveColorBand($this_el, dimensions, e);
             }).on(endEvent, function(event) { 
-              $(document).unbind(moveEvent); 
+              $(document).off(moveEvent); // for desktop
               $this_el.css("cursor","-webkit-grab");
               $this_el.css("cursor","-moz-grab");
             });
           }).on(endEvent, function(event) { 
-            $(document).unbind(moveEvent); 
+            $(document).off(moveEvent); // for mobile
           });
         },
     
@@ -342,7 +359,7 @@
           var colorMultiplier = methods.getColorMultiplier(colorHex,colorBandLocation);
           // figure out what color is being highlighted
 
-          var highlightedColor = methods.modifyHSL(colorHsl,colorMultiplier);
+          var highlightedColor = "#" + methods.modifyHSL(colorHsl,colorMultiplier);
 
           // change the color preview to the color being highlighted
           $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
@@ -374,7 +391,7 @@
         updateSavedColorPreview: function (elements) {
           $.each(elements, function (index) {
             var $this_el = $(elements[index]);
-            var thisColor = "#" + $this_el.attr("class");
+            var thisColor = $this_el.attr("class");
             $this_el.find(".color-preview").css("background-color",thisColor);
           });
         },
@@ -438,7 +455,7 @@
                   '<li>',
                    '<a class="' + columns[a][b] + '">',
                      '<span class="color-preview"></span>',
-                     '<span class="color-label">#' + columns[a][b] + '</span>',
+                     '<span class="color-label">' + columns[a][b] + '</span>',
                    '</a>',
                  '</li>'
                   ].join('\n'));
@@ -551,9 +568,9 @@
             }
           }
         }
-    
+            
         // add the default color to saved colors
-        methods.addToSavedColors(myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
+        methods.addToSavedColors("#" + myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
         methods.updatePreview($myColorTextInput);
     
         /* input field focus: clear content
@@ -577,7 +594,7 @@
             myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
             $this_el.val(myColorVars.newValue); // put the new value in the field
             // save to saved colors
-            methods.addToSavedColors(myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
+            methods.addToSavedColors("#" + myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
           }
           methods.updatePreview($this_el); // update preview
@@ -631,13 +648,10 @@
           $(this).find(".color-box").click( function (e) {
             var $this_el = $(this);
             e.stopPropagation(); // stop this click from closing the dropdown
-            var spectrumLocation = $this_el.offset();
-            var spectrumLeft = spectrumLocation.left;
-            var mouseX = e.pageX; // find mouse
-            var highlightBand = $this_el.find(".highlight-band");
-            var newPosition = mouseX - spectrumLeft - (myStyleVars.threeFourthsHBW);
-            highlightBand.css("left",newPosition); // move mouse
-            var highlightedColor = methods.calculateHighlightedColor.apply(highlightBand);
+            var $highlightBand = $this_el.find(".highlight-band");
+            var dimensions = methods.getMoveableArea($highlightBand);
+            methods.moveColorBand($highlightBand, dimensions, e);
+            var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
             methods.addToSavedColors(highlightedColor,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
             // update touch instructions
@@ -650,6 +664,7 @@
             methods.calculateHighlightedColor.apply(this);
           });
           
+          //FIXME: Should use the endEvent
           $($myHighlightBands).click(function (e) {
             e.stopPropagation(); // stops dragging highlight band from triggering click on spectrum
           });
@@ -689,7 +704,7 @@
 
     };
   
-})( jQuery );
+})(jQuery);
 
 $(document).ready(function () {
   

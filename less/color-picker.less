@@ -79,6 +79,11 @@
 .two-color-spectrum (@start: @white, @stop: @black) {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, @start), color-stop(1.0, @stop));
   background-image: -moz-linear-gradient(left center, @start 0%, @stop 100%);
+  background-image: -webkit-linear-gradient(left, @start, @stop); 
+  background-image: -o-linear-gradient(left, @start, @stop); 
+  background-image: linear-gradient(to right, @start, @start); 
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start),argb(@stop))); // IE9 and down
 }
 
 .three-color-spectrum (@mid: @red) {
@@ -89,9 +94,8 @@
 // actual styles 
 
 .color-picker-markup {
-	@media screen and (max-width: 767px) {
-		margin:20px 0px;
-	}
+	margin-top:20px;
+	padding:0px;
 }
 
 .hex-pound {
@@ -137,6 +141,10 @@
 
 /* button to open picker */
 
+.btn-group {
+	vertical-align: top;
+}
+
 .color-dropdown { 
   height:30px;
   padding:3px 5px;
@@ -144,8 +152,6 @@
 		min-height:40px;
 	}
 	@media screen and (min-width: 768px) {
-		position:relative;
-		top:-2px;
 	}
 }
 

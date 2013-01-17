@@ -1,7 +1,6 @@
-@media screen and (max-width: 767px) {
-  .color-picker-markup {
-    margin: 20px 0px;
-  }
+.color-picker-markup {
+  margin-top: 20px;
+  padding: 0px;
 }
 .hex-pound {
   display: inline-block;
@@ -45,6 +44,9 @@
   }
 }
 /* button to open picker */
+.btn-group {
+  vertical-align: top;
+}
 .color-dropdown {
   height: 30px;
   padding: 3px 5px;
@@ -55,10 +57,7 @@
   }
 }
 @media screen and (min-width: 768px) {
-  .color-dropdown {
-    position: relative;
-    top: -2px;
-  }
+  
 }
 .color-preview {
   border: 1px solid #cccccc;
@@ -293,6 +292,11 @@
 .spectrum-white {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);
+  background-image: -webkit-linear-gradient(left, #ffffff, #808080);
+  background-image: -o-linear-gradient(left, #ffffff, #808080);
+  background-image: linear-gradient(to right, #ffffff, #ffffff);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ff808080', GradientType=1);
 }
 .spectrum-white .highlight-band {
   left: 0px;
@@ -324,6 +328,11 @@
 .spectrum-black {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #000000 0%, #808080 100%);
+  background-image: -webkit-linear-gradient(left, #000000, #808080);
+  background-image: -o-linear-gradient(left, #000000, #808080);
+  background-image: linear-gradient(to right, #000000, #000000);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff000000', endColorstr='#ff808080', GradientType=1);
 }
 .spectrum-black .highlight-band {
   left: 0px;

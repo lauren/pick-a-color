@@ -1,3 +1,4 @@
+/* input field */
 .color-picker-markup {
   margin-top: 20px;
   padding: 0px;
@@ -101,9 +102,9 @@
 }
 @media screen and (max-width: 767px) {
   .color-menu {
-    left: -246px;
-    min-width: 301px;
-    max-width: 301px;
+    left: -260px;
+    min-width: 313px;
+    max-width: 313px;
   }
 }
 .color-menu.small {
@@ -166,6 +167,11 @@
   .color-menu li > a {
     min-height: 40px;
   }
+}
+.color-menu li > a:hover {
+  background-image: none;
+  color: #333;
+  background-color: #eee;
 }
 .color-menu li:hover a {
   background-color: #eee;
@@ -234,57 +240,8 @@
 }
 @media screen and (max-width: 767px) {
   .color-box {
-    width: 180px;
+    width: 190px;
     height: 35px;
-  }
-}
-/* selector box */
-.highlight-band {
-  border: 2px solid #000000;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 1px 1px 1px #555555;
-  -moz-box-shadow: 1px 1px 1px #555555;
-  box-shadow: 1px 1px 1px #555555;
-  height: 20px;
-  width: 11px;
-  display: inline-block;
-  cursor: pointer;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
-  position: absolute;
-  top: -2px;
-  left: 94.5px;
-  text-align: center;
-}
-@media screen and (max-width: 767px) {
-  .highlight-band {
-    width: 21px;
-    left: 79.5px;
-    height: 35px;
-    border: 2px solid #000000;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: 1px 1px 3px #333333;
-    -moz-box-shadow: 1px 1px 3px #333333;
-    box-shadow: 1px 1px 3px #333333;
-  }
-}
-.highlight-band-stripe {
-  min-height: 75%;
-  min-width: 1px;
-  background-color: #000000;
-  opacity: 0.25;
-  margin: 4px 2px;
-  display: inline-block;
-}
-@media screen and (min-width: 768px) {
-  .highlight-band-stripe {
-    margin: 2px 1px;
   }
 }
 .black .highlight-band-stripe {
@@ -295,7 +252,7 @@
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #808080);
   background-image: -o-linear-gradient(left, #ffffff, #808080);
-  background-image: linear-gradient(to right, #ffffff, #ffffff);
+  background-image: linear-gradient(to right, #ffffff, #808080);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ff808080', GradientType=1);
 }
@@ -331,13 +288,62 @@
   background-image: -moz-linear-gradient(left center, #000000 0%, #808080 100%);
   background-image: -webkit-linear-gradient(left, #000000, #808080);
   background-image: -o-linear-gradient(left, #000000, #808080);
-  background-image: linear-gradient(to right, #000000, #000000);
+  background-image: linear-gradient(to right, #000000, #808080);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff000000', endColorstr='#ff808080', GradientType=1);
 }
 .spectrum-black .highlight-band {
   left: 0px;
   border: 2px solid #808080;
+}
+/* selector box */
+.highlight-band {
+  border: 2px solid #000000;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 1px 1px #555555;
+  -moz-box-shadow: 1px 1px 1px #555555;
+  box-shadow: 1px 1px 1px #555555;
+  height: 20px;
+  width: 11px;
+  display: inline-block;
+  cursor: pointer;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  position: absolute;
+  top: -2px;
+  left: 94.5px;
+  text-align: center;
+}
+@media screen and (max-width: 767px) {
+  .highlight-band {
+    width: 21px;
+    left: 84.5px;
+    height: 35px;
+    border: 2px solid #000000;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 1px 1px 3px #333333;
+    -moz-box-shadow: 1px 1px 3px #333333;
+    box-shadow: 1px 1px 3px #333333;
+  }
+}
+.highlight-band-stripe {
+  min-height: 75%;
+  min-width: 1px;
+  background-color: #000000;
+  opacity: 0.25;
+  margin: 4px 2px;
+  display: inline-block;
+}
+@media screen and (min-width: 768px) {
+  .highlight-band-stripe {
+    margin: 2px 1px;
+  }
 }
 /* tabbed navigation */
 .color-menu-tabs {

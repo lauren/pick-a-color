@@ -18,11 +18,12 @@
   
       /*** capabilities ***/
   
-      var supportsTouch = 'ontouchstart' in window || 'onmsgesturechange' in window;
+      var supportsTouch = 'ontouchstart' in window;
       var smallScreen = (parseInt($(window).width(),10) < 767) ? true : false;
-      var supportsLocalStorage = 'localStorage' in window && window.localStorage !== null;
+      var supportsLocalStorage = 'localStorage' in window && window.localStorage !== null && 
+        typeof JSON === 'object'; // don't use LS in IE bcs we can't use JSON.stringify or .parse
       var myCookies = document.cookie;
-      var tenYearsInMilliseconds = 315360000000;
+      var tenYearsInMilliseconds = 315360000000; // shut up I need it for the cookie
       
       var startEvent  = supportsTouch ? "touchstart.colorPicker"  : "mousedown.colorPicker";
       var moveEvent   = supportsTouch ? "touchmove.colorPicker"   : "mousemove.colorPicker";
@@ -169,8 +170,8 @@
           }
           myStyleVars.halfSpectrumWidth = myStyleVars.spectrumWidth / 2;
           // highlightBandWidth is width plus 2x border-width
-          myStyleVars.highlightBandWidth = parseInt($(".highlight-band").first().width(), 10) +
-            (2 * parseInt($(".highlight-band").first().css("border-width"), 10));
+          var $firstHighlightBand = $(".highlight-band").first();
+          myStyleVars.highlightBandWidth = parseInt($firstHighlightBand.width(), 10) + 4;
           myStyleVars.halfHighlightBandWidth = myStyleVars.highlightBandWidth / 2;
           myStyleVars.threeFourthsHBW = myStyleVars.highlightBandWidth * 0.75;
           myStyleVars.threeHighlightBands = myStyleVars.highlightBandWidth * 3;
@@ -326,7 +327,6 @@
           var newPosition = mouseX - moveableArea.minX - myStyleVars.threeFourthsHBW;
           // don't move beyond moveable area
           newPosition = Math.max(0,(Math.min(newPosition,moveableArea.maxX))); 
-          $colorBand.css("position","relative");
           $colorBand.css("left", newPosition);
         },
     
@@ -339,15 +339,17 @@
             $this_el.css("cursor","-moz-grabbing");
             var dimensions = methods.getMoveableArea($this_el);
             $(document).on(moveEvent, function (e) {
-              $this_el.trigger("dragging");
+              $this_el.trigger("dragging.colorPicker");
               methods.moveColorBand($this_el, dimensions, e);
             }).on(endEvent, function(event) { 
               $(document).off(moveEvent); // for desktop
               $this_el.css("cursor","-webkit-grab");
               $this_el.css("cursor","-moz-grab");
+              $this_el.trigger("endDrag.colorPicker");
             });
-          }).on(endEvent, function(event) { 
+          }).on(endEvent, function(event,$this_el) { 
             $(document).off(moveEvent); // for mobile
+            $this_el.trigger("endDrag.colorPicker");
           });
         },
     
@@ -669,8 +671,12 @@
           
           methods.horizontallyDraggable.apply($myHighlightBands);
     
-          $($myHighlightBands).on("dragging",function () {
+          $($myHighlightBands).on("dragging.colorPicker",function () {
             methods.calculateHighlightedColor.apply(this);
+          }).on("endDrag.colorPicker", function (event) {
+            var finalColor = methods.calculateHighlightedColor.apply(this);
+            methods.addToSavedColors(finalColor,mySavedColors,mySavedColorsDataAttr);
+            methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
           });
           
           //FIXME: Should use the endEvent

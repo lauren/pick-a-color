@@ -279,16 +279,11 @@
 		}
 	}
 	li > a {
-	  padding: 5px 15px 3px 15px; /*overwriting bootstrap default */
+	  padding: 5px 15px 3px 15px;
 	  cursor: default;
 		min-height:25px;
 		@media screen and (max-width: 767px) {
 			min-height:40px;
-		}
-		&:hover {
-			background-image:none;
-			color: #333;
-			background-color:#eee;
 		}
 	}
 	li:hover a {
@@ -296,6 +291,7 @@
 		.transition(background-color .5s ease-in);
 		color: #333;
 		background-image:none;
+		filter:none;
 		@media screen and (max-width: 767px) {
 			background-color: #fff;
 		}
@@ -480,7 +476,7 @@
 	min-width: 1px;
 	background-color:@black;
 	opacity: 0.25;
-	margin: 4px 2px;
+	margin: 3px 1px;
 	display:inline-block;
 	@media screen and (min-width: 768px) {
 		margin: 2px 1px;

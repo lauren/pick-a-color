@@ -158,8 +158,6 @@
 }
 .color-menu li > a {
   padding: 5px 15px 3px 15px;
-  /*overwriting bootstrap default */
-
   cursor: default;
   min-height: 25px;
 }
@@ -167,11 +165,6 @@
   .color-menu li > a {
     min-height: 40px;
   }
-}
-.color-menu li > a:hover {
-  background-image: none;
-  color: #333;
-  background-color: #eee;
 }
 .color-menu li:hover a {
   background-color: #eee;
@@ -181,6 +174,7 @@
   transition: background-color 0.5s ease-in;
   color: #333;
   background-image: none;
+  filter: none;
 }
 @media screen and (max-width: 767px) {
   .color-menu li:hover a {
@@ -530,7 +524,7 @@
   min-width: 1px;
   background-color: #000000;
   opacity: 0.25;
-  margin: 4px 2px;
+  margin: 3px 1px;
   display: inline-block;
 }
 @media screen and (min-width: 768px) {

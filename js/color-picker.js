@@ -430,70 +430,28 @@
               $savedColorsContent = $(".savedColors-content");
               mySavedColors = allSavedColors;
             }
-                    
-            var savedColors = mySavedColors; // array to iterate through
-            var columns = [];
-            var savedColorsMarkup = [];
             
-            // $savedColorsContent.html(
-            //   '<div class="saved-color-col 0"></div><div class="saved-color-col 1"></div>'
-            // );
-            // var $savedCol0 = $(".saved-color-col 0");
-            // var $savedCol1 = $(".saved-color-col 1");
-            //
-            // $.each(savedColors, function (index) {
-            //   var itemMarkup = [
-            //     '<li>',
-            //                  '<a class="' + savedColors[index] + '">',
-            //                    '<span class="color-preview"></span>',
-            //                    '<span class="color-label">#' + savedColors[index] + '</span>',
-            //                  '</a>',
-            //                '</li>'
-            //   ].join('\n');
-            //   if (index % 2 === 0) {
-            //     $savedCol0.append(itemMarkup);
-            //   } else {
-            //     $savedCol1.append(itemMarkup);
-            //   }
-            // });
+            var maxSavedColors = myStyleVars.rowsInDropdown * myStyleVars.maxColsInDropdown;
+            mySavedColors = mySavedColors.slice(0,maxSavedColors-1);
+            
+            var $col0 = $("<div>").addClass("saved-color-col 0");
+            var $col1 = $("<div>").addClass("saved-color-col 1");
                     
-            // split into up to max number of columns by max number of rows
-            var i = 0;
-            var perCol = myStyleVars.rowsInDropdown; // number of colors we can pull into a column
-            // used to keep track of where to start slicing the array
-            var colStart = 0;
-            // number of columns is the number of saved colors over available rows
-            var numCols = Math.ceil(savedColors.length/perCol);
-            // limit that to the maximum number of columns
-            numCols = Math.min(numCols,myStyleVars.maxColsInDropdown);
-            while (i < numCols) {
-              columns.push(savedColors.slice(colStart,colStart+perCol));
-              i++;
-              colStart += perCol; // move start back by the number of items per column
-            }
-                    
-            for (var a = 0; a < columns.length; a++) {
-              for (var b = 0; b < columns[a].length; b++) {
-                var itemMarkup = [];
-                if (b === 0) {
-                  itemMarkup.push('<div class="saved-color-col ' + a + '">');
-                }
-                itemMarkup.push([
-                  '<li>',
-                   '<a class="' + columns[a][b] + '">',
-                     '<span class="color-preview"></span>',
-                     '<span class="color-label">' + columns[a][b] + '</span>',
-                   '</a>',
-                 '</li>'
-                  ].join('\n'));
-                if (b === (columns[a].length - 1)) {
-                  itemMarkup.push('</div>');
-                }
-                savedColorsMarkup.push(itemMarkup.join('\n'));
+            $.each(mySavedColors, function (index,value) {
+              var $this_li = $("<li>");
+              var $this_link = $("<a class=" + value + ">");
+              $this_link.append($("<span>").addClass("color-preview"));
+              $this_link.append($("<span>").addClass("color-label").text(value));
+              $this_li.append($this_link);
+              if (index % 2 === 0) {
+                $col0.append($this_li);
+              } else {
+                $col1.append($this_li);
               }
-            }
-                    
-            $savedColorsContent.html(savedColorsMarkup.join('\n'));
+            });
+            
+            $savedColorsContent.html($col0);
+            $savedColorsContent.append($col1);
         
             var savedColorLinks = $($savedColorsContent).find("a");
             methods.updateSavedColorPreview(savedColorLinks);
@@ -673,8 +631,8 @@
           /* move the highlight band when you click on a spectrum */
     
           $(this).find(".color-box").click( function (e) {
-            var $this_el = $(this);
             e.stopPropagation(); // stop this click from closing the dropdown
+            var $this_el = $(this);
             var $highlightBand = $this_el.find(".highlight-band");
             var dimensions = methods.getMoveableArea($highlightBand);
             methods.moveColorBand($highlightBand, dimensions, e);

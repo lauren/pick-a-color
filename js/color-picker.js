@@ -30,8 +30,8 @@
       var clickEvent  = supportsTouch ? "touchend.colorPicker"    : "click.colorPicker";
       
       if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function(obj, start) {
-          for (var i = (start || 0), j = this.length; i < j; i++) {
+        Array.prototype.indexOf = function(obj) {
+          for (var i = 0; i < this.length; i++) {
             if (this[i] === obj) { 
               return i; 
             }
@@ -375,7 +375,7 @@
   
           /* replace the color label with a 'select me' button */
           $this_parent.prev('.color-label').replaceWith(
-            '<button class="btn btn-mini color-select" type="button">Select</button>');
+            '<button class="color-select btn btn-mini" type="button">Select</button>');
       
           // watch the position of the color band to change its border color
           // when needed for visibility

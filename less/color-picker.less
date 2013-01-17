@@ -265,7 +265,6 @@
 	}
 	.btn {
 		margin: 0px 5px;
-		.borders-shadows!important; /*overwriting the bootstrap styles for button groups to not have all rounded corners */
 		&.color-select {
 			height:22px;
 			padding:0px 5px;
@@ -277,6 +276,10 @@
 	}
 }
 
+.input-prepend.input-append input + .btn-group .btn.color-select {
+	.rounded-corners;
+}
+
 .color-menu-instructions {
 	text-align: center;
 	padding:0px 6px;
@@ -286,8 +289,11 @@
 .color-label {
   vertical-align:middle;
   margin:0px;
-  margin-left:5px;
+  margin-left:10px;
   cursor:pointer;
+	@media screen and (max-width: 767px) {
+	margin-left:8px;
+	}
 }
 
 /* color gradients */

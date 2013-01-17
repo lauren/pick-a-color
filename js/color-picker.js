@@ -46,7 +46,8 @@
         showSpectrum          : true,
         showSavedColors       : true,
         showColorWheel        : true,
-        saveColorsPerElement  : false
+        saveColorsPerElement  : false,
+        fadeMenuToggle        : true
       }, options);
       
       var useTabs = settings.showSavedColors || settings.showColorWheel;
@@ -149,7 +150,7 @@
           myColorVars.typedColor = myColorVars.defaultColor;
           
           var $inputMarkup = $('<input id="appendedPrependedDropdownButton" type="text" value="' +
-            myColorVars.defaultColor + '">').addClass("color-text-input");
+            myColorVars.defaultColor + '"/>').addClass("color-text-input");
           
           var colorPickerMarkup =
             markupBeforeInput().append($inputMarkup).append(markupAfterInput());
@@ -205,12 +206,20 @@
               methods.closeDropdown(thisColorPreviewButton,$this_el); // close it
             }
           });
-          $(menu).css("display","block");
+          if (settings.fadeMenuToggle) {
+            $(menu).fadeIn("fast");
+          } else {
+            $(menu).css("display","block");
+          }
           $(button).addClass("open");
         },
     
         closeDropdown: function (button,menu) {
-          $(menu).css("display","none");
+          if (settings.fadeMenuToggle) {
+            $(menu).fadeOut("fast");
+          } else {
+            $(menu).css("display","none");
+          }
           $(button).removeClass("open");
         },
         
@@ -712,7 +721,8 @@ $(document).ready(function () {
     showSpectrum            : true,
     showColorWheel          : false,
     showSavedColors         : true,
-    saveColorsPerElement    : true
+    saveColorsPerElement    : true,
+    fadeMenuToggle          : true
   });
   
 });

@@ -22,6 +22,7 @@
       var smallScreen = (parseInt($(window).width(),10) < 767) ? true : false;
       var supportsLocalStorage = 'localStorage' in window && window.localStorage !== null && 
         typeof JSON === 'object'; // don't use LS in IE bcs we can't use JSON.stringify or .parse
+      var isIE = /*@cc_on!@*/false; // OH NOES
       var myCookies = document.cookie;
       var tenYearsInMilliseconds = 315360000000; // shut up I need it for the cookie
       
@@ -90,15 +91,22 @@
           $basicColors.append($("<h6>").addClass("hidden-dekstop color-menu-instructions").
             text("Tap spectrum or drag band to change color"));
         }
-        $.each(presetColors, function (index) {
+        $.each(presetColors, function (index,value) {
           var $thisColor = $("<li>");
           var $thisLink = $("<a>").addClass(index);
           $thisLink.append($("<span>").addClass("color-preview " + index));
           $thisLink.append($("<span>").addClass("color-label").text(index));
           if (settings.showSpectrum) {
             var $thisSpectrum = $("<span>").addClass("color-box spectrum-" + index);
+            if (isIE) {
+              $.each([0,1], function (i) {
+                if (value !== "fff" && index !== "000")
+                $thisSpectrum.append($("<span>").addClass(index + "-spectrum-" + i +
+                " ie-spectrum"));
+              });
+            }
             var $thisHighlightBand = $("<span>").addClass("highlight-band");
-            $.each([1,2,3], function () {
+            $.each([0,1,2], function () {
               $thisHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
             });
             $thisSpectrum.append($thisHighlightBand);
@@ -160,18 +168,27 @@
                 
           /*** style-related variables ***/
           
-          console.log($(".color-box").first());
-          console.log($(".color-box").first().width());
-          console.log(parseInt($(".color-box").first().width(),10));
+          var $firstCB = $(".color-box").first();
+          var firstCBWidth = $firstCB.width();
+          var firstCBWidth2 = $firstCB.width;
+          var firstCBWidthPI = parseInt(firstCBWidth,10);
+          var firstCBWidth2PI = parseInt(firstCBWidth,10);
+          var firstCBOuterWidth = $firstCB.outerWidth();
+          var firstCBOuterWidthPI = parseInt(firstCBOuterWidth,10);
           
-          myStyleVars.spectrumWidth = parseInt($(".color-box").first().width(), 10);
+          myStyleVars.spectrumWidth = firstCBWidthPI;
           if (myStyleVars.spectrumWidth === 0) {
             console.log(myStyleVars.spectrumWidth);
+            console.log($firstCB);
+            console.log(firstCBWidth);
+            console.log(firstCBWidth2);
+            console.log(firstCBWidthPI);
+            console.log(firstCBWidth2PI);
           }
           myStyleVars.halfSpectrumWidth = myStyleVars.spectrumWidth / 2;
           // highlightBandWidth is width plus 2x border-width
           var $firstHighlightBand = $(".highlight-band").first();
-          myStyleVars.highlightBandWidth = parseInt($firstHighlightBand.width(), 10) + 4;
+          myStyleVars.highlightBandWidth = parseInt($firstHighlightBand.outerWidth(), 10) + 4;
           myStyleVars.halfHighlightBandWidth = myStyleVars.highlightBandWidth / 2;
           myStyleVars.threeFourthsHBW = myStyleVars.highlightBandWidth * 0.75;
           myStyleVars.threeHighlightBands = myStyleVars.highlightBandWidth * 3;
@@ -310,10 +327,10 @@
         },
         
         /* defines the area within which a colorBand can be moved */
-        getMoveableArea: function ($colorBand) {
+        getMoveableArea: function ($element) {
           var dimensions = {};
-          var $cbParent = $colorBand.parent();
-          var myWidth = myStyleVars.highlightBandWidth;
+          var $cbParent = $element.parent();
+          var myWidth = $element.outerWidth();
           var parentWidth = $cbParent.width(); // don't include borders for parent width
           var parentLocation = $cbParent.offset();
           dimensions.minX = parentLocation.left;
@@ -327,6 +344,7 @@
           var newPosition = mouseX - moveableArea.minX - myStyleVars.threeFourthsHBW;
           // don't move beyond moveable area
           newPosition = Math.max(0,(Math.min(newPosition,moveableArea.maxX))); 
+          $colorBand.css("position", "absolute");
           $colorBand.css("left", newPosition);
         },
     
@@ -334,7 +352,6 @@
           $(this).on(startEvent, function (event) {
             event.preventDefault();
             var $this_el = $(event.delegateTarget);
-            $this_el.css("position","relative");
             $this_el.css("cursor","-webkit-grabbing");
             $this_el.css("cursor","-moz-grabbing");
             var dimensions = methods.getMoveableArea($this_el);
@@ -347,9 +364,8 @@
               $this_el.css("cursor","-moz-grab");
               $this_el.trigger("endDrag.colorPicker");
             });
-          }).on(endEvent, function(event,$this_el) { 
+          }).on(endEvent, function(event) { 
             $(document).off(moveEvent); // for mobile
-            $this_el.trigger("endDrag.colorPicker");
           });
         },
     

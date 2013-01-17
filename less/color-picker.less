@@ -44,6 +44,24 @@
 	        border-radius: @radius;
 }
 
+.left-rounded-corners (@radius: 4px) {
+   -webkit-border-top-left-radius: @radius;
+-webkit-border-bottom-left-radius: @radius;
+       -moz-border-radius-topleft: @radius;
+    -moz-border-radius-bottomleft: @radius;
+           border-top-left-radius: @radius;
+        border-bottom-left-radius: @radius;
+}
+
+.right-rounded-corners (@radius: 4px) {
+   -webkit-border-top-right-radius: @radius;
+-webkit-border-bottom-right-radius: @radius;
+       -moz-border-radius-topright: @radius;
+    -moz-border-radius-bottomright: @radius;
+           border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+}
+
 .shadows (@shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075)) {
 	-webkit-box-shadow: @shadow;
 	   -moz-box-shadow: @shadow;
@@ -91,7 +109,19 @@
 	background-image: -moz-linear-gradient(left center, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
 }
 
-// actual styles 
+// IE spectrums
+
+.spectrum-0(@color) {
+	.two-color-spectrum(lighten(@color,50%),@color);
+	.left-rounded-corners;
+}
+
+.spectrum-1(@color) {
+	.two-color-spectrum(@color,darken(@color,50%));
+	.right-rounded-corners;
+}
+
+//// actual styles 
 
 /* input field */
 
@@ -360,6 +390,68 @@
 		border: 2px solid #808080;
 	}
 }
+
+/* IE spectrums */
+
+.ie-spectrum {
+  height:20px;
+  width:@color-box-width/2;
+	display:inline-block;
+	@media screen and (max-width: 767px) {
+		width:@color-box-width-phone/2;
+		height:35px;
+	}
+	top:-1;
+}
+
+.red-spectrum-0 {
+	.spectrum-0(@red);
+}
+
+.red-spectrum-1 {
+	.spectrum-1(@red);
+}
+
+.orange-spectrum-0 {
+	.spectrum-0(@orange);
+}
+
+.orange-spectrum-1 {
+	.spectrum-1(@orange);
+}
+
+.yellow-spectrum-0 {
+	.spectrum-0(@yellow);
+}
+
+.yellow-spectrum-1 {
+	.spectrum-1(@yellow);
+}
+
+.green-spectrum-0 {
+	.spectrum-0(@green);
+}
+
+.green-spectrum-1 {
+	.spectrum-1(@green);
+}
+
+.blue-spectrum-0 {
+	.spectrum-0(@blue);
+}
+
+.blue-spectrum-1 {
+	.spectrum-1(@blue);
+}
+
+.purple-spectrum-0 {
+	.spectrum-0(@purple);
+}
+
+.purple-spectrum-1 {
+	.spectrum-1(@purple);
+}
+
 
 /* selector box */
 

@@ -485,7 +485,7 @@
 }
 /* selector box */
 .highlight-band {
-  border: 2px solid #000000;
+  border: 2px solid #0d0d0d;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
@@ -523,7 +523,7 @@
   min-height: 75%;
   min-width: 1px;
   background-color: #000000;
-  opacity: 0.25;
+  opacity: 0.50;
   margin: 3px 1px;
   display: inline-block;
 }

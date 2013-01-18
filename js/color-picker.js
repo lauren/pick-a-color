@@ -326,26 +326,26 @@
           methods.changeBorderColor(element,"#000");
         },
         
-        /* defines the area within which a colorBand can be moved */
+        /* defines the area within which an element can be moved */
         getMoveableArea: function ($element) {
           var dimensions = {};
-          var $cbParent = $element.parent();
+          var $elParent = $element.parent();
           var myWidth = $element.outerWidth();
-          var parentWidth = $cbParent.width(); // don't include borders for parent width
-          var parentLocation = $cbParent.offset();
+          var parentWidth = $elParent.width(); // don't include borders for parent width
+          var parentLocation = $elParent.offset();
           dimensions.minX = parentLocation.left;
           dimensions.maxX = parentWidth - myWidth; //subtract myWidth to avoid pushing out of parent
           return dimensions;
         },
         
-        moveColorBand: function ($colorBand, moveableArea, e) {
+        moveHighlightBand: function ($highlightBand, moveableArea, e) {
           var mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX; // find the mouse!
-          // mouse position relative to width of colorBand
+          // mouse position relative to width of highlight-band
           var newPosition = mouseX - moveableArea.minX - myStyleVars.threeFourthsHBW;
           // don't move beyond moveable area
           newPosition = Math.max(0,(Math.min(newPosition,moveableArea.maxX))); 
-          $colorBand.css("position", "absolute");
-          $colorBand.css("left", newPosition);
+          $highlightBand.css("position", "absolute");
+          $highlightBand.css("left", newPosition);
         },
     
         horizontallyDraggable: function () {
@@ -357,7 +357,7 @@
             var dimensions = methods.getMoveableArea($this_el);
             $(document).on(moveEvent, function (e) {
               $this_el.trigger("dragging.colorPicker");
-              methods.moveColorBand($this_el, dimensions, e);
+              methods.moveHighlightBand($this_el, dimensions, e);
             }).on(endEvent, function(event) { 
               $(document).off(moveEvent); // for desktop
               $this_el.css("cursor","-webkit-grab");
@@ -367,6 +367,22 @@
           }).on(endEvent, function(event) { 
             $(document).off(moveEvent); // for mobile
           });
+        },
+        
+        modifyHighlightBand: function ($highlightBand,colorMultiplier,colorHex) {
+          var darkGrayHSL = { h: 0, s:0, l: 0.05 };
+          var bwMidHSL = { h: 0, s:0, l: 0.5 };
+          // change to color of band is opposite of change to color of spectrum 
+          console.log(colorMultiplier);
+          var hbColorMultiplier = -colorMultiplier;
+          var hbsColorMultiplier = hbColorMultiplier * 10; // needs to be either black or white
+          console.log(colorMultiplier);
+          var $hbStripes = $highlightBand.find(".highlight-band-stripe");
+          var newBandColor = (colorHex === "000") ? methods.modifyHSL(bwMidHSL,hbColorMultiplier) 
+            : methods.modifyHSL(darkGrayHSL,hbColorMultiplier);
+          var newStripeColor = methods.modifyHSL(bwMidHSL,hbsColorMultiplier);
+          $highlightBand.css("border-color","#" + newBandColor);
+          $hbStripes.css("background-color","#" + newStripeColor);
         },
     
         calculateHighlightedColor: function () {
@@ -378,39 +394,16 @@
           var colorHex = tinycolor(colorName).toHex();
       
           // midpoint of the current left position of the color band
-          var colorBandLocation = parseInt($this_el.css("left"),10) +
+          var highlightBandLocation = parseInt($this_el.css("left"),10) +
             myStyleVars.halfHighlightBandWidth;
-        
-          // based on the color of the color box and location of the color band,
-          // figure out how multiply the base color to get the new color
-          var colorMultiplier = methods.getColorMultiplier(colorHex,colorBandLocation);
-          // figure out what color is being highlighted
-
+          var colorMultiplier = methods.getColorMultiplier(colorHex,highlightBandLocation);
           var highlightedColor = "#" + methods.modifyHSL(colorHsl,colorMultiplier);
-
-          // change the color preview to the color being highlighted
           $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
-  
-          /* replace the color label with a 'select me' button */
+          /* replace the color label with a 'select' button */
           $this_parent.prev('.color-label').replaceWith(
             '<button class="color-select btn btn-mini" type="button">Select</button>');
-      
-          // watch the position of the color band to change its border color
-          // when needed for visibility
-      
-          // if it's not black or white....
-          if ((colorHex !== "000") && (colorHex !== "fff")) {
-        
-            // lighten at dark end, darken at light end
-            (colorBandLocation >= myStyleVars.brightSpectrumWidth) ?
-              methods.lightenBorder($(this)) : methods.darkenBorder($(this));
-  
-          } else if (colorHex === "000") {
-        
-            // turn the black colorband light gray in the black section of the spectrum
-            (colorBandLocation > myStyleVars.blackSpectrumWidth) ?
-              methods.darkenBorder($(this)) : methods.lightenBorder($(this));
-        
+          if (colorHex !== "fff") {  
+            methods.modifyHighlightBand($this_el,colorMultiplier,colorHex);
           }
           return highlightedColor;
         },
@@ -635,7 +628,7 @@
             var $this_el = $(this);
             var $highlightBand = $this_el.find(".highlight-band");
             var dimensions = methods.getMoveableArea($highlightBand);
-            methods.moveColorBand($highlightBand, dimensions, e);
+            methods.moveHighlightBand($highlightBand, dimensions, e);
             var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
             methods.addToSavedColors(highlightedColor,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);

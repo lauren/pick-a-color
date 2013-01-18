@@ -26,7 +26,7 @@
 
 @border_gray:#ccc;
 
-@dark_gray:ligthen(@black,25%);
+@dark_gray:lighten(@black,5%);
 
 // widths
 
@@ -383,7 +383,7 @@
   .two-color-spectrum(@black,@bw_midpoint);
 	.highlight-band {
 		left:0px;
-		border: 2px solid #808080;
+		border: 2px solid @bw_midpoint;
 	}
 }
 
@@ -452,7 +452,7 @@
 /* selector box */
 
 .highlight-band {
-	.borders-shadows(4px,2px,@black,solid, 1px 1px 1px #555);
+	.borders-shadows(4px,2px,@dark_gray,solid, 1px 1px 1px #555);
 	height:20px;
 	width:@color-band-width;
 	display:inline-block;
@@ -475,7 +475,7 @@
 	min-height: 75%;
 	min-width: 1px;
 	background-color:@black;
-	opacity: 0.25;
+	opacity: 0.50;
 	margin: 3px 1px;
 	display:inline-block;
 	@media screen and (min-width: 768px) {

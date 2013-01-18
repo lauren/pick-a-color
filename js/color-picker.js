@@ -169,22 +169,7 @@
           /*** style-related variables ***/
           
           var $firstCB = $(".color-box").first();
-          var firstCBWidth = $firstCB.width();
-          var firstCBWidth2 = $firstCB.width;
-          var firstCBWidthPI = parseInt(firstCBWidth,10);
-          var firstCBWidth2PI = parseInt(firstCBWidth,10);
-          var firstCBOuterWidth = $firstCB.outerWidth();
-          var firstCBOuterWidthPI = parseInt(firstCBOuterWidth,10);
-          
-          myStyleVars.spectrumWidth = firstCBWidthPI;
-          if (myStyleVars.spectrumWidth === 0) {
-            console.log(myStyleVars.spectrumWidth);
-            console.log($firstCB);
-            console.log(firstCBWidth);
-            console.log(firstCBWidth2);
-            console.log(firstCBWidthPI);
-            console.log(firstCBWidth2PI);
-          }
+          myStyleVars.spectrumWidth = parseInt($firstCB.outerWidth(),10);
           myStyleVars.halfSpectrumWidth = myStyleVars.spectrumWidth / 2;
           // highlightBandWidth is width plus 2x border-width
           var $firstHighlightBand = $(".highlight-band").first();
@@ -224,7 +209,7 @@
               methods.closeDropdown(thisColorPreviewButton,$this_el); // close it
             }
           });
-          if (settings.fadeMenuToggle) {
+          if (settings.fadeMenuToggle && !supportsTouch) {//fades look terrible in mobile
             $(menu).fadeIn("fast");
           } else {
             $(menu).css("display","block");
@@ -233,7 +218,7 @@
         },
     
         closeDropdown: function (button,menu) {
-          if (settings.fadeMenuToggle) {
+          if (settings.fadeMenuToggle && !supportsTouch) { //fades look terrible in mobile
             $(menu).fadeOut("fast");
           } else {
             $(menu).css("display","none");
@@ -274,56 +259,29 @@
     
         getColorMultiplier: function (colorHex,position) {
           // position of the color band as a percentage of the width of the color box
-          var spectrumWidth = myStyleVars.spectrumWidth;
-          if (spectrumWidth === 0) {
-            
-            console.log(myStyleVars);
+          var percent_of_box = position / myStyleVars.spectrumWidth;
+          // non-B/W spectrums can be lightened or darkened...
+          if (colorHex !== "fff" && colorHex !== "000") {
+            if (percent_of_box <= 0.5) { // in the light half of the box
+              // get the percentage position relative to half of the box,
+              // subtract from one bcs we lighten away from center, not left
+              return (1 - (position / myStyleVars.halfSpectrumWidth)) / 2;
+            } else { // in the dark half of the box
+              // get the percentage position relative to half of the box and return negative
+              return -(((position - myStyleVars.halfSpectrumWidth) /
+                myStyleVars.halfSpectrumWidth) / 2);
+            } 
+          } else if (colorHex === "fff") { // white gets darkened to 50%
+            return -percent_of_box / 2; // so halve multiplier and return negative value
+          } else if (colorHex === "000") { // black gets lightened to 50%
+            return percent_of_box / 2; // so divide multiplier in half
           }
-          var percent_of_box = position / spectrumWidth;
-
-          // white only gets darkened up to 50%, so halve multiplier and return negative value
-          if (colorHex === "fff") {
-            return -percent_of_box / 2;
-  
-            // black only gets lightened up to 50%, so divide multiplier in half
-          } else if (colorHex === "000") {
-            return percent_of_box / 2;
-  
-            // non B/W colors can be lightened OR darkened, but only to 50%,
-                    
-          } else if (percent_of_box <= 0.5) { // if the color band is in the light half of the box...
-  
-            // get the percentage position relative to half of the box,
-            // then subtract from one to account for the fact that we're
-            // lightening as we move away from center, not away from left
-            return (1 - (position / myStyleVars.halfSpectrumWidth)) / 2;
-  
-          } else {  // if the color is in the dark half of the box...
-  
-            // get the percentage position relative to half of the box
-            // and return negative value
-            return -(((position - myStyleVars.halfSpectrumWidth) /
-              myStyleVars.halfSpectrumWidth) / 2);
-          }
-  
         },
   
         modifyHSL: function (HSL,multiplier) {
           HSL.l += multiplier; // add the multiplier
           HSL.l = Math.min(Math.max(0,HSL.l),1); //make sure it's between 0 and 1
           return tinycolor(HSL).toHex();
-        },
-        
-        changeBorderColor: function (element,color) {
-          $(element).css("border-color", color);
-        },
-  
-        lightenBorder: function (element) {
-          methods.changeBorderColor(element,"#aaa");
-        },
-  
-        darkenBorder: function (element) {
-          methods.changeBorderColor(element,"#000");
         },
         
         /* defines the area within which an element can be moved */
@@ -373,10 +331,8 @@
           var darkGrayHSL = { h: 0, s:0, l: 0.05 };
           var bwMidHSL = { h: 0, s:0, l: 0.5 };
           // change to color of band is opposite of change to color of spectrum 
-          console.log(colorMultiplier);
           var hbColorMultiplier = -colorMultiplier;
           var hbsColorMultiplier = hbColorMultiplier * 10; // needs to be either black or white
-          console.log(colorMultiplier);
           var $hbStripes = $highlightBand.find(".highlight-band-stripe");
           var newBandColor = (colorHex === "000") ? methods.modifyHSL(bwMidHSL,hbColorMultiplier) 
             : methods.modifyHSL(darkGrayHSL,hbColorMultiplier);
@@ -425,7 +381,7 @@
             }
             
             var maxSavedColors = myStyleVars.rowsInDropdown * myStyleVars.maxColsInDropdown;
-            mySavedColors = mySavedColors.slice(0,maxSavedColors-1);
+            mySavedColors = mySavedColors.slice(0,maxSavedColors);
             
             var $col0 = $("<div>").addClass("saved-color-col 0");
             var $col1 = $("<div>").addClass("saved-color-col 1");
@@ -494,6 +450,9 @@
         addToSavedColors: function (color,mySavedColors,savedColorsDataAttr) {
           // make sure we're saving colors and the current color is not in the pre-sets
           if (settings.showSavedColors  && !presetColors.hasOwnProperty(color)) {
+            if (color.indexOf("#") !== 0) {
+              color = "#" + color;
+            }
             methods.updateSavedColors(color,allSavedColors);
             if (settings.saveColorsPerElement) { // if we're saving colors per element...
               methods.updateSavedColors(color,mySavedColors,savedColorsDataAttr);
@@ -548,7 +507,7 @@
         }
             
         // add the default color to saved colors
-        methods.addToSavedColors("#" + myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
+        methods.addToSavedColors(myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
         methods.updatePreview($myColorTextInput);
     
         /* input field focus: clear content
@@ -572,7 +531,7 @@
             myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
             $this_el.val(myColorVars.newValue); // put the new value in the field
             // save to saved colors
-            methods.addToSavedColors("#" + myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
+            methods.addToSavedColors(myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
           }
           methods.updatePreview($this_el); // update preview
@@ -664,8 +623,8 @@
             if ($this_el.is("SPAN") || $this_el.is("A")) {
               //grab the color the link's class or span's parent link's class
               var selectedColor = $this_el.is("SPAN") ?
-                $this_el.parent().attr("class") :
-                $this_el.attr("class");
+                $this_el.parent().attr("class").split("#")[1] :
+                $this_el.attr("class").split("#")[1];
               $($myColorTextInput).val(selectedColor);
               methods.updatePreview($myColorTextInput);
               methods.closeDropdown($myColorPreviewButton,$myColorMenu);

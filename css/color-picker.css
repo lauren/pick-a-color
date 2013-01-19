@@ -66,9 +66,9 @@
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);
+  -moz-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);
   height: 20px;
   width: 20px;
   display: inline-block;
@@ -227,9 +227,9 @@
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);
+  -moz-box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);
   cursor: pointer;
 }
 @media screen and (max-width: 767px) {
@@ -485,22 +485,22 @@
 }
 /* selector box */
 .highlight-band {
-  border: 2px solid #0d0d0d;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: 1px 1px 1px #555555;
-  -moz-box-shadow: 1px 1px 1px #555555;
-  box-shadow: 1px 1px 1px #555555;
-  height: 20px;
+  border: 1px solid #262626;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 1px #333333;
+  -moz-box-shadow: 1px 1px 1px #333333;
+  box-shadow: 1px 1px 1px #333333;
+  height: 19px;
   width: 11px;
   display: inline-block;
   cursor: pointer;
   cursor: -webkit-grab;
   cursor: -moz-grab;
   position: absolute;
-  top: -2px;
+  top: -1px;
   left: 94.5px;
   text-align: center;
 }
@@ -508,28 +508,23 @@
   .highlight-band {
     width: 21px;
     left: 84.5px;
-    height: 35px;
-    border: 2px solid #000000;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: 1px 1px 3px #333333;
-    -moz-box-shadow: 1px 1px 3px #333333;
-    box-shadow: 1px 1px 3px #333333;
+    height: 34px;
   }
 }
 .highlight-band-stripe {
-  min-height: 75%;
+  min-height: 80%;
   min-width: 1px;
   background-color: #000000;
-  opacity: 0.50;
-  margin: 4px 1px;
+  opacity: 0.40;
+  margin: 2px 1px;
   display: inline-block;
+  -webkit-box-shadow: 1px 0px 2px 0px #ffffff;
+  -moz-box-shadow: 1px 0px 2px 0px #ffffff;
+  box-shadow: 1px 0px 2px 0px #ffffff;
 }
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 767px) {
   .highlight-band-stripe {
-    margin: 2px 1px;
+    margin: 4px 1px;
   }
 }
 /* tabbed navigation */
@@ -558,9 +553,9 @@
   -moz-border-radius-topright: 4px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
   -webkit-transition: border 0.25s linear;
   -moz-transition: border 0.25s linear;
   -o-transition: border 0.25s linear;
@@ -581,9 +576,9 @@
   -moz-border-radius-topright: 4px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
 }
 .active-content {
   display: block;

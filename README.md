@@ -1,6 +1,15 @@
 color-picker
 ============
 
+## Browsers
+
+Google Chrome 23.0.1271.100 (Mac OSX, iOS 6.0.2)
+Google Chrome 24.0.1312.52 (Windows 8)
+Safari 6.0.2 (Mac OSX and iOS 6.0.2)
+Firefox 18.0.1 (Mac OSX and Windows 8)
+Internet Explorer 10 (Windows 8)
+Internet Explorer 8 (Windows XP)
+
 ## The Markup
 
     <div class="color-picker" data-border-color="YOUR_DEFAULT_COLOR">

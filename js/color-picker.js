@@ -3,7 +3,7 @@
    
     $.fn.colorPicker = function (options) {
   
-      /*** preset colors ***/
+      // preset colors
   
       var presetColors = {
         white     : 'fff',
@@ -16,7 +16,7 @@
         black     : '000'
       };
   
-      /*** capabilities ***/
+      // capabilities
   
       var supportsTouch = 'ontouchstart' in window;
       var smallScreen = (parseInt($(window).width(),10) < 767) ? true : false;
@@ -42,19 +42,18 @@
         };
       }
   
-      /*** settings ***/
+      // settings
   
       var settings = $.extend( {}, {
         showSpectrum          : true,
         showSavedColors       : true,
-        showColorWheel        : true,
         saveColorsPerElement  : false,
         fadeMenuToggle        : true
       }, options);
       
-      var useTabs = settings.showSavedColors || settings.showColorWheel;
+      var useTabs = settings.showSavedColors;
       
-      /*** markup ***/
+      // markup 
       
       var markupBeforeInput = function () {
         var $markup = $("<div>").addClass("input-prepend input-append color-picker-markup");
@@ -79,10 +78,6 @@
           if (settings.showSavedColors) {
             $tabContainer.append($("<span>").addClass("savedColors-tab tab").
             append($("<a>").text("Your Saved Colors")));
-          }
-          if (settings.showColorWheel) {
-            $tabContainer.append($("<span>").addClass("fullColorWheel-tab tab").
-            append("<a>").text("Full Color Wheel"));
           }
           $listContainer.append($tabContainer);
         }
@@ -148,7 +143,7 @@
         }
       }
 
-      /*** methods ***/
+      // methods
   
       var methods = {
             
@@ -165,28 +160,6 @@
             markupBeforeInput().append($inputMarkup).append(markupAfterInput());
       
           $this_el.html(colorPickerMarkup);
-                
-          /*** style-related variables ***/
-          
-          var $firstCB = $(".color-box").first();
-          myStyleVars.spectrumWidth = parseInt($firstCB.outerWidth(),10);
-          myStyleVars.halfSpectrumWidth = myStyleVars.spectrumWidth / 2;
-          // highlightBandWidth is width plus 2x border-width
-          var $firstHighlightBand = $(".highlight-band").first();
-          myStyleVars.highlightBandWidth = parseInt($firstHighlightBand.outerWidth(), 10) + 4;
-          myStyleVars.halfHighlightBandWidth = myStyleVars.highlightBandWidth / 2;
-          myStyleVars.threeFourthsHBW = myStyleVars.highlightBandWidth * 0.75;
-          myStyleVars.threeHighlightBands = myStyleVars.highlightBandWidth * 3;
-          myStyleVars.eightHighlightBands = myStyleVars.highlightBandWidth * 8;
-          if (smallScreen) {
-            myStyleVars.brightSpectrumWidth = myStyleVars.spectrumWidth -
-            myStyleVars.threeHighlightBands;
-            myStyleVars.blackSpectrumWidth = myStyleVars.threeHighlightBands;
-          } else {
-            myStyleVars.brightSpectrumWidth = myStyleVars.spectrumWidth -
-              myStyleVars.eightHighlightBands;
-            myStyleVars.blackSpectrumWidth = myStyleVars.eightHighlightBands;
-          }
         },
     
         updatePreview: function ($this_el) {
@@ -253,23 +226,27 @@
           });
         },
     
-        /* takes a color and the current position of the color band,
-        returns the value by which the color should be multiplied to
-        get the color currently being highlighted by the band */
+        // takes a color and the current position of the color band,
+        // returns the value by which the color should be multiplied to
+        // get the color currently being highlighted by the band
     
         getColorMultiplier: function (colorHex,position) {
           // position of the color band as a percentage of the width of the color box
-          var percent_of_box = position / myStyleVars.spectrumWidth;
+          var spectrumWidth = parseInt($(".color-box").first().width(),10);
+          if (spectrumWidth === 0) {
+            spectrumWidth = supportsTouch ? 190 : 200;
+          }
+          var halfSpectrumWidth = spectrumWidth / 2;
+          var percent_of_box = position / spectrumWidth;
           // non-B/W spectrums can be lightened or darkened...
           if (colorHex !== "fff" && colorHex !== "000") {
             if (percent_of_box <= 0.5) { // in the light half of the box
               // get the percentage position relative to half of the box,
               // subtract from one bcs we lighten away from center, not left
-              return (1 - (position / myStyleVars.halfSpectrumWidth)) / 2;
+              return (1 - (position / halfSpectrumWidth)) / 2;
             } else { // in the dark half of the box
               // get the percentage position relative to half of the box and return negative
-              return -(((position - myStyleVars.halfSpectrumWidth) /
-                myStyleVars.halfSpectrumWidth) / 2);
+              return -(((position - halfSpectrumWidth) / halfSpectrumWidth) / 2);
             } 
           } else if (colorHex === "fff") { // white gets darkened to 50%
             return -percent_of_box / 2; // so halve multiplier and return negative value
@@ -284,7 +261,7 @@
           return tinycolor(HSL).toHex();
         },
         
-        /* defines the area within which an element can be moved */
+        // defines the area within which an element can be moved 
         getMoveableArea: function ($element) {
           var dimensions = {};
           var $elParent = $element.parent();
@@ -297,9 +274,11 @@
         },
         
         moveHighlightBand: function ($highlightBand, moveableArea, e) {
+          var hbWidth = $(".highlight-band").first().outerWidth();
+          var threeFourthsHBWidth = hbWidth * 0.75;
           var mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX; // find the mouse!
           // mouse position relative to width of highlight-band
-          var newPosition = mouseX - moveableArea.minX - myStyleVars.threeFourthsHBW;
+          var newPosition = mouseX - moveableArea.minX - threeFourthsHBWidth;
           // don't move beyond moveable area
           newPosition = Math.max(0,(Math.min(newPosition,moveableArea.maxX))); 
           $highlightBand.css("position", "absolute");
@@ -344,18 +323,19 @@
         calculateHighlightedColor: function () {
           var $this_el = $(this);
           var $this_parent = $this_el.parent();
+          var hbWidth = $(".highlight-band").first().outerWidth();
+          var halfHBWidth = hbWidth / 2;
           // get the class of the parent color box and slice off "spectrum"
           var colorName = $this_parent.attr("class").split("-")[2];
           var colorHsl = tinycolor(colorName).toHsl();
           var colorHex = tinycolor(colorName).toHex();
       
           // midpoint of the current left position of the color band
-          var highlightBandLocation = parseInt($this_el.css("left"),10) +
-            myStyleVars.halfHighlightBandWidth;
+          var highlightBandLocation = parseInt($this_el.css("left"),10) + halfHBWidth;
           var colorMultiplier = methods.getColorMultiplier(colorHex,highlightBandLocation);
           var highlightedColor = "#" + methods.modifyHSL(colorHsl,colorMultiplier);
           $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
-          /* replace the color label with a 'select' button */
+          // replace the color label with a 'select' button 
           $this_parent.prev('.color-label').replaceWith(
             '<button class="color-select btn btn-mini" type="button">Select</button>');
           if (colorHex !== "fff") {  
@@ -388,7 +368,7 @@
                     
             $.each(mySavedColors, function (index,value) {
               var $this_li = $("<li>");
-              var $this_link = $("<a class=" + value + ">");
+              var $this_link = $("<a>").addClass(value);
               $this_link.append($("<span>").addClass("color-preview"));
               $this_link.append($("<span>").addClass("color-label").text(value));
               $this_li.append($this_link);
@@ -445,12 +425,12 @@
           methods.saveColorsToLocalStorage(savedColors,savedColorsDataAttr);
         },
     
-        /* when settings.saveColorsPerElement, colors are saved to both mySavedColors and
-        allSavedColors so they will be avail to color pickers with no savedColorsDataAttr */
+        // when settings.saveColorsPerElement, colors are saved to both mySavedColors and
+        // allSavedColors so they will be avail to color pickers with no savedColorsDataAttr
         addToSavedColors: function (color,mySavedColors,savedColorsDataAttr) {
           // make sure we're saving colors and the current color is not in the pre-sets
           if (settings.showSavedColors  && !presetColors.hasOwnProperty(color)) {
-            if (color.indexOf("#") !== 0) {
+            if (!color.indexOf("#") !== 0) {
               color = "#" + color;
             }
             methods.updateSavedColors(color,allSavedColors);
@@ -464,9 +444,7 @@
   
       return this.each(function () {
     
-        /*** initialize  ***/
         methods.initialize.apply(this);
-    
         // commonly used DOM elements for each color picker
         var $myContainer = this;
         var $myColorTextInput = $($myContainer).find("input");
@@ -476,7 +454,7 @@
         var $myColorSpectrums = $($myContainer).find(".color-box");
         var $myTouchInstructions = $($myContainer).find(".color-menu-instructions");
         var $myHighlightBands = $($myContainer).find(".highlight-band");
-        if (settings.showSavedColors || settings.showColorWheel) {
+        if (useTabs) {
           var $myTabs = $($myContainer).find(".tab");
         }
         if (settings.showSavedColors) {
@@ -510,8 +488,8 @@
         methods.addToSavedColors(myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
         methods.updatePreview($myColorTextInput);
     
-        /* input field focus: clear content
-        input field blur: update preview, restore previous content if no value entered */
+        //input field focus: clear content
+        // input field blur: update preview, restore previous content if no value entered
   
         $myColorTextInput.focus(function () {
           var $this_el = $(this);
@@ -537,7 +515,7 @@
           methods.updatePreview($this_el); // update preview
         });
         
-        /* toggle visibility of dropdown menu when you click or press the preview button */
+        // toggle visibility of dropdown menu when you click or press the preview button 
 
         $myColorPreviewButton.on(clickEvent, function (e) {
           methods.pressPreviewButton(e,$myColorMenu,$myColorPreviewButton);
@@ -560,7 +538,7 @@
           e.stopPropagation();
         });
     
-        /* update field and close menu when selecting from basic dropdown */
+        // update field and close menu when selecting from basic dropdown 
     
         $myColorMenuLinks.click( function () {
           var selectedColor = $(this).find("span:first").css("background-color");
@@ -576,11 +554,11 @@
           methods.tabbable.apply($myTabs);
         }
     
-        /*** for using the light/dark spectrums ***/
+        // for using the light/dark spectrums 
     
         if (settings.showSpectrum) {
     
-          /* move the highlight band when you click on a spectrum */
+          // move the highlight band when you click on a spectrum 
     
           $(this).find(".color-box").click( function (e) {
             e.stopPropagation(); // stop this click from closing the dropdown
@@ -612,7 +590,7 @@
       
         }
 
-        /*** for using saved colors ***/
+        // for using saved colors 
     
         if (settings.showSavedColors) {
 
@@ -651,7 +629,6 @@ $(document).ready(function () {
   
   $(".color-picker").colorPicker({
     showSpectrum            : true,
-    showColorWheel          : false,
     showSavedColors         : true,
     saveColorsPerElement    : true,
     fadeMenuToggle          : true

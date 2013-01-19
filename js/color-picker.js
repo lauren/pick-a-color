@@ -233,9 +233,6 @@
         getColorMultiplier: function (colorHex,position) {
           // position of the color band as a percentage of the width of the color box
           var spectrumWidth = parseInt($(".color-box").first().width(),10);
-          if (spectrumWidth === 0) {
-            spectrumWidth = supportsTouch ? 190 : 200;
-          }
           var halfSpectrumWidth = spectrumWidth / 2;
           var percent_of_box = position / spectrumWidth;
           // non-B/W spectrums can be lightened or darkened...

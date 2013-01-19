@@ -1,9 +1,25 @@
 /* input field */
-.color-picker-markup {
+div.color-picker {
+  /* button to open picker */
+
+  /* basic menu of colors */
+
+  /* color gradients */
+
+  /* IE spectrums */
+
+  /* selector box */
+
+  /* tabbed navigation */
+
+  /*** saved colors tab ***/
+
+}
+div.color-picker .color-picker-markup {
   margin: 20px 5px;
   padding: 0px;
 }
-.hex-pound {
+div.color-picker .hex-pound {
   display: inline-block;
   height: 20px;
   font-size: 14px;
@@ -19,48 +35,47 @@
   padding: 4px 5px;
 }
 @media screen and (max-width: 767px) {
-  .hex-pound {
+  div.color-picker .hex-pound {
     padding: 8px 5px 0px 5px;
     min-height: 30px;
     vertical-align: middle;
   }
 }
 @media screen and (max-width: 767px) {
-  .add-on {
+  div.color-picker .add-on {
     padding: 8px 5px 0px 5px;
   }
 }
-.color-text-input {
+div.color-picker .color-text-input {
   width: 200px;
 }
 @media screen and (max-width: 767px) {
-  .color-text-input {
+  div.color-picker .color-text-input {
     min-width: 228px;
     min-height: 30px;
   }
 }
 @media screen and (max-width: 767px) {
-  #appendedDropdownButton {
+  div.color-picker #appendedDropdownButton {
     height: 40px;
   }
 }
-/* button to open picker */
-.btn-group {
+div.color-picker .btn-group {
   vertical-align: top;
 }
-.color-dropdown {
+div.color-picker .color-dropdown {
   height: 30px;
   padding: 3px 5px;
 }
 @media screen and (max-width: 767px) {
-  .color-dropdown {
+  div.color-picker .color-dropdown {
     min-height: 40px;
   }
 }
 @media screen and (min-width: 768px) {
   
 }
-.color-preview {
+div.color-picker .color-preview {
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -74,99 +89,98 @@
   display: inline-block;
   cursor: pointer;
 }
-.color-preview.current-color {
+div.color-picker .color-preview.current-color {
   margin-bottom: 1px;
   margin-right: 3px;
 }
 @media screen and (max-width: 767px) {
-  .color-preview {
+  div.color-picker .color-preview {
     height: 30px;
     width: 30px;
   }
 }
-.caret {
+div.color-picker .caret {
   vertical-align: bottom;
   margin-bottom: 15px;
 }
 @media screen and (max-width: 767px) {
-  .caret {
+  div.color-picker .caret {
     margin-bottom: 20px;
   }
 }
-/* basic menu of colors */
-.color-menu {
+div.color-picker .color-menu {
   padding: 5px 0px;
   /*overwriting bootstrap default */
 
   min-width: 330px;
 }
 @media screen and (max-width: 767px) {
-  .color-menu {
+  div.color-picker .color-menu {
     left: -260px;
     min-width: 313px;
     max-width: 313px;
   }
 }
-.color-menu.small {
+div.color-picker .color-menu.small {
   min-width: 100px;
 }
 @media screen and (max-width: 767px) {
-  .color-menu.small {
+  div.color-picker .color-menu.small {
     left: -63px;
   }
 }
-.color-menu .color-preview {
+div.color-picker .color-menu .color-preview {
   vertical-align: middle;
   margin: 0px;
 }
 @media screen and (max-width: 767px) {
-  .color-menu .color-preview {
+  div.color-picker .color-menu .color-preview {
     height: 35px;
     width: 35px;
   }
 }
-.color-menu .color-preview.current-color,
-.color-menu .color-preview.white {
+div.color-picker .color-menu .color-preview.current-color,
+div.color-picker .color-menu .color-preview.white {
   background-color: #ffffff;
 }
-.color-menu .color-preview.red {
+div.color-picker .color-menu .color-preview.red {
   background-color: #ff0000;
 }
-.color-menu .color-preview.orange {
+div.color-picker .color-menu .color-preview.orange {
   background-color: #ff6600;
 }
-.color-menu .color-preview.yellow {
+div.color-picker .color-menu .color-preview.yellow {
   background-color: #ffff00;
 }
-.color-menu .color-preview.green {
+div.color-picker .color-menu .color-preview.green {
   background-color: #008000;
 }
-.color-menu .color-preview.blue {
+div.color-picker .color-menu .color-preview.blue {
   background-color: #0000ff;
 }
-.color-menu .color-preview.indigo {
+div.color-picker .color-menu .color-preview.indigo {
   background-color: #4b0082;
 }
-.color-menu .color-preview.violet {
+div.color-picker .color-menu .color-preview.violet {
   background-color: #ee82ee;
 }
-.color-menu .color-preview.purple {
+div.color-picker .color-menu .color-preview.purple {
   background-color: #800080;
 }
-.color-menu .color-preview.black {
+div.color-picker .color-menu .color-preview.black {
   background-color: #000000;
 }
-.color-menu li > a {
+div.color-picker .color-menu li > a {
   padding: 5px 15px 3px 15px;
   cursor: default;
   min-height: 25px;
 }
 @media screen and (max-width: 767px) {
-  .color-menu li > a {
+  div.color-picker .color-menu li > a {
     min-height: 40px;
   }
 }
-.color-menu li:hover a {
+div.color-picker .color-menu li:hover a {
   background-color: #eee;
   -webkit-transition: background-color 0.5s ease-in;
   -moz-transition: background-color 0.5s ease-in;
@@ -177,47 +191,46 @@
   filter: none;
 }
 @media screen and (max-width: 767px) {
-  .color-menu li:hover a {
+  div.color-picker .color-menu li:hover a {
     background-color: #fff;
   }
 }
-.color-menu .btn {
+div.color-picker .color-menu .btn {
   margin: 0px 5px;
 }
-.color-menu .btn.color-select {
+div.color-picker .color-menu .btn.color-select {
   height: 22px;
   padding: 0px 5px;
   margin-top: 0px;
 }
 @media screen and (max-width: 767px) {
-  .color-menu .btn.color-select {
+  div.color-picker .color-menu .btn.color-select {
     height: 37px;
   }
 }
-.input-prepend.input-append input + .btn-group .btn.color-select {
+div.color-picker .input-prepend.input-append input + .btn-group .btn.color-select {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-.color-menu-instructions {
+div.color-picker .color-menu-instructions {
   text-align: center;
   padding: 0px 6px;
   margin: 0px;
 }
-.color-label {
+div.color-picker .color-label {
   vertical-align: middle;
   margin: 0px;
   margin-left: 10px;
   cursor: pointer;
 }
 @media screen and (max-width: 767px) {
-  .color-label {
+  div.color-picker .color-label {
     margin-left: 8px;
   }
 }
-/* color gradients */
-.color-box {
+div.color-picker .color-box {
   height: 20px;
   width: 200px;
   position: absolute;
@@ -233,15 +246,15 @@
   cursor: pointer;
 }
 @media screen and (max-width: 767px) {
-  .color-box {
+  div.color-picker .color-box {
     width: 190px;
     height: 35px;
   }
 }
-.black .highlight-band-stripe {
+div.color-picker .black .highlight-band-stripe {
   background-color: #ffffff;
 }
-.spectrum-white {
+div.color-picker .spectrum-white {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #808080);
@@ -250,34 +263,34 @@
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ff808080', GradientType=1);
 }
-.spectrum-white .highlight-band {
+div.color-picker .spectrum-white .highlight-band {
   left: 0px;
 }
-.spectrum-red {
+div.color-picker .spectrum-red {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff0000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 50%, #000000 100%);
 }
-.spectrum-orange {
+div.color-picker .spectrum-orange {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff6600), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 50%, #000000 100%);
 }
-.spectrum-yellow {
+div.color-picker .spectrum-yellow {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ffff00), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 50%, #000000 100%);
 }
-.spectrum-green {
+div.color-picker .spectrum-green {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(0.5, #008000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 50%, #000000 100%);
 }
-.spectrum-blue {
+div.color-picker .spectrum-blue {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #0000ff), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 50%, #000000 100%);
 }
-.spectrum-purple {
+div.color-picker .spectrum-purple {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(0.5, #800080), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 50%, #000000 100%);
 }
-.spectrum-black {
+div.color-picker .spectrum-black {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #000000 0%, #808080 100%);
   background-image: -webkit-linear-gradient(left, #000000, #808080);
@@ -286,24 +299,23 @@
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff000000', endColorstr='#ff808080', GradientType=1);
 }
-.spectrum-black .highlight-band {
+div.color-picker .spectrum-black .highlight-band {
   left: 0px;
-  border: 2px solid #808080;
+  border: 1px solid #808080;
 }
-/* IE spectrums */
-.ie-spectrum {
+div.color-picker .ie-spectrum {
   height: 20px;
   width: 100px;
   display: inline-block;
   top: -1;
 }
 @media screen and (max-width: 767px) {
-  .ie-spectrum {
+  div.color-picker .ie-spectrum {
     width: 95px;
     height: 35px;
   }
 }
-.red-spectrum-0 {
+div.color-picker .red-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ff0000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #ff0000);
@@ -318,7 +330,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-.red-spectrum-1 {
+div.color-picker .red-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff0000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff0000 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ff0000, #000000);
@@ -333,7 +345,7 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.orange-spectrum-0 {
+div.color-picker .orange-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ff6600));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #ff6600);
@@ -348,7 +360,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-.orange-spectrum-1 {
+div.color-picker .orange-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff6600), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff6600 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ff6600, #000000);
@@ -363,7 +375,7 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.yellow-spectrum-0 {
+div.color-picker .yellow-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ffff00));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #ffff00);
@@ -378,7 +390,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-.yellow-spectrum-1 {
+div.color-picker .yellow-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffff00), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffff00 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ffff00, #000000);
@@ -393,7 +405,7 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.green-spectrum-0 {
+div.color-picker .green-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(1, #008000));
   background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 100%);
   background-image: -webkit-linear-gradient(left, #80ff80, #008000);
@@ -408,7 +420,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-.green-spectrum-1 {
+div.color-picker .green-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #008000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #008000 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #008000, #000000);
@@ -423,7 +435,7 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.blue-spectrum-0 {
+div.color-picker .blue-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #0000ff));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #0000ff);
@@ -438,7 +450,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-.blue-spectrum-1 {
+div.color-picker .blue-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #0000ff), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #0000ff 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #0000ff, #000000);
@@ -453,7 +465,7 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-.purple-spectrum-0 {
+div.color-picker .purple-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(1, #800080));
   background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 100%);
   background-image: -webkit-linear-gradient(left, #ff80ff, #800080);
@@ -468,7 +480,7 @@
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-.purple-spectrum-1 {
+div.color-picker .purple-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #800080), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #800080 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #800080, #000000);
@@ -483,8 +495,7 @@
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-/* selector box */
-.highlight-band {
+div.color-picker .highlight-band {
   border: 1px solid #262626;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -505,13 +516,13 @@
   text-align: center;
 }
 @media screen and (max-width: 767px) {
-  .highlight-band {
+  div.color-picker .highlight-band {
     width: 21px;
     left: 84.5px;
     height: 34px;
   }
 }
-.highlight-band-stripe {
+div.color-picker .highlight-band-stripe {
   min-height: 80%;
   min-width: 1px;
   background-color: #000000;
@@ -523,19 +534,18 @@
   box-shadow: 1px 0px 2px 0px #ffffff;
 }
 @media screen and (max-width: 767px) {
-  .highlight-band-stripe {
+  div.color-picker .highlight-band-stripe {
     margin: 4px 1px;
   }
 }
-/* tabbed navigation */
-.color-menu-tabs {
+div.color-picker .color-menu-tabs {
   padding: 5px 3px 3px 10px;
   font-size: 12px;
   color: #333;
   border-bottom: 1px solid #cccccc;
   margin-bottom: 5px;
 }
-.color-menu-tabs span {
+div.color-picker .color-menu-tabs span {
   padding: 5px;
   margin: 5px;
   border-left: 1px solid #fff;
@@ -543,7 +553,7 @@
   cursor: pointer;
   background-color: #fff;
 }
-.color-menu-tabs span:hover {
+div.color-picker .color-menu-tabs span:hover {
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -561,11 +571,11 @@
   -o-transition: border 0.25s linear;
   transition: border 0.25s linear;
 }
-.color-menu-tabs a {
+div.color-picker .color-menu-tabs a {
   color: #333;
   text-decoration: none;
 }
-.color-menu-tabs .tab-active {
+div.color-picker .color-menu-tabs .tab-active {
   border-bottom: 3px solid #fff;
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
@@ -580,18 +590,17 @@
   -moz-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
 }
-.active-content {
+div.color-picker .active-content {
   display: block;
 }
-.inactive-content {
+div.color-picker .inactive-content {
   display: none;
 }
-/*** saved colors tab ***/
-.savedColors-content {
+div.color-picker .savedColors-content {
   padding: 5px 15px;
   white-space: normal;
 }
-.savedColors-content li > a {
+div.color-picker .savedColors-content li > a {
   margin-left: 7px;
   padding-left: 8px;
   -webkit-border-radius: 4px;
@@ -599,7 +608,7 @@
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-.saved-color-col {
+div.color-picker .saved-color-col {
   position: relative;
   left: -15px;
   float: left;

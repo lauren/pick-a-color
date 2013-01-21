@@ -129,6 +129,15 @@ div.color-picker .color-menu.small {
     left: -63px;
   }
 }
+div.color-picker .color-menu ul {
+  padding: 0px;
+  margin: 0px;
+}
+div.color-picker .color-menu li {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
 div.color-picker .color-menu .color-preview {
   vertical-align: middle;
   margin: 0px;

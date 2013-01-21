@@ -67,7 +67,7 @@
         $button.append($("<span>").addClass("color-preview current-color"));
         $button.append($("<span>").addClass("caret"));
         $markup.append($button);
-        var $listContainer = $("<ul>").addClass("color-menu dropdown-menu");
+        var $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
         if (!useTabs && !settings.showSpectrum) {
           $listContainer.addClass("small");
         }
@@ -79,13 +79,14 @@
             $tabContainer.append($("<span>").addClass("savedColors-tab tab").
             append($("<a>").text("Your Saved Colors")));
           }
-          $listContainer.append($tabContainer);
+          $dropdownContainer.append($tabContainer);
         }
         var $basicColors = $("<div>").addClass("basicColors-content active-content");
         if (settings.showSpectrum) {
           $basicColors.append($("<h6>").addClass("hidden-dekstop color-menu-instructions").
             text("Tap spectrum or drag band to change color"));
         }
+        var $listContainer = $("<ul>");
         $.each(presetColors, function (index,value) {
           var $thisColor = $("<li>");
           var $thisLink = $("<a>").addClass(index);
@@ -108,16 +109,17 @@
             $thisLink.append($thisSpectrum);
           }
           $thisColor.append($thisLink);
-          $basicColors.append($thisColor);
+          $listContainer.append($thisColor);
         });
-        $listContainer.append($basicColors);
+        $basicColors.append($listContainer);
+        $dropdownContainer.append($basicColors);
         if (settings.showSavedColors) {
           var $savedColors = $("<div>").addClass("savedColors-content inactive-content");
           $savedColors.append($("<p>").addClass("saved-colors-instructions").
             text("Type in a color or use the spectrums to lighten or darken an existing color."));
-          $listContainer.append($savedColors);
+          $dropdownContainer.append($savedColors);
         }
-        $markup.append($listContainer);
+        $markup.append($dropdownContainer);
         return $markup;
       };
   
@@ -363,8 +365,8 @@
             var maxSavedColors = myStyleVars.rowsInDropdown * myStyleVars.maxColsInDropdown;
             mySavedColors = mySavedColors.slice(0,maxSavedColors);
             
-            var $col0 = $("<div>").addClass("saved-color-col 0");
-            var $col1 = $("<div>").addClass("saved-color-col 1");
+            var $col0 = $("<ul>").addClass("saved-color-col 0");
+            var $col1 = $("<ul>").addClass("saved-color-col 1");
                     
             $.each(mySavedColors, function (index,value) {
               var $this_li = $("<li>");
@@ -430,7 +432,7 @@
         addToSavedColors: function (color,mySavedColors,savedColorsDataAttr) {
           // make sure we're saving colors and the current color is not in the pre-sets
           if (settings.showSavedColors  && !presetColors.hasOwnProperty(color)) {
-            if (!color.indexOf("#") !== 0) {
+            if (color.indexOf("#") === -1) {
               color = "#" + color;
             }
             methods.updateSavedColors(color,allSavedColors);

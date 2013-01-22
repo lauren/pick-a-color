@@ -107,6 +107,10 @@
 .three-color-spectrum (@mid: @red) {
 	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@mid,50%)), color-stop(0.5, @mid), color-stop(1.0, darken(@mid,50%)));
 	background-image: -moz-linear-gradient(left center, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
+	background-image: -webkit-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
+  background-image: -o-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
+  background-image: linear-gradient(to right, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
+  background-repeat: repeat-x;
 }
 
 // IE spectrums

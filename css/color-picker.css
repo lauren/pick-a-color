@@ -278,26 +278,50 @@ div.color-picker .spectrum-white .highlight-band {
 div.color-picker .spectrum-red {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff0000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 50%, #000000 100%);
+  background-image: -webkit-linear-gradient(left, #ffffff 0%, #ff0000 50%, #000000 100%);
+  background-image: -o-linear-gradient(left, #ffffff 0%, #ff0000 50%, #000000 100%);
+  background-image: linear-gradient(to right, #ffffff 0%, #ff0000 50%, #000000 100%);
+  background-repeat: repeat-x;
 }
 div.color-picker .spectrum-orange {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff6600), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 50%, #000000 100%);
+  background-image: -webkit-linear-gradient(left, #ffffff 0%, #ff6600 50%, #000000 100%);
+  background-image: -o-linear-gradient(left, #ffffff 0%, #ff6600 50%, #000000 100%);
+  background-image: linear-gradient(to right, #ffffff 0%, #ff6600 50%, #000000 100%);
+  background-repeat: repeat-x;
 }
 div.color-picker .spectrum-yellow {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ffff00), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 50%, #000000 100%);
+  background-image: -webkit-linear-gradient(left, #ffffff 0%, #ffff00 50%, #000000 100%);
+  background-image: -o-linear-gradient(left, #ffffff 0%, #ffff00 50%, #000000 100%);
+  background-image: linear-gradient(to right, #ffffff 0%, #ffff00 50%, #000000 100%);
+  background-repeat: repeat-x;
 }
 div.color-picker .spectrum-green {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(0.5, #008000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 50%, #000000 100%);
+  background-image: -webkit-linear-gradient(left, #80ff80 0%, #008000 50%, #000000 100%);
+  background-image: -o-linear-gradient(left, #80ff80 0%, #008000 50%, #000000 100%);
+  background-image: linear-gradient(to right, #80ff80 0%, #008000 50%, #000000 100%);
+  background-repeat: repeat-x;
 }
 div.color-picker .spectrum-blue {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #0000ff), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 50%, #000000 100%);
+  background-image: -webkit-linear-gradient(left, #ffffff 0%, #0000ff 50%, #000000 100%);
+  background-image: -o-linear-gradient(left, #ffffff 0%, #0000ff 50%, #000000 100%);
+  background-image: linear-gradient(to right, #ffffff 0%, #0000ff 50%, #000000 100%);
+  background-repeat: repeat-x;
 }
 div.color-picker .spectrum-purple {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(0.5, #800080), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 50%, #000000 100%);
+  background-image: -webkit-linear-gradient(left, #ff80ff 0%, #800080 50%, #000000 100%);
+  background-image: -o-linear-gradient(left, #ff80ff 0%, #800080 50%, #000000 100%);
+  background-image: linear-gradient(to right, #ff80ff 0%, #800080 50%, #000000 100%);
+  background-repeat: repeat-x;
 }
 div.color-picker .spectrum-black {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #808080));

@@ -1,16 +1,22 @@
-color-picker
+Pick-a-Color: a jQuery color picker for Twitter Bootstrap
 ============
 
-## Browsers
+## Tested Browsers
 
-Google Chrome 23.0.1271.100 (Mac OSX, iOS 6.0.2)
-Google Chrome 24.0.1312.52 (Windows 8)
-Safari 6.0.2 (Mac OSX and iOS 6.0.2)
-Internet Explorer 10 (Windows 8)
-Internet Explorer 8 (Windows XP)
-Firefox 18.0.1 (Mac OSX and Windows 8)
-Opera 12.12 (Mac OSX and Windows 8)
+I've tested NAME GOES HERE in these browsers:
 
+* Google Chrome 23.0.1271.100 (Mac OSX, iOS 6.0.2)
+* Google Chrome 24.0.1312.52 (Windows 8)
+* Safari 6.0.2 (Mac OSX and iOS 6.0.2)
+* Internet Explorer 10 (Windows 8)
+* Internet Explorer 9 Mode (via IE10 on Windows 8)
+* Internet Explorer 8 (Windows XP)
+* Firefox 18.0.1 (Mac OSX and Windows 8)
+* Opera 12.12 (Mac OSX and Windows 8)
+
+### Notes on IE Support
+
+I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure that Internet Explorer 8 and 
 
 ## The Markup
 

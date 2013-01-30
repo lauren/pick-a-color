@@ -113,6 +113,8 @@ div.pick-a-color-markup .color-menu {
   /*overwriting bootstrap default */
 
   min-width: 330px;
+  /* resets for ul / li styles */
+
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-menu {
@@ -179,17 +181,17 @@ div.pick-a-color-markup .color-menu .color-preview.purple {
 div.pick-a-color-markup .color-menu .color-preview.black {
   background-color: #000000;
 }
-div.pick-a-color-markup .color-menu li > a {
+div.pick-a-color-markup .color-menu li.color-item > a {
   padding: 5px 15px 3px 15px;
   cursor: default;
   min-height: 25px;
 }
 @media screen and (max-width: 767px) {
-  div.pick-a-color-markup .color-menu li > a {
+  div.pick-a-color-markup .color-menu li.color-item > a {
     min-height: 40px;
   }
 }
-div.pick-a-color-markup .color-menu li:hover a {
+div.pick-a-color-markup .color-menu li.color-item:hover a {
   background-color: #eee;
   -webkit-transition: background-color 0.5s ease-in;
   -moz-transition: background-color 0.5s ease-in;
@@ -200,28 +202,24 @@ div.pick-a-color-markup .color-menu li:hover a {
   filter: none;
 }
 @media screen and (max-width: 767px) {
-  div.pick-a-color-markup .color-menu li:hover a {
+  div.pick-a-color-markup .color-menu li.color-item:hover a {
     background-color: #fff;
   }
 }
-div.pick-a-color-markup .color-menu .btn {
-  margin: 0px 5px;
-}
 div.pick-a-color-markup .color-menu .btn.color-select {
+  margin: 0px 5px;
   height: 22px;
   padding: 0px 5px;
   margin-top: 0px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-menu .btn.color-select {
     height: 37px;
   }
-}
-div.pick-a-color-markup .input-prepend.input-append input + .btn-group .btn.color-select {
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
 }
 div.pick-a-color-markup .color-menu-instructions {
   text-align: center;
@@ -583,7 +581,7 @@ div.pick-a-color-markup .color-menu-tabs {
   border-bottom: 1px solid #cccccc;
   margin-bottom: 5px;
 }
-div.pick-a-color-markup .color-menu-tabs span {
+div.pick-a-color-markup .color-menu-tabs .tab {
   padding: 5px;
   margin: 5px;
   border-left: 1px solid #fff;
@@ -591,7 +589,7 @@ div.pick-a-color-markup .color-menu-tabs span {
   cursor: pointer;
   background-color: #fff;
 }
-div.pick-a-color-markup .color-menu-tabs span:hover {
+div.pick-a-color-markup .color-menu-tabs .tab:hover {
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -638,7 +636,7 @@ div.pick-a-color-markup .savedColors-content {
   padding: 5px 15px;
   white-space: normal;
 }
-div.pick-a-color-markup .savedColors-content li > a {
+div.pick-a-color-markup .savedColors-content li.color-item > a {
   margin-left: 7px;
   padding-left: 8px;
   -webkit-border-radius: 4px;

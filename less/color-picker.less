@@ -235,6 +235,8 @@ div.pick-a-color-markup {
 			}
 		}
 		
+		/* resets for ul / li styles */
+		
 		ul {
 			padding:0px;
 			margin:0px;
@@ -294,7 +296,7 @@ div.pick-a-color-markup {
 			  background-color:@black;
 			}
 		}
-		li > a {
+		li.color-item > a {
 		  padding: 5px 15px 3px 15px;
 		  cursor: default;
 			min-height:25px;
@@ -302,7 +304,7 @@ div.pick-a-color-markup {
 				min-height:40px;
 			}
 		}
-		li:hover a {
+		li.color-item:hover a {
 			background-color:#eee;
 			.transition(background-color .5s ease-in);
 			color: #333;
@@ -312,21 +314,16 @@ div.pick-a-color-markup {
 				background-color: #fff;
 			}
 		}
-		.btn {
+		.btn.color-select {
 			margin: 0px 5px;
-			&.color-select {
-				height:22px;
-				padding:0px 5px;
-				margin-top:0px;
+			height:22px;
+			padding:0px 5px;
+			margin-top:0px;
+			.rounded-corners;
 			@media screen and (max-width: 767px) {
 				height:37px;
 			}
-			}
 		}
-	}
-
-	.input-prepend.input-append input + .btn-group .btn.color-select {
-		.rounded-corners;
 	}
 
 	.color-menu-instructions {
@@ -510,7 +507,7 @@ div.pick-a-color-markup {
 		color: #333;
 		border-bottom:1px solid @border_gray;
 		margin-bottom:5px;
-		span {
+		.tab {
 			padding:5px;
 			margin:5px;
 			border-left:1px solid #fff;
@@ -545,7 +542,7 @@ div.pick-a-color-markup {
 	.savedColors-content {
 		padding:5px 15px;
 		white-space:normal;
-		li > a {
+		li.color-item > a {
 		margin-left:7px;
 		padding-left:8px;
 		.rounded-corners;

@@ -26,10 +26,12 @@
           myCookies = document.cookie,
           tenYearsInMilliseconds = 315360000000, // shut up I need it for the cookie
       
-          startEvent  = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
-          moveEvent   = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
-          endEvent    = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor",
-          clickEvent  = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor";
+          startEvent    = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
+          moveEvent     = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
+          endEvent      = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor",
+          clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
+          dragEvent     = "dragging.pickAColor",
+          endDragEvent  = "endDrag.pickAColor";
       
       if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function(obj) {
@@ -84,12 +86,12 @@
           $basicColors.append($("<h6>").addClass("color-menu-instructions").
             text("Tap spectrum or drag band to change color"));
         }
-        var $listContainer = $("<ul>");
+        var $listContainer = $("<ul>").addClass("basic-colors-list");
         $.each(presetColors, function (index,value) {
-          var $thisColor = $("<li>");
-          var $thisLink = $("<a>").addClass(index);
-          $thisLink.append($("<span>").addClass("color-preview " + index));
-          $thisLink.append($("<span>").addClass("color-label").text(index));
+          var $thisColor = $("<li>").addClass("color-item");
+          var $thisLink = $("<a>").addClass(index + " color-link").
+            append($("<span>").addClass("color-preview " + index)).
+            append($("<span>").addClass("color-label").text(index));
           if (settings.showSpectrum) {
             var $thisSpectrum = $("<span>").addClass("color-box spectrum-" + index);
             if (isIE) {
@@ -168,9 +170,9 @@
             "#" + myColorVars.typedColor);
         },
     
-        pressPreviewButton: function (event,$myColorMenu,$myColorPreviewButton) {
+        pressPreviewButton: function (event) {
           event.stopPropagation();
-          methods.toggleDropdown($myColorPreviewButton,$myColorMenu);
+          methods.toggleDropdown(event.target);
         },
         
         openDropdown: function (button,menu) {
@@ -203,11 +205,14 @@
           $(button).removeClass("open");
         },
         
-        toggleDropdown: function (button,menu) {
-          if ($(menu).css("display") === "none") {
-            methods.openDropdown(button,menu);
+        toggleDropdown: function (element) {
+          var $container = $(element).parents(".pick-a-color-markup"),
+              $button = $container.find(".btn-group"),
+              $menu = $container.find(".color-menu");
+          if ($menu.css("display") === "none") {
+            methods.openDropdown($button,$menu);
           } else {
-            methods.closeDropdown(button,menu);
+            methods.closeDropdown($button,$menu);
           }
         },
         
@@ -270,7 +275,7 @@
           
         },
         
-        // based on ligten/darken in LESS   
+        // modifyHSLLightness based on ligten/darken in LESS   
         // https://github.com/cloudhead/less.js/blob/master/dist/less-1.3.3.js#L1763
   
         modifyHSLLightness: function (HSL,multiplier) {
@@ -312,16 +317,18 @@
             var dimensions = methods.getMoveableArea($this_el);
             
             $(document).on(moveEvent, function (e) {
-              $this_el.trigger("dragging.pickAColor");
+              $this_el.trigger(dragEvent);
               methods.moveHighlightBand($this_el, dimensions, e);
             }).on(endEvent, function(event) { 
               $(document).off(moveEvent); // for desktop
+              $(document).off(dragEvent);
               $this_el.css("cursor","-webkit-grab");
               $this_el.css("cursor","-moz-grab");
-              $this_el.trigger("endDrag.pickAColor");
+              $this_el.one(endDragEvent);
             });
           }).on(endEvent, function(event) { 
             $(document).off(moveEvent); // for mobile
+            $(document).off(dragEvent);
           });
         },
         
@@ -349,11 +356,11 @@
               colorName = $this_parent.attr("class").split("-")[2],
               colorHex = presetColors[colorName],
               colorHsl = tinycolor(colorName).toHsl(),
-      
-          // midpoint of the current left position of the color band
+              // midpoint of the current left position of the color band
               highlightBandLocation = parseInt($this_el.css("left"),10) + halfHBWidth,
               colorMultiplier = methods.getColorMultiplier(colorHex,highlightBandLocation),
               highlightedColor = "#" + methods.modifyHSLLightness(colorHsl,colorMultiplier);
+              
           $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
           // replace the color label with a 'select' button 
           $this_parent.prev('.color-label').replaceWith(
@@ -387,7 +394,7 @@
                 $col1 = $("<ul>").addClass("saved-color-col 1");
                     
             $.each(mySavedColors, function (index,value) {
-              var $this_li = $("<li>"),
+              var $this_li = $("<li>").addClass("color-item"),
                   $this_link = $("<a>").addClass(value);
               $this_link.append($("<span>").addClass("color-preview"));
               $this_link.append($("<span>").addClass("color-label").text(value));
@@ -686,7 +693,7 @@
         // toggle visibility of dropdown menu when you click or press the preview button 
 
         $myColorPreviewButton.on(clickEvent, function (e) {
-          methods.pressPreviewButton(e,$myColorMenu,$myColorPreviewButton);
+          methods.pressPreviewButton(e);
         });
         
         // any touch or click outside of a dropdown should close all dropdowns
@@ -743,16 +750,17 @@
           
           methods.horizontallyDraggable.apply($myHighlightBands);
     
-          $($myHighlightBands).on("dragging.pickAColor",function () {
+          $($myHighlightBands).on(dragEvent,function (event) {
+            var $thisEl = event.target
             methods.calculateHighlightedColor.apply(this);
-          }).on("endDrag.pickAColor", function (event) {
-            var finalColor = methods.calculateHighlightedColor.apply(this);
+          }).on(endDragEvent, function (event) {
+            var $thisEl = event.delegateTarget;
+            var finalColor = methods.calculateHighlightedColor.apply($thisEl);
             methods.addToSavedColors(finalColor,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
           });
           
-          //FIXME: Should use the endEvent
-          $($myHighlightBands).click(function (e) {
+          $($myHighlightBands).on(endEvent, function (e) {
             e.stopPropagation(); // stops dragging highlight band from triggering click on spectrum
           });
       
@@ -764,14 +772,14 @@
 
           // make the links in saved colors work
           $($mySavedColorsContent).click( function (event) {
-            var $this_el = $(event.target);
-            // make sure click happened on a link or span
+            var $thisEl = $(event.target);
             
-            if ($this_el.is("SPAN") || $this_el.is("A")) {
+            // make sure click happened on a link or span
+            if ($thisEl.is("SPAN") || $thisEl.is("A")) {
               //grab the color the link's class or span's parent link's class
-              var selectedColor = $this_el.is("SPAN") ?
-                $this_el.parent().attr("class").split("#")[1] :
-                $this_el.attr("class").split("#")[1];
+              var selectedColor = $thisEl.is("SPAN") ?
+                $thisEl.parent().attr("class").split("#")[1] :
+                $thisEl.attr("class").split("#")[1];
               $($myColorTextInput).val(selectedColor);
               methods.updatePreview($myColorTextInput);
               methods.closeDropdown($myColorPreviewButton,$myColorMenu);
@@ -802,5 +810,9 @@ $(document).ready(function () {
     saveColorsPerElement    : true,
     fadeMenuToggle          : true
   });
+  
+  $(document).on("pickAColor.dragEnd", function () {
+    console.log("hi");
+  })
     
 });

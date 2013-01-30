@@ -14,14 +14,20 @@ I've tested Pick-a-Color in these browsers:
 * Firefox 18.0.1 (Mac OSX and Windows 8)
 * Opera 12.12 (Mac OSX and Windows 8)
 
+Minor issues in these browsers are documented here: https://github.com/lauren/pick-a-color/issues
+
 ### Notes on IE Support
 
-I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure that Internet Explorer 8 and higher use their "Browser Mode" instead of switching to the Browser Mode of a previous version of IE. You can use it like this:
+I highly recommend using the X-UA-COMPATIBLE tag in your html `<head>` to ensure that Internet Explorer 8 and higher use their own "Browser Mode" instead of switching to the Browser Mode of a previous version. It works like this:
 	
 		<meta http-equiv="x-ua-compatible" content="IE=10">
 		
-There is one known issue I'm still working out in IE8, which is documented here: 
+### Notes on Mobile Support
 
+You must use a viewport tag in your html `<head>` for content to be displayed at the correct size in a mobile browser. It works like this:
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
 ## The Markup
 
 ### showSpectrum: true, showSavedColors: true

@@ -1,5 +1,7 @@
 /* input field */
-div.color-picker {
+div.pick-a-color-markup {
+  margin: 20px 5px;
+  padding: 0px;
   /* button to open picker */
 
   /* basic menu of colors */
@@ -15,11 +17,7 @@ div.color-picker {
   /*** saved colors tab ***/
 
 }
-div.color-picker .color-picker-markup {
-  margin: 20px 5px;
-  padding: 0px;
-}
-div.color-picker .hex-pound {
+div.pick-a-color-markup .hex-pound {
   display: inline-block;
   height: 20px;
   font-size: 14px;
@@ -33,49 +31,51 @@ div.color-picker .hex-pound {
   -moz-border-radius: 4px 0 0 4px;
   border-radius: 4px 0 0 4px;
   padding: 4px 5px;
+  vertical-align: top;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .hex-pound {
+  div.pick-a-color-markup .hex-pound {
     padding: 8px 5px 0px 5px;
     min-height: 30px;
     vertical-align: middle;
   }
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .add-on {
+  div.pick-a-color-markup .add-on {
     padding: 8px 5px 0px 5px;
   }
 }
-div.color-picker .color-text-input {
+div.pick-a-color-markup .color-text-input {
   width: 200px;
+  vertical-align: top;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-text-input {
+  div.pick-a-color-markup .color-text-input {
     min-width: 228px;
     min-height: 30px;
   }
 }
 @media screen and (max-width: 767px) {
-  div.color-picker #appendedDropdownButton {
+  div.pick-a-color-markup #appendedDropdownButton {
     height: 40px;
   }
 }
-div.color-picker .btn-group {
+div.pick-a-color-markup .btn-group {
   vertical-align: top;
 }
-div.color-picker .color-dropdown {
+div.pick-a-color-markup .color-dropdown {
   height: 30px;
   padding: 3px 5px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-dropdown {
+  div.pick-a-color-markup .color-dropdown {
     min-height: 40px;
   }
 }
 @media screen and (min-width: 768px) {
   
 }
-div.color-picker .color-preview {
+div.pick-a-color-markup .color-preview {
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -89,107 +89,107 @@ div.color-picker .color-preview {
   display: inline-block;
   cursor: pointer;
 }
-div.color-picker .color-preview.current-color {
+div.pick-a-color-markup .color-preview.current-color {
   margin-bottom: 1px;
   margin-right: 3px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-preview {
+  div.pick-a-color-markup .color-preview {
     height: 30px;
     width: 30px;
   }
 }
-div.color-picker .caret {
+div.pick-a-color-markup .caret {
   vertical-align: bottom;
   margin-bottom: 15px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .caret {
+  div.pick-a-color-markup .caret {
     margin-bottom: 20px;
   }
 }
-div.color-picker .color-menu {
+div.pick-a-color-markup .color-menu {
   padding: 5px 0px;
   /*overwriting bootstrap default */
 
   min-width: 330px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-menu {
+  div.pick-a-color-markup .color-menu {
     left: -260px;
     min-width: 313px;
     max-width: 313px;
   }
 }
-div.color-picker .color-menu.small {
+div.pick-a-color-markup .color-menu.small {
   min-width: 100px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-menu.small {
+  div.pick-a-color-markup .color-menu.small {
     left: -63px;
   }
 }
-div.color-picker .color-menu ul {
+div.pick-a-color-markup .color-menu ul {
   padding: 0px;
   margin: 0px;
 }
-div.color-picker .color-menu li {
+div.pick-a-color-markup .color-menu li {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
 }
-div.color-picker .color-menu .color-preview {
+div.pick-a-color-markup .color-menu .color-preview {
   vertical-align: middle;
   margin: 0px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-menu .color-preview {
+  div.pick-a-color-markup .color-menu .color-preview {
     height: 35px;
     width: 35px;
   }
 }
-div.color-picker .color-menu .color-preview.current-color,
-div.color-picker .color-menu .color-preview.white {
+div.pick-a-color-markup .color-menu .color-preview.current-color,
+div.pick-a-color-markup .color-menu .color-preview.white {
   background-color: #ffffff;
 }
-div.color-picker .color-menu .color-preview.red {
+div.pick-a-color-markup .color-menu .color-preview.red {
   background-color: #ff0000;
 }
-div.color-picker .color-menu .color-preview.orange {
+div.pick-a-color-markup .color-menu .color-preview.orange {
   background-color: #ff6600;
 }
-div.color-picker .color-menu .color-preview.yellow {
+div.pick-a-color-markup .color-menu .color-preview.yellow {
   background-color: #ffff00;
 }
-div.color-picker .color-menu .color-preview.green {
+div.pick-a-color-markup .color-menu .color-preview.green {
   background-color: #008000;
 }
-div.color-picker .color-menu .color-preview.blue {
+div.pick-a-color-markup .color-menu .color-preview.blue {
   background-color: #0000ff;
 }
-div.color-picker .color-menu .color-preview.indigo {
+div.pick-a-color-markup .color-menu .color-preview.indigo {
   background-color: #4b0082;
 }
-div.color-picker .color-menu .color-preview.violet {
+div.pick-a-color-markup .color-menu .color-preview.violet {
   background-color: #ee82ee;
 }
-div.color-picker .color-menu .color-preview.purple {
+div.pick-a-color-markup .color-menu .color-preview.purple {
   background-color: #800080;
 }
-div.color-picker .color-menu .color-preview.black {
+div.pick-a-color-markup .color-menu .color-preview.black {
   background-color: #000000;
 }
-div.color-picker .color-menu li > a {
+div.pick-a-color-markup .color-menu li > a {
   padding: 5px 15px 3px 15px;
   cursor: default;
   min-height: 25px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-menu li > a {
+  div.pick-a-color-markup .color-menu li > a {
     min-height: 40px;
   }
 }
-div.color-picker .color-menu li:hover a {
+div.pick-a-color-markup .color-menu li:hover a {
   background-color: #eee;
   -webkit-transition: background-color 0.5s ease-in;
   -moz-transition: background-color 0.5s ease-in;
@@ -200,46 +200,51 @@ div.color-picker .color-menu li:hover a {
   filter: none;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-menu li:hover a {
+  div.pick-a-color-markup .color-menu li:hover a {
     background-color: #fff;
   }
 }
-div.color-picker .color-menu .btn {
+div.pick-a-color-markup .color-menu .btn {
   margin: 0px 5px;
 }
-div.color-picker .color-menu .btn.color-select {
+div.pick-a-color-markup .color-menu .btn.color-select {
   height: 22px;
   padding: 0px 5px;
   margin-top: 0px;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-menu .btn.color-select {
+  div.pick-a-color-markup .color-menu .btn.color-select {
     height: 37px;
   }
 }
-div.color-picker .input-prepend.input-append input + .btn-group .btn.color-select {
+div.pick-a-color-markup .input-prepend.input-append input + .btn-group .btn.color-select {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-div.color-picker .color-menu-instructions {
+div.pick-a-color-markup .color-menu-instructions {
   text-align: center;
   padding: 0px 6px;
   margin: 0px;
 }
-div.color-picker .color-label {
+@media screen and (min-width: 767px) {
+  div.pick-a-color-markup .color-menu-instructions {
+    display: none;
+  }
+}
+div.pick-a-color-markup .color-label {
   vertical-align: middle;
   margin: 0px;
   margin-left: 10px;
   cursor: pointer;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-label {
+  div.pick-a-color-markup .color-label {
     margin-left: 8px;
   }
 }
-div.color-picker .color-box {
+div.pick-a-color-markup .color-box {
   height: 20px;
   width: 200px;
   position: absolute;
@@ -255,15 +260,15 @@ div.color-picker .color-box {
   cursor: pointer;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .color-box {
+  div.pick-a-color-markup .color-box {
     width: 190px;
     height: 35px;
   }
 }
-div.color-picker .black .highlight-band-stripe {
+div.pick-a-color-markup .black .highlight-band-stripe {
   background-color: #ffffff;
 }
-div.color-picker .spectrum-white {
+div.pick-a-color-markup .spectrum-white {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #808080 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #808080);
@@ -272,10 +277,10 @@ div.color-picker .spectrum-white {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ff808080', GradientType=1);
 }
-div.color-picker .spectrum-white .highlight-band {
+div.pick-a-color-markup .spectrum-white .highlight-band {
   left: 0px;
 }
-div.color-picker .spectrum-red {
+div.pick-a-color-markup .spectrum-red {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff0000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 50%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ffffff 0%, #ff0000 50%, #000000 100%);
@@ -283,7 +288,7 @@ div.color-picker .spectrum-red {
   background-image: linear-gradient(to right, #ffffff 0%, #ff0000 50%, #000000 100%);
   background-repeat: repeat-x;
 }
-div.color-picker .spectrum-orange {
+div.pick-a-color-markup .spectrum-orange {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ff6600), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 50%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ffffff 0%, #ff6600 50%, #000000 100%);
@@ -291,7 +296,7 @@ div.color-picker .spectrum-orange {
   background-image: linear-gradient(to right, #ffffff 0%, #ff6600 50%, #000000 100%);
   background-repeat: repeat-x;
 }
-div.color-picker .spectrum-yellow {
+div.pick-a-color-markup .spectrum-yellow {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #ffff00), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 50%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ffffff 0%, #ffff00 50%, #000000 100%);
@@ -299,7 +304,7 @@ div.color-picker .spectrum-yellow {
   background-image: linear-gradient(to right, #ffffff 0%, #ffff00 50%, #000000 100%);
   background-repeat: repeat-x;
 }
-div.color-picker .spectrum-green {
+div.pick-a-color-markup .spectrum-green {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(0.5, #008000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 50%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #80ff80 0%, #008000 50%, #000000 100%);
@@ -307,7 +312,7 @@ div.color-picker .spectrum-green {
   background-image: linear-gradient(to right, #80ff80 0%, #008000 50%, #000000 100%);
   background-repeat: repeat-x;
 }
-div.color-picker .spectrum-blue {
+div.pick-a-color-markup .spectrum-blue {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(0.5, #0000ff), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 50%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ffffff 0%, #0000ff 50%, #000000 100%);
@@ -315,7 +320,7 @@ div.color-picker .spectrum-blue {
   background-image: linear-gradient(to right, #ffffff 0%, #0000ff 50%, #000000 100%);
   background-repeat: repeat-x;
 }
-div.color-picker .spectrum-purple {
+div.pick-a-color-markup .spectrum-purple {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(0.5, #800080), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 50%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ff80ff 0%, #800080 50%, #000000 100%);
@@ -323,7 +328,7 @@ div.color-picker .spectrum-purple {
   background-image: linear-gradient(to right, #ff80ff 0%, #800080 50%, #000000 100%);
   background-repeat: repeat-x;
 }
-div.color-picker .spectrum-black {
+div.pick-a-color-markup .spectrum-black {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #000000), color-stop(1, #808080));
   background-image: -moz-linear-gradient(left center, #000000 0%, #808080 100%);
   background-image: -webkit-linear-gradient(left, #000000, #808080);
@@ -332,23 +337,23 @@ div.color-picker .spectrum-black {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff000000', endColorstr='#ff808080', GradientType=1);
 }
-div.color-picker .spectrum-black .highlight-band {
+div.pick-a-color-markup .spectrum-black .highlight-band {
   left: 0px;
   border: 1px solid #808080;
 }
-div.color-picker .ie-spectrum {
+div.pick-a-color-markup .ie-spectrum {
   height: 20px;
   width: 100px;
   display: inline-block;
   top: -1;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .ie-spectrum {
+  div.pick-a-color-markup .ie-spectrum {
     width: 95px;
     height: 35px;
   }
 }
-div.color-picker .red-spectrum-0 {
+div.pick-a-color-markup .red-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ff0000));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff0000 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #ff0000);
@@ -363,7 +368,7 @@ div.color-picker .red-spectrum-0 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-div.color-picker .red-spectrum-1 {
+div.pick-a-color-markup .red-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff0000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff0000 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ff0000, #000000);
@@ -378,7 +383,7 @@ div.color-picker .red-spectrum-1 {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-div.color-picker .orange-spectrum-0 {
+div.pick-a-color-markup .orange-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ff6600));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ff6600 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #ff6600);
@@ -393,7 +398,7 @@ div.color-picker .orange-spectrum-0 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-div.color-picker .orange-spectrum-1 {
+div.pick-a-color-markup .orange-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff6600), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ff6600 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ff6600, #000000);
@@ -408,7 +413,7 @@ div.color-picker .orange-spectrum-1 {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-div.color-picker .yellow-spectrum-0 {
+div.pick-a-color-markup .yellow-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ffff00));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #ffff00 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #ffff00);
@@ -423,7 +428,7 @@ div.color-picker .yellow-spectrum-0 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-div.color-picker .yellow-spectrum-1 {
+div.pick-a-color-markup .yellow-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffff00), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #ffff00 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #ffff00, #000000);
@@ -438,7 +443,7 @@ div.color-picker .yellow-spectrum-1 {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-div.color-picker .green-spectrum-0 {
+div.pick-a-color-markup .green-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #80ff80), color-stop(1, #008000));
   background-image: -moz-linear-gradient(left center, #80ff80 0%, #008000 100%);
   background-image: -webkit-linear-gradient(left, #80ff80, #008000);
@@ -453,7 +458,7 @@ div.color-picker .green-spectrum-0 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-div.color-picker .green-spectrum-1 {
+div.pick-a-color-markup .green-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #008000), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #008000 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #008000, #000000);
@@ -468,7 +473,7 @@ div.color-picker .green-spectrum-1 {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-div.color-picker .blue-spectrum-0 {
+div.pick-a-color-markup .blue-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #0000ff));
   background-image: -moz-linear-gradient(left center, #ffffff 0%, #0000ff 100%);
   background-image: -webkit-linear-gradient(left, #ffffff, #0000ff);
@@ -483,7 +488,7 @@ div.color-picker .blue-spectrum-0 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-div.color-picker .blue-spectrum-1 {
+div.pick-a-color-markup .blue-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #0000ff), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #0000ff 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #0000ff, #000000);
@@ -498,7 +503,7 @@ div.color-picker .blue-spectrum-1 {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-div.color-picker .purple-spectrum-0 {
+div.pick-a-color-markup .purple-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff80ff), color-stop(1, #800080));
   background-image: -moz-linear-gradient(left center, #ff80ff 0%, #800080 100%);
   background-image: -webkit-linear-gradient(left, #ff80ff, #800080);
@@ -513,7 +518,7 @@ div.color-picker .purple-spectrum-0 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
-div.color-picker .purple-spectrum-1 {
+div.pick-a-color-markup .purple-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #800080), color-stop(1, #000000));
   background-image: -moz-linear-gradient(left center, #800080 0%, #000000 100%);
   background-image: -webkit-linear-gradient(left, #800080, #000000);
@@ -528,7 +533,7 @@ div.color-picker .purple-spectrum-1 {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }
-div.color-picker .highlight-band {
+div.pick-a-color-markup .highlight-band {
   border: 1px solid #262626;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -549,13 +554,13 @@ div.color-picker .highlight-band {
   text-align: center;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .highlight-band {
+  div.pick-a-color-markup .highlight-band {
     width: 21px;
     left: 84.5px;
     height: 34px;
   }
 }
-div.color-picker .highlight-band-stripe {
+div.pick-a-color-markup .highlight-band-stripe {
   min-height: 80%;
   min-width: 1px;
   background-color: #000000;
@@ -567,18 +572,18 @@ div.color-picker .highlight-band-stripe {
   box-shadow: 1px 0px 2px 0px #ffffff;
 }
 @media screen and (max-width: 767px) {
-  div.color-picker .highlight-band-stripe {
+  div.pick-a-color-markup .highlight-band-stripe {
     margin: 4px 1px;
   }
 }
-div.color-picker .color-menu-tabs {
+div.pick-a-color-markup .color-menu-tabs {
   padding: 5px 3px 3px 10px;
   font-size: 12px;
   color: #333;
   border-bottom: 1px solid #cccccc;
   margin-bottom: 5px;
 }
-div.color-picker .color-menu-tabs span {
+div.pick-a-color-markup .color-menu-tabs span {
   padding: 5px;
   margin: 5px;
   border-left: 1px solid #fff;
@@ -586,7 +591,7 @@ div.color-picker .color-menu-tabs span {
   cursor: pointer;
   background-color: #fff;
 }
-div.color-picker .color-menu-tabs span:hover {
+div.pick-a-color-markup .color-menu-tabs span:hover {
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
   border-left: 1px solid #cccccc;
@@ -604,11 +609,11 @@ div.color-picker .color-menu-tabs span:hover {
   -o-transition: border 0.25s linear;
   transition: border 0.25s linear;
 }
-div.color-picker .color-menu-tabs a {
+div.pick-a-color-markup .color-menu-tabs a {
   color: #333;
   text-decoration: none;
 }
-div.color-picker .color-menu-tabs .tab-active {
+div.pick-a-color-markup .color-menu-tabs .tab-active {
   border-bottom: 3px solid #fff;
   border-top: 1px solid #cccccc;
   border-right: 1px solid #cccccc;
@@ -623,17 +628,17 @@ div.color-picker .color-menu-tabs .tab-active {
   -moz-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
 }
-div.color-picker .active-content {
+div.pick-a-color-markup .active-content {
   display: block;
 }
-div.color-picker .inactive-content {
+div.pick-a-color-markup .inactive-content {
   display: none;
 }
-div.color-picker .savedColors-content {
+div.pick-a-color-markup .savedColors-content {
   padding: 5px 15px;
   white-space: normal;
 }
-div.color-picker .savedColors-content li > a {
+div.pick-a-color-markup .savedColors-content li > a {
   margin-left: 7px;
   padding-left: 8px;
   -webkit-border-radius: 4px;
@@ -641,7 +646,7 @@ div.color-picker .savedColors-content li > a {
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-div.color-picker .saved-color-col {
+div.pick-a-color-markup .saved-color-col {
   position: relative;
   left: -15px;
   float: left;

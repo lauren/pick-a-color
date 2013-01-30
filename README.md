@@ -3,7 +3,7 @@ Pick-a-Color: a jQuery color picker for Twitter Bootstrap
 
 ## Tested Browsers
 
-I've tested NAME GOES HERE in these browsers:
+I've tested Pick-a-Color in these browsers:
 
 * Google Chrome 23.0.1271.100 (Mac OSX, iOS 6.0.2)
 * Google Chrome 24.0.1312.52 (Windows 8)
@@ -16,14 +16,18 @@ I've tested NAME GOES HERE in these browsers:
 
 ### Notes on IE Support
 
-I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure that Internet Explorer 8 and 
+I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure that Internet Explorer 8 and higher use their "Browser Mode" instead of switching to the Browser Mode of a previous version of IE. You can use it like this:
+	
+		<meta http-equiv="x-ua-compatible" content="IE=10">
+		
+There is one known issue I'm still working out in IE8, which is documented here: 
 
 ## The Markup
 
 ### showSpectrum: true, showSavedColors: true
 
-    <div class="color-picker" data-border-color="YOUR_DEFAULT_COLOR">
-			<div class="input-prepend input-append color-picker-markup">
+    <div class="pick-a-color" data-border-color="YOUR_DEFAULT_COLOR">
+			<div class="input-prepend input-append pick-a-color-markup">
 				<span class="hex-pound">#</span>
 				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT_COLOR" />
 		   	<div class="btn-group">
@@ -41,7 +45,7 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 							</span>
 						</div>
 		      	<div class="basicColors-content active-content">
-		      		<h6 class="hidden-desktop color-menu-instructions">
+		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
 		    			<ul>
@@ -260,8 +264,8 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 		
 ### showSpectrum: true, showSavedColors: false
 
-		<div class="color-picker" data-border-color="YOUR_DEFAULT_COLOR">
-			<div class="input-prepend input-append color-picker-markup">
+		<div class="pick-a-color" data-border-color="YOUR_DEFAULT_COLOR">
+			<div class="input-prepend input-append pick-a-color-markup">
 				<span class="hex-pound">#</span>
 				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT_COLOR" />
 		   	<div class="btn-group">
@@ -271,7 +275,7 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 		     	</button>
 		     	<div class="color-menu dropdown-menu">
 		      	<div class="basicColors-content active-content">
-		      		<h6 class="hidden-desktop color-menu-instructions">
+		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
 		    			<ul>
@@ -388,8 +392,8 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 		
 ### showSpectrum: false, showSavedColors: true
 
-    <div class="color-picker" data-border-color="YOUR_DEFAULT_COLOR">
-			<div class="input-prepend input-append color-picker-markup">
+    <div class="pick-a-color" data-border-color="YOUR_DEFAULT_COLOR">
+			<div class="input-prepend input-append pick-a-color-markup">
 				<span class="hex-pound">#</span>
 				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT_COLOR" />
 		   	<div class="btn-group">
@@ -407,7 +411,7 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 							</span>
 						</div>
 		      	<div class="basicColors-content active-content">
-		      		<h6 class="hidden-desktop color-menu-instructions">
+		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
 		    			<ul>
@@ -571,8 +575,8 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 
 ### showSpectrum: false, showSavedColors: false
 
-    <div class="color-picker" data-border-color="YOUR_DEFAULT_COLOR">
-			<div class="input-prepend input-append color-picker-markup">
+    <div class="pick-a-color" data-border-color="YOUR_DEFAULT_COLOR">
+			<div class="input-prepend input-append pick-a-color-markup">
 				<span class="hex-pound">#</span>
 				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT_COLOR" />
 		   	<div class="btn-group">
@@ -582,7 +586,7 @@ I highly recommend using the X-UA-COMPATIBLE tag in your html <head> to ensure t
 		     	</button>
 		     	<div class="color-menu dropdown-menu">
 		      	<div class="basicColors-content active-content">
-		      		<h6 class="hidden-desktop color-menu-instructions">
+		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
 		    			<ul>

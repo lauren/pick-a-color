@@ -129,11 +129,9 @@
 
 /* input field */
 
-div.color-picker {
-	.color-picker-markup {
-		margin:20px 5px;
-		padding:0px;
-	}
+div.pick-a-color-markup {
+	margin:20px 5px;
+	padding:0px;
 
 	.hex-pound {
 	 	display: inline-block;
@@ -149,6 +147,7 @@ div.color-picker {
 	     -moz-border-radius: 4px 0 0 4px;
 	          border-radius: 4px 0 0 4px;
 	  padding: 4px 5px;
+		vertical-align:top;
 		@media screen and (max-width: 767px) {
 			padding:8px 5px 0px 5px;
 			min-height:30px;
@@ -164,6 +163,7 @@ div.color-picker {
 
 	.color-text-input {
 		width:200px;
+		vertical-align:top;
 		@media screen and (max-width: 767px) {
 			min-width:228px;
 			min-height:30px;
@@ -333,6 +333,9 @@ div.color-picker {
 		text-align: center;
 		padding:0px 6px;
 		margin:0px;
+		@media screen and (min-width: 767px) {
+			display:none;
+		}
 	}
 
 	.color-label {

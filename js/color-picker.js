@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
    
-    $.fn.colorPicker = function (options) {
+    $.fn.pickAColor = function (options) {
   
       // preset colors
   
@@ -26,10 +26,10 @@
       var myCookies = document.cookie;
       var tenYearsInMilliseconds = 315360000000; // shut up I need it for the cookie
       
-      var startEvent  = supportsTouch ? "touchstart.colorPicker"  : "mousedown.colorPicker";
-      var moveEvent   = supportsTouch ? "touchmove.colorPicker"   : "mousemove.colorPicker";
-      var endEvent    = supportsTouch ? "touchend.colorPicker"    : "mouseup.colorPicker";
-      var clickEvent  = supportsTouch ? "touchend.colorPicker"    : "click.colorPicker";
+      var startEvent  = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor";
+      var moveEvent   = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor";
+      var endEvent    = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor";
+      var clickEvent  = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor";
       
       if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function(obj) {
@@ -56,7 +56,7 @@
       // markup 
       
       var markupBeforeInput = function () {
-        var $markup = $("<div>").addClass("input-prepend input-append color-picker-markup");
+        var $markup = $("<div>").addClass("input-prepend input-append pick-a-color-markup");
         $markup.append($("<span>").addClass("hex-pound").text("#"));
         return $markup;
       };
@@ -83,7 +83,7 @@
         }
         var $basicColors = $("<div>").addClass("basicColors-content active-content");
         if (settings.showSpectrum) {
-          $basicColors.append($("<h6>").addClass("hidden-dekstop color-menu-instructions").
+          $basicColors.append($("<h6>").addClass("color-menu-instructions").
             text("Tap spectrum or drag band to change color"));
         }
         var $listContainer = $("<ul>");
@@ -132,15 +132,19 @@
      
       if (settings.showSavedColors) { // if we're saving colors...
         var allSavedColors = []; // make an array for all saved colors
+        
         if (supportsLocalStorage && localStorage.allSavedColors) { // look for them in LS
           allSavedColors = JSON.parse(localStorage.allSavedColors);
-          // if there's a saved_colors cookie...
+          
+          // if there's a saved_colors cookie...          
         } else if (myCookies.indexOf("savedColors-allSavedColors") > -1) {
           myCookies = myCookies.split(";"); // split cookies into an array...
-          $.each(myCookies, function (index) {
+          
+          $.each(myCookies, function (index) { // find the savedColors cookie!
             if (myCookies[index].match("savedColors-allSavedColors=")) {
               allSavedColors = myCookies[index].split("=")[1].split(",");
             }
+          
           });
         }
       }
@@ -152,20 +156,20 @@
         initialize: function () {
           var $this_el = $(this);
           // get the default color from the content of each div
-          myColorVars.defaultColor = $this_el.text().match(/^\s+$|^$/) ? "000" : $this_el.text();
+          myColorVars.defaultColor = $this_el.text() === "" ? "000" : $this_el.text();
           myColorVars.typedColor = myColorVars.defaultColor;
           
           var $inputMarkup = $('<input id="appendedPrependedDropdownButton" type="text" value="' +
             myColorVars.defaultColor + '"/>').addClass("color-text-input");
           
-          var colorPickerMarkup =
-            markupBeforeInput().append($inputMarkup).append(markupAfterInput());
-      
-          $this_el.html(colorPickerMarkup);
+          
+          $this_el.html(function (){
+            return markupBeforeInput().append($inputMarkup).append(markupAfterInput());
+          });
         },
     
         updatePreview: function ($this_el) {
-          myColorVars.typedColor = tinycolor($this_el.val()).toHex();
+          myColorVars.typedColor = methods.rgbStringToHex($this_el.val());
           $this_el.siblings(".btn-group").find(".current-color").css("background-color",
             "#" + myColorVars.typedColor);
         },
@@ -178,17 +182,20 @@
         openDropdown: function (button,menu) {
           $(".color-menu").each(function () { // check all the other color menus...
             var $this_el = $(this);
+            
             if ($this_el.css("display") === "block") { // if one is open,
               // find its color preview button
               var thisColorPreviewButton = $this_el.parents(".btn-group");
               methods.closeDropdown(thisColorPreviewButton,$this_el); // close it
             }
           });
-          if (settings.fadeMenuToggle && !supportsTouch) {//fades look terrible in mobile
+          
+          if (settings.fadeMenuToggle && !supportsTouch) { //fades look terrible in mobile
             $(menu).fadeIn("fast");
           } else {
             $(menu).css("display","block");
           }
+          
           $(button).addClass("open");
         },
     
@@ -198,6 +205,7 @@
           } else {
             $(menu).css("display","none");
           }
+          
           $(button).removeClass("open");
         },
         
@@ -211,12 +219,14 @@
         
         tabbable: function () {
           var $this_el = $(this);
-          var $myContainer = $this_el.parents(".color-picker");
+          var $myContainer = $this_el.parents(".pick-a-color-markup");
+          
           $this_el.click(function () {
             var $this_el = $(this);
             // interpret the associated content class from the tab class and get that content div
             var contentClass = $this_el.attr("class").split(" ")[0].split("-")[0] + "-content";
             var myContent = $this_el.parents(".dropdown-menu").find("." + contentClass);
+            
             if (!$this_el.hasClass("tab-active")) { // make all active tabs inactive
               $myContainer.find(".tab-active").removeClass("tab-active");
               // toggle visibility of active content
@@ -235,13 +245,15 @@
         getColorMultiplier: function (colorHex,position) {
           // position of the color band as a percentage of the width of the color box
           var spectrumWidth = parseInt($(".color-box").first().width(),10);
-          if (spectrumWidth === 0) {
+          if (spectrumWidth === 0) { // in case the width isn't set correctly
             spectrumWidth = supportsTouch ? 190 : 200;
           }
           var halfSpectrumWidth = spectrumWidth / 2;
           var percent_of_box = position / spectrumWidth;
+          
           // non-B/W spectrums can be lightened or darkened...
           if (colorHex !== "fff" && colorHex !== "000") {
+            
             if (percent_of_box <= 0.5) { // in the light half of the box
               // get the percentage position relative to half of the box,
               // subtract from one bcs we lighten away from center, not left
@@ -249,17 +261,22 @@
             } else { // in the dark half of the box
               // get the percentage position relative to half of the box and return negative
               return -(((position - halfSpectrumWidth) / halfSpectrumWidth) / 2);
-            } 
+            }
+             
           } else if (colorHex === "fff") { // white gets darkened to 50%
             return -percent_of_box / 2; // so halve multiplier and return negative value
+            
           } else if (colorHex === "000") { // black gets lightened to 50%
             return percent_of_box / 2; // so divide multiplier in half
           }
         },
+        
+        // based on ligten/darken in LESS   
+        // https://github.com/cloudhead/less.js/blob/master/dist/less-1.3.3.js#L1763
   
-        modifyHSL: function (HSL,multiplier) {
-          HSL.l += multiplier; // add the multiplier
-          HSL.l = Math.min(Math.max(0,HSL.l),1); //make sure it's between 0 and 1
+        modifyHSLLightness: function (HSL,multiplier) {
+          HSL.l += multiplier; 
+          HSL.l = Math.min(Math.max(0,HSL.l),1); 
           return tinycolor(HSL).toHex();
         },
         
@@ -294,14 +311,15 @@
             $this_el.css("cursor","-webkit-grabbing");
             $this_el.css("cursor","-moz-grabbing");
             var dimensions = methods.getMoveableArea($this_el);
+            
             $(document).on(moveEvent, function (e) {
-              $this_el.trigger("dragging.colorPicker");
+              $this_el.trigger("dragging.pickAColor");
               methods.moveHighlightBand($this_el, dimensions, e);
             }).on(endEvent, function(event) { 
               $(document).off(moveEvent); // for desktop
               $this_el.css("cursor","-webkit-grab");
               $this_el.css("cursor","-moz-grab");
-              $this_el.trigger("endDrag.colorPicker");
+              $this_el.trigger("endDrag.pickAColor");
             });
           }).on(endEvent, function(event) { 
             $(document).off(moveEvent); // for mobile
@@ -315,9 +333,10 @@
           var hbColorMultiplier = -colorMultiplier;
           var hbsColorMultiplier = hbColorMultiplier * 10; // needs to be either black or white
           var $hbStripes = $highlightBand.find(".highlight-band-stripe");
-          var newBandColor = (colorHex === "000") ? methods.modifyHSL(bwMidHSL,hbColorMultiplier) 
-            : methods.modifyHSL(darkGrayHSL,hbColorMultiplier);
-          var newStripeColor = methods.modifyHSL(bwMidHSL,hbsColorMultiplier);
+          var newBandColor = (colorHex === "000") ?
+            methods.modifyHSLLightness(bwMidHSL,hbColorMultiplier) :  
+            methods.modifyHSLLightness(darkGrayHSL,hbColorMultiplier);
+          var newStripeColor = methods.modifyHSLLightness(bwMidHSL,hbsColorMultiplier);
           $highlightBand.css("border-color","#" + newBandColor);
           $hbStripes.css("background-color","#" + newStripeColor);
         },
@@ -329,13 +348,13 @@
           var halfHBWidth = hbWidth / 2;
           // get the class of the parent color box and slice off "spectrum"
           var colorName = $this_parent.attr("class").split("-")[2];
-          var colorHsl = tinycolor(colorName).toHsl();
-          var colorHex = tinycolor(colorName).toHex();
+          var colorHex = presetColors[colorName];
+          var colorHsl = tinycolor(colorHex).toHsl();
       
           // midpoint of the current left position of the color band
           var highlightBandLocation = parseInt($this_el.css("left"),10) + halfHBWidth;
           var colorMultiplier = methods.getColorMultiplier(colorHex,highlightBandLocation);
-          var highlightedColor = "#" + methods.modifyHSL(colorHsl,colorMultiplier);
+          var highlightedColor = "#" + methods.modifyHSLLightness(colorHsl,colorMultiplier);
           $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
           // replace the color label with a 'select' button 
           $this_parent.prev('.color-label').replaceWith(
@@ -394,10 +413,12 @@
           var now = new Date();
           var expiresOn = new Date(now.getTime() + tenYearsInMilliseconds);
           expiresOn = expiresOn.toGMTString();
+          
           if (typeof savedColorsDataAttr === "undefined") {
-            document.cookie = "savedColors-allSavedColors=" + savedColors + ";expires=" + expiresOn;
+            document.cookie = "pickAColorSavedColors-allSavedColors=" + savedColors + 
+              ";expires=" + expiresOn;
           } else {
-            document.cookie = "savedColors-" + savedColorsDataAttr + "=" + savedColors +
+            document.cookie = "pickAColorSavedColors-" + savedColorsDataAttr + "=" + savedColors +
             ";expires=" + expiresOn;
           }
         },
@@ -408,7 +429,8 @@
             if (typeof savedColorsDataAttr === "undefined") {
               localStorage.allSavedColors = JSON.stringify(savedColors);
             } else { // otherwise save to a data attr-specific item
-              localStorage["savedColors-" + savedColorsDataAttr] = JSON.stringify(savedColors);
+              localStorage["pickAColorSavedColors-" + savedColorsDataAttr] =
+                JSON.stringify(savedColors);
             }
           } else {
             methods.setSavedColorsCookie(savedColors,savedColorsDataAttr);
@@ -440,7 +462,145 @@
               methods.updateSavedColors(color,mySavedColors,savedColorsDataAttr);
             }
           }
+        },
+        
+        // returns a HEX value from an array of RGB numbers 
+        // inspiration from http://stackoverflow.com/a/5624139
+        rgbToHex: function (rgb) {
+          var hex = [];
+          $.each(rgb, function(index, value) {
+            var thisHex = Math.floor(value).toString(16); // convert to hex
+            thisHex = (thisHex.length === 1) ? "0" + thisHex : thisHex; // add a 0 if it's too short
+            hex.push(thisHex);
+          });
+          return hex.join(""); 
+        },
+
+        // returns a HEX value from a string like 'rgb(X,X,X)' 
+        // inspiration from http://stackoverflow.com/a/5624139 
+        rgbStringToHex: function(string) {
+          if (string.match(/^rgb/)) { // make sure it's an RGB string
+            // get rid of the rgb and parens and make an array of the numbers 
+            var RGB = string.split("(")[1].split(")")[0].split(","); 
+            $.each(RGB, function(index,value) {
+              RGB[index] = parseInt(value,10);
+            })
+            return methods.rgbtoHex(RGB);
+          } else { // if it doesn't start with RGB, just return the original string 
+            return string;
+          }
+        },
+        
+        // returns an RGB array from a hex string 
+        // inspiration from http://stackoverflow.com/a/5624139
+        hexToRgb: function(hex) {
+          if (hex.indexOf("#") === 1) { // take off the # if it's there
+            hex = hex[1,hex.length]
+          }
+          if (hex.length < 6) { // make six-digit hex from three-digit hex
+            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
+          }
+          var r = parseInt(hex.slice(0,2),16);
+          var g = parseInt(hex.slice(2,4),16);
+          var b = parseInt(hex.slice(4,6),16);
+          return [r,g,b]
+        },
+        
+        // rgbToHsl, hslToRGB, and bound01 are from TinyColor v0.9.13
+        // https://github.com/bgrins/TinyColor
+        // 2012-11-28, Brian Grinstead, MIT License
+        // https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L238
+        
+        bound01: function (n, max) {
+            if (n === "1.0") { n = "100%"; }
+
+            var processPercent = (typeof n === "string") && (n.indexOf('%') != -1);
+            n = Math.min(max, Math.max(0, parseFloat(n)));
+
+            // Automatically convert percentage into number
+            if (processPercent) {
+                n = parseInt(n * max, 10) / 100;
+            }
+
+            // Handle floating point rounding errors
+            if ((Math.abs(n - max) < 0.000001)) {
+                return 1;
+            }
+
+            // Convert into [0, 1] range if it isn't already
+            return (n % max) / parseFloat(max);
+        },
+
+        // modified to make the expected argument an array
+        rgbToHsl: function(rgb) {
+            console.log(rgb);
+            var r = methods.bound01(rgb[0], 255),
+                g = methods.bound01(rgb[1], 255),
+                b = methods.bound01(rgb[2], 255);
+
+            var max = Math.max(r, g, b), min = Math.min(r, g, b);
+            var h = (max + min) / 2,
+                s = (max + min) / 2,
+                l = (max + min) / 2;
+
+            if(max == min) {
+                h = s = 0; // achromatic
+            }
+            else {
+                var d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch(max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+
+                h /= 6;
+                console.log(h);
+            }
+            console.log({ h: h, s: s, l: l });
+            return { h: h, s: s, l: l };
+        },
+        
+        // modified to make the expected argument an object and result an array
+        hslToRgb: function(hsl) {
+            var r, g, b;
+            
+            var h = methods.bound01(hsl.h, 360),
+                s = methods.bound01(hsl.s, 100),
+                l = methods.bound01(hsl.l, 100);
+                
+            function hue2rgb(p, q, t) {
+                if(t < 0) t += 1;
+                if(t > 1) t -= 1;
+                if(t < 1/6) return p + (q - p) * 6 * t;
+                if(t < 1/2) return q;
+                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                return p;
+            }
+
+            if(s === 0) {
+                r = g = b = l; // achromatic
+            }
+            else {
+                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                var p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1/3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1/3);
+            }
+            
+            return [r * 25500, g * 25500, b * 25500];
+        },
+        
+        hexToHsl: function(hex) {
+          return methods.rgbToHsl(methods.hexToRgb(hex));
+        },
+        
+        hslToHex: function(hsl) {
+          return methods.rgbToHex(methods.hslToRgb(hsl));
         }
+        
     
       };
   
@@ -456,9 +616,11 @@
         var $myColorSpectrums = $($myContainer).find(".color-box");
         var $myTouchInstructions = $($myContainer).find(".color-menu-instructions");
         var $myHighlightBands = $($myContainer).find(".highlight-band");
+        
         if (useTabs) {
           var $myTabs = $($myContainer).find(".tab");
         }
+        
         if (settings.showSavedColors) {
           var $mySavedColorsContent = $($myContainer).find(".savedColors-content");
           if (settings.saveColorsPerElement) { // when saving colors for each color picker...
@@ -468,18 +630,23 @@
             $.each(mySavedColorsDataObj, function (key) {
               mySavedColorsDataAttr = key;
             });
+            
             // get this picker's colors from local storage if possible
-            if (supportsLocalStorage && localStorage["savedColors-" + mySavedColorsDataAttr]) {
-              mySavedColors = JSON.parse(localStorage["savedColors-" + mySavedColorsDataAttr]);
+            if (supportsLocalStorage && localStorage["pickAColorSavedColors-" +
+              mySavedColorsDataAttr]) {
+              mySavedColors = JSON.parse(localStorage["pickAColorSavedColors-" + 
+                mySavedColorsDataAttr]);
+            
             // otherwise, get them from cookies
-            } else if (myCookies.indexOf("savedColors-" + mySavedColorsDataAttr) > -1) {
+            } else if (myCookies.indexOf("pickAColorSavedColors-" + mySavedColorsDataAttr) > -1) {
               myCookies = myCookies.split(";"); // an array of cookies...
               $.each(myCookies, function (index) { // find the matching cookie
-                if (myCookies[index].match("savedColors" + mySavedColorsDataAttr)) {
+                if (myCookies[index] = ("pickAColorSavedColors" + mySavedColorsDataAttr)) {
                   // take out the name, turn it into an array, and set saved colors equal to it
                   mySavedColors = myCookies[index].split("=")[1].split(",");
                 }
               });
+           
             } else { // if no data-attr specific colors are in local storage OR cookies...
               mySavedColors = allSavedColors; // use mySavedColors
             }
@@ -496,7 +663,7 @@
         $myColorTextInput.focus(function () {
           var $this_el = $(this);
           myColorVars.typedColor = $this_el.val(); // update with the current
-          $this_el.val(" "); //clear the field on focus
+          $this_el.val(""); //clear the field on focus
           methods.openDropdown($myColorPreviewButton,$myColorMenu);
         }).blur(function () {
           var $this_el = $(this);
@@ -508,7 +675,7 @@
           if (myColorVars.newValue.match(/^\s+$|^$/)) {
             $this_el.val(myColorVars.typedColor);
           } else { // otherwise...
-            myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
+            myColorVars.newValue = methods.rgbStringToHex(myColorVars.newValue); // convert to hex
             $this_el.val(myColorVars.newValue); // put the new value in the field
             // save to saved colors
             methods.addToSavedColors(myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
@@ -544,7 +711,7 @@
     
         $myColorMenuLinks.click( function () {
           var selectedColor = $(this).find("span:first").css("background-color");
-          selectedColor = tinycolor(selectedColor).toHex();
+          selectedColor = methods.rgbStringToHex(selectedColor);
           $($myColorTextInput).val(selectedColor);
           methods.updatePreview($myColorTextInput);
           methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
@@ -577,9 +744,9 @@
           
           methods.horizontallyDraggable.apply($myHighlightBands);
     
-          $($myHighlightBands).on("dragging.colorPicker",function () {
+          $($myHighlightBands).on("dragging.pickAColor",function () {
             methods.calculateHighlightedColor.apply(this);
-          }).on("endDrag.colorPicker", function (event) {
+          }).on("endDrag.pickAColor", function (event) {
             var finalColor = methods.calculateHighlightedColor.apply(this);
             methods.addToSavedColors(finalColor,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
@@ -600,6 +767,7 @@
           $($mySavedColorsContent).click( function (event) {
             var $this_el = $(event.target);
             // make sure click happened on a link or span
+            
             if ($this_el.is("SPAN") || $this_el.is("A")) {
               //grab the color the link's class or span's parent link's class
               var selectedColor = $this_el.is("SPAN") ?
@@ -629,11 +797,11 @@
 
 $(document).ready(function () {
   
-  $(".color-picker").colorPicker({
+  $(".pick-a-color").pickAColor({
     showSpectrum            : true,
     showSavedColors         : true,
     saveColorsPerElement    : true,
     fadeMenuToggle          : true
   });
-  
+    
 });

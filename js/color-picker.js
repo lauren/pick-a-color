@@ -21,8 +21,8 @@
       var supportsTouch = 'ontouchstart' in window,
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null && 
-            typeof JSON === 'object', // don't use LS if JSON is not available (IE)
-          isIE = /*@cc_on!@*/false, // OH NOES
+            typeof JSON === 'object', // don't use LS if JSON is not available (IE, ahem)
+          isIE = /*@cc_on!@*/false, // OH NOES!
           myCookies = document.cookie,
           tenYearsInMilliseconds = 315360000000, // shut up I need it for the cookie
       
@@ -53,7 +53,7 @@
       
       var useTabs = settings.showSavedColors;
       
-      // markup 
+      // so much markup 
       
       var markupBeforeInput = function () {
         return $("<div>").addClass("input-prepend input-append pick-a-color-markup").
@@ -121,8 +121,8 @@
       var myColorVars = {};
       
       var myStyleVars = {
-          rowsInDropdown          : 8,
-          maxColsInDropdown       : 2
+          rowsInDropdown     : 8,
+          maxColsInDropdown  : 2
       };
      
       if (settings.showSavedColors) { // if we're saving colors...
@@ -243,26 +243,31 @@
             spectrumWidth = supportsTouch ? 190 : 200;
           }
           var halfSpectrumWidth = spectrumWidth / 2,
-              percent_of_box = position / spectrumWidth;
-          
-          // non-B/W spectrums can be lightened or darkened...
-          if (colorHex !== "fff" && colorHex !== "000") {
-            
-            if (percent_of_box <= 0.5) { // in the light half of the box
-              // get the percentage position relative to half of the box,
-              // subtract from one bcs we lighten away from center, not left
-              return (1 - (position / halfSpectrumWidth)) / 2;
-            } else { // in the dark half of the box
-              // get the percentage position relative to half of the box and return negative
-              return -(((position - halfSpectrumWidth) / halfSpectrumWidth) / 2);
-            }
-             
-          } else if (colorHex === "fff") { // white gets darkened to 50%
-            return -percent_of_box / 2; // so halve multiplier and return negative value
-            
-          } else if (colorHex === "000") { // black gets lightened to 50%
-            return percent_of_box / 2; // so divide multiplier in half
+              percentOfBox = position / spectrumWidth,
+              spectrumType;
+
+          switch(colorHex) {
+            case "fff":
+              spectrumType = "darkenRight";
+              break;
+            case "000":
+              spectrumType = "ligtenRight";
+              break;
+            default:
+              spectrumType = "bidirectional"
           }
+                    
+          // for spectrums that lighten and darken, recalculate percent of box relative
+          // to the half of spectrum the highlight band is currently in
+          if (spectrumType === "bidirectional") {
+            return (percentOfBox <= 0.5) ?
+              (1 - (position / halfSpectrumWidth)) / 2 :
+              -((position - halfSpectrumWidth) / halfSpectrumWidth) / 2
+            // now that we're treating each half as an individual spectrum, both are darkenRight
+          } else {
+            return (spectrumType === "darkenRight") ? -(percentOfBox / 2) : (percentOfBox / 2);
+          }
+          
         },
         
         // based on ligten/darken in LESS   

@@ -6,24 +6,33 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="x-ua-compatible" content="IE=10">
 	  
-
 		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/color-picker.css">	  
-		<script src="js/jquery-1.9.0.min.js"></script>
-		<script src="js/tinycolor-min.js"></script>
-		<script src="js/color-picker.js"></script>
-	
+		<link rel="stylesheet" href="css/pick-a-color.css">	  	
 		
 	</head>
 	
-	<body style="padding:10px;">
+	<body>
 		
 		<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
 		<div class="pick-a-color" id="font-color" data-font-color="aaa">aaa</div>
 		<div class="pick-a-color" id="data-background-color" data-background-color="a1beef">a1beef</div>
 		<div class="pick-a-color" id="data-highlight-color" data-highlight-color="551033">551033</div>
 		<div class="pick-a-color" id="data-contrast-color" data-contrast-color="eee">eee</div>
-		<div class="pick-a-color"></div>	
+		<div class="pick-a-color"></div>
+		
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/tinycolor-min.js"></script>
+	<script src="js/pick-a-color.js"></script>	
+		
+	<script type="text/javascript">
+	
+		$(document).ready(function () {
+
+		  $(".pick-a-color").pickAColor();
+
+		});
+	
+	</script>
 				
 	</body>
 	

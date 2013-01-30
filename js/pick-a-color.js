@@ -152,7 +152,9 @@
             
         initialize: function () {
           var $this_el = $(this);
-          // get the default color from the content of each div
+          var $myContainer = $this_el.parents(".pick-a-color-markup");
+          
+          // get the default color from the content or data attribute
           myColorVars.defaultColor = $this_el.text() === "" ? "000" : $this_el.text();
           myColorVars.typedColor = myColorVars.defaultColor;
           
@@ -380,6 +382,7 @@
         },
     
         updateSavedColorMarkup: function ($savedColorsContent,mySavedColors) {
+          mySavedColors = mySavedColors ? mySavedColors : allSavedColors;
           if (mySavedColors.length > 0) {
                     
             if (!settings.saveColorsPerElement) {
@@ -736,6 +739,8 @@
           // move the highlight band when you click on a spectrum 
     
           $(this).find(".color-box").click( function (e) {
+            console.log("click");
+            
             e.stopPropagation(); // stop this click from closing the dropdown
             var $this_el = $(this),
                 $highlightBand = $this_el.find(".highlight-band"),
@@ -754,15 +759,14 @@
             var $thisEl = event.target
             methods.calculateHighlightedColor.apply(this);
           }).on(endDragEvent, function (event) {
+            console.log("endDrag");
             var $thisEl = event.delegateTarget;
             var finalColor = methods.calculateHighlightedColor.apply($thisEl);
             methods.addToSavedColors(finalColor,mySavedColors,mySavedColorsDataAttr);
             methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
           });
           
-          $($myHighlightBands).on(endEvent, function (e) {
-            e.stopPropagation(); // stops dragging highlight band from triggering click on spectrum
-          });
+
       
         }
 
@@ -781,7 +785,7 @@
                 $thisEl.parent().attr("class").split("#")[1] :
                 $thisEl.attr("class").split("#")[1];
               $($myColorTextInput).val(selectedColor);
-              methods.updatePreview($myColorTextInput);
+              methods.updatePyreview($myColorTextInput);
               methods.closeDropdown($myColorPreviewButton,$myColorMenu);
               methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr);
               methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
@@ -802,17 +806,12 @@
   
 })(jQuery);
 
-$(document).ready(function () {
-  
-  $(".pick-a-color").pickAColor({
-    showSpectrum            : true,
-    showSavedColors         : true,
-    saveColorsPerElement    : true,
-    fadeMenuToggle          : true
-  });
-  
-  $(document).on("pickAColor.dragEnd", function () {
-    console.log("hi");
-  })
-    
-});
+// $(document).ready(function () {
+//   
+//   $(".pick-a-color").pickAColor();
+//   
+//   $(document).on("pickAColor.dragEnd", function () {
+//     console.log("hi");
+//   })
+//     
+// });

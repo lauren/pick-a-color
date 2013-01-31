@@ -3,36 +3,36 @@ Pick-a-Color: a jQuery color picker for Twitter Bootstrap
 
 Pick-a-Color is a color picker that's easy to use--even for people who aren't techies or designers. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
 
-Features:
+### Features 
 
-*For Your Site's Users*
+#### For your site's users
 * text field entry that accepts HEX, RGB, RGBA, HSL, HSLA, HSV, HSVA, and named colors 
-** _Thanks to Brian Grinstead's [Tiny Color](https://github.com/bgrins/TinyColor) for doing all the tricky color conversion math._
+		** _Huge, tremendous thanks to Brian Grinstead's [Tiny Color](https://github.com/bgrins/TinyColor) for doing all the tricky color conversion math._
 * dropdown with 8 basic colors that can be lightened and darkened
 * "Saved Colors" tab that stores recently used colors for later reference
-** _Saved Colors persist across pageviews with localStorage when possible and cookies when localStorage is unavailable or impractical_
+		** _Saved Colors persist across pageviews with localStorage when possible and cookies when localStorage is unavailable or impractical_
 * easy-to-use interface based on pretty Bootstrap styles
 * chunky mobile styles that make dragging easy on a touch device
 
-*For You*
+#### For you
 * simple initialization with as little as three lines of HTML and one line of JavaScript
 * configurable options for:
-** whether or not to show users a lighten/darken spectrum
-** whether or not to show users their saved colors
-** whether colors should be saved separately for each color picker or once for all color pickers on a page (sensible default is once per page, but I leave the choice to you)
-** whether or not the dropdown menu should fade in and out (hey, some people feel strongly about this...so...yeah)
+		** whether or not to show users a lighten/darken spectrum
+		** whether or not to show users their saved colors
+		** whether colors should be saved separately for each color picker or once for all color pickers on a page (sensible default is once per page, but I leave the choice to you)
+		** whether or not the dropdown menu should fade in and out (hey, some people feel strongly about this...so...yeah)
 * anonymous JavaScript function that will not mess up your other JavaScript
 * namespaced CSS that will not mess up your other styles
 * equally pretty and user-friendly in desktop and mobile browsers
 * tested in Chrome (Mac/PC/iOS), Safari (Mac/iOS), IE 8+, Firefox (Mac/PC), and Opera (Mac/PC)
 * you didn't have to write your own color picker
 
-Caveats:
+### Caveats
 
 * Like ~~most things~~ everything ~~on the internet~~ in life, this is a work in progress. Known issues are relatively minor at this point and are documented here: https://github.com/lauren/pick-a-color/issues?milestone=2&state=open
 * This is my first big JavaScript project, so there are surely some things I've done that will make you go "n00b! Look what happens when product managers code!!!" I would LOVE to know what those things are so I can learn and make Pick-a-Color better. You can tell me by making a ticket here: https://github.com/lauren/pick-a-color/issues/new 
 
-Still with me? Let's get to it...
+OK! Let's do this color picking thing!
 
 ## How to Use
 
@@ -42,33 +42,33 @@ It's so easy!
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		
-2. Make sure you're using the bootstrap.min.css file from Bootstrap 2.2.2. You do not need bootstrap-responsive.min.css or bootstrap.min.js. If you're not using bootstrap yet...
+2. Make sure you're using the bootstrap.min.css file from Bootstrap 2.2.2. You do not need bootstrap-responsive.min.css or bootstrap.min.js. If you're not using bootstrap yet:
+    2.1 Download it here: FIXME 
+		2.2 Put it in your css folder or somewhere in your project directory.
+    2.3 Add this to the `<head>` of your HTML document:
 
-    2.1 Download it here: http://twitter.github.com/bootstrap/assets/bootstrap.zip 
-		2.1 Put it in your css folder or somewhere in your project directory.
-    2.2 Add this to the `<head>` of your HTML document:
-
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+				<link rel="stylesheet" href="/css/bootstrap.min.css">
 	
-3. Download the Pick-a-Color JS and CSS here: FIXME.
+3. Download the Pick-a-Color JS and CSS and TinyColor 0.9.12 here: FIXME.
 
 4. Put the CSS your css folder and link to it from the `<head>` of your HTML document like this, AFTER the bootstrap.min.css link:
 	
 		<link rel="stylesheet" href="css/pick-a-color.min.css">
 		
-5. Put the JS in your js folder and link to it from the bottom of your HTML document, right before the closing `</body>`. Make sure it comes AFTER the jQuery link:
-
+5. Put both JS files in your js folder and link to them from the bottom of your HTML document, right before the closing `</body>`. Make sure they come AFTER the jQuery link:
+		
+		<script src="js/tinycolor-0.9.12.min.js"></script>
 		<script src="js/color-picker.js"></script>
 		
-6. Add this to your HTML wherever you want a Pick-A-Color. Replace "YOUR-ID" with your unique identifier for the color picker ("border-color" or "background-color") and "YOUR-DEFAULT" with the default color you'd like to show in the color picker:
+6. Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
-		<div class="pick-a-color" id="YOUR-ID" data-YOUR-ID="YOUR-DEFAULT">YOUR-DEFAULT</div>
+		<div class="pick-a-color" id="YOUR_ID" data-YOUR_ID="YOUR_DEFAULT">YOUR_DEFAULT</div>
 
-For instance, yours might look like this:
+		For instance, yours might look like this:
 
-		<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
+				<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
 		
-You can change the class of your div, but make sure to match it in your JavaScript in the next step...
+		You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
 7. Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
@@ -87,15 +87,11 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 
 		<!doctype html>
 		<html>
-
-			<head>
-		
+			<head>		
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<meta http-equiv="x-ua-compatible" content="IE=10">
-	  
+				<meta http-equiv="x-ua-compatible" content="IE=10">	  
 				<link rel="stylesheet" href="css/bootstrap.min.css">
 				<link rel="stylesheet" href="css/pick-a-color.css">	  	
-		
 			</head>
 	
 			<body>
@@ -122,7 +118,6 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 			</script>
 				
 			</body>
-	
 		</html>
 
 ### Options
@@ -154,7 +149,7 @@ I recommend setting this to `false`. Imagine you're a user filling out a big for
 
 #### fadeMenuToggle
 
-Specifies whether the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile, which NEVER uses a fade because WOW they look terrible in mobile browsers.
+Specifies whether the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile devices, in which Pick-a-Color never ever ever uses a fade because WOW they look terrible in mobile browsers.
 
 ## Tested Browsers
 
@@ -187,12 +182,14 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 		
 ## The Markup
 
-### showSpectrum: true, showSavedColors: true
+This is the markup that Pick-a-Color generates when it is initialized, based upon your settings:
 
-    <div class="pick-a-color" data-border-color="YOUR_DEFAULT_COLOR">
+### default settings: showSpectrum: true, showSavedColors: true
+
+    <div class="pick-a-color" id="YOUR_ID" data-border-color="YOUR_DEFAULT">
 			<div class="input-prepend input-append pick-a-color-markup">
 				<span class="hex-pound">#</span>
-				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT_COLOR" />
+				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT" />
 		   	<div class="btn-group">
 		    	<button class="btn color-dropdown dropdown-toggle">      
 		       	<span class="color-preview current-color"></span>
@@ -211,9 +208,9 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
-		    			<ul>
-								<li>
-			      			<a class="white">
+		    			<ul class="basic-colors-list">
+								<li class="color-item">
+			      			<a class="white color-link">
 			        			<span class="color-preview white"></span>
 			        			<span class="color-label">white</span>
 			        			<span class="color-box spectrum-white">
@@ -225,8 +222,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="red">
+								<li class="color-item">
+			      			<a class="red color-link">
 			        			<span class="color-preview red"></span>
 			        			<span class="color-label">red</span>
 			        			<span class="color-box spectrum-red">
@@ -238,8 +235,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="orange">
+								<li class="color-item">
+			      			<a class="orange color-link">
 			        			<span class="color-preview 'orange'"></span>
 			        			<span class="color-label">orange</span>
 			        			<span class="color-box spectrum-orange">
@@ -251,8 +248,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="yellow">
+								<li class="color-item">
+			      			<a class="yellow color-link">
 			        			<span class="color-preview yellow"></span>
 			        			<span class="color-label">yellow</span>
 			        			<span class="color-box spectrum-yellow">
@@ -264,8 +261,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="green">
+								<li class="color-item">
+			      			<a class="green color-link">
 			        			<span class="color-preview green"></span>
 			        			<span class="color-label">green</span>
 			        			<span class="color-box spectrum-green">
@@ -277,8 +274,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="blue">
+								<li class="color-item">
+			      			<a class="blue color-link">
 			        			<span class="color-preview blue"></span>
 			        			<span class="color-label">blue</span>
 			        			<span class="color-box spectrum-blue">
@@ -290,8 +287,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="purple">
+								<li class="color-item">
+			      			<a class="purple color-link">
 			        			<span class="color-preview purple"></span>
 			        			<span class="color-label">purple</span>
 			        			<span class="color-box spectrum-purple">
@@ -303,8 +300,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="black">
+								<li class="color-item">
+			      			<a class="black color-link">
 			        			<span class="color-preview black"></span>
 			        			<span class="color-label">black</span>
 			        			<span class="color-box spectrum-'black'">
@@ -320,49 +317,49 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 						</div>
 						<div class="savedColors-content inactive-content">
 		      		<ul class="saved-color-col 0">
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
@@ -370,49 +367,49 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 								</li>
 							</ul>
 							<ul class="saved-color-col 1">
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
@@ -427,10 +424,10 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 		
 ### showSpectrum: true, showSavedColors: false
 
-		<div class="pick-a-color" data-border-color="YOUR_DEFAULT_COLOR">
+		<div class="pick-a-color" data-border-color="YOUR_DEFAULT">
 			<div class="input-prepend input-append pick-a-color-markup">
 				<span class="hex-pound">#</span>
-				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT_COLOR" />
+				<input id="appendedPrependedDropdownButton" type="text" class="color-text-input" value="YOUR_DEFAULT" />
 		   	<div class="btn-group">
 		    	<button class="btn color-dropdown dropdown-toggle">      
 		       	<span class="color-preview current-color"></span>
@@ -441,9 +438,9 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
-		    			<ul>
-								<li>
-			      			<a class="white">
+		    			<ul class="basic-colors-list">
+								<li class="color-item">
+			      			<a class="white color-link">
 			        			<span class="color-preview white"></span>
 			        			<span class="color-label">white</span>
 			        			<span class="color-box spectrum-white">
@@ -455,8 +452,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="red">
+								<li class="color-item">
+			      			<a class="red color-link">
 			        			<span class="color-preview red"></span>
 			        			<span class="color-label">red</span>
 			        			<span class="color-box spectrum-red">
@@ -468,8 +465,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="orange">
+								<li class="color-item">
+			      			<a class="orange color-link">
 			        			<span class="color-preview 'orange'"></span>
 			        			<span class="color-label">orange</span>
 			        			<span class="color-box spectrum-orange">
@@ -481,8 +478,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="yellow">
+								<li class="color-item">
+			      			<a class="yellow color-link">
 			        			<span class="color-preview yellow"></span>
 			        			<span class="color-label">yellow</span>
 			        			<span class="color-box spectrum-yellow">
@@ -494,8 +491,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="green">
+								<li class="color-item">
+			      			<a class="green color-link">
 			        			<span class="color-preview green"></span>
 			        			<span class="color-label">green</span>
 			        			<span class="color-box spectrum-green">
@@ -507,8 +504,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="blue">
+								<li class="color-item">
+			      			<a class="blue color-link">
 			        			<span class="color-preview blue"></span>
 			        			<span class="color-label">blue</span>
 			        			<span class="color-box spectrum-blue">
@@ -520,8 +517,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="purple">
+								<li class="color-item">
+			      			<a class="purple color-link">
 			        			<span class="color-preview purple"></span>
 			        			<span class="color-label">purple</span>
 			        			<span class="color-box spectrum-purple">
@@ -533,8 +530,8 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 			        			</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="black">
+								<li class="color-item">
+			      			<a class="black color-link">
 			        			<span class="color-preview black"></span>
 			        			<span class="color-label">black</span>
 			        			<span class="color-box spectrum-'black'">
@@ -577,52 +574,52 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
-		    			<ul>
-								<li>
-			      			<a class="white">
+		    			<ul class="basic-colors-link">
+								<li class="color-item">
+			      			<a class="white color-link">
 			        			<span class="color-preview white"></span>
 			        			<span class="color-label">white</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="red">
+								<li class="color-item">
+			      			<a class="red color-link">
 			        			<span class="color-preview red"></span>
 			        			<span class="color-label">red</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="orange">
+								<li class="color-item">
+			      			<a class="orange color-link">
 			        			<span class="color-preview 'orange'"></span>
 			        			<span class="color-label">orange</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="yellow">
+								<li class="color-item">
+			      			<a class="yellow color-link">
 			        			<span class="color-preview yellow"></span>
 			        			<span class="color-label">yellow</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="green">
+								<li class="color-item">
+			      			<a class="green color-link">
 			        			<span class="color-preview green"></span>
 			        			<span class="color-label">green</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="blue">
+								<li class="color-item">
+			      			<a class="blue color-link">
 			        			<span class="color-preview blue"></span>
 			        			<span class="color-label">blue</span>
 			        			<span class="color-box spectrum-blue">
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="purple">
+								<li class="color-item">
+			      			<a class="purple color-link">
 			        			<span class="color-preview purple"></span>
 			        			<span class="color-label">purple</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="black">
+								<li class="color-item">
+			      			<a class="black color-link">
 			        			<span class="color-preview black"></span>
 			        			<span class="color-label">black</span>
 			      			</a>
@@ -631,49 +628,49 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 						</div>
 						<div class="savedColors-content inactive-content">
 		      		<ul class="saved-color-col 0">
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
@@ -681,49 +678,49 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 								</li>
 							</ul>
 							<ul class="saved-color-col 1">
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
 									</a>
 								</li>
-								<li>
+								<li class="color-item">
 									<a class="#222">
 										<span class="color-preview"></span>
 										<span class="color-label">#222</span>
@@ -752,52 +749,52 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 		      		<h6 class="color-menu-instructions">
 		        		'Tap spectrum to lighten or darken color.',
 		        	</h6>
-		    			<ul>
-								<li>
-			      			<a class="white">
+		    			<ul class="basic-colors-list">
+								<li class="color-item">
+			      			<a class="white color-link">
 			        			<span class="color-preview white"></span>
 			        			<span class="color-label">white</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="red">
+								<li class="color-item">
+			      			<a class="red color-link">
 			        			<span class="color-preview red"></span>
 			        			<span class="color-label">red</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="orange">
+								<li class="color-item">
+			      			<a class="orange color-link">
 			        			<span class="color-preview 'orange'"></span>
 			        			<span class="color-label">orange</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="yellow">
+								<li class="color-item">
+			      			<a class="yellow color-link">
 			        			<span class="color-preview yellow"></span>
 			        			<span class="color-label">yellow</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="green">
+								<li class="color-item">
+			      			<a class="green color-link">
 			        			<span class="color-preview green"></span>
 			        			<span class="color-label">green</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="blue">
+								<li class="color-item">
+			      			<a class="blue color-link">
 			        			<span class="color-preview blue"></span>
 			        			<span class="color-label">blue</span>
 			        			<span class="color-box spectrum-blue">
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="purple">
+								<li class="color-item">
+			      			<a class="purple color-link">
 			        			<span class="color-preview purple"></span>
 			        			<span class="color-label">purple</span>
 			      			</a>
 			    			</li>
-								<li>
-			      			<a class="black">
+								<li class="color-item">
+			      			<a class="black color-link">
 			        			<span class="color-preview black"></span>
 			        			<span class="color-label">black</span>
 			      			</a>

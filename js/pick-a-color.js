@@ -15,7 +15,7 @@
         purple    : '800080',
         black     : '000'
       };
-  
+        
       // capabilities
   
       var supportsTouch = 'ontouchstart' in window,
@@ -167,7 +167,7 @@
         },
     
         updatePreview: function ($this_el) {
-          myColorVars.typedColor = methods.rgbStringToHex($this_el.val());
+          myColorVars.typedColor = tinycolor($this_el.val()).toHex();
           $this_el.siblings(".btn-group").find(".current-color").css("background-color",
             "#" + myColorVars.typedColor);
         },
@@ -326,7 +326,8 @@
               $(document).off(dragEvent);
               $this_el.css("cursor","-webkit-grab");
               $this_el.css("cursor","-moz-grab");
-              $this_el.one(endDragEvent);
+              $this_el.trigger(endDragEvent);
+              $(document).off(endEvent);
             });
           }).on(endEvent, function(event) { 
             $(document).off(moveEvent); // for mobile
@@ -471,143 +472,6 @@
               methods.updateSavedColors(color,mySavedColors,savedColorsDataAttr);
             }
           }
-        },
-        
-        // returns a HEX value from an array of RGB numbers 
-        // inspiration from http://stackoverflow.com/a/5624139
-        rgbToHex: function (rgb) {
-          var hex = [];
-          $.each(rgb, function(index, value) {
-            var thisHex = Math.floor(value).toString(16); // convert to hex
-            thisHex = (thisHex.length === 1) ? "0" + thisHex : thisHex; // add a 0 if it's too short
-            hex.push(thisHex);
-          });
-          return hex.join(""); 
-        },
-
-        // returns a HEX value from a string like 'rgb(X,X,X)' 
-        // inspiration from http://stackoverflow.com/a/5624139 
-        rgbStringToHex: function(string) {
-          if (string.match(/^rgb/)) { // make sure it's an RGB string
-            // get rid of the rgb and parens and make an array of the numbers 
-            var RGB = string.split("(")[1].split(")")[0].split(","); 
-            $.each(RGB, function(index,value) {
-              RGB[index] = parseInt(value,10);
-            })
-            return methods.rgbToHex(RGB);
-          } else { // if it doesn't start with RGB, just return the original string 
-            return string;
-          }
-        },
-        
-        // returns an RGB array from a hex string 
-        // inspiration from http://stackoverflow.com/a/5624139
-        hexToRgb: function(hex) {
-          if (hex.indexOf("#") === 1) { // take off the # if it's there
-            hex = hex[1,hex.length]
-          }
-          if (hex.length < 6) { // make six-digit hex from three-digit hex
-            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]
-          }
-          var r = parseInt(hex.slice(0,2),16),
-              g = parseInt(hex.slice(2,4),16),
-              b = parseInt(hex.slice(4,6),16);
-          return [r,g,b]
-        },
-        
-        // rgbToHsl, hslToRGB, and bound01 are from TinyColor v0.9.13
-        // https://github.com/bgrins/TinyColor
-        // 2012-11-28, Brian Grinstead, MIT License
-        // https://github.com/bgrins/TinyColor/blob/master/tinycolor.js#L238
-        
-        bound01: function (n, max) {
-            if (n === "1.0") { n = "100%"; }
-
-            var processPercent = (typeof n === "string") && (n.indexOf('%') != -1);
-            n = Math.min(max, Math.max(0, parseFloat(n)));
-
-            // Automatically convert percentage into number
-            if (processPercent) {
-                n = parseInt(n * max, 10) / 100;
-            }
-
-            // Handle floating point rounding errors
-            if ((Math.abs(n - max) < 0.000001)) {
-                return 1;
-            }
-
-            // Convert into [0, 1] range if it isn't already
-            return (n % max) / parseFloat(max);
-        },
-
-        // modified to make the expected argument an array
-        rgbToHsl: function(rgb) {
-            console.log(rgb);
-            var r = methods.bound01(rgb[0], 255),
-                g = methods.bound01(rgb[1], 255),
-                b = methods.bound01(rgb[2], 255);
-
-            var max = Math.max(r, g, b), min = Math.min(r, g, b),
-                h = (max + min) / 2,
-                s = (max + min) / 2,
-                l = (max + min) / 2;
-
-            if(max == min) {
-                h = s = 0; // achromatic
-            }
-            else {
-                var d = max - min;
-                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-                switch(max) {
-                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
-                    case g: h = (b - r) / d + 2; break;
-                    case b: h = (r - g) / d + 4; break;
-                }
-
-                h /= 6;
-                console.log(h);
-            }
-            console.log({ h: h, s: s, l: l });
-            return { h: h, s: s, l: l };
-        },
-        
-        // modified to make the expected argument an object and result an array
-        hslToRgb: function(hsl) {
-            var r, g, b;
-            
-            var h = methods.bound01(hsl.h, 360),
-                s = methods.bound01(hsl.s, 100),
-                l = methods.bound01(hsl.l, 100);
-                
-            function hue2rgb(p, q, t) {
-                if(t < 0) t += 1;
-                if(t > 1) t -= 1;
-                if(t < 1/6) return p + (q - p) * 6 * t;
-                if(t < 1/2) return q;
-                if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-                return p;
-            }
-
-            if(s === 0) {
-                r = g = b = l; // achromatic
-            }
-            else {
-                var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-                var p = 2 * l - q;
-                r = hue2rgb(p, q, h + 1/3);
-                g = hue2rgb(p, q, h);
-                b = hue2rgb(p, q, h - 1/3);
-            }
-            
-            return [r * 25500, g * 25500, b * 25500];
-        },
-        
-        hexToHsl: function(hex) {
-          return methods.rgbToHsl(methods.hexToRgb(hex));
-        },
-        
-        hslToHex: function(hsl) {
-          return methods.rgbToHex(methods.hslToRgb(hsl));
         }
         
     
@@ -684,7 +548,7 @@
           if (myColorVars.newValue.match(/^\s+$|^$/)) {
             $this_el.val(myColorVars.typedColor);
           } else { // otherwise...
-            myColorVars.newValue = methods.rgbStringToHex(myColorVars.newValue); // convert to hex
+            myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
             $this_el.val(myColorVars.newValue); // put the new value in the field
             // save to saved colors
             methods.addToSavedColors(myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
@@ -720,7 +584,7 @@
     
         $myColorMenuLinks.click( function () {
           var selectedColor = $(this).find("span:first").css("background-color");
-          selectedColor = methods.rgbStringToHex(selectedColor);
+          selectedColor = tinyColor(selectedColor).toHex();
           $($myColorTextInput).val(selectedColor);
           methods.updatePreview($myColorTextInput);
           methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
@@ -739,7 +603,6 @@
           // move the highlight band when you click on a spectrum 
     
           $(this).find(".color-box").click( function (e) {
-            console.log("click");
             
             e.stopPropagation(); // stop this click from closing the dropdown
             var $this_el = $(this),
@@ -759,7 +622,6 @@
             var $thisEl = event.target
             methods.calculateHighlightedColor.apply(this);
           }).on(endDragEvent, function (event) {
-            console.log("endDrag");
             var $thisEl = event.delegateTarget;
             var finalColor = methods.calculateHighlightedColor.apply($thisEl);
             methods.addToSavedColors(finalColor,mySavedColors,mySavedColorsDataAttr);
@@ -785,7 +647,7 @@
                 $thisEl.parent().attr("class").split("#")[1] :
                 $thisEl.attr("class").split("#")[1];
               $($myColorTextInput).val(selectedColor);
-              methods.updatePyreview($myColorTextInput);
+              methods.updatePreview($myColorTextInput);
               methods.closeDropdown($myColorPreviewButton,$myColorMenu);
               methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr);
               methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
@@ -806,12 +668,8 @@
   
 })(jQuery);
 
-// $(document).ready(function () {
-//   
-//   $(".pick-a-color").pickAColor();
-//   
-//   $(document).on("pickAColor.dragEnd", function () {
-//     console.log("hi");
-//   })
-//     
-// });
+$(document).ready(function () {
+  
+  $(".pick-a-color").pickAColor();
+        
+});

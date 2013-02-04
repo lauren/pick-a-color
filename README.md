@@ -155,14 +155,13 @@ Specifies whether the dropdown menu should fade in and out when it's opened and 
 
 I've tested Pick-a-Color in these browsers:
 
-* Google Chrome 23.0.1271.100 (Mac OSX, iOS 6.0.2)
-* Google Chrome 24.0.1312.52 (Windows 8)
+* Google Chrome 24.0.1312.57 (Mac OSX, Windows 8, Windows XP, iOS 6.0.2)
 * Safari 6.0.2 (Mac OSX and iOS 6.0.2)
 * Internet Explorer 10 (Windows 8)
 * Internet Explorer 9 Mode (via IE10 on Windows 8)
 * Internet Explorer 8 (Windows XP)
 * Firefox 18.0.1 (Mac OSX and Windows 8)
-* Opera 12.12 (Mac OSX and Windows 8)
+* Opera 12.13 (Mac OSX and Windows 8)
 
 Minor issues in these browsers are documented here: https://github.com/lauren/pick-a-color/issues
 

@@ -32,12 +32,13 @@ div.pick-a-color-markup .hex-pound {
 }
 div.pick-a-color-markup .color-text-input {
   width: 200px;
-  vertical-align: top;
+  vertical-align: middle;
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-text-input {
     min-width: 228px;
     min-height: 30px;
+    font-size: 16px;
   }
 }
 @media screen and (max-width: 767px) {
@@ -113,7 +114,7 @@ div.pick-a-color-markup .color-menu.small {
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-menu.small {
-    left: -63px;
+    left: -66px;
   }
 }
 div.pick-a-color-markup .color-menu ul {
@@ -587,10 +588,6 @@ div.pick-a-color-markup .color-menu-tabs .tab:hover {
   -webkit-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0px 0px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border 0.25s linear;
-  -moz-transition: border 0.25s linear;
-  -o-transition: border 0.25s linear;
-  transition: border 0.25s linear;
 }
 div.pick-a-color-markup .color-menu-tabs a {
   color: #333;

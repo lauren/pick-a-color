@@ -29,7 +29,7 @@
           startEvent    = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
           moveEvent     = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
           endEvent      = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor",
-          clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
+          clickEvent    = supportsTouch ? "touchstart.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
       
@@ -304,6 +304,7 @@
               mouseX = supportsTouch ? e.originalEvent.pageX : e.pageX, // find the mouse!
               // mouse position relative to width of highlight-band
               newPosition = mouseX - moveableArea.minX - threeFourthsHBWidth;
+          
           // don't move beyond moveable area
           newPosition = Math.max(0,(Math.min(newPosition,moveableArea.maxX))); 
           $highlightBand.css("position", "absolute");
@@ -330,6 +331,7 @@
               $(document).off(endEvent);
             });
           }).on(endEvent, function(event) { 
+            event.stopPropagation();
             $(document).off(moveEvent); // for mobile
             $(document).off(dragEvent);
           });
@@ -384,7 +386,7 @@
     
         updateSavedColorMarkup: function ($savedColorsContent,mySavedColors) {
           mySavedColors = mySavedColors ? mySavedColors : allSavedColors;
-          if (mySavedColors.length > 0) {
+          if (settings.showSavedColors && mySavedColors.length > 0) {
                     
             if (!settings.saveColorsPerElement) {
               $savedColorsContent = $(".savedColors-content");
@@ -464,7 +466,7 @@
         addToSavedColors: function (color,mySavedColors,savedColorsDataAttr) {
           // make sure we're saving colors and the current color is not in the pre-sets
           if (settings.showSavedColors  && !presetColors.hasOwnProperty(color)) {
-            if (color.indexOf("#") === -1) {
+            if (color[0] != "#") {
               color = "#" + color;
             }
             methods.updateSavedColors(color,allSavedColors);
@@ -540,9 +542,6 @@
           methods.openDropdown($myColorPreviewButton,$myColorMenu);
         }).blur(function () {
           var $this_el = $(this);
-          setTimeout(function () {
-            methods.closeDropdown($myColorPreviewButton,$myColorMenu);
-          }, 250); // delay menu close to allow pressPreviewButton to trigger if it caused blur
           myColorVars.newValue = $this_el.val(); // on blur, check the field's value
           // if the field is empty, put the original value back in the field
           if (myColorVars.newValue.match(/^\s+$|^$/)) {
@@ -582,9 +581,9 @@
     
         // update field and close menu when selecting from basic dropdown 
     
-        $myColorMenuLinks.click( function () {
+        $myColorMenuLinks.on(clickEvent, function () {
           var selectedColor = $(this).find("span:first").css("background-color");
-          selectedColor = tinyColor(selectedColor).toHex();
+          selectedColor = tinycolor(selectedColor).toHex();
           $($myColorTextInput).val(selectedColor);
           methods.updatePreview($myColorTextInput);
           methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
@@ -602,8 +601,7 @@
     
           // move the highlight band when you click on a spectrum 
     
-          $(this).find(".color-box").click( function (e) {
-            
+          $(this).find(".color-box").on(clickEvent, function (e) {
             e.stopPropagation(); // stop this click from closing the dropdown
             var $this_el = $(this),
                 $highlightBand = $this_el.find(".highlight-band"),
@@ -667,9 +665,3 @@
     };
   
 })(jQuery);
-
-$(document).ready(function () {
-  
-  $(".pick-a-color").pickAColor();
-        
-});

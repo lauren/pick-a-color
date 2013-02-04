@@ -32,7 +32,7 @@
           clickEvent    = supportsTouch ? "touchstart.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
-      
+                
       if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function(obj) {
           for (var i = 0; i < this.length; i++) {
@@ -129,22 +129,22 @@
      
       if (settings.showSavedColors) { // if we're saving colors...
         var allSavedColors = []; // make an array for all saved colors
-        
         if (supportsLocalStorage && localStorage.allSavedColors) { // look for them in LS
           allSavedColors = JSON.parse(localStorage.allSavedColors);
           
           // if there's a saved_colors cookie...          
-        } else if (myCookies.indexOf("savedColors-allSavedColors") > -1) {
-          myCookies = myCookies.split(";"); // split cookies into an array...
+        } else if (myCookies.indexOf("pickAColorSavedColors-allSavedColors") > -1) {
+          var theseCookies = myCookies.split(";"); // split cookies into an array...
           
-          $.each(myCookies, function (index) { // find the savedColors cookie!
-            if (myCookies[index].match("savedColors-allSavedColors=")) {
-              allSavedColors = myCookies[index].split("=")[1].split(",");
+          $.each(theseCookies, function (index) { // find the savedColors cookie!
+            if (theseCookies[index].match("pickAColorSavedColors-allSavedColors=")) {
+              allSavedColors = theseCookies[index].split("=")[1].split(",");
             }
           
           });
         }
       }
+      
 
       // methods
   
@@ -430,8 +430,8 @@
             document.cookie = "pickAColorSavedColors-allSavedColors=" + savedColors + 
               ";expires=" + expiresOn;
           } else {
-            document.cookie = "pickAColorSavedColors-" + savedColorsDataAttr + "=" + savedColors +
-            ";expires=" + expiresOn;
+            document.cookie = "pickAColorSavedColors-" + savedColorsDataAttr + "=" + 
+              savedColors + "; expires=" + expiresOn;
           }
         },
     
@@ -514,13 +514,12 @@
             
             // otherwise, get them from cookies
             } else if (myCookies.indexOf("pickAColorSavedColors-" + mySavedColorsDataAttr) > -1) {
-              myCookies = myCookies.split(";"); // an array of cookies...
-              $.each(myCookies, function (index) { // find the matching cookie
-                if (myCookies[index] = ("pickAColorSavedColors" + mySavedColorsDataAttr)) {
-                  // take out the name, turn it into an array, and set saved colors equal to it
-                  mySavedColors = myCookies[index].split("=")[1].split(",");
+              var theseCookies = myCookies.split(";"); // an array of cookies...
+              for (var i=0; i < theseCookies.length; i++) {
+                if (theseCookies[i].match(mySavedColorsDataAttr)) {
+                  mySavedColors = theseCookies[i].split("=")[1].split(",");
                 }
-              });
+              };
            
             } else { // if no data-attr specific colors are in local storage OR cookies...
               mySavedColors = allSavedColors; // use mySavedColors

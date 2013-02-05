@@ -189,8 +189,6 @@ div.pick-a-color-markup {
 		@media screen and (max-width: 767px) {
 			min-height:40px;
 		}
-		@media screen and (min-width: 768px) {
-		}
 	}
 
 	.color-preview {
@@ -222,6 +220,7 @@ div.pick-a-color-markup {
 	.color-menu {
 	  padding:5px 0px; /*overwriting bootstrap default */
 		min-width: 330px;
+		font-size:14px;
 	
 		@media screen and (max-width: 767px) {
 			left:-260px;
@@ -553,6 +552,10 @@ div.pick-a-color-markup {
 		position:relative;
 		left:-15px;
 		float:left;
+		width:150px;
+		@media screen and (max-width: 767px) {
+			width:125px;
+		}
 	}
 }
 

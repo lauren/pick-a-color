@@ -58,9 +58,6 @@ div.pick-a-color-markup .color-dropdown {
     min-height: 40px;
   }
 }
-@media screen and (min-width: 768px) {
-  
-}
 div.pick-a-color-markup .color-preview {
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
@@ -99,6 +96,7 @@ div.pick-a-color-markup .color-menu {
   /*overwriting bootstrap default */
 
   min-width: 330px;
+  font-size: 14px;
   /* resets for ul / li styles */
 
 }
@@ -630,4 +628,10 @@ div.pick-a-color-markup .saved-color-col {
   position: relative;
   left: -15px;
   float: left;
+  width: 150px;
+}
+@media screen and (max-width: 767px) {
+  div.pick-a-color-markup .saved-color-col {
+    width: 125px;
+  }
 }

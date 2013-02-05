@@ -5,6 +5,7 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	  <meta http-equiv="x-ua-compatible" content="IE=10">	  
+
 		<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
 		<link rel="stylesheet" href="css/pick-a-color.css">	  	
 		
@@ -19,7 +20,7 @@
 		<div class="pick-a-color" id="data-contrast-color" data-contrast-color="eee">eee</div>
 		<div class="pick-a-color"></div>
 		
-	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/tinycolor-0.9.12.min.js"></script>
 	<script src="js/pick-a-color.min.js"></script>	
 	
@@ -28,7 +29,7 @@
 		$(document).ready(function () {
 
 		  $(".pick-a-color").pickAColor({
-			  showSpectrum            : false,
+			  showSpectrum            : true,
 		    showSavedColors         : true,
 		    saveColorsPerElement    : false,
 		    fadeMenuToggle          : false

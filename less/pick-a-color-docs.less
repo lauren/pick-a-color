@@ -120,7 +120,8 @@ body {
 	padding-bottom:50px;
 	@media screen and (max-width: 768px) {
 		padding-top:0px;
-		width:auto;
+		width:100%;
+		padding:0px;
 	}
 	
 	&> .container {
@@ -129,7 +130,13 @@ body {
 	margin-top:-20px;
 	.rounded-corners;
 	border: 1px solid #d4d4d4;
-	
+	@media screen and (max-width: 768px) {
+		width: auto;
+		left:0;
+		right:0;
+		position:relative;
+		margin:0px;
+	}
 	}
 }
 

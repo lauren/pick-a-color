@@ -3,24 +3,26 @@ Pick-a-Color: a jQuery color picker for Twitter Bootstrap
 
 Pick-a-Color is a color picker that's easy to use--even for people who aren't techies or designers. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
 
+For a less terrible documentation-reading experience, check out the official docs at [http://lauren.github.com/color-picker](http://lauren.github.com/color-picker).
+
 ### Features 
 
 #### For your site's users
 * text field entry that accepts HEX, RGB, RGBA, HSL, HSLA, HSV, HSVA, and named colors 
-		** _Huge, tremendous thanks to Brian Grinstead's [Tiny Color](https://github.com/bgrins/TinyColor) for doing all the tricky color conversion math._
+		* _Huge, tremendous thanks to Brian Grinstead's [Tiny Color](https://github.com/bgrins/TinyColor) for doing all the tricky color conversion math._
 * dropdown with 8 basic colors that can be lightened and darkened
 * "Saved Colors" tab that stores recently used colors for later reference
-		** _Saved Colors persist across pageviews with localStorage when possible and cookies when localStorage is unavailable or impractical_
+		* _Saved Colors persist across pageviews with localStorage when possible and cookies when localStorage is unavailable or impractical_
 * easy-to-use interface based on pretty Bootstrap styles
 * chunky mobile styles that make dragging easy on a touch device
 
 #### For you
 * simple initialization with as little as three lines of HTML and one line of JavaScript
 * configurable options for:
-		** whether or not to show users a lighten/darken spectrum
-		** whether or not to show users their saved colors
-		** whether colors should be saved separately for each color picker or once for all color pickers on a page (sensible default is once per page, but I leave the choice to you)
-		** whether or not the dropdown menu should fade in and out (hey, some people feel strongly about this...so...yeah)
+		* whether or not to show users a lighten/darken spectrum
+		* whether or not to show users their saved colors
+		* whether colors should be saved separately for each color picker or once for all color pickers on a page (sensible default is once per page, but I leave the choice to you)
+		* whether or not the dropdown menu should fade in and out (hey, some people feel strongly about this...so...yeah)
 * anonymous JavaScript function that will not mess up your other JavaScript
 * namespaced CSS that will not mess up your other styles
 * equally pretty and user-friendly in desktop and mobile browsers
@@ -36,7 +38,7 @@ OK! Let's do this color picking thing!
 
 ## How to Use
 
-1. Download the required files: http://lauren.bootstrap.com/color-picker/tinycolor-and-pick-a-color-1.0.0.zip. Add them to your CSS and JS folders and include them in your document as follows:
+1. Download the required files: http://lauren.github.com/pick-a-color/pick-a-color.zip. Add them to your CSS and JS folders and include them in your document as follows:
 
 *In the `<head>`:*
 

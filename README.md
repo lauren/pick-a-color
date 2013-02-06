@@ -3,7 +3,7 @@ Pick-a-Color: a jQuery color picker for Twitter Bootstrap
 
 Pick-a-Color is a color picker that's easy to use--even for people who aren't techies or designers. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
 
-For a less terrible documentation-reading experience, check out the official docs at [http://lauren.github.com/color-picker](http://lauren.github.com/color-picker).
+For a less terrible documentation-reading experience, check out the official docs at [http://lauren.github.com/pick-a-color](http://lauren.github.com/pick-a-color).
 
 ### Features 
 

@@ -36,31 +36,19 @@ OK! Let's do this color picking thing!
 
 ## How to Use
 
-It's so easy!
+1. Download the required files: http://lauren.bootstrap.com/color-picker/tinycolor-and-pick-a-color-1.0.0.zip. Add them to your CSS and JS folders and include them in your document as follows:
 
-1. Make sure you're using jQuery 1.9.0. If you're not, add this to the end of your HTML document, right before the closing `</body>`:
-	
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-		
-2. Make sure you're using the bootstrap.min.css file from Bootstrap 2.2.2. You do not need bootstrap-responsive.min.css or bootstrap.min.js. If you're not using bootstrap yet:
-    2.1 Download it here: FIXME 
-		2.2 Put it in your css folder or somewhere in your project directory.
-    2.3 Add this to the `<head>` of your HTML document:
+*In the `<head>`:*
 
-				<link rel="stylesheet" href="/css/bootstrap.min.css">
-	
-3. Download the Pick-a-Color JS and CSS and TinyColor 0.9.12 here: FIXME.
-
-4. Put the CSS your css folder and link to it from the `<head>` of your HTML document like this, AFTER the bootstrap.min.css link:
-	
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/pick-a-color.min.css">
-		
-5. Put both JS files in your js folder and link to them from the bottom of your HTML document, right before the closing `</body>`. Make sure they come AFTER the jQuery link:
-		
+
+*Before the ending `</body>`:*
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<script src="js/tinycolor-0.9.12.min.js"></script>
 		<script src="js/color-picker.js"></script>
 		
-6. Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
+2. Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 		<div class="pick-a-color" id="YOUR_ID" data-YOUR_ID="YOUR_DEFAULT">YOUR_DEFAULT</div>
 
@@ -70,11 +58,11 @@ It's so easy!
 		
 		You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
-7. Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
+3. Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
 		$(".pick-a-color").pickAColor();
 		
-8. To optimize IE and mobile support, I recommend adding these tags to your `<head>`:
+4. To optimize IE and mobile support, I recommend adding these tags to your `<head>`:
 	
 	<meta http-equiv="x-ua-compatible" content="IE=10">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">

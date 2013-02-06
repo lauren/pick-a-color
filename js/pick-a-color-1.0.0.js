@@ -1,4 +1,4 @@
-(function ($) {
+;(function ($) {
     "use strict";
    
     $.fn.pickAColor = function (options) {
@@ -13,7 +13,7 @@
         green     : '008000',
         blue      : '00f',
         purple    : '800080',
-        black     : '000'
+        black     : '000' 
       };
         
       // capabilities
@@ -32,6 +32,15 @@
           clickEvent    = supportsTouch ? "touchstart.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
+          
+      if (supportsLocalStorage) {
+        try {
+          localStorage.setItem("this","that");
+        }
+        catch(e) {
+          localStorage.clear();
+        }
+      }
                 
       if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function(obj) {
@@ -439,10 +448,20 @@
           if (supportsLocalStorage) {
             // if there is no data attribute, save to allSavedColors
             if (typeof savedColorsDataAttr === "undefined") {
-              localStorage.allSavedColors = JSON.stringify(savedColors);
+              try {
+                localStorage.allSavedColors = JSON.stringify(savedColors);
+              }
+              catch(e) {
+                localStorage.clear();
+              }
             } else { // otherwise save to a data attr-specific item
-              localStorage["pickAColorSavedColors-" + savedColorsDataAttr] =
-                JSON.stringify(savedColors);
+              try {
+                localStorage["pickAColorSavedColors-" + savedColorsDataAttr] =
+                  JSON.stringify(savedColors);
+              }
+              catch(e) {
+                localStorage.clear();
+              }
             }
           } else {
             methods.setSavedColorsCookie(savedColors,savedColorsDataAttr);

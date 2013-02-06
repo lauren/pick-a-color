@@ -1,9 +1,9 @@
-body{padding-top:120px;font-weight:200;font-size:18px;line-height:22px;color:#555555;background-image:-webkit-gradient(linear, left top, left top, color-stop(0%, #ff0000), color-stop(17%, #ffff00), color-stop(34%, #00ff00), color-stop(51%, #00ffff), color-stop(68%, #0000ff), color-stop(85%, #ff00ff), color-stop(100%, #ff0000));background-image:-moz-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-image:-webkit-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-image:-o-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-image:linear-gradient(to bottom, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff0000', endColorstr='#ff800080', GradientType=0);padding-bottom:50px;}@media screen and (max-width:768px){body{padding-top:0px;width:100%;padding:0px;}}body>.container{background-color:#fff;padding:40px 20px;margin-top:-20px;-webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;border-radius:4px;border:1px solid #d4d4d4;}@media screen and (max-width:768px){body>.container{width:auto;left:0;right:0;position:relative;margin:0px;}}
+body{padding-top:120px;font-weight:200;font-size:18px;line-height:22px;color:#555555;background-image:-webkit-gradient(linear, left top, left top, color-stop(0%, #ff0000), color-stop(17%, #ffff00), color-stop(34%, #00ff00), color-stop(51%, #00ffff), color-stop(68%, #0000ff), color-stop(85%, #ff00ff), color-stop(100%, #ff0000));background-image:-moz-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-image:-webkit-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-image:-o-linear-gradient(top, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-image:linear-gradient(to bottom, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff0000', endColorstr='#ff800080', GradientType=0);padding-bottom:50px;}@media screen and (max-width:768px){body{padding-top:0px;width:100%;padding:0px;}}body>.container{background-color:#fff;padding:40px 20px;margin-top:-20px;-webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;border-radius:4px;border:1px solid #d4d4d4;}@media screen and (max-width:768px){body>.container{width:auto;left:0;right:0;position:relative;margin:-5px 0px 0px 0px;}}
 h1,h2,h3,h4{font-weight:200;}
 h1,h2,h3{line-height:44px;}
 h4{line-height:33px;}
 h6{padding:0px;}
-h1{font-size:49.5px;}
+h1{font-size:49.5px;}@media screen and (max-width:768px){h1{font-size:40.5px;}}
 h2{font-size:40.5px;}
 h3{font-size:31.5px;}
 h4{font-size:22.5px;}
@@ -35,6 +35,8 @@ pre{margin-top:4px;}
 .navbar .nav>.active>a:hover{background-color:#fafafa;}
 .navbar .nav a:hover{background-color:#fafafa;-webkit-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);-moz-box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);box-shadow:inset 0 3px 8px rgba(0, 0, 0, 0.125);-webkit-border-top-left-radius:4px;-moz-border-radius-topleft:4px;border-top-left-radius:4px;-webkit-border-top-right-radius:4px;-moz-border-radius-topright:4px;border-top-right-radius:4px;}
 .navbar .nav li{margin-left:5px;}
+@media screen and (max-width:768px){.navbar .nav-collapse.collapse ul{width:auto;}.navbar .nav-collapse.collapse ul li .underline{visibility:hidden;}}
+.navbar .icon-bar{background-image:none;}
 .options .pick-a-color-markup{padding:0px;margin:0px;}
 .footer{font-size:14px;line-height:16px;margin:5px auto;text-align:center;padding-top:15px;border-top:1px dashed #999999;}
 .pretend-mobile div.pick-a-color-markup .hex-pound{padding:8px 5px 0px 5px;min-height:30px;vertical-align:middle;}

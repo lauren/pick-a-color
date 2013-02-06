@@ -135,7 +135,7 @@ body {
 		left:0;
 		right:0;
 		position:relative;
-		margin:0px;
+		margin:-5px 0px 0px 0px;
 	}
 	}
 }
@@ -156,12 +156,27 @@ h6 {
 	padding:0px;
 }
 
-h1 { font-size: @fontsize * 2.75; } 
-h2 { font-size: @fontsize * 2.25; } 
-h3 { font-size: @fontsize * 1.75; } 
-h4 { font-size: @fontsize * 1.25; } 
-h5 { font-size: @fontsize; }
-h6 { font-size: @fontsize * 0.85; } 
+h1 { 
+	font-size: @fontsize * 2.75; 
+	@media screen and (max-width: 768px) {
+		font-size: @fontsize * 2.25;
+	}
+} 
+h2 { 
+	font-size: @fontsize * 2.25; 
+	} 
+h3 { 
+	font-size: @fontsize * 1.75; 
+} 
+h4 { 
+	font-size: @fontsize * 1.25; 
+} 
+h5 { 
+	font-size: @fontsize; 
+}
+h6 { 
+	font-size: @fontsize * 0.85; 
+} 
 
 .small {
 	line-height:18px;
@@ -302,6 +317,19 @@ pre {
 	
 	.nav li {
 		margin-left:5px;
+	}
+	
+	.nav-collapse.collapse ul {
+		@media screen and (max-width: 768px) {		
+			width:auto;
+			li .underline {
+				visibility: hidden;
+			}
+		}
+	}
+	
+	.icon-bar {
+		background-image:none;
 	}
 	
 	

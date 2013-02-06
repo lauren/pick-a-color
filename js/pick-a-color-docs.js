@@ -11,6 +11,9 @@ $(document).ready(function () {
         thisId = $thisEl.attr("href"),
         elLocation = $(thisId).offset().top;
         targetLocation = elLocation - scrollspyOffset;
+    if ($(window).width() < 767) {
+      targetLocation = elLocation;
+    }
     $('html, body').animate({
     	scrollTop: targetLocation
     }, 500);

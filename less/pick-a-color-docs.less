@@ -39,11 +39,17 @@
 
 @green:#008000;
 
+@brightGreen: #00ff00;
+
 @blue:#0000FF;
+
+@teal:#00ffff;
 
 @indigo:#4B0082;
 
 @violet:#EE82EE;
+
+@lightPurple: #ff00ff;
 
 @purple:#800080;
 
@@ -76,6 +82,16 @@
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@start),argb(@stop))); // IE9 and down
 }
 
+.vertical-full-spectrum (@one: @red, @two: @yellow, @three: @brightGreen, @four: @teal, @five: @blue, @six: @lightPurple, @seven: @red) {
+  background-image: -webkit-gradient(linear, left top, left top, color-stop(0%, @one), color-stop(17%, @two), color-stop(34%,@three), color-stop(51%, @four), color-stop(68%, @five), color-stop(85%, @six), color-stop(100%, @seven));
+  background-image: -moz-linear-gradient(top, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
+  background-image: -webkit-linear-gradient(top, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: -o-linear-gradient(top, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: linear-gradient(to bottom, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@red),argb(@purple))); // IE9 and down
+}
+
 .top-rounded-corners (@radius: 4px) {
    -webkit-border-top-left-radius: @radius;
        -moz-border-radius-topleft: @radius;
@@ -100,11 +116,11 @@ body {
 	font-size:@fontsize;
 	line-height:@lineheight;
 	color: @gray;
-	.vertical-spectrum(@start: @red,@stop:@purple);
-	background-attachment:fixed;
+	.vertical-full-spectrum;
+	padding-bottom:50px;
 	@media screen and (max-width: 768px) {
 		padding-top:0px;
-		min-width:70%;
+		min-width:350px;
 	}
 	
 	&> .container {
@@ -186,6 +202,7 @@ pre {
 	.navbar-inner {
 		background-image:none;
 		filter:none;
+		background-color:#fff;
 	}
 	.nav {
 		margin:0 auto;

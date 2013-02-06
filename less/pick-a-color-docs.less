@@ -1,0 +1,405 @@
+////// variables
+
+//// bootstrap
+
+// Grays
+// -------------------------
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLighter:           #eee;
+@white:                 #fff; 
+
+@navbarLinkColor:                 #777;
+@navbarLinkColorHover:            @grayDark;
+@navbarLinkColorActive:           @gray;
+@navbarLinkBackgroundHover:       transparent;
+
+@navbarBrandColor:                @navbarLinkColor;
+@navbarBackgroundHighlight:       #222222;
+
+//// pick-a-color
+
+@color-box-width: 200px;
+@color-box-width-phone: 190px; 
+@color-band-width: 11px;
+@phone-color-band-width: 21px;
+
+// basic colors 
+
+@white:#ffffff;
+
+@red:#FF0000;
+
+@orange:#FF6600;
+
+@yellow:#FFFF00;
+
+@green:#008000;
+
+@blue:#0000FF;
+
+@indigo:#4B0082;
+
+@violet:#EE82EE;
+
+@purple:#800080;
+
+@black:#000000;
+
+//// docs
+
+@fontsize: 18px;
+@lineheight: 22px;
+
+////// mixins
+
+.two-color-spectrum (@start: @white, @stop: @black) {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, @start), color-stop(1.0, @stop));
+  background-image: -moz-linear-gradient(left center, @start 0%, @stop 100%);
+  background-image: -webkit-linear-gradient(left, @start, @stop); 
+  background-image: -o-linear-gradient(left, @start, @stop); 
+  background-image: linear-gradient(to right, @start, @stop); 
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start),argb(@stop))); // IE9 and down
+}
+
+.vertical-spectrum (@start: @white, @stop: @black) {
+  background-image: -webkit-gradient(linear, left top, left top, color-stop(0.0, @start), color-stop(1.0, @stop));
+  background-image: -moz-linear-gradient(top, @start 0%, @stop 100%);
+  background-image: -webkit-linear-gradient(top, @start, @stop); 
+  background-image: -o-linear-gradient(top, @start, @stop); 
+  background-image: linear-gradient(to bottom, @start, @stop); 
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@start),argb(@stop))); // IE9 and down
+}
+
+.top-rounded-corners (@radius: 4px) {
+   -webkit-border-top-left-radius: @radius;
+       -moz-border-radius-topleft: @radius;
+           border-top-left-radius: @radius;
+   -webkit-border-top-right-radius: @radius;
+       -moz-border-radius-topright: @radius;
+           border-top-right-radius: @radius;
+}
+
+.rounded-corners (@radius: 4px) {
+	-webkit-border-radius: @radius;
+	   -moz-border-radius: @radius;
+			 -o-border-radius: @radius;
+	        border-radius: @radius;
+}
+
+// actual styles
+
+body {
+	padding-top:120px;
+	font-weight:200;
+	font-size:@fontsize;
+	line-height:@lineheight;
+	color: @gray;
+	.vertical-spectrum(@start: @red,@stop:@purple);
+	
+	&> .container {
+	background-color:#fff;
+	padding:40px 20px;
+	margin-top:-20px;
+	.rounded-corners;
+	border: 1px solid #d4d4d4;
+	}
+}
+
+h1,h2,h3,h4 {
+	font-weight:200;
+}
+
+h1,h2,h3 { 
+	line-height: @lineheight * 2; 
+}
+
+h4 {
+	line-height: @lineheight * 1.5;
+}
+
+h6 {
+	padding:0px;
+}
+
+h1 { font-size: @fontsize * 2.75; } 
+h2 { font-size: @fontsize * 2.25; } 
+h3 { font-size: @fontsize * 1.75; } 
+h4 { font-size: @fontsize * 1.25; } 
+h5 { font-size: @fontsize; }
+h6 { font-size: @fontsize * 0.85; } 
+
+.small {
+	line-height:18px;
+	font-size:14px;
+	margin-top:5px;
+}
+
+ul.docs li, ol.docs li {
+	font-size: 18px;
+	line-height:22px;
+	margin-bottom:3px;
+	margin-top:2px;
+}
+
+pre {
+	margin-top:4px;
+}
+
+/* nav bar styles */
+
+.navbar {
+	margin:0px auto;
+	text-align:center;
+	vertical-align:top;
+	position:fixed;
+	top:0;
+	z-index:1100;
+	left: 0;
+	right: 0;
+	width:1000px;
+	padding:0px;
+	@media screen and (min-width: 1200px) {
+		width:1230px;
+	}
+	@media screen and (max-width: 979px) and (min-width: 768px) {
+		width: 784px;
+	}
+	@media screen and (max-width: 768px) {
+		right:0;
+		left:0;
+		width:auto;
+	}
+
+	&.navbar-fixed-top {
+		@media screen and (max-width: 979px) {
+			position: absolute;
+		}
+		left: 0;
+		right: auto;
+		width:100%;
+		margin: 0 auto;
+	}
+	.navbar-inner {
+		background-image:none;
+		filter:none;
+	}
+	.nav {
+		margin:0 auto;
+		width:490px;
+		text-align:center;
+		float:none;
+	}
+	.container {
+		width:auto;
+	}
+	.title,.tag {
+		padding:0px;
+		line-height:24px;
+	}
+	.tag {
+		font-size:16px;
+	}
+	.title {
+		margin-top:15px;
+	}
+	.pick-a-color-brand, .pick-a-color-tag {
+		color: @gray;
+		&:hover {
+    	text-decoration: none;
+  		}
+	}
+	.btn-navbar {
+		margin:10px auto;
+		width:20px;
+		float:none;
+	}
+	
+	.underline {
+		height:5px;
+		width:120%;
+		display:block;
+		position:relative;
+		left:-10%;
+	}
+	.active {
+		&.about .underline {
+		.two-color-spectrum (@start: @red, @stop: @orange) 
+		}
+		&.features .underline {
+		.two-color-spectrum (@start: @orange, @stop: @yellow) 
+		}
+		&.how .underline{
+		.two-color-spectrum (@start: @yellow, @stop: @green) 
+		}
+		&.details .underline {
+		.two-color-spectrum (@start: @green, @stop: @blue) 
+		}
+		&.github .underline {
+		.two-color-spectrum (@start: @blue, @stop: @purple) 
+		}
+	}
+	
+	.about:hover .underline {
+		.two-color-spectrum (@start: @red, @stop: @orange) 
+	}
+	.features:hover .underline {
+		.two-color-spectrum (@start: @orange, @stop: @yellow) 
+	}
+	.how:hover .underline{
+		.two-color-spectrum (@start: @yellow, @stop: @green) 
+	}
+	.details:hover .underline {
+		.two-color-spectrum (@start: @green, @stop: @blue) 
+	}
+	.github:hover .underline {
+		.two-color-spectrum (@start: @blue, @stop: @purple) 
+	}
+	
+	.nav > .active > a {
+		background-color:#fafafa;
+		.top-rounded-corners;
+	}
+	
+	.nav > .active > a:hover {
+		background-color:#fafafa;
+	}
+	
+	.nav a:hover {
+		background-color:#fafafa;
+		-webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+		-moz-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+		box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
+		.top-rounded-corners;		
+	}
+	
+	.nav li {
+		margin-left:5px;
+	}
+	
+	
+}
+
+.options .pick-a-color-markup {
+	padding:0px;
+	margin:0px;
+}
+
+.footer {
+	font-size:14px;
+	line-height:16px;
+	margin:5px auto;
+	text-align:center;
+	padding-top:15px;
+	border-top:1px dashed @grayLight;
+}
+
+/* demonstrate mobile styles */
+
+.pretend-mobile {
+
+	div.pick-a-color-markup {
+
+		.hex-pound {
+			padding:8px 5px 0px 5px;
+			min-height:30px;
+			vertical-align:middle;
+		}
+
+		.add-on {
+			padding:8px 5px 0px 5px;
+		}
+
+		.color-text-input {
+			min-width:228px;
+			min-height:30px;
+			font-size:16px;
+		}
+
+		#appendedDropdownButton {
+			height:40px;
+		}
+
+		// button to open picker
+
+		.color-dropdown { 
+			min-height:40px;
+		}
+
+		.color-preview {
+			height:30px;
+			width:30px;
+		}
+
+		.caret {
+			margin-bottom:20px;
+		}
+
+		// basic menu of colors 
+
+		.color-menu {
+			left:-260px;
+			min-width:313px;
+			max-width:313px;
+
+			&.small {
+				left:-66px;
+			}
+
+			.color-preview {
+				height: 35px;
+				width: 35px;
+			}
+
+			li.color-item > a {
+				min-height:40px;
+			}
+
+			li.color-item:hover a {
+				background-color: #fff;
+			}
+			
+			.btn.color-select {
+				height:37px;
+			}
+
+			.color-label {
+				margin-left:8px;
+			}
+
+			// color gradients 
+
+			.color-box {
+				width:@color-box-width-phone;
+				height:35px;
+			}
+
+			.ie-spectrum {
+				width:@color-box-width-phone/2;
+				height:35px;
+			}
+
+
+			// highlight band
+
+			.highlight-band {
+				width:@phone-color-band-width;
+				left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
+				height:34px;
+				}
+
+				.highlight-band-stripe {
+				margin: 4px 1px;
+				}
+
+			}
+			.saved-color-col {
+				width: 125px;
+			}
+		}
+}

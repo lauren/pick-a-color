@@ -102,6 +102,10 @@ body {
 	color: @gray;
 	.vertical-spectrum(@start: @red,@stop:@purple);
 	background-attachment:fixed;
+	min-width:200px;
+	@media screen and (max-width: 768px) {
+		padding-top:0px;
+	}
 	
 	&> .container {
 	background-color:#fff;
@@ -109,7 +113,6 @@ body {
 	margin-top:-20px;
 	.rounded-corners;
 	border: 1px solid #d4d4d4;
-	min-width: 420px;
 	
 	}
 }
@@ -177,17 +180,9 @@ pre {
 		right:0;
 		left:0;
 		width:auto;
+		position:relative;
 	}
 
-	&.navbar-fixed-top {
-		@media screen and (max-width: 979px) {
-			position: absolute;
-		}
-		left: 0;
-		right: auto;
-		width:100%;
-		margin: 0 auto;
-	}
 	.navbar-inner {
 		background-image:none;
 		filter:none;

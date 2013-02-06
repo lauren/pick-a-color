@@ -36,7 +36,7 @@ div.pick-a-color-markup .color-text-input {
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-text-input {
-    min-width: 228px;
+    min-width: 200px;
     min-height: 30px;
     font-size: 16px;
   }
@@ -102,9 +102,8 @@ div.pick-a-color-markup .color-menu {
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-menu {
-    left: -260px;
-    min-width: 313px;
-    max-width: 313px;
+    left: -232px;
+    min-width: 285px;
   }
 }
 div.pick-a-color-markup .color-menu.small {
@@ -209,6 +208,8 @@ div.pick-a-color-markup .color-menu-instructions {
   text-align: center;
   padding: 0px 6px;
   margin: 0px;
+  font-size: 14px;
+  font-weight: normal;
 }
 @media screen and (min-width: 767px) {
   div.pick-a-color-markup .color-menu-instructions {
@@ -243,7 +244,7 @@ div.pick-a-color-markup .color-box {
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .color-box {
-    width: 190px;
+    width: 160px;
     height: 35px;
   }
 }
@@ -331,7 +332,7 @@ div.pick-a-color-markup .ie-spectrum {
 }
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .ie-spectrum {
-    width: 95px;
+    width: 80px;
     height: 35px;
   }
 }
@@ -538,7 +539,7 @@ div.pick-a-color-markup .highlight-band {
 @media screen and (max-width: 767px) {
   div.pick-a-color-markup .highlight-band {
     width: 21px;
-    left: 84.5px;
+    left: 69.5px;
     height: 34px;
   }
 }

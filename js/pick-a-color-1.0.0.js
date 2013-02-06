@@ -256,7 +256,7 @@
           // position of the color band as a percentage of the width of the color box
           var spectrumWidth = parseInt($(".color-box").first().width(),10);
           if (spectrumWidth === 0) { // in case the width isn't set correctly
-            spectrumWidth = supportsTouch ? 190 : 200;
+            spectrumWidth = supportsTouch ? 160 : 200;
           }
           var halfSpectrumWidth = spectrumWidth / 2,
               percentOfBox = position / spectrumWidth,

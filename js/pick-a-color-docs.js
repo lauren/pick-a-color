@@ -1,6 +1,6 @@
 $(document).ready(function () {
   
-  var scrollspyOffset = 130;
+  var scrollspyOffset = 160;
   
   $('.navbar').scrollspy({
   });

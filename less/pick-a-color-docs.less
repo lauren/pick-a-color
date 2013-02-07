@@ -72,15 +72,7 @@
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start),argb(@stop))); // IE9 and down
 }
 
-.vertical-spectrum (@start: @white, @stop: @black) {
-  background-image: -webkit-gradient(linear, left top, left top, color-stop(0.0, @start), color-stop(1.0, @stop));
-  background-image: -moz-linear-gradient(top, @start 0%, @stop 100%);
-  background-image: -webkit-linear-gradient(top, @start, @stop); 
-  background-image: -o-linear-gradient(top, @start, @stop); 
-  background-image: linear-gradient(to bottom, @start, @stop); 
-  background-repeat: repeat-x;
-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@start),argb(@stop))); // IE9 and down
-}
+// finally, a legitimate reason to have a rainbow background!
 
 .vertical-full-spectrum (@one: @red, @two: @yellow, @three: @brightGreen, @four: @teal, @five: @blue, @six: @lightPurple, @seven: @red) {
   background-image: -webkit-gradient(linear, left top, left top, color-stop(0%, @one), color-stop(17%, @two), color-stop(34%,@three), color-stop(51%, @four), color-stop(68%, @five), color-stop(85%, @six), color-stop(100%, @seven));
@@ -108,10 +100,29 @@
 	        border-radius: @radius;
 }
 
+.shadows (@shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.075)) {
+	-webkit-box-shadow: @shadow;
+	   -moz-box-shadow: @shadow;
+	        box-shadow: @shadow;
+}
+
+.borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid,@shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07)) {
+	border: @width @style @color;
+	.rounded-corners(@radius);
+  .shadows(@shadow);
+}
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+     -moz-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+
 // actual styles
 
 body {
-	padding-top:120px;
+	padding-top:130px;
 	font-weight:200;
 	font-size:@fontsize;
 	line-height:@lineheight;
@@ -225,6 +236,7 @@ pre {
 		background-image:none;
 		filter:none;
 		background-color:#fff;
+		.top-rounded-corners(@radius:0px);
 	}
 	.nav {
 		margin:0 auto;
@@ -234,6 +246,13 @@ pre {
 	}
 	.container {
 		width:auto;
+	}
+	.logo {
+		.vertical-full-spectrum;
+		.rounded-corners;
+		height:35px;
+		width:35px;
+		display:inline-block;
 	}
 	.title,.tag {
 		padding:0px;

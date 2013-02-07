@@ -29,18 +29,9 @@
           startEvent    = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
           moveEvent     = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
           endEvent      = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor",
-          clickEvent    = supportsTouch ? "touchstart.pickAColor"    : "click.pickAColor",
+          clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
-          
-      if (supportsLocalStorage) {
-        try {
-          localStorage.setItem("this","that");
-        }
-        catch(e) {
-          localStorage.clear();
-        }
-      }
                 
       if (!Array.prototype.indexOf) {
         Array.prototype.indexOf = function(obj) {
@@ -494,7 +485,7 @@
             }
           }
         }
-        
+      
     
       };
   
@@ -509,7 +500,9 @@
             $myColorMenu = $($myContainer).find(".color-menu"),
             $myColorSpectrums = $($myContainer).find(".color-box"),
             $myTouchInstructions = $($myContainer).find(".color-menu-instructions"),
-            $myHighlightBands = $($myContainer).find(".highlight-band");
+            $myHighlightBands = $($myContainer).find(".highlight-band"),
+            mostRecentClick, // for storing click events when needed
+            windowTopPosition; // for storing the position of the top of the window when needed
         
         if (useTabs) {
           var $myTabs = $($myContainer).find(".tab");
@@ -576,15 +569,29 @@
         
         // toggle visibility of dropdown menu when you click or press the preview button 
 
-        $myColorPreviewButton.on(clickEvent, function (e) {
-          methods.pressPreviewButton(e);
+        $myColorPreviewButton.on(startEvent, function (e) {
+          windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
+        }).on(clickEvent, function (e) {
+          var distance = windowTopPosition - $(window).scrollTop();
+          if (supportsTouch && (Math.abs(distance) > 0)) {
+            return false;
+          } else {
+            methods.pressPreviewButton(e);
+          }
         });
         
         // any touch or click outside of a dropdown should close all dropdowns
         
-        $(document).on(clickEvent, function () {
-          if ($myColorMenu.css("display") === "block") {
-            methods.closeDropdown($myColorPreviewButton,$myColorMenu);
+        $(document).on(startEvent, function (e) {
+          windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
+        }).on(clickEvent, function (e) {
+          var distance = windowTopPosition - $(window).scrollTop();
+          if (supportsTouch && (Math.abs(distance) > 0)) {
+            return false;
+          } else {
+            if ($myColorMenu.css("display") === "block") {
+              methods.closeDropdown($myColorPreviewButton,$myColorMenu);
+            }
           }
         });
         
@@ -598,15 +605,22 @@
         });
     
         // update field and close menu when selecting from basic dropdown 
-    
-        $myColorMenuLinks.on(clickEvent, function () {
-          var selectedColor = $(this).find("span:first").css("background-color");
-          selectedColor = tinycolor(selectedColor).toHex();
-          $($myColorTextInput).val(selectedColor);
-          methods.updatePreview($myColorTextInput);
-          methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
-          methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
-          methods.closeDropdown($myColorPreviewButton,$myColorMenu); // close the dropdown
+        
+        $myColorMenuLinks.on(startEvent, function (e) {
+          windowTopPosition = $(window).scrollTop(); 
+        }).on(clickEvent, function () {
+          var distance = windowTopPosition - $(window).scrollTop();
+          if (supportsTouch && (Math.abs(distance) > 0)) {
+            return false;
+          } else {
+            var selectedColor = $(this).find("span:first").css("background-color");
+            selectedColor = tinycolor(selectedColor).toHex();
+            $($myColorTextInput).val(selectedColor);
+            methods.updatePreview($myColorTextInput);
+            methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
+            methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
+            methods.closeDropdown($myColorPreviewButton,$myColorMenu); // close the dropdown
+          }
         });
                 
         if (useTabs) { // make tabs tabbable
@@ -618,18 +632,27 @@
         if (settings.showSpectrum) {
     
           // move the highlight band when you click on a spectrum 
-    
-          $(this).find(".color-box").on(clickEvent, function (e) {
-            e.stopPropagation(); // stop this click from closing the dropdown
-            var $this_el = $(this),
-                $highlightBand = $this_el.find(".highlight-band"),
-                dimensions = methods.getMoveableArea($highlightBand);
-            methods.moveHighlightBand($highlightBand, dimensions, e);
-            var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
-            methods.addToSavedColors(highlightedColor,mySavedColors,mySavedColorsDataAttr);
-            methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
-            // update touch instructions
-            $myTouchInstructions.html("Press 'select' to choose this color.");
+          
+          $(this).find(".color-box").on(startEvent, function (e) {
+            mostRecentClick = e; // save the startEvent so we have coordinates for mobile to use in the clickEvent
+            windowTopPosition = $(window).scrollTop();
+          }).on(clickEvent, function (event) {
+            var distance = windowTopPosition - $(window).scrollTop();
+            if (supportsTouch && (Math.abs(distance) > 0)) {
+              return false;
+            } else {
+              event.stopPropagation(); // stop this click from closing the dropdown
+              var $this_el = $(this),
+                  $highlightBand = $this_el.find(".highlight-band"),
+                  dimensions = methods.getMoveableArea($highlightBand);
+              supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, mostRecentClick) : 
+                methods.moveHighlightBand($highlightBand, dimensions, event);
+              var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
+              methods.addToSavedColors(highlightedColor,mySavedColors,mySavedColorsDataAttr);
+              methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
+              // update touch instructions
+              $myTouchInstructions.html("Press 'select' to choose this color.");
+            }
           });
           
           methods.horizontallyDraggable.apply($myHighlightBands);

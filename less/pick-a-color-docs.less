@@ -171,7 +171,7 @@ h6 {
 h1 { 
 	font-size: @fontsize * 2.75; 
 	@media screen and (max-width: 768px) {
-		font-size: @fontsize * 2.25;
+		font-size: @fontsize * 2;
 	}
 } 
 h2 { 
@@ -255,6 +255,10 @@ pre {
 		height:35px;
 		width:35px;
 		display:inline-block;
+		@media screen and (max-width: 768px) {
+		height:30px;
+		width:30px;
+		}
 	}
 	.title,.tag {
 		padding:0px;

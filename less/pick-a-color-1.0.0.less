@@ -148,7 +148,7 @@ div.pick-a-color-markup {
 	          border-radius: 4px 0 0 4px;
 	  padding: 4px 5px;
 		vertical-align:top;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			padding:8px 5px 0px 5px;
 			min-height:30px;
 			vertical-align:middle;
@@ -156,15 +156,16 @@ div.pick-a-color-markup {
 	}
 
 	.add-on {
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			padding:8px 5px 0px 5px;
 		}
 	}
 
 	.color-text-input {
+		text-align:left;
 		width:200px;
 		vertical-align:middle;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			min-width:200px;
 			min-height:30px;
 			font-size:16px;
@@ -172,7 +173,7 @@ div.pick-a-color-markup {
 	}
 
 	#appendedDropdownButton {
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			height:40px;
 		}
 	}
@@ -186,7 +187,7 @@ div.pick-a-color-markup {
 	.color-dropdown { 
 	  height:30px;
 	  padding:3px 5px;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			min-height:40px;
 		}
 	}
@@ -201,7 +202,7 @@ div.pick-a-color-markup {
 			margin-bottom:1px;
 			margin-right:3px;
 		}
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			height:30px;
 			width:30px;
 		}
@@ -210,7 +211,7 @@ div.pick-a-color-markup {
 	.caret {
 	  vertical-align:bottom;
 	  margin-bottom:15px;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			margin-bottom:20px;
 		}
 	}
@@ -218,18 +219,19 @@ div.pick-a-color-markup {
 	// basic menu of colors 
 
 	.color-menu {
+		text-align:left;
 	  padding:5px 0px; /*overwriting bootstrap default */
 		min-width: 330px;
 		font-size:14px;
 	
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			left:-232px;
 			min-width:285px;
 		}
 	
 		&.small {
 			min-width:100px;
-			@media screen and (max-width: 767px) {
+			@media screen and (max-width: 979px) {
 				left:-66px;
 			}
 		}
@@ -250,7 +252,7 @@ div.pick-a-color-markup {
 		.color-preview {
 		  vertical-align:middle;
 		  margin:0px;
-			@media screen and (max-width: 767px) {
+			@media screen and (max-width: 979px) {
 			height: 35px;
 			width: 35px;
 			}
@@ -299,7 +301,7 @@ div.pick-a-color-markup {
 		  padding: 5px 15px 3px 15px;
 		  cursor: default;
 			min-height:25px;
-			@media screen and (max-width: 767px) {
+			@media screen and (max-width: 979px) {
 				min-height:40px;
 			}
 		}
@@ -309,7 +311,7 @@ div.pick-a-color-markup {
 			color: #333;
 			background-image:none;
 			filter:none;
-			@media screen and (max-width: 767px) {
+			@media screen and (max-width: 979px) {
 				background-color: #fff;
 			}
 		}
@@ -319,7 +321,7 @@ div.pick-a-color-markup {
 			padding:0px 5px;
 			margin-top:0px;
 			.rounded-corners;
-			@media screen and (max-width: 767px) {
+			@media screen and (max-width: 979px) {
 				height:37px;
 			}
 		}
@@ -329,7 +331,7 @@ div.pick-a-color-markup {
 		text-align: center;
 		padding:0px 6px;
 		margin:0px;
-		@media screen and (min-width: 767px) {
+		@media screen and (min-width: 979px) {
 			display:none;
 		}
 		font-size:14px;
@@ -341,7 +343,7 @@ div.pick-a-color-markup {
 	  margin:0px;
 	  margin-left:10px;
 	  cursor:pointer;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 		margin-left:8px;
 		}
 	}
@@ -355,7 +357,7 @@ div.pick-a-color-markup {
 	  left:110px;
 	  .borders-shadows;
 		cursor:pointer;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			width:@color-box-width-phone;
 			height:35px;
 		}
@@ -410,7 +412,7 @@ div.pick-a-color-markup {
 	  height:20px;
 	  width:@color-box-width/2;
 		display:inline-block;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			width:@color-box-width-phone/2;
 			height:35px;
 		}
@@ -480,7 +482,7 @@ div.pick-a-color-markup {
 		top:-1px;
 		left:(@color-box-width/2) - (@color-band-width/2);
 		text-align:center;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			width:@phone-color-band-width;
 			left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
 			height:34px;
@@ -495,7 +497,7 @@ div.pick-a-color-markup {
 		margin: 2px 1px;
 		display:inline-block;
 		.shadows(1px 0px 2px 0px #ffffff;);
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			margin: 4px 1px;
 		}
 	}
@@ -554,7 +556,7 @@ div.pick-a-color-markup {
 		left:-15px;
 		float:left;
 		width:150px;
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: 979px) {
 			width:125px;
 		}
 	}

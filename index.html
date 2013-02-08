@@ -10,8 +10,9 @@
 
     <link href="css/bootstrap-2.2.2.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="css/pick-a-color-1.0.0.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/pick-a-color-docs.css" rel="stylesheet">
+    <link href="css/pick-a-color-1.0.0.min.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -25,18 +26,18 @@
     <link rel="shortcut icon" href="favicon.ico"/>
   </head>
 
-  <body data-spy="scroll" data-target=".navbar" data-offset="170">
+  <body data-spy="scroll" data-target=".navbar" data-offset="100">
 
     <div class="navbar">
       <div class="navbar-inner">
+				<div class="branding">
 					<h1 class="title">
 						<a class="pick-a-color-brand" href="#">
 							<span class="logo"></span>
 							Pick-a-Color
-							<span class="logo"></span>
 						</a>
 					</h1>
-					<h2 class="tag"><a class="pick-a-color-tag" href="#">a jQuery color picker for Twitter Bootstrap</a></h2>
+				</div>
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -61,7 +62,7 @@
 								<span class="underline"></span>
 							</li>
               <li class="github">
-								<a href="https://github.com/lauren/pick-a-color">GitHub</a>
+								<a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">GitHub</a>
 								<span class="underline"></span>
 							</li>
             </ul>
@@ -73,67 +74,88 @@
     <div class="container">
 	
 			<div class="row-fluid" id="about">
-				<div class="span8">
-					<p>Pick-a-Color is a color picker that's easy to use&mdash;even for people who aren't techies or designers. It's mobile-friendly, too. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.</p>
-					
-					<p>If you use it, <a href="http://twitter.com/laurensperber">let me know</a>&mdash;it'll really make my day!</p>
+
+				<div class="span12 intro">
+					<h2 class="name">Pick-a-Color</h2>
+					<h3 class="tag">an easy-to-use jQuery color picker for Twitter Bootstrap</h3>
+					<a class="btn btn-success btn-large" href="/pick-a-color/pick-a-color.zip"
+	           onClick="_gaq.push(['_trackEvent', 'download', 'github']);">
+	          <i class="icon-download-alt icon-large"></i>
+	          Download Pick-a-Color
+					</a>
+	        <a class="btn btn-large" href="https://github.com/lauren/pick-a-color" target="_blank"
+	           onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">
+	          <i class="icon-github-alt icon-large"></i>
+	          View Source Code
+					</a>
 				</div>
 			</div>
 			
 			<div class="row-fluid">
-				<div class="span6">
-					<h3>Desktop</h3>
-					<p>This is how Pick-a-Color looks on browsers 768px and wider:</p>
+				<div class="span6 visible-desktop demo">
+					<h3>Desktop <i class="icon-laptop"></i> <i class="icon-desktop"></i></h3>
+					<p class="small">For browsers 980px or wider:</p>
 					<div class="pick-a-color" id="desktop-demo" data-desktop-demo="fff">fff</div>
-					<p class="small">If you are viewing this on a mobile browser you will see the mobile styles above. <em>Obviously.</em></p>
-
 				</div>
-			  <div class="span6 pretend-mobile">
-					<h3>Mobile</h3>
-					<p>This is how Pick-a-Color looks on browsers 767px and narrower:</p>
+			  <div class="span6 pretend-mobile demo">
+					<h3>Mobile <i class="icon-mobile-phone"></i> <i class="icon-tablet"></i></h3>
+					<p class="small">For browsers 979px or narrower:</p>
 					<div class="pick-a-color" id="mobile-demo" data-mobile-demo="f00">f00</div>
+					<p class="small hidden-desktop">To see how it looks in desktop browsers, check this site from a regular computer.</p>
 				</div>
 			</div>
+			
 			<h2 id="features">Features</h2>
 			
 			<div class="row-fluid">				
 				<div class="span6">		      
 					<h3>For your users</h3>
-					<ul class="docs">
-						<li>text field entry that accepts HEX, RGB, RGBA, HSL, HSLA, HSV, HSVA, and named colors 
-						    <ul>
-									<li><em>Huge, tremendous thanks to Brian Grinstead's <a href="https://github.com/bgrins/TinyColor">Tiny Color</a> for doing all the tricky color conversion math.</em></li>
-								</ul>
-						</li>
-						<li>8 basic colors that can be lightened and darkened</li>
-						<li>"Saved Colors" tab that stores recently used colors
-							<ul>
-								<li><em>Saved Colors persist across pageviews with localStorage when possible and cookies when not</em></li>
-							</ul>
-						</li>
-						<li>easy-to-use interface based on pretty Bootstrap styles</li>
-						<li>chunky mobile styles that make dragging easy on a touch device</li>
-					</ul>
+						<div class="row-fluid">
+							<div class="span6">
+								<h5><i class="icon-edit icon-large"></i> Flexible text entry</h5>
+								<p class="small">Accepts HEX, RGB, HSL, HSV, HSVA, and names, thanks to Brian Grinstead's amazing <a href="https://github.com/bgrins/TinyColor" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'tiny_color']);">Tiny Color</a>.</small>
+							</div>
+							<div class="span6">
+								<h5><i class="icon-save icon-large"></i> Saved colors</h5>
+								<p class="small">Saves up to 16 recently used colors. Colors are stored in localStorage or cookies.<p>
+							</div>
+						</div>
+						<div class="row-fluid">
+							<div class="span6">
+								<h5><i class="icon-tint icon-large"></i> Basic color palate</h5>
+								<p class="small">Easy-to-use preset colors that can be lightened and darkened.</p>
+							</div>
+							<div class="span6">
+								<h5><i class="icon-mobile-phone icon-large"></i> Chunky mobile styles</h5>
+								<p class="small">Dragging is easy, even on a touch device.</p>
+							</div>
+						</div>
 
 				</div>
 			  <div class="span6">
 					<h3>For you</h3>
-					<ul class="docs">
-						<li>simple initialization with three lines of HTML and one line of JavaScript</li>
-						<li>anonymous JavaScript function that won't mess up your other scripts</li>
-						<li>namespaced CSS that won't mess up your other styles</li>
-						<li>equally pretty and user-friendly in desktop and mobile browsers</li>
-						<li>tested in Chrome (Mac/PC/iOS), Safari (Mac/iOS), IE 8+, Firefox (Mac/PC), and Opera (Mac/PC)</li>
-						<li>configurable options for:
-						    <ul>
-									<li>whether or not to show users a lighten/darken spectrum</li>
-						    	<li>whether or not to show users their saved colors</li>
-						    	<li>whether colors should be saved separately for each color picker or once for all color pickers on a page</li>
-						    	<li>whether or not the dropdown menu should fade in and out</li>
-								</ul>
-						</li>
-						<li>you didn't have to write your own color picker</li>
-					</ul>
+					
+					<div class="row-fluid">
+						<div class="span6">
+							<h5><i class="icon-certificate icon-large"></i> Tested</h5>
+							<p class="small">Tested in Chrome (Mac/PC/iOS), Safari (Mac/iOS), IE 8+, Firefox (Mac/PC), and Opera (Mac/PC).</p>
+						</div>
+						<div class="span6">
+							<h5><i class=" icon-exclamation-sign icon-large"></i> No conflicts</h5>
+							<p class="small">Anonymous JavasScript function and namespaced CSS won't mess up your code.</p>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span6">
+							<h5><i class="icon-magic icon-large"></i> Simple initialization</h5>
+							<p class="small">As little as three lines of HTML and one line of JavaScript.</p>
+						</div>
+						<div class="span6">
+							<h5><i class="icon-gift icon-large"></i> Done</h5>
+							<p class="small">You didn't have to write your own color picker. 'Nuff said.</p>
+						</div>
+					</div>
+				
 				</div>
 			</div>
 			
@@ -142,10 +164,10 @@
 					<h3>Caveats</h3>
 					<ul class="docs">
 						<li>
-							Like <strike>most things</strike> everything <strike>on the internet</strike> in life, this is a work in progress. Known issues are relatively minor at this point and are documented <a href="https://github.com/lauren/pick-a-color/issues?milestone=2&state=open">here</a>.
+							Like <strike>most things</strike> everything <strike>on the internet</strike> in life, this is a work in progress. Known issues are relatively minor at this point and are documented <a href="https://github.com/lauren/pick-a-color/issues?milestone=2&state=open" onClick="_gaq.push(['_trackEvent', 'view_tickets', 'github']);">here</a>.
 						</li>
 						<li>
-							This is my first big JavaScript project, so there are surely some things I've done that will make you go "n00b! Look what happens when product managers code!!!" I would LOVE to know what those things are so I can learn and make Pick-a-Color better. You can tell me about them by <a href="https://github.com/lauren/pick-a-color/issues/new"> making me a ticket</a>.
+							This is my first big JavaScript project, so there are surely some things I've done that will make you go "n00b! Look what happens when product managers code!!!" I would LOVE to know what those things are so I can learn and make Pick-a-Color better. You can tell me about them by <a href="https://github.com/lauren/pick-a-color/issues/new" onClick="_gaq.push(['_trackEvent', 'make_ticket', 'github']);"> making me a ticket</a>.
 						</li>
 					</ul>
 					
@@ -161,7 +183,7 @@
 			
 					<ol class="docs">
 						<li>
-							<a href="/pick-a-color/pick-a-color.zip">Download the required files</a>. Add them to your CSS and JS folders and include them in your document as follows:<br/>
+							<a href="/pick-a-color/pick-a-color.zip" onClick="_gaq.push(['_trackEvent', 'download', 'github']);">Download the required files</a>. Add them to your CSS and JS folders and include them in your document as follows:<br/>
 							In the <code>&lt;head&gt;</code>:
 								<pre>&lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;
 &lt;link rel="stylesheet" href="css/pick-a-color.min.css"&gt;</pre>
@@ -255,7 +277,7 @@
 			</div>
 			
 			<div class="row-fluid options" id="about">
-				<div class="span6">
+				<div class="span4">
 
 					<h5>showSpectrum</h5> 
 
@@ -263,7 +285,7 @@
 					
 				</div>
 
-				<div class="span6">
+				<div class="span8">
 
 					<h6>showSpectrum: true</h6>
 					
@@ -277,7 +299,7 @@
 			</div>
 			
 			<div class="row-fluid options" id="about">
-				<div class="span6">
+				<div class="span4">
 
 					<h5>showSavedColors</h5>
 
@@ -285,7 +307,7 @@
 
 				</div>				
 
-				<div class="span6">
+				<div class="span8">
 					
 					<h6>showSavedColors: true</h6>
 					
@@ -300,7 +322,7 @@
 
 			<div class="row-fluid options" id="about">
 				
-				<div class="span6">
+				<div class="span8">
 
 					<h5>saveColorsPerElement (for <code>showSavedColors: true</code> only)</h5>
 
@@ -315,7 +337,7 @@
 
 			<div class="row-fluid options" id="about">
 
-				<div class="span6">
+				<div class="span4">
 
 					<h5>fadeMenuToggle</h5>
 
@@ -323,7 +345,7 @@
 				
 				</div>
 
-				<div class="span6">
+				<div class="span8">
 					
 					<h6>fadeMenuToggle: true</h6>
 
@@ -355,7 +377,7 @@
 						<li>Opera 12.13 (Mac OSX and Windows 8)</li>
 					</ul>
 
-					<p>Minor issues in these browsers are documented <a href="https://github.com/lauren/pick-a-color/issues">here</a>.</p>
+					<p>Minor issues in these browsers are documented <a href="https://github.com/lauren/pick-a-color/issues" onClick="_gaq.push(['_trackEvent', 'view_tickets', 'github']);">here</a>.</p>
 
 					<p>The only major platform I haven't been able to test yet is Android. I'm working on it.</p>
 
@@ -1007,8 +1029,9 @@
 				</div>
 			</div>
 			<div class="footer">
-				<p><a href="https://github.com/lauren/pick-a-color">Pick-A-Color</a> &copy; 2013 <a href="http://twitter.com/laurensperber">Lauren Sperber</a> | Pick-A-Color License: <a href="http://opensource.org/licenses/MIT">MIT</a></p>
-				<p><a href="https://github.com/bgrins/TinyColor">TinyColor</a> &copy; 2012 <a href="http://briangrinstead.com/">Brian Grinstead</a> | TinyColor License: <a href="https://github.com/bgrins/TinyColor/blob/master/LICENSE">MIT</a></p>
+				<p><a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">Pick-A-Color</a> &copy; 2013 <a href="http://twitter.com/laurensperber" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'twitter', 'laurensperber']);">Lauren Sperber</a> | Pick-A-Color License: <a href="http://opensource.org/licenses/MIT" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'license', 'mit']);">MIT</a></p>
+				<p><a href="https://github.com/bgrins/TinyColor" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'tiny_color']);">TinyColor</a> &copy; 2012 <a href="http://briangrinstead.com/" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'brian_grinstead']);">Brian Grinstead</a> | TinyColor License: <a href="https://github.com/bgrins/TinyColor/blob/master/LICENSE" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'license', 'mit']);">MIT</a></p>
+				<p><a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a> icons by Dave Gandy</p>
 			</div>
 
     </div> 

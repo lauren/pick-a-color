@@ -122,7 +122,7 @@
 // actual styles
 
 body {
-	padding-top:130px;
+	padding-top:70px;
 	font-weight:200;
 	font-size:@fontsize;
 	line-height:@lineheight;
@@ -157,7 +157,7 @@ h1,h2,h3,h4 {
 }
 
 h1,h2,h3 { 
-	line-height: @lineheight * 2; 
+	line-height: @lineheight * 2.2; 
 }
 
 h4 {
@@ -177,9 +177,19 @@ h1 {
 h2 { 
 	font-size: @fontsize * 2.25; 
 	} 
+h2.name { 
+	font-size: @fontsize * 4; 
+		@media screen and (max-width: 450px) {
+			font-size: @fontsize * 3;
+		}
+	}
 h3 { 
 	font-size: @fontsize * 1.75; 
 } 
+h3.tag {
+	font-size: @fontsize * 1.2;
+	line-height: @lineheight;
+}
 h4 { 
 	font-size: @fontsize * 1.25; 
 } 
@@ -199,8 +209,8 @@ h6 {
 ul.docs li, ol.docs li {
 	font-size: 18px;
 	line-height:22px;
-	margin-bottom:3px;
-	margin-top:2px;
+	margin-bottom:5px;
+	margin-top:5px;
 }
 
 pre {
@@ -211,7 +221,6 @@ pre {
 
 .navbar {
 	margin:0px auto;
-	text-align:center;
 	vertical-align:top;
 	position:fixed;
 	top:0;
@@ -226,7 +235,7 @@ pre {
 	@media screen and (max-width: 979px) and (min-width: 768px) {
 		width: 784px;
 	}
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		right:0;
 		left:0;
 		width:auto;
@@ -238,48 +247,48 @@ pre {
 		filter:none;
 		background-color:#fff;
 		.top-rounded-corners(@radius:0px);
-		.shadows(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75))
+		.shadows(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
+		@media screen and (max-width: 767px) {
+			.rounded-corners(@radius:0px);
+		}
 	}
 	.nav {
 		margin:0 auto;
-		width:490px;
-		text-align:center;
-		float:none;
+		width:510px;
+		float:right;
+		vertical-align:bottom;
+		margin-top:15px;
+		@media screen and (max-width: 978px) {
+			width:150px;
+			text-align:right;
+			margin:0px;
+		}
 	}
 	.container {
 		width:auto;
 	}
-	.logo {
-		.vertical-full-spectrum;
-		.rounded-corners;
-		height:35px;
-		width:35px;
-		display:inline-block;
-		@media screen and (max-width: 768px) {
-		height:20px;
-		width:20px;
-		}
-	}
-	.title,.tag {
-		padding:0px;
-		line-height:24px;
-	}
-	.tag {
-		font-size:16px;
+	.branding {
+		float:left;
+		padding-left:9px;
 	}
 	.title {
+		padding:0px;
+		line-height:24px;
 		margin-top:15px;
 	}
-	.pick-a-color-brand, .pick-a-color-tag {
+	.pick-a-color-brand {
 		color: @gray;
 		&:hover {
     	text-decoration: none;
   		}
 	}
 	.btn-navbar {
-		margin:10px auto;
-		width:20px;
-		float:none;
+		width:15px;
+		margin-top:10px;
+		padding:15px;
+		@media screen and (max-width: 767px) {
+			margin:5px 0px;
+		}
 	}
 	
 	.underline {
@@ -288,6 +297,9 @@ pre {
 		display:block;
 		position:relative;
 		left:-10%;
+		@media screen and (max-width: 968px) {
+			display:none;
+		}
 	}
 	.active {
 		&.about .underline {
@@ -308,61 +320,91 @@ pre {
 	}
 	
 	.about:hover .underline {
-		.two-color-spectrum (@start: @red, @stop: @orange) 
+		.two-color-spectrum (@start: @red, @stop: @orange); 
+		.transition(@transition:background-image .5s ease-in);
 	}
 	.features:hover .underline {
-		.two-color-spectrum (@start: @orange, @stop: @yellow) 
+		.two-color-spectrum (@start: @orange, @stop: @yellow); 
+		.transition(@transition:background-image .5s ease-in);
 	}
 	.how:hover .underline{
-		.two-color-spectrum (@start: @yellow, @stop: @green) 
+		.two-color-spectrum (@start: @yellow, @stop: @green);
+		.transition(@transition:background-image .5s ease-in);
 	}
 	.details:hover .underline {
-		.two-color-spectrum (@start: @green, @stop: @blue) 
+		.two-color-spectrum (@start: @green, @stop: @blue);
+		.transition(@transition:background-image .5s ease-in);
 	}
 	.github:hover .underline {
-		.two-color-spectrum (@start: @blue, @stop: @purple) 
+		.two-color-spectrum (@start: @blue, @stop: @purple);
+		.transition(@transition:background-image .5s ease-in);
 	}
 	
 	.nav > .active > a {
 		background-color:#fafafa;
 		.top-rounded-corners;
+		.shadows(none);
+		
+		
 	}
 	
 	.nav > .active > a:hover {
 		background-color:#fafafa;
+		.shadows(none);
+		
 	}
 	
 	.nav a:hover {
 		background-color:#fafafa;
-		-webkit-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
-		-moz-box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
-		box-shadow: inset 0 3px 8px rgba(0,0,0,0.125);
-		.top-rounded-corners;		
 	}
 	
 	.nav li {
 		margin-left:5px;
 	}
 	
-	.nav-collapse.collapse ul {
-		@media screen and (max-width: 768px) {		
-			width:auto;
-			li .underline {
-				visibility: hidden;
-			}
-		}
-	}
 	
 	.icon-bar {
 		background-image:none;
 	}
 	
-	
+}
+
+.logo {
+	.vertical-full-spectrum;
+	.rounded-corners;
+	height:36px;
+	width:36px;
+	display:inline-block;
+	@media screen and (max-width: 767px) {
+		height:22px;
+		width:22px;
+	}
+}
+
+.intro {
+	text-align:center;
+	padding:30px 0px;
+}
+
+.demo {
+	margin:20px auto 50px auto;
+	text-align:center;
+	.pick-a-color{
+		margin:0 auto;	
+	}
+}
+
+.btn-success {
+	margin-right:10px;
 }
 
 .options .pick-a-color-markup {
 	padding:0px;
 	margin:0px;
+}
+
+.options {
+	margin-bottom:20px;
 }
 
 .footer {

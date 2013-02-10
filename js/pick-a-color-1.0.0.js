@@ -171,10 +171,12 @@
           $this_el.siblings(".btn-group").find(".current-color").css("background-color",
             "#" + myColorVars.typedColor);
         },
-    
-        pressPreviewButton: function (event) {
-          event.stopPropagation();
-          methods.toggleDropdown(event.target);
+        
+        // must be called with apply and an arguments array like [{thisEvent}]
+        pressPreviewButton: function () {
+          var thisEvent = arguments[0].thisEvent;
+          thisEvent.stopPropagation();
+          methods.toggleDropdown(thisEvent.target);
         },
         
         openDropdown: function (button,menu) {
@@ -205,6 +207,16 @@
           }
           
           $(button).removeClass("open");
+        },
+        
+        // can only be called with apply. requires an arguments array like: 
+        // [{button, menu}]
+        closeDropdownIfOpen: function () {
+          var button = arguments[0].button,
+              menu = arguments[0].menu;
+          if (menu.css("display") === "block") {
+            methods.closeDropdown(button,menu);
+          }
         },
         
         toggleDropdown: function (element) {
@@ -473,17 +485,75 @@
     
         // when settings.saveColorsPerElement, colors are saved to both mySavedColors and
         // allSavedColors so they will be avail to color pickers with no savedColorsDataAttr
-        addToSavedColors: function (color,mySavedColors,savedColorsDataAttr) {
-          // make sure we're saving colors and the current color is not in the pre-sets
-          if (settings.showSavedColors  && !presetColors.hasOwnProperty(color)) {
+        addToSavedColors: function (color,mySavedColorsInfo,$mySavedColorsContent) { 
+          if (settings.showSavedColors) { // make sure we're saving colors
             if (color[0] != "#") {
               color = "#" + color;
             }
             methods.updateSavedColors(color,allSavedColors);
             if (settings.saveColorsPerElement) { // if we're saving colors per element...
-              methods.updateSavedColors(color,mySavedColors,savedColorsDataAttr);
+              var mySavedColors = mySavedColorsInfo.colors,
+                  dataAttr = mySavedColorsInfo.dataAttr;
+              methods.updateSavedColors(color,mySavedColors,dataAttr);
+              methods.updateSavedColorMarkup($mySavedColorsContent,mySavedColors);
+            } else { // if not saving per element, update markup with allSavedColors
+              methods.updateSavedColorMarkup($mySavedColorsContent,allSavedColors);
             }
           }
+        },
+        
+        // handles selecting a color from the basic menu of colors.
+        // must be called with apply and relies on an arguments array like:
+        // [{els, savedColorsInfo}]
+        selectFromBasicColors: function () {
+          var selectedColor = $(this).find("span:first").css("background-color");
+          selectedColor = tinycolor(selectedColor).toHex();
+          var myElements = arguments[0].els,
+              mySavedColorsInfo = arguments[0].savedColorsInfo;
+          $(myElements.colorTextInput).val(selectedColor);
+          methods.updatePreview(myElements.colorTextInput);
+          methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent); 
+          methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
+        },
+        
+        // handles user clicking or tapping on spectrum to select a color.
+        // must be called with apply and relies on an arguments array like:
+        // [{thisEvent, mostRecentClick, savedColorsInfo, els}]
+        tapSpectrum: function () {
+          var thisEvent = arguments[0].thisEvent,
+              mostRecentClick = arguments[0].mostRecentClick,
+              mySavedColorsInfo = arguments[0].savedColorsInfo,
+              myElements = arguments[0].els;
+          thisEvent.stopPropagation(); // stop this click from closing the dropdown
+          var $highlightBand = $(this).find(".highlight-band"),
+              dimensions = methods.getMoveableArea($highlightBand);
+          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, mostRecentClick) : 
+            methods.moveHighlightBand($highlightBand, dimensions, thisEvent);
+          var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
+          methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
+          // update touch instructions
+          myElements.touchInstructions.html("Press 'select' to choose this color.");
+        },
+        
+        // bind to mousedown/touchstart, execute provied function if the top of the
+        // window has not moved when there is a mouseup/touchend
+        // must be called with apply and an arguments array like: 
+        // [{thisFunction, theseArguments}]
+        executeUnlessScrolled: function () {
+          var thisFunction = arguments[0].thisFunction,
+              theseArguments = arguments[0].theseArguments,
+              windowTopPosition;
+          $(this).on(startEvent, function (e) {
+            windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
+          }).on(clickEvent, function (event) {
+            var distance = windowTopPosition - $(window).scrollTop();
+            if (supportsTouch && (Math.abs(distance) > 0)) {
+              return false;
+            } else {
+              theseArguments.thisEvent = event; //add the click event to the arguments object
+              thisFunction.apply($(this), [theseArguments]);
+            }
+          });
         }
       
     
@@ -513,36 +583,37 @@
         if (settings.showSavedColors) {
           myElements.savedColorsContent = $(this).find(".savedColors-content");
           if (settings.saveColorsPerElement) { // when saving colors for each color picker...
-          var mySavedColors = [],
-              mySavedColorsDataObj = $(this).data(),
-              mySavedColorsDataAttr;
-            $.each(mySavedColorsDataObj, function (key) {
-              mySavedColorsDataAttr = key;
+            var mySavedColorsInfo = {
+              colors: [],
+              dataObj: $(this).data(),
+            }
+            $.each(mySavedColorsInfo.dataObj, function (key) {
+              mySavedColorsInfo.dataAttr = key;
             });
             
             // get this picker's colors from local storage if possible
             if (supportsLocalStorage && localStorage["pickAColorSavedColors-" +
-              mySavedColorsDataAttr]) {
-              mySavedColors = JSON.parse(localStorage["pickAColorSavedColors-" + 
-                mySavedColorsDataAttr]);
+              mySavedColorsInfo.dataAttr]) {
+              mySavedColorsInfo.colors = JSON.parse(localStorage["pickAColorSavedColors-" + 
+                mySavedColorsInfo.dataAttr]);
             
             // otherwise, get them from cookies
-            } else if (myCookies.indexOf("pickAColorSavedColors-" + mySavedColorsDataAttr) > -1) {
+            } else if (myCookies.indexOf("pickAColorSavedColors-" + mySavedColorsInfo.dataAttr) > -1) {
               var theseCookies = myCookies.split(";"); // an array of cookies...
               for (var i=0; i < theseCookies.length; i++) {
-                if (theseCookies[i].match(mySavedColorsDataAttr)) {
-                  mySavedColors = theseCookies[i].split("=")[1].split(",");
+                if (theseCookies[i].match(mySavedColorsInfo.dataAttr)) {
+                  mySavedColorsInfo.colors = theseCookies[i].split("=")[1].split(",");
                 }
               };
            
             } else { // if no data-attr specific colors are in local storage OR cookies...
-              mySavedColors = allSavedColors; // use mySavedColors
+              mySavedColorsInfo.colors = allSavedColors; // use mySavedColors
             }
           }
         }
             
         // add the default color to saved colors
-        methods.addToSavedColors(myColorVars.defaultColor,mySavedColors,mySavedColorsDataAttr);
+        methods.addToSavedColors(myColorVars.defaultColor,mySavedColorsInfo,myElements.savedColorsContent);
         methods.updatePreview(myElements.colorTextInput);
     
         //input field focus: clear content
@@ -563,39 +634,18 @@
             myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
             $this_el.val(myColorVars.newValue); // put the new value in the field
             // save to saved colors
-            methods.addToSavedColors(myColorVars.newValue,mySavedColors,mySavedColorsDataAttr);
-            methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColors);
+            methods.addToSavedColors(myColorVars.newValue,mySavedColorsInfo,myElements.savedColorsContent);
           }
           methods.updatePreview($this_el); // update preview
         });
         
-        // toggle visibility of dropdown menu when you click or press the preview button 
-
-        myElements.colorPreviewButton.on(startEvent, function (e) {
-          windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
-        }).on(clickEvent, function (e) {
-          var distance = windowTopPosition - $(window).scrollTop();
-          if (supportsTouch && (Math.abs(distance) > 0)) {
-            return false;
-          } else {
-            methods.pressPreviewButton(e);
-          }
-        });
+        // toggle visibility of dropdown menu when you click or press the preview button
+        methods.executeUnlessScrolled.apply(myElements.colorPreviewButton, 
+          [{"thisFunction": methods.pressPreviewButton, "theseArguments" : {}}]);
         
         // any touch or click outside of a dropdown should close all dropdowns
-        
-        $(document).on(startEvent, function (e) {
-          windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
-        }).on(clickEvent, function (e) {
-          var distance = windowTopPosition - $(window).scrollTop();
-          if (supportsTouch && (Math.abs(distance) > 0)) {
-            return false;
-          } else {
-            if (myElements.colorMenu.css("display") === "block") {
-              methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu);
-            }
-          }
-        });
+        methods.executeUnlessScrolled.apply($(document), [{"thisFunction": methods.closeDropdownIfOpen, 
+          "theseArguments": {"button": myElements.colorPreviewButton, "menu": myElements.colorMenu}}]);
         
         // prevent click/touchend to color-menu or color-text input from closing dropdown
         
@@ -606,24 +656,9 @@
           e.stopPropagation();
         });
     
-        // update field and close menu when selecting from basic dropdown 
-        
-        myElements.colorMenuLinks.on(startEvent, function (e) {
-          windowTopPosition = $(window).scrollTop(); 
-        }).on(clickEvent, function () {
-          var distance = windowTopPosition - $(window).scrollTop();
-          if (supportsTouch && (Math.abs(distance) > 0)) {
-            return false;
-          } else {
-            var selectedColor = $(this).find("span:first").css("background-color");
-            selectedColor = tinycolor(selectedColor).toHex();
-            $(myElements.colorTextInput).val(selectedColor);
-            methods.updatePreview(myElements.colorTextInput);
-            methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr); 
-            methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColors);
-            methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
-          }
-        });
+        // update field and close menu when selecting from basic dropdown
+        methods.executeUnlessScrolled.apply(myElements.colorMenuLinks, [{"thisFunction": methods.selectFromBasicColors, 
+          "theseArguments": {"els": myElements, "savedColorsInfo": mySavedColorsInfo}}]);
                 
         if (useTabs) { // make tabs tabbable
           methods.tabbable.apply(myElements.tabs);
@@ -635,27 +670,9 @@
     
           // move the highlight band when you click on a spectrum 
           
-          $(this).find(".color-box").on(startEvent, function (e) {
-            mostRecentClick = e; // save the startEvent so we have coordinates for mobile to use in the clickEvent
-            windowTopPosition = $(window).scrollTop();
-          }).on(clickEvent, function (event) {
-            var distance = windowTopPosition - $(window).scrollTop();
-            if (supportsTouch && (Math.abs(distance) > 0)) {
-              return false;
-            } else {
-              event.stopPropagation(); // stop this click from closing the dropdown
-              var $this_el = $(this),
-                  $highlightBand = $this_el.find(".highlight-band"),
-                  dimensions = methods.getMoveableArea($highlightBand);
-              supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, mostRecentClick) : 
-                methods.moveHighlightBand($highlightBand, dimensions, event);
-              var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
-              methods.addToSavedColors(highlightedColor,mySavedColors,mySavedColorsDataAttr);
-              methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColors);
-              // update touch instructions
-              myElements.touchInstructions.html("Press 'select' to choose this color.");
-            }
-          });
+          methods.executeUnlessScrolled.apply(myElements.colorSpectrums, [{"thisFunction": methods.tapSpectrum, 
+            "theseArguments": {"thisEvent": event, "mostRecentClick": mostRecentClick, "savedColorsInfo": 
+            mySavedColorsInfo, "els": myElements}}]);
           
           methods.horizontallyDraggable.apply(myElements.highlightBands);
     
@@ -665,8 +682,7 @@
           }).on(endDragEvent, function (event) {
             var $thisEl = event.delegateTarget;
             var finalColor = methods.calculateHighlightedColor.apply($thisEl);
-            methods.addToSavedColors(finalColor,mySavedColors,mySavedColorsDataAttr);
-            methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColors);
+            methods.addToSavedColors(finalColor,mySavedColorsInfo,myElements.savedColorsContent);
           });
           
 
@@ -690,8 +706,7 @@
               $(myElements.colorTextInput).val(selectedColor);
               methods.updatePreview(myElements.colorTextInput);
               methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu);
-              methods.addToSavedColors(selectedColor,mySavedColors,mySavedColorsDataAttr);
-              methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColors);
+              methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
             }
           });
               
@@ -699,7 +714,7 @@
           if (!settings.saveColorsPerElement) {
             methods.updateSavedColorMarkup(myElements.savedColorsContent,allSavedColors);
           } else if (settings.saveColorsPerElement) {
-            methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColors);
+            methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColorsInfo.colors);
           }
         }
         

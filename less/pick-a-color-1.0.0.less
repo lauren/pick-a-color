@@ -206,6 +206,7 @@ div.pick-a-color-markup {
 			height:30px;
 			width:30px;
 		}
+
 	}
 
 	.caret {
@@ -297,24 +298,27 @@ div.pick-a-color-markup {
 			  background-color:@black;
 			}
 		}
-		li.color-item > a {
-		  padding: 5px 15px 3px 15px;
-		  cursor: default;
-			min-height:25px;
-			@media screen and (max-width: 979px) {
-				min-height:40px;
+		.basicColors-content, .savedColors-content {
+			li > a {
+			  padding: 5px 15px 3px 15px;
+			  cursor: default;
+				min-height:25px;
+				@media screen and (max-width: 979px) {
+					min-height:40px;
+				}
+			}
+			li:hover a {
+				background-color:#eee;
+				.transition(background-color .5s ease-in);
+				color: #333;
+				background-image:none;
+				filter:none;
+				@media screen and (max-width: 979px) {
+					background-color: #fff;
+				}
 			}
 		}
-		li.color-item:hover a {
-			background-color:#eee;
-			.transition(background-color .5s ease-in);
-			color: #333;
-			background-image:none;
-			filter:none;
-			@media screen and (max-width: 979px) {
-				background-color: #fff;
-			}
-		}
+
 		.btn.color-select {
 			margin: 0px 5px;
 			height:22px;
@@ -558,6 +562,28 @@ div.pick-a-color-markup {
 		width:150px;
 		@media screen and (max-width: 979px) {
 			width:125px;
+		}
+	}
+	
+	// advanced colors
+	
+	.advanced-content {
+		ul {
+			margin-top:10px;
+		}
+		li {
+		  padding: 5px 15px 3px 15px;
+		  cursor: default;
+			min-height:25px;
+			@media screen and (max-width: 979px) {
+				min-height:40px;
+			}
+		}
+		.color-preview {
+			height:50px;
+			width: 295px;
+			float:left;
+			margin:10px 0px 10px 15px;
 		}
 	}
 }

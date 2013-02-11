@@ -166,17 +166,20 @@ div.pick-a-color-markup .color-menu .color-preview.purple {
 div.pick-a-color-markup .color-menu .color-preview.black {
   background-color: #000000;
 }
-div.pick-a-color-markup .color-menu li.color-item > a {
+div.pick-a-color-markup .color-menu .basicColors-content li > a,
+div.pick-a-color-markup .color-menu .savedColors-content li > a {
   padding: 5px 15px 3px 15px;
   cursor: default;
   min-height: 25px;
 }
 @media screen and (max-width: 979px) {
-  div.pick-a-color-markup .color-menu li.color-item > a {
+  div.pick-a-color-markup .color-menu .basicColors-content li > a,
+  div.pick-a-color-markup .color-menu .savedColors-content li > a {
     min-height: 40px;
   }
 }
-div.pick-a-color-markup .color-menu li.color-item:hover a {
+div.pick-a-color-markup .color-menu .basicColors-content li:hover a,
+div.pick-a-color-markup .color-menu .savedColors-content li:hover a {
   background-color: #eee;
   -webkit-transition: background-color 0.5s ease-in;
   -moz-transition: background-color 0.5s ease-in;
@@ -187,7 +190,8 @@ div.pick-a-color-markup .color-menu li.color-item:hover a {
   filter: none;
 }
 @media screen and (max-width: 979px) {
-  div.pick-a-color-markup .color-menu li.color-item:hover a {
+  div.pick-a-color-markup .color-menu .basicColors-content li:hover a,
+  div.pick-a-color-markup .color-menu .savedColors-content li:hover a {
     background-color: #fff;
   }
 }
@@ -637,4 +641,23 @@ div.pick-a-color-markup .saved-color-col {
   div.pick-a-color-markup .saved-color-col {
     width: 125px;
   }
+}
+div.pick-a-color-markup .advanced-content ul {
+  margin-top: 10px;
+}
+div.pick-a-color-markup .advanced-content li {
+  padding: 5px 15px 3px 15px;
+  cursor: default;
+  min-height: 25px;
+}
+@media screen and (max-width: 979px) {
+  div.pick-a-color-markup .advanced-content li {
+    min-height: 40px;
+  }
+}
+div.pick-a-color-markup .advanced-content .color-preview {
+  height: 50px;
+  width: 295px;
+  float: left;
+  margin: 10px 0px 10px 15px;
 }

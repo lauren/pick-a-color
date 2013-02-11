@@ -50,10 +50,11 @@
         showSpectrum          : true,
         showSavedColors       : true,
         saveColorsPerElement  : false,
-        fadeMenuToggle        : true
+        fadeMenuToggle        : true,
+        showAdvanced          : true
       }, options);
       
-      var useTabs = settings.showSavedColors;
+      var useTabs = settings.showSavedColors || settings.showAdvanced;
       
       // so much markup 
       
@@ -77,7 +78,11 @@
             append($("<a>").text("Basic Colors")));
           if (settings.showSavedColors) {
             $tabContainer.append($("<span>").addClass("savedColors-tab tab").
-            append($("<a>").text("Your Saved Colors")));
+            append($("<a>").text("Saved Colors")));
+          }
+          if (settings.showAdvanced) {
+            $tabContainer.append($("<span>").addClass("advanced-tab tab").
+            append($("<a>").text("Advanced")));
           }
           $dropdownContainer.append($tabContainer);
         }
@@ -115,6 +120,51 @@
           $savedColors.append($("<p>").addClass("saved-colors-instructions").
             text("Type in a color or use the spectrums to lighten or darken an existing color."));
           $dropdownContainer.append($savedColors);
+        }
+        if (settings.showAdvanced) {
+          var $advanced = $("<div>").addClass("advanced-content inactive-content");
+          var $advancedList = $("<ul>").addClass("advanced-list");
+          var $hueItem = $("<li>").addClass("hue-item").text("Hue: ");
+          var $hueSpectrum = $("<span>").addClass("color-box spectrum-hue");
+          if (isIE) {
+            $.each([0,6], function (i) {
+              $thisSpectrum.append($("<span>").addClass("hue-spectrum-" + i +
+              " ie-spectrum"));
+            });
+          }
+          var $hueHighlightBand = $("<span>").addClass("highlight-band");
+          $.each([0,1,2], function () {
+            $hueHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
+          });
+          $advancedList.append($hueItem.append($hueSpectrum.append($hueHighlightBand)));
+          var $lightnessItem = $("<li>").addClass("lightness-item").text("Lightness: ");
+          var $lightnessSpectrum = $("<span>").addClass("color-box spectrum-lightness");
+          if (isIE) {
+            $.each([0,1], function (i) {
+              $thisSpectrum.append($("<span>").addClass("lightness-spectrum-" + i +
+              " ie-spectrum"));
+            });
+          }
+          var $lightnessHighlightBand = $("<span>").addClass("highlight-band");
+          $.each([0,1,2], function () {
+            $lightnessHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
+          });
+          $advancedList.append($lightnessItem.append($lightnessSpectrum.append($lightnessHighlightBand)));
+          var $saturationItem = $("<li>").addClass("lightness-item").append("Saturation: ");
+          var $saturationSpectrum = $("<span>").addClass("color-box spectrum-saturation");
+          if (isIE) {
+            $.each([0,1], function (i) {
+              $thisSpectrum.append($("<span>").addClass("saturation-spectrum-" + i +
+              " ie-spectrum"));
+            });
+          }
+          var $saturationHighlightBand = $("<span>").addClass("highlight-band");
+          $.each([0,1,2], function () {
+            $saturationHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
+          });
+          $advancedList.append($saturationItem.append($saturationSpectrum.append($saturationHighlightBand))).
+            append($("<span>").addClass("color-preview advanced"));
+          $dropdownContainer.append($advanced.append($advancedList));
         }
         $markup.append($dropdownContainer);
         return $markup;

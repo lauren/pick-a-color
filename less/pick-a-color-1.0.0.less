@@ -2,6 +2,8 @@
 
 // basic colors 
 
+// basic colors 
+
 @white:#ffffff;
 
 @red:#FF0000;
@@ -12,11 +14,17 @@
 
 @green:#008000;
 
+@brightGreen: #00ff00;
+
 @blue:#0000FF;
+
+@teal:#00ffff;
 
 @indigo:#4B0082;
 
 @violet:#EE82EE;
+
+@lightPurple: #ff00ff;
 
 @purple:#800080;
 
@@ -110,6 +118,15 @@
 	background-image: -webkit-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
   background-image: -o-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
   background-image: linear-gradient(to right, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
+  background-repeat: repeat-x;
+}
+
+.full-spectrum (@one: @red, @two: @yellow, @three: @brightGreen, @four: @teal, @five: @blue, @six: @lightPurple, @seven: @red) {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, @one), color-stop(17%, @two), color-stop(34%,@three), color-stop(51%, @four), color-stop(68%, @five), color-stop(85%, @six), color-stop(100%, @seven));
+  background-image: -moz-linear-gradient(left center, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
+  background-image: -webkit-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: -o-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: linear-gradient(to right, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
   background-repeat: repeat-x;
 }
 
@@ -584,6 +601,10 @@ div.pick-a-color-markup {
 			width: 295px;
 			float:left;
 			margin:10px 0px 10px 15px;
+		}
+		
+		.spectrum-hue {
+			.full-spectrum;
 		}
 	}
 }

@@ -661,3 +661,11 @@ div.pick-a-color-markup .advanced-content .color-preview {
   float: left;
   margin: 10px 0px 10px 15px;
 }
+div.pick-a-color-markup .advanced-content .spectrum-hue {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, #ff0000), color-stop(17%, #ffff00), color-stop(34%, #00ff00), color-stop(51%, #00ffff), color-stop(68%, #0000ff), color-stop(85%, #ff00ff), color-stop(100%, #ff0000));
+  background-image: -moz-linear-gradient(left center, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);
+  background-image: -webkit-linear-gradient(left, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);
+  background-image: -o-linear-gradient(left, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);
+  background-image: linear-gradient(to right, #ff0000 0%, #ffff00 17%, #00ff00 24%, #00ffff 51%, #0000ff 68%, #ff00ff 85%, #ff0000 100%);
+  background-repeat: repeat-x;
+}

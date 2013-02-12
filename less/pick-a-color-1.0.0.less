@@ -6,27 +6,27 @@
 
 @white:#ffffff;
 
-@red:#FF0000;
+@red:hsl(0,100%,50%);
 
-@orange:#FF6600;
+@orange:hsl(24, 100%, 50%);
 
-@yellow:#FFFF00;
+@yellow:hsl(60, 100%, 50%);
 
-@green:#008000;
+@green:hsl(120, 100%, 25%);
 
-@brightGreen: #00ff00;
+@brightGreen:hsl(120, 100%, 50%);
 
-@blue:#0000FF;
+@blue:hsl(240, 100%, 50%);
 
-@teal:#00ffff;
+@teal:hsl(180, 100%, 50%);
 
-@indigo:#4B0082;
+@indigo:hsl(275, 100%, 25%);
 
-@violet:#EE82EE;
+@violet:hsl(300, 76%, 72%);
 
-@lightPurple: #ff00ff;
+@lightPurple:hsl(300, 100%, 50%);
 
-@purple:#800080;
+@purple:hsl(300, 100%, 25%);
 
 @black:#000000;
 
@@ -127,6 +127,24 @@
   background-image: -webkit-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
   background-image: -o-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
   background-image: linear-gradient(to right, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-repeat: repeat-x;
+}
+
+.lightness-spectrum (@color: @red) {
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@color,50%)), color-stop(0.5, @color), color-stop(1.0, darken(@color,50%)));
+	background-image: -moz-linear-gradient(left center, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
+	background-image: -webkit-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+  background-image: -o-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+  background-image: linear-gradient(to right, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+  background-repeat: repeat-x;
+}
+
+.saturation-spectrum (@color: @red) {
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, desaturate(@color,100%)), color-stop(0.5, @color), color-stop(1.0, saturate(@color,100%)));
+	background-image: -moz-linear-gradient(left center, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
+	background-image: -webkit-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
+  background-image: -o-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
+  background-image: linear-gradient(to right, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
   background-repeat: repeat-x;
 }
 
@@ -601,10 +619,33 @@ div.pick-a-color-markup {
 			width: 295px;
 			float:left;
 			margin:10px 0px 10px 15px;
+			background-color: @red;
+			text-align:center;
+			.color-select.btn.advanced {
+				margin-top:15px;
+				display:none;
+			}
+			&:hover .color-select.btn.advanced {
+				display:inline;
+			}
 		}
 		
 		.spectrum-hue {
 			.full-spectrum;
+			.highlight-band {
+				left:0px;
+			}
+		}
+		
+		.spectrum-lightness {
+			.lightness-spectrum;
+		}
+		
+		.spectrum-saturation {
+			.saturation-spectrum;
+			.highlight-band {
+				left:@color-box-width - (@color-band-width + 2);
+			}
 		}
 	}
 }

@@ -158,12 +158,14 @@
               " ie-spectrum"));
             });
           }
+          
           var $saturationHighlightBand = $("<span>").addClass("highlight-band");
           $.each([0,1,2], function () {
             $saturationHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
           });
           $advancedList.append($saturationItem.append($saturationSpectrum.append($saturationHighlightBand))).
-            append($("<span>").addClass("color-preview advanced"));
+            append($("<span>").addClass("color-preview advanced").
+            append("<button class='color-select btn btn-mini advanced' type='button'>Select</button>"));
           $dropdownContainer.append($advanced.append($advancedList));
         }
         $markup.append($dropdownContainer);
@@ -305,26 +307,14 @@
         // returns the value by which the color should be multiplied to
         // get the color currently being highlighted by the band
     
-        getColorMultiplier: function (colorHex,position) {
+        getColorMultiplier: function (spectrumType,position) {
           // position of the color band as a percentage of the width of the color box
           var spectrumWidth = parseInt($(".color-box").first().width(),10);
           if (spectrumWidth === 0) { // in case the width isn't set correctly
             spectrumWidth = supportsTouch ? 160 : 200;
           }
           var halfSpectrumWidth = spectrumWidth / 2,
-              percentOfBox = position / spectrumWidth,
-              spectrumType;
-
-          switch(colorHex) {
-            case "fff":
-              spectrumType = "darkenRight";
-              break;
-            case "000":
-              spectrumType = "ligtenRight";
-              break;
-            default:
-              spectrumType = "bidirectional"
-          }
+              percentOfBox = position / spectrumWidth;
                     
           // for spectrums that lighten and darken, recalculate percent of box relative
           // to the half of spectrum the highlight band is currently in
@@ -343,9 +333,10 @@
         // https://github.com/cloudhead/less.js/blob/master/dist/less-1.3.3.js#L1763
   
         modifyHSLLightness: function (HSL,multiplier) {
-          HSL.l += multiplier; 
-          HSL.l = Math.min(Math.max(0,HSL.l),1); 
-          return tinycolor(HSL).toHex();
+          var hsl = HSL;
+          hsl.l += multiplier; 
+          hsl.l = Math.min(Math.max(0,hsl.l),1); 
+          return tinycolor(hsl).toHslString();
         },
         
         // defines the area within which an element can be moved 
@@ -399,42 +390,69 @@
           });
         },
         
-        modifyHighlightBand: function ($highlightBand,colorMultiplier,colorHex) {
+        modifyHighlightBand: function ($highlightBand,colorMultiplier,spectrumType) {
           var darkGrayHSL = { h: 0, s:0, l: 0.05 },
               bwMidHSL = { h: 0, s:0, l: 0.5 },
               // change to color of band is opposite of change to color of spectrum 
               hbColorMultiplier = -colorMultiplier,
               hbsColorMultiplier = hbColorMultiplier * 10, // needs to be either black or white
               $hbStripes = $highlightBand.find(".highlight-band-stripe"),
-              newBandColor = (colorHex === "000") ?
+              newBandColor = (spectrumType === "lightenRight") ?
                 methods.modifyHSLLightness(bwMidHSL,hbColorMultiplier) :  
                 methods.modifyHSLLightness(darkGrayHSL,hbColorMultiplier),
               newStripeColor = methods.modifyHSLLightness(bwMidHSL,hbsColorMultiplier);
-          $highlightBand.css("border-color","#" + newBandColor);
-          $hbStripes.css("background-color","#" + newStripeColor);
+          $highlightBand.css("border-color", newBandColor);
+          $hbStripes.css("background-color", newStripeColor);
         },
     
+        // must be called with apply and expects an arguments array like 
+        // [{type: "basic"}] or [{type: "advanced", hsl: {h,s,l}}]
         calculateHighlightedColor: function () {
-          var $this_el = $(this),
-              $this_parent = $this_el.parent(),
+          var $thisEl = $(this),
               hbWidth = $(".highlight-band").first().outerWidth(),
               halfHBWidth = hbWidth / 2,
-              // get the class of the parent color box and slice off "spectrum"
-              colorName = $this_parent.attr("class").split("-")[2],
-              colorHex = presetColors[colorName],
-              colorHsl = tinycolor(colorName).toHsl(),
-              // midpoint of the current left position of the color band
-              highlightBandLocation = parseInt($this_el.css("left"),10) + halfHBWidth,
-              colorMultiplier = methods.getColorMultiplier(colorHex,highlightBandLocation),
-              highlightedColor = "#" + methods.modifyHSLLightness(colorHsl,colorMultiplier);
-              
-          $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
-          // replace the color label with a 'select' button 
-          $this_parent.prev('.color-label').replaceWith(
-            '<button class="color-select btn btn-mini" type="button">Select</button>');
-          if (colorHex !== "fff") {  
-            methods.modifyHighlightBand($this_el,colorMultiplier,colorHex);
+              type = arguments[0].type;
+          
+          if (type === "basic") {
+            // get the class of the parent color box and slice off "spectrum"
+            var $this_parent = $thisEl.parent(),
+                colorName = $this_parent.attr("class").split("-")[2],
+                colorHex = presetColors[colorName],
+                colorHsl = tinycolor(colorHex).toHsl();
+                switch(colorHex) {
+                  case "fff":
+                    var spectrumType = "darkenRight";
+                    break;
+                  case "000":
+                    var spectrumType = "lightenRight";
+                    break;
+                  default:
+                    var spectrumType = "bidirectional";
+                }
+          } else {
+            var colorHsl = {h: arguments[0].hsl.h, l: arguments[0].hsl.l, s: arguments[0].hsl.s},
+                spectrumType = "bidirectional",
+                $advancedPreview = $(this).parents(".advanced-list").find(".color-preview");
           }
+                                        
+          // midpoint of the current left position of the color band
+          var highlightBandLocation = parseInt($thisEl.css("left"),10) + halfHBWidth,
+              colorMultiplier = methods.getColorMultiplier(spectrumType,highlightBandLocation),
+              highlightedColor = methods.modifyHSLLightness(colorHsl,colorMultiplier);
+                                                
+          if (type === "basic") {
+            $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
+            // replace the color label with a 'select' button 
+            $this_parent.prev('.color-label').replaceWith(
+              '<button class="color-select btn btn-mini" type="button">Select</button>');
+            if (spectrumType !== "darkenRight") {  
+              methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
+            }
+          } else {
+            $advancedPreview.css("background-color",highlightedColor);
+            methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
+          }
+
           return highlightedColor;
         },
     
@@ -579,7 +597,7 @@
               dimensions = methods.getMoveableArea($highlightBand);
           supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, mostRecentClick) : 
             methods.moveHighlightBand($highlightBand, dimensions, thisEvent);
-          var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand);
+          var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand, [{type: "basic"}]);
           methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
           // update touch instructions
           myElements.touchInstructions.html("Press 'select' to choose this color.");
@@ -604,9 +622,53 @@
               thisFunction.apply($(this), [theseArguments]);
             }
           });
-        }
-      
+        },
+        
+        
+        // takes the position of a highlight band on the hue spectrum and finds highlighted hue
+        // and updates the background of the lightness and saturation spectrums
     
+        getHighlightedHue: function () {
+          var hbWidth = $(this).outerWidth(),
+              halfHBWidth = hbWidth / 2,
+              position = parseInt($(this).css("left"),10) + halfHBWidth,
+              spectrumWidth = parseInt($(".color-box").first().width(),10),
+              $advancedPreview = $(this).parents(".advanced-list").find(".color-preview"),
+              $lightnessSpectrum = $(this).parents(".advanced-list").find(".spectrum-lightness"),
+              $saturationSpectrum = $(this).parents(".advanced-list").find(".spectrum-saturation"),
+              lightnessStyles = function (hue) {
+                  var standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(i) {
+                    return "background-image: " + i + "(left, hsl(" + hue + ",100%,75%) 0%, hsl(" + hue + 
+                    ",100%,50%) 50%, hsl(" + hue + ",100%,25%) 100%);"
+                  });
+                  return "background-image: -webkit-gradient(linear, left top, right top, color-stop(0, hsl(" + hue + 
+                  ",100%,75%)), color-stop(0.5, hsl(" + hue + ",100%,50%)), color-stop(1, hsl(" + hue + ",100%,25%)));" + 
+                  "background-image: -moz-linear-gradient(left center, hsl(" + hue + ",100%,75%) 0%, hsl(" + hue + 
+                  ",100%,50%) 50%, hsl(" + hue + ",100%,25%) 100%);" + standard 
+              },
+              saturationStyles = function (hue) {
+                  var standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(i) {
+                    return "background-image: " + i + "(left, hsl(" + hue + ",0%,50%) 0%, hsl(" + hue + 
+                    ",50%,50%) 50%, hsl(" + hue + ",100%,50%) 100%);"
+                  });
+                  return "background-image: -webkit-gradient(linear, left top, right top, color-stop(0, hsl(" + hue + 
+                  ",0%,50%)), color-stop(0.5, hsl(" + hue + ",50%,50%)), color-stop(1, hsl(" + hue + ",100%,50%)));" + 
+                  "background-image: -moz-linear-gradient(left center, hsl(" + hue + ",0%,50%) 0%, hsl(" + hue + 
+                  ",50%,50%) 50%, hsl(" + hue + ",100%,50%) 100%);" + standard 
+              };
+          
+          if (spectrumWidth === 0) { // in case the width isn't set correctly
+            spectrumWidth = supportsTouch ? 160 : 200;
+          }
+
+          var hue = Math.floor((position/spectrumWidth) * 360);
+          
+          $advancedPreview.css("background-color","hsl(" + hue + ",100%,50%)");
+          $lightnessSpectrum.attr("style",lightnessStyles(hue));
+          $saturationSpectrum.attr("style",saturationStyles(hue));
+          return hue;
+          
+        }
       };
   
       return this.each(function () {
@@ -620,7 +682,11 @@
           colorMenu: $(this).find(".color-menu"),
           colorSpectrums: $(this).find(".color-box"),
           touchInstructions: $(this).find(".color-menu-instructions"),
-          highlightBands: $(this).find(".highlight-band")
+          highlightBands: $(this).find(".highlight-band"),
+          basicHighlightBands: $(this).find(".basicColors-content .highlight-band"),
+          hueHighlightBand: $(this).find(".spectrum-hue .highlight-band"),
+          lightnessHighlightBand: $(this).find(".spectrum-lightness .highlight-band"),
+          saturationHighlightBand: $(this).find(".saturation-spectrum .highlight-band")
         };
         
         var mostRecentClick, // for storing click events when needed
@@ -660,6 +726,13 @@
               mySavedColorsInfo.colors = allSavedColors; // use mySavedColors
             }
           }
+        }
+        if (settings.showAdvanced) {
+          var advancedStatus = {
+            h: 0,
+            s: 1,
+            l: 0.5
+          };
         }
             
         // add the default color to saved colors
@@ -726,17 +799,26 @@
           
           methods.horizontallyDraggable.apply(myElements.highlightBands);
     
-          $(myElements.highlightBands).on(dragEvent,function (event) {
+          $(myElements.basicHighlightBands).on(dragEvent,function (event) {
             var $thisEl = event.target
-            methods.calculateHighlightedColor.apply(this);
+            methods.calculateHighlightedColor.apply(this, [{type: "basic"}]);
           }).on(endDragEvent, function (event) {
             var $thisEl = event.delegateTarget;
-            var finalColor = methods.calculateHighlightedColor.apply($thisEl);
+            var finalColor = methods.calculateHighlightedColor.apply($thisEl, [{type: "basic"}]);
             methods.addToSavedColors(finalColor,mySavedColorsInfo,myElements.savedColorsContent);
           });
-          
-
       
+        }
+        
+        if (settings.showAdvanced) {
+          $(myElements.hueHighlightBand).on(dragEvent, function(event) {
+            advancedStatus.h = methods.getHighlightedHue.apply(this);
+          });
+                    
+          $(myElements.lightnessHighlightBand).on(dragEvent, function() {
+            console.log(advancedStatus);
+            methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
+          })
         }
 
         // for using saved colors 
@@ -767,6 +849,8 @@
             methods.updateSavedColorMarkup(myElements.savedColorsContent,mySavedColorsInfo.colors);
           }
         }
+        
+        console.log(advancedStatus);
         
       });
 

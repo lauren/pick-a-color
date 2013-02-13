@@ -150,7 +150,7 @@
             $lightnessHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
           });
           $advancedList.append($lightnessItem.append($lightnessSpectrum.append($lightnessHighlightBand)));
-          var $saturationItem = $("<li>").addClass("lightness-item").append("Saturation: ");
+          var $saturationItem = $("<li>").addClass("saturation-item").append("Saturation: ");
           var $saturationSpectrum = $("<span>").addClass("color-box spectrum-saturation");
           if (isIE) {
             $.each([0,1], function (i) {
@@ -431,15 +431,22 @@
                 }
           } else {
             var colorHsl = {h: arguments[0].hsl.h, l: arguments[0].hsl.l, s: arguments[0].hsl.s},
+                currentHue = arguments[0].hsl.h,
+                currentSaturation = arguments[0].hsl.s,
                 spectrumType = "bidirectional",
-                $advancedPreview = $(this).parents(".advanced-list").find(".color-preview");
+                $advancedPreview = $(this).parents(".advanced-list").find(".color-preview"),
+                $hueSpectrum = $(this).parents(".advanced-list").find(".spectrum-hue"),
+                $saturationSpectrum = $(this).parents(".advanced-list").find(".spectrum-saturation");
           }
                                         
           // midpoint of the current left position of the color band
           var highlightBandLocation = parseInt($thisEl.css("left"),10) + halfHBWidth,
               colorMultiplier = methods.getColorMultiplier(spectrumType,highlightBandLocation),
-              highlightedColor = methods.modifyHSLLightness(colorHsl,colorMultiplier);
-                                                
+              highlightedColor = methods.modifyHSLLightness(colorHsl,colorMultiplier),
+              highlightedLightness = highlightedColor.split("(")[1].split(")")[0].split(",")[2].split("%")[0];
+              
+          highlightedLightness = (parseInt(highlightedLightness)) / 100;
+                                                              
           if (type === "basic") {
             $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
             // replace the color label with a 'select' button 
@@ -450,10 +457,12 @@
             }
           } else {
             $advancedPreview.css("background-color",highlightedColor);
-            methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
+            $saturationSpectrum.attr("style",methods.updateSaturationStyles(currentHue,highlightedLightness));
+            $hueSpectrum.attr("style",methods.updateHueStyles(currentSaturation,highlightedLightness));
+            methods.modifyHighlightBand($(".advanced-content .highlight-band"),colorMultiplier,spectrumType);
           }
 
-          return highlightedColor;
+          return (type === "basic") ? tinycolor(highlightedColor).toHex() : highlightedLightness;
         },
     
         updateSavedColorPreview: function (elements) {
@@ -586,16 +595,15 @@
         
         // handles user clicking or tapping on spectrum to select a color.
         // must be called with apply and relies on an arguments array like:
-        // [{thisEvent, mostRecentClick, savedColorsInfo, els}]
+        // [{thisEvent, savedColorsInfo, els}]
         tapSpectrum: function () {
           var thisEvent = arguments[0].thisEvent,
-              mostRecentClick = arguments[0].mostRecentClick,
               mySavedColorsInfo = arguments[0].savedColorsInfo,
               myElements = arguments[0].els;
           thisEvent.stopPropagation(); // stop this click from closing the dropdown
           var $highlightBand = $(this).find(".highlight-band"),
               dimensions = methods.getMoveableArea($highlightBand);
-          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, mostRecentClick) : 
+          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, thisEvent) : 
             methods.moveHighlightBand($highlightBand, dimensions, thisEvent);
           var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand, [{type: "basic"}]);
           methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
@@ -619,14 +627,84 @@
               return false;
             } else {
               theseArguments.thisEvent = event; //add the click event to the arguments object
-              thisFunction.apply($(this), [theseArguments]);
+              return thisFunction.apply($(this), [theseArguments]);
             }
           });
         },
         
+        updateSaturationStyles: function (hue, lightness) {
+          var lightnessString = (lightness * 100).toString() + "%",
+              string = "",
+              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index,value) {
+                string += "background-image: " + value + "(left," +
+                  "hsl(" + hue + ",0%," + lightnessString + ") 0%," + 
+                  "hsl(" + hue + ",50%," + lightnessString + ") 50%," + 
+                  "hsl(" + hue + ",100%," + lightnessString + ") 100%);";
+              });
+          return "background-image: -webkit-gradient(linear, left top, right top," + 
+            "color-stop(0, hsl(" + hue + ",0%," + lightnessString + "))," + 
+            "color-stop(0.5, hsl(" + hue + ",50%," + lightnessString + "))," + 
+            "color-stop(1, hsl(" + hue + ",100%," + lightnessString + ")));" + 
+            "background-image: -moz-linear-gradient(left center," + 
+            "hsl(" + hue + ",0%," + lightnessString + ") 0%," + 
+            "hsl(" + hue + ",50%," + lightnessString + ") 50%," + 
+            "hsl(" + hue + ",100%," + lightnessString + ") 100%);" + string;
+        },
+        
+        updateLightnessStyles: function (hue, saturation) {
+          var saturationString = (saturation * 100).toString() + "%",
+              string = "",
+              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index, value) {
+                string += "background-image: " + value + "(left," + 
+                  "hsl(" + hue + "," + saturationString + ",100%) 0%," + 
+                  "hsl(" + hue + "," + saturationString + ",50%) 50%," + 
+                  "hsl(" + hue + "," + saturationString + ",0%) 100%);";
+              });
+          return "background-image: -webkit-gradient(linear, left top, right top," + 
+            "color-stop(0, hsl(" + hue + "," + saturationString + ",100%))," + 
+            "color-stop(0.5, hsl(" + hue + "," + saturationString + ",50%))," + 
+            "color-stop(1, hsl(" + hue + "," + saturationString + ",0%)));" + 
+            "background-image: -moz-linear-gradient(left center," + 
+            "hsl(" + hue + "," + saturationString + ",100%) 0%," + 
+            "hsl(" + hue + "," + saturationString + ",50%) 50%," + 
+            "hsl(" + hue + "," + saturationString + ",0%) 100%);" + string;
+        },
+        
+        updateHueStyles: function (saturation, lightness) {
+          var saturationString = (saturation * 100).toString() + "%",
+              lightnessString = (lightness * 100).toString() + "%",
+              string = "",
+              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index,value) {
+                string += "background-image" + value + "(left," + 
+                  "hsl(0," + saturationString + "," + lightnessString + "); 0%," + 
+                  "hsl(60," + saturationString + "," + lightnessString + ") 17%," +
+                  "hsl(120," + saturationString + "," + lightnessString + ") 24%," + 
+                  "hsl(180," + saturationString + "," + lightnessString + ") 51%," +
+                  "hsl(240," + saturationString + "," + lightnessString + ") 68%," +
+                  "hsl(300," + saturationString + "," + lightnessString + ") 85%," +
+                  "hsl(0," + saturationString + "," + lightnessString + ") 100%);";
+            });
+          return "background-image: -webkit-gradient(linear, left top, right top," +
+            "color-stop(0%, hsl(0," + saturationString + "," + lightnessString + "))," + 
+            "color-stop(17%, hsl(60," + saturationString + "," + lightnessString + "))," + 
+            "color-stop(34%, hsl(120," + saturationString + "," + lightnessString + "))," + 
+            "color-stop(51%, hsl(180," + saturationString + "," + lightnessString + "))," + 
+            "color-stop(68%, hsl(300," + saturationString + "," + lightnessString + "))," +
+            "color-stop(85%, hsl(300," + saturationString + "," + lightnessString + "))," +
+            "color-stop(100%, hsl(0," + saturationString + "," + lightnessString + ")));" +
+            "background-image: -moz-linear-gradient(left center," +
+            "hsl(0," + saturationString + "," + lightnessString + ") 0%," +
+            "hsl(60," + saturationString + "," + lightnessString + ") 17%," + 
+            "hsl(120," + saturationString + "," + lightnessString + ") 24%," + 
+            "hsl(180," + saturationString + "," + lightnessString + ") 51%," +
+            "hsl(300," + saturationString + "," + lightnessString + ") 68%," +
+            "hsl(300," + saturationString + "," + lightnessString + ") 85%," + 
+            "hsl(0," + saturationString + "," + lightnessString + ") 100%);" + string;
+        },
         
         // takes the position of a highlight band on the hue spectrum and finds highlighted hue
         // and updates the background of the lightness and saturation spectrums
+        // relies on apply and an arguments array like [{h, s, l}]
     
         getHighlightedHue: function () {
           var hbWidth = $(this).outerWidth(),
@@ -636,26 +714,10 @@
               $advancedPreview = $(this).parents(".advanced-list").find(".color-preview"),
               $lightnessSpectrum = $(this).parents(".advanced-list").find(".spectrum-lightness"),
               $saturationSpectrum = $(this).parents(".advanced-list").find(".spectrum-saturation"),
-              lightnessStyles = function (hue) {
-                  var standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(i) {
-                    return "background-image: " + i + "(left, hsl(" + hue + ",100%,75%) 0%, hsl(" + hue + 
-                    ",100%,50%) 50%, hsl(" + hue + ",100%,25%) 100%);"
-                  });
-                  return "background-image: -webkit-gradient(linear, left top, right top, color-stop(0, hsl(" + hue + 
-                  ",100%,75%)), color-stop(0.5, hsl(" + hue + ",100%,50%)), color-stop(1, hsl(" + hue + ",100%,25%)));" + 
-                  "background-image: -moz-linear-gradient(left center, hsl(" + hue + ",100%,75%) 0%, hsl(" + hue + 
-                  ",100%,50%) 50%, hsl(" + hue + ",100%,25%) 100%);" + standard 
-              },
-              saturationStyles = function (hue) {
-                  var standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(i) {
-                    return "background-image: " + i + "(left, hsl(" + hue + ",0%,50%) 0%, hsl(" + hue + 
-                    ",50%,50%) 50%, hsl(" + hue + ",100%,50%) 100%);"
-                  });
-                  return "background-image: -webkit-gradient(linear, left top, right top, color-stop(0, hsl(" + hue + 
-                  ",0%,50%)), color-stop(0.5, hsl(" + hue + ",50%,50%)), color-stop(1, hsl(" + hue + ",100%,50%)));" + 
-                  "background-image: -moz-linear-gradient(left center, hsl(" + hue + ",0%,50%) 0%, hsl(" + hue + 
-                  ",50%,50%) 50%, hsl(" + hue + ",100%,50%) 100%);" + standard 
-              };
+              currentLightness = arguments[0].l,
+              currentSaturation = arguments[0].s,
+              saturationString = (currentSaturation * 100).toString() + "%",
+              lightnessString = (currentLightness * 100).toString() + "%";
           
           if (spectrumWidth === 0) { // in case the width isn't set correctly
             spectrumWidth = supportsTouch ? 160 : 200;
@@ -663,12 +725,50 @@
 
           var hue = Math.floor((position/spectrumWidth) * 360);
           
-          $advancedPreview.css("background-color","hsl(" + hue + ",100%,50%)");
-          $lightnessSpectrum.attr("style",lightnessStyles(hue));
-          $saturationSpectrum.attr("style",saturationStyles(hue));
-          return hue;
+          $advancedPreview.css("background-color","hsl(" + hue + "," + saturationString + "," + lightnessString + ")");
+          $lightnessSpectrum.attr("style",methods.updateLightnessStyles(hue,currentSaturation));
+          $saturationSpectrum.attr("style",methods.updateSaturationStyles(hue,currentLightness));
+          return hue;        
+        },
+        
+        // relies on apply and an arguments array like [{h, s, l}]
+        
+        getHighlightedSaturation: function () {
+          var hbWidth = $(this).outerWidth(),
+              halfHBWidth = hbWidth / 2,
+              position = parseInt($(this).css("left"),10) + halfHBWidth,
+              spectrumWidth = parseInt($(".color-box").first().width(),10),
+              $advancedPreview = $(this).parents(".advanced-list").find(".color-preview"),
+              $lightnessSpectrum = $(this).parents(".advanced-list").find(".spectrum-lightness"),
+              $hueSpectrum = $(this).parents(".advanced-list").find(".spectrum-hue"),
+              currentLightness = arguments[0].l,
+              lightnessString = (currentLightness * 100).toString() + "%",
+              currentHue = arguments[0].h;
           
+          if (spectrumWidth === 0) { // in case the width isn't set correctly
+            spectrumWidth = supportsTouch ? 160 : 200;
+          }
+                  
+          var saturation = position/spectrumWidth,
+              saturationString = (saturation * 100).toString() + "%";
+          
+          $advancedPreview.css("background-color","hsl(" + currentHue + "," + saturationString + "," + lightnessString + ")");
+          $lightnessSpectrum.attr("style",methods.updateLightnessStyles(currentHue,saturation));
+          $hueSpectrum.attr("style",methods.updateHueStyles(saturation,currentLightness));
+          return saturation;        
+        },
+        
+        tapLightnessSpectrum: function () {
+          var thisEvent = arguments[0].thisEvent,
+              advancedStatus = arguments[0].advancedStatus;
+          thisEvent.stopPropagation(); // stop this click from closing the dropdown
+          var $highlightBand = $(this).find(".highlight-band"),
+              dimensions = methods.getMoveableArea($highlightBand);
+          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, thisEvent) : 
+            methods.moveHighlightBand($highlightBand, dimensions, thisEvent);
+          arguments[0].advancedStatus.l = methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
         }
+        
       };
   
       return this.each(function () {
@@ -681,12 +781,17 @@
           colorPreviewButton: $(this).find(".btn-group"),
           colorMenu: $(this).find(".color-menu"),
           colorSpectrums: $(this).find(".color-box"),
+          basicSpectrums: $(this).find(".basicColors-content .color-box"),
           touchInstructions: $(this).find(".color-menu-instructions"),
           highlightBands: $(this).find(".highlight-band"),
           basicHighlightBands: $(this).find(".basicColors-content .highlight-band"),
+          hueSpectrum: $(this).find(".spectrum-hue"),
+          lightnessSpectrum: $(this).find(".spectrum-lightness"),
+          saturationSpectrum: $(this).find(".spectrum-saturation"),
           hueHighlightBand: $(this).find(".spectrum-hue .highlight-band"),
           lightnessHighlightBand: $(this).find(".spectrum-lightness .highlight-band"),
-          saturationHighlightBand: $(this).find(".saturation-spectrum .highlight-band")
+          saturationHighlightBand: $(this).find(".spectrum-saturation .highlight-band"),
+          advancedPreview: $(this).find(".advanced-content .color-preview")
         };
         
         var mostRecentClick, // for storing click events when needed
@@ -793,8 +898,8 @@
     
           // move the highlight band when you click on a spectrum 
           
-          methods.executeUnlessScrolled.apply(myElements.colorSpectrums, [{"thisFunction": methods.tapSpectrum, 
-            "theseArguments": {"thisEvent": event, "mostRecentClick": mostRecentClick, "savedColorsInfo": 
+          methods.executeUnlessScrolled.apply(myElements.basicSpectrums, [{"thisFunction": methods.tapSpectrum, 
+            "theseArguments": {"thisEvent": event, "savedColorsInfo": 
             mySavedColorsInfo, "els": myElements}}]);
           
           methods.horizontallyDraggable.apply(myElements.highlightBands);
@@ -809,17 +914,67 @@
           });
       
         }
-        
+                
         if (settings.showAdvanced) {
+          
+          // for dragging advanced sliders
+          
           $(myElements.hueHighlightBand).on(dragEvent, function(event) {
-            advancedStatus.h = methods.getHighlightedHue.apply(this);
+            advancedStatus.h = methods.getHighlightedHue.apply(this, [advancedStatus]);
           });
                     
           $(myElements.lightnessHighlightBand).on(dragEvent, function() {
-            console.log(advancedStatus);
             methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
+          }).on(endDragEvent, function () {
+            advancedStatus.l = methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
+          });
+          
+          $(myElements.saturationHighlightBand).on(dragEvent, function() {
+            methods.getHighlightedSaturation.apply(this, [advancedStatus]);
+          }).on(endDragEvent, function () {
+            advancedStatus.s = methods.getHighlightedSaturation.apply(this, [advancedStatus]);
+          });
+          
+          // for clicking/tapping advanced sliders 
+          
+          $(myElements.lightnessSpectrum).click( function (event) {
+            event.stopPropagation(); // stop this click from closing the dropdown
+            var $highlightBand = $(this).find(".highlight-band"),
+                dimensions = methods.getMoveableArea($highlightBand);
+            supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
+              methods.moveHighlightBand($highlightBand, dimensions, event);
+            advancedStatus.l = methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
+          });
+          
+          $(myElements.hueSpectrum).click( function (event) {
+            event.stopPropagation(); // stop this click from closing the dropdown
+            var $highlightBand = $(this).find(".highlight-band"),
+                dimensions = methods.getMoveableArea($highlightBand);
+            supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
+              methods.moveHighlightBand($highlightBand, dimensions, event);
+            advancedStatus.h = methods.getHighlightedHue.apply($highlightBand, [advancedStatus]);
+          });
+          
+          $(myElements.saturationSpectrum).click( function (event) {
+            event.stopPropagation(); // stop this click from closing the dropdown
+            var $highlightBand = $(this).find(".highlight-band"),
+                dimensions = methods.getMoveableArea($highlightBand);
+            supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
+              methods.moveHighlightBand($highlightBand, dimensions, event);
+            advancedStatus.s = methods.getHighlightedSaturation.apply($highlightBand, [advancedStatus]);
+          });
+          
+          //for clicking advanced color preview
+          
+          $(myElements.advancedPreview).click( function () {
+            var selectedColor = tinycolor($(this).css("background-color")).toHex();
+            $(myElements.colorTextInput).val(selectedColor);
+            methods.updatePreview(myElements.colorTextInput);
+            methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent); 
+            methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
           })
         }
+        
 
         // for using saved colors 
     
@@ -850,8 +1005,8 @@
           }
         }
         
-        console.log(advancedStatus);
         
+                
       });
 
     };

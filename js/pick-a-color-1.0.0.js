@@ -127,9 +127,9 @@
           var $hueItem = $("<li>").addClass("hue-item").text("Hue: ");
           var $hueSpectrum = $("<span>").addClass("color-box spectrum-hue");
           if (isIE) {
-            $.each([0,6], function (i) {
-              $thisSpectrum.append($("<span>").addClass("hue-spectrum-" + i +
-              " ie-spectrum"));
+            $.each([0,1,2,3,4,5,6], function (i) {
+              $hueSpectrum.append($("<span>").addClass("hue-spectrum-" + i +
+              " ie-spectrum hue"));
             });
           }
           var $hueHighlightBand = $("<span>").addClass("highlight-band");
@@ -141,7 +141,7 @@
           var $lightnessSpectrum = $("<span>").addClass("color-box spectrum-lightness");
           if (isIE) {
             $.each([0,1], function (i) {
-              $thisSpectrum.append($("<span>").addClass("lightness-spectrum-" + i +
+              $lightnessSpectrum.append($("<span>").addClass("lightness-spectrum-" + i +
               " ie-spectrum"));
             });
           }
@@ -154,7 +154,7 @@
           var $saturationSpectrum = $("<span>").addClass("color-box spectrum-saturation");
           if (isIE) {
             $.each([0,1], function (i) {
-              $thisSpectrum.append($("<span>").addClass("saturation-spectrum-" + i +
+              $saturationSpectrum.append($("<span>").addClass("saturation-spectrum-" + i +
               " ie-spectrum"));
             });
           }
@@ -444,7 +444,7 @@
               colorMultiplier = methods.getColorMultiplier(spectrumType,highlightBandLocation),
               highlightedColor = methods.modifyHSLLightness(colorHsl,colorMultiplier),
               highlightedLightness = highlightedColor.split("(")[1].split(")")[0].split(",")[2].split("%")[0];
-              
+          
           highlightedLightness = (parseInt(highlightedLightness)) / 100;
                                                               
           if (type === "basic") {
@@ -756,17 +756,6 @@
           $lightnessSpectrum.attr("style",methods.updateLightnessStyles(currentHue,saturation));
           $hueSpectrum.attr("style",methods.updateHueStyles(saturation,currentLightness));
           return saturation;        
-        },
-        
-        tapLightnessSpectrum: function () {
-          var thisEvent = arguments[0].thisEvent,
-              advancedStatus = arguments[0].advancedStatus;
-          thisEvent.stopPropagation(); // stop this click from closing the dropdown
-          var $highlightBand = $(this).find(".highlight-band"),
-              dimensions = methods.getMoveableArea($highlightBand);
-          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, thisEvent) : 
-            methods.moveHighlightBand($highlightBand, dimensions, thisEvent);
-          arguments[0].advancedStatus.l = methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
         }
         
       };
@@ -899,7 +888,7 @@
           // move the highlight band when you click on a spectrum 
           
           methods.executeUnlessScrolled.apply(myElements.basicSpectrums, [{"thisFunction": methods.tapSpectrum, 
-            "theseArguments": {"thisEvent": event, "savedColorsInfo": 
+            "theseArguments": {"savedColorsInfo": 
             mySavedColorsInfo, "els": myElements}}]);
           
           methods.horizontallyDraggable.apply(myElements.highlightBands);
@@ -925,7 +914,7 @@
                     
           $(myElements.lightnessHighlightBand).on(dragEvent, function() {
             methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
-          }).on(endDragEvent, function () {
+          }).on(endEvent, function () {
             advancedStatus.l = methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
           });
           
@@ -937,13 +926,13 @@
           
           // for clicking/tapping advanced sliders 
           
-          $(myElements.lightnessSpectrum).click( function (event) {
+          $(myElements.lightnessSpectrum).on("mousedown", function (event) {
             event.stopPropagation(); // stop this click from closing the dropdown
             var $highlightBand = $(this).find(".highlight-band"),
                 dimensions = methods.getMoveableArea($highlightBand);
             supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
               methods.moveHighlightBand($highlightBand, dimensions, event);
-            advancedStatus.l = methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
+            methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
           });
           
           $(myElements.hueSpectrum).click( function (event) {

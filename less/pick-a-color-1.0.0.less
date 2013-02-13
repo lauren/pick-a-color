@@ -160,6 +160,16 @@
 	.right-rounded-corners;
 }
 
+.saturation-spectrum-0(@color) {
+	.two-color-spectrum(desaturate(@color,100%),desaturate(@color,50%));
+	.left-rounded-corners;
+}
+
+.saturation-spectrum-1(@color) {
+	.two-color-spectrum(desaturate(@color,50%),@color);
+	.right-rounded-corners;
+}
+
 //// actual styles 
 
 // input field
@@ -451,6 +461,9 @@ div.pick-a-color-markup {
 	  height:20px;
 	  width:@color-box-width/2;
 		display:inline-block;
+		&.hue {
+			width:(@color-box-width/6) + .5px;
+		}
 		@media screen and (max-width: 979px) {
 			width:@color-box-width-phone/2;
 			height:35px;
@@ -458,11 +471,11 @@ div.pick-a-color-markup {
 		top:-1;
 	}
 
-	.red-spectrum-0 {
+	.red-spectrum-0, .lightness-spectrum-0 {
 		.spectrum-0(@red);
 	}
 
-	.red-spectrum-1 {
+	.red-spectrum-1, .lightness-spectrum-1 {
 		.spectrum-1(@red);
 	}
 
@@ -505,7 +518,46 @@ div.pick-a-color-markup {
 	.purple-spectrum-1 {
 		.spectrum-1(@purple);
 	}
+	
+	.saturation-spectrum-0 {
+		.saturation-spectrum-0(@red);
+	}
 
+	.saturation-spectrum-1 {
+		.saturation-spectrum-1(@red);
+	}
+	
+	.hue-spectrum-0 {
+		.two-color-spectrum(@red,@yellow);
+	}
+	
+	.hue-spectrum-1 {
+		.two-color-spectrum(@yellow,@brightGreen);
+	}
+	
+	.hue-spectrum-2 {
+		.two-color-spectrum(@brightGreen,@teal);
+		left:-1px;
+		position:relative;
+	}
+	
+	.hue-spectrum-3 {
+		.two-color-spectrum(@teal,@blue);
+		left:-1px;
+		position:relative;
+	}
+	
+	.hue-spectrum-4 {
+		.two-color-spectrum(@blue,@lightPurple);
+		left:-1px;
+		position:relative;
+	}
+	
+	.hue-spectrum-5 {
+		.two-color-spectrum(@lightPurple,@red);
+		left:-2px;
+		position:relative;
+	}
 
 	// highlight band
 

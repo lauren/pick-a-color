@@ -36,6 +36,8 @@ I'm [Lauren](http://twitter.com/laurensperber). I originally wrote Pick-a-Color 
 
 If you have any bugs to report in Pick-a-Color, let me know by making a ticket here: https://github.com/lauren/pick-a-color/issues/new 
 
+Pick-a-Color is available under the MIT License: https://github.com/lauren/pick-a-color/blob/master/LICENSE
+
 OK! Let's do this color picking thing!
 
 ## How to Use
@@ -190,7 +192,3 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
-		
-## License
-
-Pick-a-Color is available under the MIT License: https://github.com/lauren/pick-a-color/blob/master/LICENSE

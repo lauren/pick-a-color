@@ -140,7 +140,7 @@ $(".pick-a-color").pickAColor({
    saveColorsPerElement    : false,
    fadeMenuToggle          : true
  });
-``
+```
 
 #### showSpectrum 
 

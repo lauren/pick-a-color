@@ -1,33 +1,50 @@
 Pick-a-Color: a jQuery color picker for Twitter Bootstrap
 ============
 
-Pick-a-Color is a color picker that's easy to use--even for people who aren't techies or designers. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
+For a documentation-reading experience that includes rainbow gradients and live examples, check out the official docs at [http://lauren.github.com/pick-a-color](http://lauren.github.com/pick-a-color).
 
-For a less terrible documentation-reading experience, check out the official docs at [http://lauren.github.com/pick-a-color](http://lauren.github.com/pick-a-color).
+There are some great color picker plugins out there, but most cater to the needs of techies and designers, providing complicated controls to access every color imaginable.
+
+Pick-a-Color is designed to be easy for anyone to use. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
+
 
 ### Features 
 
 #### For your site's users
-* text field entry that accepts HEX, RGB, RGBA, HSL, HSLA, HSV, HSVA, and named colors 
-		* _Huge, tremendous thanks to Brian Grinstead's [Tiny Color](https://github.com/bgrins/TinyColor) for doing all the tricky color conversion math._
-* dropdown with 8 basic colors that can be lightened and darkened
-* "Saved Colors" tab that stores recently used colors for later reference
-		* _Saved Colors persist across pageviews with localStorage when possible and cookies when localStorage is unavailable or impractical_
-* easy-to-use interface based on pretty Bootstrap styles
-* chunky mobile styles that make dragging easy on a touch device
+
+**Flexible text entry**
+
+Accepts HEX, RGB, HSL, HSV, HSVA, and names, thanks to Brian Grinstead's amazing [Tiny Color](https://github.com/bgrins/TinyColor) library.
+
+**Saved colors**
+
+Saves up to 16 recently used colors. Colors are stored in localStorage or cookies.
+
+**Basic color palate**
+
+Easy-to-use preset colors that can be lightened and darkened.
+
+**Chunky mobile styles**
+
+Dragging is easy, even on a touch device.
 
 #### For you
-* simple initialization with as little as three lines of HTML and one line of JavaScript
-* configurable options for:
-		* whether or not to show users a lighten/darken spectrum
-		* whether or not to show users their saved colors
-		* whether colors should be saved separately for each color picker or once for all color pickers on a page (sensible default is once per page, but I leave the choice to you)
-		* whether or not the dropdown menu should fade in and out (hey, some people feel strongly about this...so...yeah)
-* anonymous JavaScript function that will not mess up your other JavaScript
-* namespaced CSS that will not mess up your other styles
-* equally pretty and user-friendly in desktop and mobile browsers
-* tested in Chrome (Mac/PC/iOS), Safari (Mac/iOS), IE 8+, Firefox (Mac/PC), and Opera (Mac/PC)
-* you didn't have to write your own color picker
+
+**Tested**
+
+Tested in Chrome (Mac/PC/iOS), Safari (Mac/iOS), IE 8+, Firefox (Mac/PC), and Opera (Mac/PC).
+
+**No conflicts**
+
+Anonymous JavasScript function and namespaced CSS won't mess up your code.
+
+**Simple initialization**
+
+As little as three lines of HTML and one line of JavaScript.
+
+**Done**
+
+You didn't have to write your own color picker. 'Nuff said.
 
 ### Caveats
 
@@ -42,33 +59,46 @@ OK! Let's do this color picking thing!
 
 *In the `<head>`:*
 
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/pick-a-color.min.css">
+```html
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/pick-a-color.min.css">
+```
 
 *Before the ending `</body>`:*
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-		<script src="js/tinycolor-0.9.12.min.js"></script>
-		<script src="js/color-picker.js"></script>
+
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="js/tinycolor-0.9.12.min.js"></script>
+<script src="js/color-picker.js"></script>
+```
 		
 2. Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
+		```html
 		<div class="pick-a-color" id="YOUR_ID" data-YOUR_ID="YOUR_DEFAULT">YOUR_DEFAULT</div>
-
+		```
+    
 		For instance, yours might look like this:
 
-				<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
+		```html
+		<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
+		```
 		
 		You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
 3. Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
+		```javascript
 		$(".pick-a-color").pickAColor();
+		```
 		
 4. To optimize IE and mobile support, I recommend adding these tags to your `<head>`:
 	
-	<meta http-equiv="x-ua-compatible" content="IE=10">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+	  ```html
+		<meta http-equiv="x-ua-compatible" content="IE=10">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		```
+		
 Ta-da! You have a color picker! You might even have several!
 
 ### Sample HTML

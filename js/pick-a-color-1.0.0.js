@@ -518,11 +518,11 @@
         
         // handles user clicking or tapping on spectrum to select a color.
         // must be called with apply and relies on an arguments array like:
-        // [{thisEvent, mostRecentClick, savedColorsInfo, els}]
+        // [{thisEvent, avedColorsInfo, els}]
         tapSpectrum: function () {
           var thisEvent = arguments[0].thisEvent,
-              mostRecentClick = arguments[0].mostRecentClick,
               mySavedColorsInfo = arguments[0].savedColorsInfo,
+              mostRecentClick = arguments[0].mostRecentClick,
               myElements = arguments[0].els;
           thisEvent.stopPropagation(); // stop this click from closing the dropdown
           var $highlightBand = $(this).find(".highlight-band"),
@@ -542,15 +542,18 @@
         executeUnlessScrolled: function () {
           var thisFunction = arguments[0].thisFunction,
               theseArguments = arguments[0].theseArguments,
-              windowTopPosition;
+              windowTopPosition,
+              mostRecentClick;
           $(this).on(startEvent, function (e) {
             windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
+            mostRecentClick = e;
           }).on(clickEvent, function (event) {
             var distance = windowTopPosition - $(window).scrollTop();
             if (supportsTouch && (Math.abs(distance) > 0)) {
               return false;
             } else {
               theseArguments.thisEvent = event; //add the click event to the arguments object
+              theseArguments.mostRecentClick = mostRecentClick //add start event to the arguments object
               thisFunction.apply($(this), [theseArguments]);
             }
           });
@@ -671,8 +674,7 @@
           // move the highlight band when you click on a spectrum 
           
           methods.executeUnlessScrolled.apply(myElements.colorSpectrums, [{"thisFunction": methods.tapSpectrum, 
-            "theseArguments": {"thisEvent": event, "mostRecentClick": mostRecentClick, "savedColorsInfo": 
-            mySavedColorsInfo, "els": myElements}}]);
+            "theseArguments": {"savedColorsInfo": mySavedColorsInfo, "els": myElements}}]);
           
           methods.horizontallyDraggable.apply(myElements.highlightBands);
     

@@ -32,7 +32,7 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 ### What? Why? Who?
 
-I'm [Lauren](http://twitter.com/laurensperber). I originally wrote Pick-a-Color for my friends at [Broadstreet](http://broadstreetads.com) because they needed a color picker that was easy for people at online publishing companies to use.
+I'm [Lauren](http://twitter.com/laurensperber). I originally wrote Pick-a-Color for my friends at [Broadstreet Ads](http://broadstreetads.com) because they needed a color picker that was easy for people at online publishing companies to use.
 
 If you have any bugs to report in Pick-a-Color, let me know by making a ticket here: https://github.com/lauren/pick-a-color/issues/new 
 
@@ -42,7 +42,7 @@ OK! Let's do this color picking thing!
 
 ## How to Use
 
-1. Download the required files: http://lauren.github.com/pick-a-color/pick-a-color.zip. Add them to your CSS and JS folders and include them in your document as follows:
+1) Download the required files: http://lauren.github.com/pick-a-color/pick-a-color.zip. Add them to your CSS and JS folders and include them in your document as follows:
 
 **In the `<head>`:**
 
@@ -59,13 +59,13 @@ OK! Let's do this color picking thing!
 <script src="js/color-picker.js"></script>
 ```
 		
-2. Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
+2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
 <div class="pick-a-color" id="YOUR_ID" data-YOUR_ID="YOUR_DEFAULT">YOUR_DEFAULT</div>
 ```
     
-		For instance, yours might look like this:
+For instance, yours might look like this:
 
 ```html
 <div class="pick-a-color" id="border-color" data-border-color="222">222</div>
@@ -73,13 +73,13 @@ OK! Let's do this color picking thing!
 		
 		You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
-3. Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
+3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
 ```javascript
 $(".pick-a-color").pickAColor();
 ```
 		
-4. To optimize IE and mobile support, I recommend adding these tags to your `<head>`:
+4) To optimize IE and mobile support, I recommend adding these tags to your `<head>`:
 	
 ```html
 <meta http-equiv="x-ua-compatible" content="IE=10">
@@ -111,22 +111,23 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 		<div class="pick-a-color" id="data-contrast-color" data-contrast-color="eee">eee</div>
 		<div class="pick-a-color"></div>
 
-	<script src="js/jquery-1.9.0.min.js"></script>
-	<script src="js/tinycolor-min.js"></script>
-	<script src="js/pick-a-color.js"></script>	
+		<script src="js/jquery-1.9.0.min.js"></script>
+		<script src="js/tinycolor-min.js"></script>
+		<script src="js/pick-a-color.js"></script>	
 
-	<script type="text/javascript">
+		<script type="text/javascript">
 
-	$(document).ready(function () {
+			$(document).ready(function () {
 
-	  $(".pick-a-color").pickAColor();
+	  		$(".pick-a-color").pickAColor();
 
-	});
+			});
 
-	</script>
+		</script>
 		
 	</body>
 </html>
+```
 
 ### Options
 

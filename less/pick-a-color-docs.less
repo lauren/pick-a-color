@@ -84,6 +84,16 @@
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@red),argb(@purple))); // IE9 and down
 }
 
+.vertical-full-spectrum-bg (@one: @red, @two: @orange, @three: @yellow, @four: @green, @five: @blue, @six: @purple) {
+  background-image: -webkit-gradient(linear, left top, left top, color-stop(0%, @one), color-stop(20%, @two), color-stop(40%,@three), color-stop(60%, @four), color-stop(80%, @five), color-stop(100%, @six));
+  background-image: -moz-linear-gradient(top, @one 0%, @two 20%, @three 40%, @four 60%, @five 80%, @six 100%);
+  background-image: -webkit-linear-gradient(top, @one 0%, @two 20%, @three 40%, @four 60%, @five 80%, @six 100%); 
+  background-image: -o-linear-gradient(top, @one 0%, @two 20%, @three 40%, @four 60%, @five 80%, @six 100%); 
+  background-image: linear-gradient(to bottom, @one 0%, @two 20%, @three 40%, @four 60%, @five 80%, @six 100%); 
+  background-repeat: repeat-x;
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@red),argb(@purple))); // IE9 and down
+}
+
 .top-rounded-corners (@radius: 4px) {
    -webkit-border-top-left-radius: @radius;
        -moz-border-radius-topleft: @radius;
@@ -127,7 +137,7 @@ body {
 	font-size:@fontsize;
 	line-height:@lineheight;
 	color: @gray;
-	.vertical-full-spectrum;
+	.vertical-full-spectrum-bg;
 	padding-bottom:50px;
 	@media screen and (max-width: 768px) {
 		padding-top:0px;
@@ -141,6 +151,7 @@ body {
 	margin-top:-20px;
 	.rounded-corners;
 	border: 1px solid #d4d4d4;
+	.shadows(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
 	@media screen and (max-width: 768px) {
 		width: auto;
 		left:0;
@@ -148,7 +159,6 @@ body {
 		position:relative;
 		margin:-5px 0px 0px 0px;
 	}
-	.shadows(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75))
 	}
 	
 	p {

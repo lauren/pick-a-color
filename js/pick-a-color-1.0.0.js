@@ -1,4 +1,8 @@
-;(function ($) {
+/*
+* Pick-a-Color CSS v1.0.0
+* Copyright 2013 Lauren Sperber and Broadstreet Ads
+* https://github.com/lauren/pick-a-color/blob/master/LICENSE
+*/;(function ($) {
     "use strict";
    
     $.fn.pickAColor = function (options) {

@@ -4,10 +4,8 @@
     "description": "an easy-to-use jQuery color picker for Twitter Bootstrap.",
     "keywords": [
         "color",
-        "color picker",
 				"input",
 				"bootstrap",
-				"twitter bootstrap"
     ],
     "version": "1.0.0",
     "author": {

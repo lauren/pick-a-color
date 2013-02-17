@@ -62,6 +62,6 @@ pre{margin-top:4px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-label{margin-left:8px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-box{width:160px;height:35px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .ie-spectrum{width:80px;height:35px;}
-.pretend-mobile div.pick-a-color-markup .color-menu .highlight-band{width:21px;left:69.5px;height:34px;}
-.pretend-mobile div.pick-a-color-markup .color-menu .highlight-band-stripe{margin:4px 1px;}
+.pretend-mobile div.pick-a-color-markup .color-menu .highlight-band{width:21px;left:69.5px;height:34px;}.pretend-mobile div.pick-a-color-markup .color-menu .highlight-band .highlight-band-stripe{margin:4px 1px;}
+.pretend-mobile div.pick-a-color-markup .color-menu .spectrum-white .highlight-band,.pretend-mobile div.pick-a-color-markup .color-menu .spectrum-black .highlight-band{left:0px;}
 .pretend-mobile div.pick-a-color-markup .saved-color-col{width:125px;}

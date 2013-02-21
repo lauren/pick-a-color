@@ -32,7 +32,7 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 ### What? Why? Who?
 
-I'm [Lauren](http://twitter.com/laurensperber). I originally wrote Pick-a-Color for my friends at [Broadstreet Ads](http://broadstreetads.com) because they needed a color picker that was easy for people at online publishing companies to use.
+I'm [Lauren](http://laurensperber.com). I originally wrote Pick-a-Color for my friends at [Broadstreet Ads](http://broadstreetads.com) because they needed a color picker that was easy for people at online publishing companies to use.
 
 If you have any bugs to report in Pick-a-Color, let me know by making a ticket here: https://github.com/lauren/pick-a-color/issues/new 
 

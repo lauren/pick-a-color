@@ -126,7 +126,7 @@
           allSavedColors = JSON.parse(localStorage.allSavedColors);
           
           // if there's a saved_colors cookie...          
-        } else if ($.inArray("pickAColorSavedColors-allSavedColors",myCookies) > -1) {
+        } else if (myCookies.match("pickAColorSavedColors-allSavedColors=")) {
           var theseCookies = myCookies.split(";"); // split cookies into an array...
           
           $.each(theseCookies, function (index) { // find the savedColors cookie!

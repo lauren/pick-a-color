@@ -36,17 +36,6 @@
           clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
-                
-      if (!Array.prototype.indexOf) {
-        Array.prototype.indexOf = function(obj) {
-          for (var i = 0; i < this.length; i++) {
-            if (this[i] === obj) { 
-              return i; 
-            }
-          };
-          return -1;
-        };
-      }
   
       // settings
   
@@ -137,7 +126,7 @@
           allSavedColors = JSON.parse(localStorage.allSavedColors);
           
           // if there's a saved_colors cookie...          
-        } else if (myCookies.indexOf("pickAColorSavedColors-allSavedColors") > -1) {
+        } else if ($.inArray("pickAColorSavedColors-allSavedColors",myCookies) > -1) {
           var theseCookies = myCookies.split(";"); // split cookies into an array...
           
           $.each(theseCookies, function (index) { // find the savedColors cookie!
@@ -476,8 +465,8 @@
         },
     
         removeFromArray: function (array, item) {
-          if (array.indexOf(item) !== -1) { // make sure it's in there
-            array.splice(array.indexOf(item),1);
+          if ($.inArray(item,array) !== -1) { // make sure it's in there
+            array.splice($.inArray(item,array),1);
           }
         },
     
@@ -605,7 +594,7 @@
                 mySavedColorsInfo.dataAttr]);
             
             // otherwise, get them from cookies
-            } else if (myCookies.indexOf("pickAColorSavedColors-" + mySavedColorsInfo.dataAttr) > -1) {
+            } else if ($.inArray("pickAColorSavedColors-" + mySavedColorsInfo.dataAttr,myCookies) > -1) {
               var theseCookies = myCookies.split(";"); // an array of cookies...
               for (var i=0; i < theseCookies.length; i++) {
                 if (theseCookies[i].match(mySavedColorsInfo.dataAttr)) {

@@ -454,8 +454,8 @@
             }
           } else {
             $advancedPreview.css("background-color",highlightedHex);
-            $saturationSpectrum.attr("style",methods.updateSaturationStyles(currentHue,highlightedLightness));
-            $hueSpectrum.attr("style",methods.updateHueStyles(currentSaturation,highlightedLightness));
+            methods.updateSaturationStyles($saturationSpectrum,currentHue,highlightedLightness);
+            methods.updateHueStyles($hueSpectrum,currentSaturation,highlightedLightness);
             methods.modifyHighlightBand($(".advanced-content .highlight-band"),colorMultiplier,spectrumType);
           }
 
@@ -632,23 +632,32 @@
           });
         },
         
-        updateSaturationStyles: function (hue, lightness) {
+        updateSaturationStyles: function (spectrum, hue, lightness) {
           var lightnessString = (lightness * 100).toString() + "%",
-              string = "",
+              start = "#" + tinycolor("hsl(" + hue + ",0%," + lightnessString).toHex(),
+              mid = "#" + tinycolor("hsl(" + hue + ",50%," + lightnessString).toHex(),
+              end = "#" + tinycolor("hsl(" + hue + ",100%," + lightnessString).toHex(),
+              fullSpectrumString = "",
               standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index,value) {
-                string += "background-image: " + value + "(left," +
-                  "hsl(" + hue + ",0%," + lightnessString + ") 0%," + 
-                  "hsl(" + hue + ",50%," + lightnessString + ") 50%," + 
-                  "hsl(" + hue + ",100%," + lightnessString + ") 100%);";
-              });
-          return "background-image: -webkit-gradient(linear, left top, right top," + 
-            "color-stop(0, hsl(" + hue + ",0%," + lightnessString + "))," + 
-            "color-stop(0.5, hsl(" + hue + ",50%," + lightnessString + "))," + 
-            "color-stop(1, hsl(" + hue + ",100%," + lightnessString + ")));" + 
-            "background-image: -moz-linear-gradient(left center," + 
-            "hsl(" + hue + ",0%," + lightnessString + ") 0%," + 
-            "hsl(" + hue + ",50%," + lightnessString + ") 50%," + 
-            "hsl(" + hue + ",100%," + lightnessString + ") 100%);" + string;
+                fullSpectrumString += "background-image: " + value + "(left, " + start + " 0%, " + mid + " 50%, " + end + " 100%);";
+              }),
+              ieSpectrum0 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + start + "', endColorstr='" + 
+              mid + "', GradientType=1)",
+              ieSpectrum1 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + mid + "', endColorstr='" + 
+              end + "', GradientType=1)";
+            fullSpectrumString = 
+              "background-image: -moz-linear-gradient(left center, " + start + " 0%, " + mid + " 50%, " + end + " 100%);" + 
+              "background-image: -webkit-gradient(linear, left top, right top," + 
+                "color-stop(0, " + start + ")," + "color-stop(0.5, " + mid + ")," + "color-stop(1, " + end + "));" +
+              fullSpectrumString;
+          if (isIE) { 
+            var $spectrum0 = $(spectrum).find(".saturation-spectrum-0");
+            var $spectrum1 = $(spectrum).find(".saturation-spectrum-1");
+            $spectrum0.css("filter",ieSpectrum0);
+            $spectrum1.css("filter",ieSpectrum1);
+          } else {
+            spectrum.attr("style",fullSpectrumString);
+          }
         },
         
         updateLightnessStyles: function (spectrum, hue, saturation) {
@@ -657,56 +666,79 @@
               mid = "#" + tinycolor("hsl(" + hue + "," + saturationString + ",50%)").toHex(),
               end = "#" + tinycolor("hsl(" + hue + "," + saturationString + ",0%)").toHex(),
               fullSpectrumString = "",
-              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index, value) {
-                fullSpectrumString += "background-image: " + value + "(left," + start + " 0%," + mid + " 50%," + end + " 100%);";
+              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient"], function(index, value) {
+                fullSpectrumString += "background-image: " + value + "(left, " + start + " 0%, " + mid + " 50%, " 
+                + end + " 100%);";
               }),
-              ieSpectrum0 = "filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='" + start + "', endColorstr='" + 
-              mid + "', GradientType=1);",
-              ieSpectrum1 = "filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='" + mid + "', endColorstr='" + 
-              end + "', GradientType=1);";
-          fullSpectrumString += "background-image: -webkit-gradient(linear, left top, right top," + 
-            "color-stop(0, " + start + ")," + "color-stop(0.5, " + mid + ")," + "color-stop(1, hsl(" + end + "));" + 
-            "background-image: -moz-linear-gradient(left center," + start + " 0%," + mid + " 50%," + end + " 100%);";
+              ieSpectrum0 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + start + "', endColorstr='" + 
+              mid + "', GradientType=1)",
+              ieSpectrum1 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + mid + "', endColorstr='" + 
+              end + "', GradientType=1)";
+          fullSpectrumString =  
+            "background-image: -moz-linear-gradient(left center, " + start + " 0%, " + mid + " 50%, " + end + " 100%); " + 
+            "background-image: linear-gradient(to right, " + start + " 0%, " + mid + " 50%, " + end + " 100%); " + 
+            "background-image: -webkit-gradient(linear, left top, right top," + 
+            " color-stop(0, " + start + ")," + " color-stop(0.5, " + mid + ")," + " color-stop(1, " + end + ")); " +
+            fullSpectrumString;
           if (isIE) { 
             var $spectrum0 = $(spectrum).find(".lightness-spectrum-0");
             var $spectrum1 = $(spectrum).find(".lightness-spectrum-1");
-            $spectrum0.attr("style",ieSpectrum0);
-            $spectrum1.attr("style",ieSpectrum1);
-            } else {
+            $spectrum0.css("filter",ieSpectrum0);
+            $spectrum1.css("filter",ieSpectrum1);
+          } else {
             spectrum.attr("style",fullSpectrumString);
-            }
+          }
         },
         
-        updateHueStyles: function (saturation, lightness) {
+        updateHueStyles: function (spectrum, saturation, lightness) {
           var saturationString = (saturation * 100).toString() + "%",
               lightnessString = (lightness * 100).toString() + "%",
-              string = "",
+              color1 = "#" + tinycolor("hsl(0," + saturationString + "," + lightnessString + ")").toHex(),
+              color2 = "#" + tinycolor("hsl(60," + saturationString + "," + lightnessString + ")").toHex(),
+              color3 = "#" + tinycolor("hsl(120," + saturationString + "," + lightnessString + ")").toHex(),
+              color4 = "#" + tinycolor("hsl(180," + saturationString + "," + lightnessString + ")").toHex(),
+              color5 = "#" + tinycolor("hsl(240," + saturationString + "," + lightnessString + ")").toHex(),
+              color6 = "#" + tinycolor("hsl(300," + saturationString + "," + lightnessString + ")").toHex(),
+              color7 = "#" + tinycolor("hsl(0," + saturationString + "," + lightnessString + ")").toHex(),
+              ieSpectrum0 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color1 + "', endColorstr='" + 
+              color2 + "', GradientType=1)",
+              ieSpectrum1 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color2 + "', endColorstr='" + 
+              color3 + "', GradientType=1)",
+              ieSpectrum2 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color3 + "', endColorstr='" + 
+              color4 + "', GradientType=1)",
+              ieSpectrum3 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color4 + "', endColorstr='" + 
+              color5 + "', GradientType=1)",
+              ieSpectrum4 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color5 + "', endColorstr='" + 
+              color6 + "', GradientType=1)",
+              ieSpectrum5 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color6 + "', endColorstr='" + 
+              color7 + "', GradientType=1)",
+              fullSpectrumString = "",
               standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index,value) {
-                string += "background-image" + value + "(left," + 
-                  "hsl(0," + saturationString + "," + lightnessString + "); 0%," + 
-                  "hsl(60," + saturationString + "," + lightnessString + ") 17%," +
-                  "hsl(120," + saturationString + "," + lightnessString + ") 24%," + 
-                  "hsl(180," + saturationString + "," + lightnessString + ") 51%," +
-                  "hsl(240," + saturationString + "," + lightnessString + ") 68%," +
-                  "hsl(300," + saturationString + "," + lightnessString + ") 85%," +
-                  "hsl(0," + saturationString + "," + lightnessString + ") 100%);";
+                fullSpectrumString += "background-image: " + value + "(left, " + color1 + " 0%, " + color2 + " 17%, " +
+                  color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " + color6 + " 85%, " + color7 + " 100%);";
             });
-          return "background-image: -webkit-gradient(linear, left top, right top," +
-            "color-stop(0%, hsl(0," + saturationString + "," + lightnessString + "))," + 
-            "color-stop(17%, hsl(60," + saturationString + "," + lightnessString + "))," + 
-            "color-stop(34%, hsl(120," + saturationString + "," + lightnessString + "))," + 
-            "color-stop(51%, hsl(180," + saturationString + "," + lightnessString + "))," + 
-            "color-stop(68%, hsl(300," + saturationString + "," + lightnessString + "))," +
-            "color-stop(85%, hsl(300," + saturationString + "," + lightnessString + "))," +
-            "color-stop(100%, hsl(0," + saturationString + "," + lightnessString + ")));" +
-            "background-image: -moz-linear-gradient(left center," +
-            "hsl(0," + saturationString + "," + lightnessString + ") 0%," +
-            "hsl(60," + saturationString + "," + lightnessString + ") 17%," + 
-            "hsl(120," + saturationString + "," + lightnessString + ") 24%," + 
-            "hsl(180," + saturationString + "," + lightnessString + ") 51%," +
-            "hsl(300," + saturationString + "," + lightnessString + ") 68%," +
-            "hsl(300," + saturationString + "," + lightnessString + ") 85%," + 
-            "hsl(0," + saturationString + "," + lightnessString + ") 100%);" + string;
+          fullSpectrumString += "background-image: -webkit-gradient(linear, left top, right top," +
+            "color-stop(0%, " + color1 + ")," + "color-stop(17%, " + color2 + ")," + "color-stop(34%, " + color3 + ")," + 
+            "color-stop(51%, " + color4 + ")," + "color-stop(68%, " + color5 + ")," + "color-stop(85%, " + color6 + ")," +
+            "color-stop(100%, " + color7 + "));" + "background-image: -moz-linear-gradient(left center, " +
+            color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " +
+            color6 + " 85%, " + color7 + " 100%);";
+          if (isIE) { 
+            var $spectrum0 = $(spectrum).find(".hue-spectrum-0");
+            var $spectrum1 = $(spectrum).find(".hue-spectrum-1");
+            var $spectrum2 = $(spectrum).find(".hue-spectrum-2");
+            var $spectrum3 = $(spectrum).find(".hue-spectrum-3");
+            var $spectrum4 = $(spectrum).find(".hue-spectrum-4");
+            var $spectrum5 = $(spectrum).find(".hue-spectrum-5");
+            $spectrum0.css("filter",ieSpectrum0);
+            $spectrum1.css("filter",ieSpectrum1);
+            $spectrum2.css("filter",ieSpectrum2);
+            $spectrum3.css("filter",ieSpectrum3);
+            $spectrum4.css("filter",ieSpectrum4);
+            $spectrum5.css("filter",ieSpectrum5);
+          } else {
+            spectrum.attr("style",fullSpectrumString);
+          }
         },
         
         // takes the position of a highlight band on the hue spectrum and finds highlighted hue
@@ -737,7 +769,7 @@
           
           $advancedPreview.css("background-color",color);
           methods.updateLightnessStyles($lightnessSpectrum,hue,currentSaturation);
-          $saturationSpectrum.attr("style",methods.updateSaturationStyles(hue,currentLightness));
+          methods.updateSaturationStyles($saturationSpectrum,hue,currentLightness);
           return hue;        
         },
         
@@ -767,7 +799,7 @@
           
           $advancedPreview.css("background-color",color);
           methods.updateLightnessStyles($lightnessSpectrum,currentHue,saturation);
-          $hueSpectrum.attr("style",methods.updateHueStyles(saturation,currentLightness));
+          methods.updateHueStyles($hueSpectrum,saturation,currentLightness);
           return saturation;        
         }
         

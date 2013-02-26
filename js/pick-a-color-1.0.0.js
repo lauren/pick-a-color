@@ -309,7 +309,7 @@
           }
           var halfSpectrumWidth = spectrumWidth / 2,
               percentOfBox = position / spectrumWidth;
-                    
+          
           // for spectrums that lighten and darken, recalculate percent of box relative
           // to the half of spectrum the highlight band is currently in
           if (spectrumType === "bidirectional") {
@@ -406,7 +406,7 @@
               hbWidth = $(".highlight-band").first().outerWidth(),
               halfHBWidth = hbWidth / 2,
               type = arguments[0].type;
-          
+                    
           if (type === "basic") {
             // get the class of the parent color box and slice off "spectrum"
             var $this_parent = $thisEl.parent(),
@@ -424,26 +424,28 @@
                     var spectrumType = "bidirectional";
                 }
           } else {
-            var colorHsl = {h: arguments[0].hsl.h, l: arguments[0].hsl.l, s: arguments[0].hsl.s},
+            // re-set current L value to 0.5 because the color multiplier ligtens
+            // and darkens against the baseline value
+            var colorHsl = {"h": arguments[0].hsl.h, "l": 0.5, "s": arguments[0].hsl.s},
                 currentHue = arguments[0].hsl.h,
                 currentSaturation = arguments[0].hsl.s,
                 spectrumType = "bidirectional",
                 $advancedPreview = $(this).parents(".advanced-list").find(".color-preview"),
                 $hueSpectrum = $(this).parents(".advanced-list").find(".spectrum-hue"),
                 $saturationSpectrum = $(this).parents(".advanced-list").find(".spectrum-saturation");
-          }
+          }   
                                         
           // midpoint of the current left position of the color band
           var highlightBandLocation = parseInt($thisEl.css("left"),10) + halfHBWidth,
               colorMultiplier = methods.getColorMultiplier(spectrumType,highlightBandLocation),
               highlightedColor = methods.modifyHSLLightness(colorHsl,colorMultiplier),
-              highlightedHex = tinycolor(highlightedColor).toHex(),
+              highlightedHex = "#" + tinycolor(highlightedColor).toHex(),
               highlightedLightness = highlightedColor.split("(")[1].split(")")[0].split(",")[2].split("%")[0];
           
           highlightedLightness = (parseInt(highlightedLightness)) / 100;
                                                               
           if (type === "basic") {
-            $this_parent.siblings(".color-preview").css("background-color",highlightedColor);
+            $this_parent.siblings(".color-preview").css("background-color",highlightedHex);
             // replace the color label with a 'select' button 
             $this_parent.prev('.color-label').replaceWith(
               '<button class="color-select btn btn-mini" type="button">Select</button>');
@@ -594,7 +596,6 @@
         tapSpectrum: function () {
           var thisEvent = arguments[0].thisEvent,
               mySavedColorsInfo = arguments[0].savedColorsInfo,
-              mostRecentClick = arguments[0].mostRecentClick,
               myElements = arguments[0].els;
           thisEvent.stopPropagation(); // stop this click from closing the dropdown
           var $highlightBand = $(this).find(".highlight-band"),
@@ -732,7 +733,7 @@
           var hue = Math.floor((position/spectrumWidth) * 360);
           
           var color = "hsl(" + hue + "," + saturationString + "," + lightnessString + ")";
-          color = tinycolor(color).toHex();
+          color = "#" + tinycolor(color).toHex();
           
           $advancedPreview.css("background-color",color);
           methods.updateLightnessStyles($lightnessSpectrum,hue,currentSaturation);
@@ -762,10 +763,10 @@
               saturationString = (saturation * 100).toString() + "%";
               
           var color = "hsl(" + currentHue + "," + saturationString + "," + lightnessString + ")";
-          color = tinycolor(color).toHex();
+          color = "#" + tinycolor(color).toHex();
           
           $advancedPreview.css("background-color",color);
-          methods.updateLightnessStyles($lightnessSpectrum,hue,currentSaturation);
+          methods.updateLightnessStyles($lightnessSpectrum,currentHue,saturation);
           $hueSpectrum.attr("style",methods.updateHueStyles(saturation,currentLightness));
           return saturation;        
         }
@@ -785,14 +786,7 @@
           basicSpectrums: $(this).find(".basicColors-content .color-box"),
           touchInstructions: $(this).find(".color-menu-instructions"),
           highlightBands: $(this).find(".highlight-band"),
-          basicHighlightBands: $(this).find(".basicColors-content .highlight-band"),
-          hueSpectrum: $(this).find(".spectrum-hue"),
-          lightnessSpectrum: $(this).find(".spectrum-lightness"),
-          saturationSpectrum: $(this).find(".spectrum-saturation"),
-          hueHighlightBand: $(this).find(".spectrum-hue .highlight-band"),
-          lightnessHighlightBand: $(this).find(".spectrum-lightness .highlight-band"),
-          saturationHighlightBand: $(this).find(".spectrum-saturation .highlight-band"),
-          advancedPreview: $(this).find(".advanced-content .color-preview")
+          basicHighlightBands: $(this).find(".basicColors-content .highlight-band")
         };
         
         var mostRecentClick, // for storing click events when needed
@@ -820,7 +814,8 @@
                 mySavedColorsInfo.dataAttr]);
             
             // otherwise, get them from cookies
-            } else if (myCookies.match(mySavedColorsInfo.dataAttr)) {
+            } else if (myCookies.match("pickAColorSavedColors-" +
+              mySavedColorsInfo.dataAttr)) {
               var theseCookies = myCookies.split(";"); // an array of cookies...
               for (var i=0; i < theseCookies.length; i++) {
                 if (theseCookies[i].match(mySavedColorsInfo.dataAttr)) {
@@ -839,6 +834,14 @@
             s: 1,
             l: 0.5
           };
+          
+          myElements.hueSpectrum = $(this).find(".spectrum-hue");
+          myElements.lightnessSpectrum = $(this).find(".spectrum-lightness");
+          myElements.saturationSpectrum = $(this).find(".spectrum-saturation");
+          myElements.hueHighlightBand = $(this).find(".spectrum-hue .highlight-band");
+          myElements.lightnessHighlightBand = $(this).find(".spectrum-lightness .highlight-band");
+          myElements.saturationHighlightBand = $(this).find(".spectrum-saturation .highlight-band");
+          myElements.advancedPreview = $(this).find(".advanced-content .color-preview");
         }
             
         // add the default color to saved colors
@@ -899,7 +902,7 @@
     
           // move the highlight band when you click on a spectrum 
           
-          methods.executeUnlessScrolled.apply(myElements.colorSpectrums, [{"thisFunction": methods.tapSpectrum, 
+          methods.executeUnlessScrolled.apply(myElements.basicSpectrums, [{"thisFunction": methods.tapSpectrum, 
             "theseArguments": {"savedColorsInfo": mySavedColorsInfo, "els": myElements}}]);
           
           methods.horizontallyDraggable.apply(myElements.highlightBands);
@@ -937,21 +940,19 @@
           
           // for clicking/tapping advanced sliders 
           
-          $(myElements.lightnessSpectrum).on("mousedown", function (event) {
+          $(myElements.lightnessSpectrum).click( function (event) {
             event.stopPropagation(); // stop this click from closing the dropdown
             var $highlightBand = $(this).find(".highlight-band"),
                 dimensions = methods.getMoveableArea($highlightBand);
-            supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
-              methods.moveHighlightBand($highlightBand, dimensions, event);
-            methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
+            methods.moveHighlightBand($highlightBand, dimensions, event);
+            advancedStatus.l = methods.calculateHighlightedColor.apply($highlightBand, [{"type": "advanced", "hsl": advancedStatus}]);
           });
           
           $(myElements.hueSpectrum).click( function (event) {
             event.stopPropagation(); // stop this click from closing the dropdown
             var $highlightBand = $(this).find(".highlight-band"),
                 dimensions = methods.getMoveableArea($highlightBand);
-            supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
-              methods.moveHighlightBand($highlightBand, dimensions, event);
+            methods.moveHighlightBand($highlightBand, dimensions, event);
             advancedStatus.h = methods.getHighlightedHue.apply($highlightBand, [advancedStatus]);
           });
           
@@ -959,8 +960,7 @@
             event.stopPropagation(); // stop this click from closing the dropdown
             var $highlightBand = $(this).find(".highlight-band"),
                 dimensions = methods.getMoveableArea($highlightBand);
-            supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, event) : 
-              methods.moveHighlightBand($highlightBand, dimensions, event);
+            methods.moveHighlightBand($highlightBand, dimensions, event);
             advancedStatus.s = methods.getHighlightedSaturation.apply($highlightBand, [advancedStatus]);
           });
           

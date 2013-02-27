@@ -242,7 +242,7 @@ div.pick-a-color-markup .color-box {
   height: 20px;
   width: 200px;
   position: absolute;
-  left: 110px;
+  left: 115px;
   border: 1px solid #cccccc;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -751,6 +751,8 @@ div.pick-a-color-markup .advanced-content li {
   padding: 5px 15px 3px 15px;
   cursor: default;
   min-height: 25px;
+  height: 50px;
+  position: relative;
 }
 @media screen and (max-width: 979px) {
   div.pick-a-color-markup .advanced-content li {
@@ -759,9 +761,9 @@ div.pick-a-color-markup .advanced-content li {
 }
 div.pick-a-color-markup .advanced-content .color-preview {
   height: 50px;
-  width: 295px;
+  width: 300px;
   float: left;
-  margin: 10px 0px 10px 15px;
+  margin: 5px 0px 10px 0px;
   background-color: #ff0000;
   text-align: center;
 }
@@ -800,5 +802,21 @@ div.pick-a-color-markup .advanced-content .spectrum-saturation {
   background-repeat: repeat-x;
 }
 div.pick-a-color-markup .advanced-content .spectrum-saturation .highlight-band {
-  left: 187px;
+  left: 287px;
+}
+div.pick-a-color-markup .advanced-content .spectrum-lightness .highlight-band {
+  left: 143.5px;
+}
+div.pick-a-color-markup .advanced-content .lightness-text,
+div.pick-a-color-markup .advanced-content .hue-text,
+div.pick-a-color-markup .advanced-content .saturation-text,
+div.pick-a-color-markup .advanced-content .preview-text {
+  vertical-align: middle;
+  text-align: center;
+  display: block;
+}
+div.pick-a-color-markup .advanced-content .color-box {
+  left: 15px;
+  top: 28px;
+  width: 300px;
 }

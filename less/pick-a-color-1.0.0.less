@@ -48,6 +48,7 @@
 @color-box-width-phone: 160px; 
 @color-band-width: 11px;
 @phone-color-band-width: 21px;
+@advanced-color-box-width: 300px;
 
 //// mixins
 
@@ -409,7 +410,7 @@ div.pick-a-color-markup {
 	  height:20px;
 	  width:@color-box-width;
 	  position:absolute;
-	  left:110px;
+	  left:115px;
 	  .borders-shadows;
 		cursor:pointer;
 		@media screen and (max-width: 979px) {
@@ -668,15 +669,17 @@ div.pick-a-color-markup {
 		  padding: 5px 15px 3px 15px;
 		  cursor: default;
 			min-height:25px;
+			height:50px;
+			position:relative;
 			@media screen and (max-width: 979px) {
 				min-height:40px;
 			}
 		}
 		.color-preview {
 			height:50px;
-			width: 295px;
+			width: @advanced-color-box-width;
 			float:left;
-			margin:10px 0px 10px 15px;
+			margin:5px 0px 10px 0px;
 			background-color: @red;
 			text-align:center;
 			.color-select.btn.advanced {
@@ -702,8 +705,24 @@ div.pick-a-color-markup {
 		.spectrum-saturation {
 			.saturation-spectrum;
 			.highlight-band {
-				left:@color-box-width - (@color-band-width + 2);
+				left:@advanced-color-box-width - (@color-band-width + 2);
 			}
+		}
+		
+		.spectrum-lightness .highlight-band {
+			left: (@advanced-color-box-width / 2) - ((@color-band-width + 2) / 2);
+		}
+		
+		.lightness-text, .hue-text, .saturation-text, .preview-text {
+			vertical-align:middle;
+			text-align:center;
+			display:block;
+		}
+		
+		.color-box {
+			left:15px;
+			top:28px;
+			width:@advanced-color-box-width;
 		}
 	}
 }

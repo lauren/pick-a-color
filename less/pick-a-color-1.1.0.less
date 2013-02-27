@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color CSS v1.0.0
+* Pick-a-Color CSS v1.1.0
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -47,8 +47,10 @@
 @color-box-width: 200px;
 @color-box-width-phone: 160px; 
 @color-band-width: 11px;
-@phone-color-band-width: 21px;
+@color-band-width-phone: 21px;
 @advanced-color-box-width: 300px;
+@advanced-color-box-width-phone: 270px;
+
 
 //// mixins
 
@@ -170,11 +172,13 @@
 .saturation-spectrum-0(@color) {
 	.two-color-spectrum(desaturate(@color,100%),desaturate(@color,50%));
 	.left-rounded-corners;
+	width: @advanced-color-box-width / 2;
 }
 
 .saturation-spectrum-1(@color) {
 	.two-color-spectrum(desaturate(@color,50%),@color);
 	.right-rounded-corners;
+	width: @advanced-color-box-width / 2;
 }
 
 //// actual styles 
@@ -274,12 +278,12 @@ div.pick-a-color-markup {
 	.color-menu {
 		text-align:left;
 	  padding:5px 0px; /*overwriting bootstrap default */
-		min-width: 330px;
+		width:330px;
 		font-size:14px;
 	
 		@media screen and (max-width: 979px) {
 			left:-232px;
-			min-width:285px;
+			width:285px;
 		}
 	
 		&.small {
@@ -383,7 +387,7 @@ div.pick-a-color-markup {
 		}
 	}
 
-	.color-menu-instructions {
+	.color-menu-instructions, .advanced-instructions {
 		text-align: center;
 		padding:0px 6px;
 		margin:0px;
@@ -469,7 +473,7 @@ div.pick-a-color-markup {
 	  width:@color-box-width/2;
 		display:inline-block;
 		&.hue {
-			width:(@color-box-width/6) + .5px;
+			width:(@advanced-color-box-width/6) + .5px;
 		}
 		@media screen and (max-width: 979px) {
 			width:@color-box-width-phone/2;
@@ -484,6 +488,10 @@ div.pick-a-color-markup {
 
 	.red-spectrum-1, .lightness-spectrum-1 {
 		.spectrum-1(@red);
+	}
+	
+	.lightness-spectrum-0, .lightness-spectrum-1 {
+		width: @advanced-color-box-width / 2;
 	}
 
 	.orange-spectrum-0 {
@@ -581,8 +589,8 @@ div.pick-a-color-markup {
 		left:(@color-box-width/2) - (@color-band-width/2);
 		text-align:center;
 		@media screen and (max-width: 979px) {
-			width:@phone-color-band-width;
-			left:(@color-box-width-phone/2) - (@phone-color-band-width/2);
+			width:@color-band-width-phone;
+			left:(@color-box-width-phone/2) - (@color-band-width-phone/2);
 			height:34px;
 		}
 	}
@@ -672,22 +680,30 @@ div.pick-a-color-markup {
 			height:50px;
 			position:relative;
 			@media screen and (max-width: 979px) {
-				min-height:40px;
+				min-height:70px;
 			}
 		}
 		.color-preview {
 			height:50px;
 			width: @advanced-color-box-width;
 			float:left;
-			margin:5px 0px 10px 0px;
+			margin:0px 0px 10px 0px;
 			background-color: @red;
 			text-align:center;
 			.color-select.btn.advanced {
 				margin-top:15px;
 				display:none;
+				@media screen and (max-width:979px) {
+					display:inline;
+					margin-top:7px;
+				}
 			}
 			&:hover .color-select.btn.advanced {
 				display:inline;
+			}
+			@media screen and (max-width:979px) {
+				width:@advanced-color-box-width-phone;
+				margin-left:-10px;
 			}
 		}
 		
@@ -706,11 +722,17 @@ div.pick-a-color-markup {
 			.saturation-spectrum;
 			.highlight-band {
 				left:@advanced-color-box-width - (@color-band-width + 2);
+				@media screen and (max-width: 979px) {
+					left:@advanced-color-box-width-phone - (@color-band-width-phone + 2);
+				}
 			}
 		}
 		
 		.spectrum-lightness .highlight-band {
 			left: (@advanced-color-box-width / 2) - ((@color-band-width + 2) / 2);
+			@media screen and (max-width: 979px) {
+				left: (@advanced-color-box-width-phone / 2) - ((@color-band-width-phone + 2) / 2);
+			}
 		}
 		
 		.lightness-text, .hue-text, .saturation-text, .preview-text {
@@ -721,9 +743,18 @@ div.pick-a-color-markup {
 		
 		.color-box {
 			left:15px;
-			top:28px;
+			top:25px;
 			width:@advanced-color-box-width;
+			@media screen and (max-width: 979px) {
+				width:@advanced-color-box-width-phone;
+				left:5px;
+			}
 		}
+		
+		.preview-item {
+			height:80px;
+		}
+		
 	}
 }
 

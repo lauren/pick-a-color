@@ -16,6 +16,8 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 **Saved colors:** Saves up to 16 recently used colors. Colors are stored in localStorage or cookies.
 
+**Advanced:** Advanced tab lets users modify hue, saturation, and lightness to make any color at all.
+
 **Basic color palate:** Easy-to-use preset colors that can be lightened and darkened.
 
 **Chunky mobile styles:** Dragging is easy, even on a touch device.
@@ -47,16 +49,16 @@ OK! Let's do this color picking thing!
 **In the `<head>`:**
 
 ```html
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/pick-a-color.min.css">
+<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
+<link rel="stylesheet" href="css/pick-a-color-1.1.0.min.css">
 ```
 
 **Before the ending `</body>`:**
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="js/tinycolor-0.9.12.min.js"></script>
-<script src="js/color-picker.js"></script>
+<script src="js/tinycolor-0.9.14.min.js"></script>
+<script src="js/pick-a-color-1.1.0.min.js"></script>
 ```
 		
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
@@ -98,8 +100,8 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 	<head>		
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="x-ua-compatible" content="IE=10">	  
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/pick-a-color.css">	  	
+		<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
+		<link rel="stylesheet" href="css/pick-a-color-1.1.0.min.css">
 	</head>
 
 	<body>
@@ -111,9 +113,9 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 		<div class="pick-a-color" id="data-contrast-color" data-contrast-color="eee">eee</div>
 		<div class="pick-a-color"></div>
 
-		<script src="js/jquery-1.9.0.min.js"></script>
-		<script src="js/tinycolor-min.js"></script>
-		<script src="js/pick-a-color.js"></script>	
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/tinycolor-0.9.14.min.js"></script>
+		<script src="js/pick-a-color-1.1.0.min.js"></script>
 
 		<script type="text/javascript">
 
@@ -138,7 +140,8 @@ $(".pick-a-color").pickAColor({
    showSpectrum            : true,
    showSavedColors         : true,
    saveColorsPerElement    : false,
-   fadeMenuToggle          : true
+   fadeMenuToggle          : true,
+	 showAdvanced						 : true
  });
 ```
 
@@ -148,7 +151,11 @@ Specifies whether or not there is a spectrum next to each basic color allowing u
 
 #### showSavedColors
 
-Specifies whether or not there is a tab called "Your Saved Colors" that keeps track of the last 16 colors a user customized. 
+Specifies whether or not there is a tab called "Saved Colors" that keeps track of the last 16 colors a user customized. 
+
+#### showAdvanced
+
+Specifies whether there is a tab called "Advanced" that allows users to modify hue, lightness, and saturation to make any color under the sun.
 
 ##### saveColorsPerElement (for showSavedColors only)
 
@@ -166,12 +173,12 @@ Specifies whether the dropdown menu should fade in and out when it's opened and 
 
 I've tested Pick-a-Color in these browsers:
 
-* Google Chrome 24.0.1312.57 (Mac OSX, Windows 8, Windows XP, iOS 6.0.2)
+* Google Chrome 24.0.1312.57 - 25.0.1364.99 (Mac OSX, Windows 8, Windows XP, iOS 6.0.2)
 * Safari 6.0.2 (Mac OSX and iOS 6.0.2)
 * Internet Explorer 10 (Windows 8)
 * Internet Explorer 9 Mode (via IE10 on Windows 8)
 * Internet Explorer 8 (Windows XP)
-* Firefox 18.0.1 (Mac OSX and Windows 8)
+* Firefox 18.0.1 - 19.0 (Mac OSX and Windows 8)
 * Opera 12.13 (Mac OSX and Windows 8)
 
 Minor issues in these browsers are documented here: https://github.com/lauren/pick-a-color/issues

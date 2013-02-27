@@ -102,7 +102,7 @@ div.pick-a-color-markup .color-menu {
   padding: 5px 0px;
   /*overwriting bootstrap default */
 
-  min-width: 330px;
+  width: 330px;
   font-size: 14px;
   /* resets for ul / li styles */
 
@@ -110,7 +110,7 @@ div.pick-a-color-markup .color-menu {
 @media screen and (max-width: 979px) {
   div.pick-a-color-markup .color-menu {
     left: -232px;
-    min-width: 285px;
+    width: 285px;
   }
 }
 div.pick-a-color-markup .color-menu.small {
@@ -215,7 +215,8 @@ div.pick-a-color-markup .color-menu .btn.color-select {
     height: 37px;
   }
 }
-div.pick-a-color-markup .color-menu-instructions {
+div.pick-a-color-markup .color-menu-instructions,
+div.pick-a-color-markup .advanced-instructions {
   text-align: center;
   padding: 0px 6px;
   margin: 0px;
@@ -223,7 +224,8 @@ div.pick-a-color-markup .color-menu-instructions {
   font-weight: normal;
 }
 @media screen and (min-width: 979px) {
-  div.pick-a-color-markup .color-menu-instructions {
+  div.pick-a-color-markup .color-menu-instructions,
+  div.pick-a-color-markup .advanced-instructions {
     display: none;
   }
 }
@@ -342,7 +344,7 @@ div.pick-a-color-markup .ie-spectrum {
   top: -1;
 }
 div.pick-a-color-markup .ie-spectrum.hue {
-  width: 33.833333333333336px;
+  width: 50.5px;
 }
 @media screen and (max-width: 979px) {
   div.pick-a-color-markup .ie-spectrum {
@@ -381,6 +383,10 @@ div.pick-a-color-markup .lightness-spectrum-1 {
   -moz-border-radius-bottomright: 4px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+}
+div.pick-a-color-markup .lightness-spectrum-0,
+div.pick-a-color-markup .lightness-spectrum-1 {
+  width: 150px;
 }
 div.pick-a-color-markup .orange-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ffffff), color-stop(1, #ff6600));
@@ -546,6 +552,7 @@ div.pick-a-color-markup .saturation-spectrum-0 {
   -moz-border-radius-bottomleft: 4px;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
+  width: 150px;
 }
 div.pick-a-color-markup .saturation-spectrum-1 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #bf4040), color-stop(1, #ff0000));
@@ -561,6 +568,7 @@ div.pick-a-color-markup .saturation-spectrum-1 {
   -moz-border-radius-bottomright: 4px;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+  width: 150px;
 }
 div.pick-a-color-markup .hue-spectrum-0 {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #ff0000), color-stop(1, #ffff00));
@@ -756,14 +764,14 @@ div.pick-a-color-markup .advanced-content li {
 }
 @media screen and (max-width: 979px) {
   div.pick-a-color-markup .advanced-content li {
-    min-height: 40px;
+    min-height: 70px;
   }
 }
 div.pick-a-color-markup .advanced-content .color-preview {
   height: 50px;
   width: 300px;
   float: left;
-  margin: 5px 0px 10px 0px;
+  margin: 0px 0px 10px 0px;
   background-color: #ff0000;
   text-align: center;
 }
@@ -771,8 +779,20 @@ div.pick-a-color-markup .advanced-content .color-preview .color-select.btn.advan
   margin-top: 15px;
   display: none;
 }
+@media screen and (max-width: 979px) {
+  div.pick-a-color-markup .advanced-content .color-preview .color-select.btn.advanced {
+    display: inline;
+    margin-top: 7px;
+  }
+}
 div.pick-a-color-markup .advanced-content .color-preview:hover .color-select.btn.advanced {
   display: inline;
+}
+@media screen and (max-width: 979px) {
+  div.pick-a-color-markup .advanced-content .color-preview {
+    width: 270px;
+    margin-left: -10px;
+  }
 }
 div.pick-a-color-markup .advanced-content .spectrum-hue {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, #ff0000), color-stop(17%, #ffff00), color-stop(34%, #00ff00), color-stop(51%, #00ffff), color-stop(68%, #0000ff), color-stop(85%, #ff00ff), color-stop(100%, #ff0000));
@@ -804,8 +824,18 @@ div.pick-a-color-markup .advanced-content .spectrum-saturation {
 div.pick-a-color-markup .advanced-content .spectrum-saturation .highlight-band {
   left: 287px;
 }
+@media screen and (max-width: 979px) {
+  div.pick-a-color-markup .advanced-content .spectrum-saturation .highlight-band {
+    left: 247px;
+  }
+}
 div.pick-a-color-markup .advanced-content .spectrum-lightness .highlight-band {
   left: 143.5px;
+}
+@media screen and (max-width: 979px) {
+  div.pick-a-color-markup .advanced-content .spectrum-lightness .highlight-band {
+    left: 123.5px;
+  }
 }
 div.pick-a-color-markup .advanced-content .lightness-text,
 div.pick-a-color-markup .advanced-content .hue-text,
@@ -817,6 +847,15 @@ div.pick-a-color-markup .advanced-content .preview-text {
 }
 div.pick-a-color-markup .advanced-content .color-box {
   left: 15px;
-  top: 28px;
+  top: 25px;
   width: 300px;
+}
+@media screen and (max-width: 979px) {
+  div.pick-a-color-markup .advanced-content .color-box {
+    width: 270px;
+    left: 5px;
+  }
+}
+div.pick-a-color-markup .advanced-content .preview-item {
+  height: 80px;
 }

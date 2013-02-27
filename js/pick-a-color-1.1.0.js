@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.0.0
+* Pick-a-Color JS v1.1.0
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -116,7 +116,8 @@
           $dropdownContainer.append($savedColors);
         }
         if (settings.showAdvanced) {
-          var $advanced = $("<div>").addClass("advanced-content inactive-content"),
+          var $advanced = $("<div>").addClass("advanced-content inactive-content").
+                append($("<h6>").addClass("advanced-instructions").text("Tap spectrum or drag band to change color")),
               $advancedList = $("<ul>").addClass("advanced-list"),
               $hueItem = $("<li>").addClass("hue-item"),
               $hueContent = $("<span>").addClass("hue-text").
@@ -237,19 +238,19 @@
         
         openDropdown: function (button,menu) {
           $(".color-menu").each(function () { // check all the other color menus...
-            var $this_el = $(this);
+            var $thisEl = $(this);
             
-            if ($this_el.css("display") === "block") { // if one is open,
+            if ($thisEl.css("display") === "block") { // if one is open,
               // find its color preview button
-              var thisColorPreviewButton = $this_el.parents(".btn-group");
-              methods.closeDropdown(thisColorPreviewButton,$this_el); // close it
+              var thisColorPreviewButton = $thisEl.parents(".btn-group");
+              methods.closeDropdown(thisColorPreviewButton,$thisEl); // close it
             }
           });
           
           if (settings.fadeMenuToggle && !supportsTouch) { //fades look terrible in mobile
             $(menu).fadeIn("fast");
           } else {
-            $(menu).css("display","block");
+            $(menu).show();
           }
           
           $(button).addClass("open");
@@ -315,9 +316,6 @@
           // position of the color band as a percentage of the width of the color box
           var spectrumWidth = (tab === "basic") ? parseInt($(".color-box").first().width(),10) : 
             parseInt($(".advanced-list").find(".color-box").first().width(),10);
-          console.log(spectrumWidth);
-          console.log(spectrumType);
-          console.log(position);
           if (spectrumWidth === 0) { // in case the width isn't set correctly
             if (tab === "basic") {
               spectrumWidth = supportsTouch ? 160 : 200;
@@ -611,20 +609,21 @@
         
         // handles user clicking or tapping on spectrum to select a color.
         // must be called with apply and relies on an arguments array like:
-        // [{thisEvent, savedColorsInfo, els}]
+        // [{thisEvent, savedColorsInfo, els, mostRecentClick}]
         tapSpectrum: function () {
           var thisEvent = arguments[0].thisEvent,
               mySavedColorsInfo = arguments[0].savedColorsInfo,
-              myElements = arguments[0].els;
+              myElements = arguments[0].els,
+              mostRecentClick = arguments[0].mostRecentClick;
           thisEvent.stopPropagation(); // stop this click from closing the dropdown
           var $highlightBand = $(this).find(".highlight-band"),
               dimensions = methods.getMoveableArea($highlightBand);
-          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, thisEvent) : 
+          supportsTouch ? methods.moveHighlightBand($highlightBand, dimensions, mostRecentClick) : 
             methods.moveHighlightBand($highlightBand, dimensions, thisEvent);
           var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand, [{type: "basic"}]);
           methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
           // update touch instructions
-          myElements.touchInstructions.html("Press 'select' to choose this color.");
+          myElements.touchInstructions.html("Press 'select' to choose this color");
         },
         
         // bind to mousedown/touchstart, execute provied function if the top of the
@@ -645,7 +644,7 @@
               return false;
             } else {
               theseArguments.thisEvent = event; //add the click event to the arguments object
-              theseArguments.mostRecentClick = mostRecentClick //add start event to the arguments object
+              theseArguments.mostRecentClick = mostRecentClick; //add start event to the arguments object
               thisFunction.apply($(this), [theseArguments]);
             }
           });
@@ -826,6 +825,10 @@
           methods.updateLightnessStyles($lightnessSpectrum,currentHue,saturation);
           methods.updateHueStyles($hueSpectrum,saturation,currentLightness);
           return saturation;        
+        },
+        
+        updateAdvancedInstructions: function (instructionsEl) {
+          instructionsEl.html("Press the color preview to choose this color");
         }
         
       };
@@ -844,6 +847,7 @@
           colorSpectrums: $(this).find(".color-box"),
           basicSpectrums: $(this).find(".basicColors-content .color-box"),
           touchInstructions: $(this).find(".color-menu-instructions"),
+          advancedInstructions: $(this).find(".advanced-instructions"),
           highlightBands: $(this).find(".highlight-band"),
           basicHighlightBands: $(this).find(".basicColors-content .highlight-band")
         };
@@ -894,6 +898,8 @@
             l: 0.5
           };
           
+          myElements.advancedSpectrums = myElements.thisEl.find(".advanced-list").find(".color-box");
+          myElements.advancedHighlightBands = myElements.thisEl.find(".advanced-list").find(".highlight-band");
           myElements.hueSpectrum = myElements.thisEl.find(".spectrum-hue");
           myElements.lightnessSpectrum = myElements.thisEl.find(".spectrum-lightness");
           myElements.saturationSpectrum = myElements.thisEl.find(".spectrum-saturation");
@@ -912,9 +918,9 @@
   
         myElements.colorTextInput.focus(function () {
           var $thisEl = $(this);
-          myColorVars.typedColor = $this_el.val(); // update with the current
+          myColorVars.typedColor = $thisEl.val(); // update with the current
           $thisEl.val(""); //clear the field on focus
-          methods.openDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
+          methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
         }).blur(function () {
           var $thisEl = $(this);
           myColorVars.newValue = $thisEl.val(); // on blur, check the field's value
@@ -954,6 +960,10 @@
         if (useTabs) { // make tabs tabbable
           methods.tabbable.apply(myElements.tabs);
         }
+        
+        if (settings.showSpectrum || settings.showAdvanced) {
+          methods.horizontallyDraggable.apply(myElements.highlightBands);
+        }
     
         // for using the light/dark spectrums 
     
@@ -963,9 +973,7 @@
           
           methods.executeUnlessScrolled.apply(myElements.basicSpectrums, [{"thisFunction": methods.tapSpectrum, 
             "theseArguments": {"savedColorsInfo": mySavedColorsInfo, "els": myElements}}]);
-          
-          methods.horizontallyDraggable.apply(myElements.highlightBands);
-    
+              
           $(myElements.basicHighlightBands).on(dragEvent,function (event) {
             var $thisEl = event.target
             methods.calculateHighlightedColor.apply(this, [{type: "basic"}]);
@@ -980,6 +988,7 @@
         if (settings.showAdvanced) {
           
           // for dragging advanced sliders
+          
           
           $(myElements.hueHighlightBand).on(dragEvent, function(event) {
             advancedStatus.h = methods.getHighlightedHue.apply(this, [advancedStatus]);
@@ -996,6 +1005,10 @@
           }).on(endDragEvent, function () {
             advancedStatus.s = methods.getHighlightedSaturation.apply(this, [advancedStatus]);
           });
+          
+          $(myElements.advancedHighlightBand).on(endDragEvent, function () {
+            methods.updateAdvancedInstructions(myElements.advancedInstructions);
+          })
           
           // for clicking/tapping advanced sliders 
           
@@ -1022,6 +1035,10 @@
             methods.moveHighlightBand($highlightBand, dimensions, event);
             advancedStatus.s = methods.getHighlightedSaturation.apply($highlightBand, [advancedStatus]);
           });
+          
+          $(myElements.advancedSpectrums).click( function () {
+            methods.updateAdvancedInstructions(myElements.advancedInstructions);
+          })
           
           //for clicking advanced color preview
           

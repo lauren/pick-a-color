@@ -26,6 +26,9 @@
 @color-box-width-phone: 160px; 
 @color-band-width: 11px;
 @phone-color-band-width: 21px;
+@color-band-width-phone: 21px;
+@advanced-color-box-width: 300px;
+@advanced-color-box-width-phone: 270px;
 
 // basic colors 
 
@@ -127,6 +130,58 @@
      -moz-transition: @transition;
        -o-transition: @transition;
           transition: @transition;
+}
+
+
+.full-spectrum (@one: @red, @two: @yellow, @three: @brightGreen, @four: @teal, @five: @blue, @six: @lightPurple, @seven: @red) {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, @one), color-stop(17%, @two), color-stop(34%,@three), color-stop(51%, @four), color-stop(68%, @five), color-stop(85%, @six), color-stop(100%, @seven));
+  background-image: -moz-linear-gradient(left center, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
+  background-image: -webkit-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: -o-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: linear-gradient(to right, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-repeat: repeat-x;
+}
+
+.lightness-spectrum (@color: @red) {
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@color,50%)), color-stop(0.5, @color), color-stop(1.0, darken(@color,50%)));
+	background-image: -moz-linear-gradient(left center, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
+	background-image: -webkit-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+  background-image: -o-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+  background-image: linear-gradient(to right, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+  background-repeat: repeat-x;
+}
+
+.saturation-spectrum (@color: @red) {
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, desaturate(@color,100%)), color-stop(0.5, @color), color-stop(1.0, saturate(@color,100%)));
+	background-image: -moz-linear-gradient(left center, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
+	background-image: -webkit-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
+  background-image: -o-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
+  background-image: linear-gradient(to right, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
+  background-repeat: repeat-x;
+}
+
+// IE spectrums
+
+.spectrum-0(@color) {
+	.two-color-spectrum(lighten(@color,50%),@color);
+	.left-rounded-corners;
+}
+
+.spectrum-1(@color) {
+	.two-color-spectrum(@color,darken(@color,50%));
+	.right-rounded-corners;
+}
+
+.saturation-spectrum-0(@color) {
+	.two-color-spectrum(desaturate(@color,100%),desaturate(@color,50%));
+	.left-rounded-corners;
+	width: @advanced-color-box-width / 2;
+}
+
+.saturation-spectrum-1(@color) {
+	.two-color-spectrum(desaturate(@color,50%),@color);
+	.right-rounded-corners;
+	width: @advanced-color-box-width / 2;
 }
 
 // actual styles
@@ -457,8 +512,8 @@ pre {
 
 		.color-text-input {
 			min-width:200px;
-			min-height:30px;
 			font-size:16px;
+			padding:9px;
 		}
 
 		#appendedDropdownButton {
@@ -468,12 +523,14 @@ pre {
 		// button to open picker
 
 		.color-dropdown { 
-			min-height:40px;
+			height:40px;
+			padding:3px 5px;
 		}
 
 		.color-preview {
 			height:30px;
 			width:30px;
+			margin-bottom:0px;
 		}
 
 		.caret {
@@ -484,7 +541,7 @@ pre {
 
 		.color-menu {
 			left:-232px;
-			min-width:285px;
+			width:285px;
 
 			&.small {
 				left:-66px;
@@ -521,8 +578,14 @@ pre {
 			.ie-spectrum {
 				width:@color-box-width-phone/2;
 				height:35px;
+				&.hue {
+					width:(@advanced-color-box-width-phone/6) + .5px;
+				}
 			}
-
+			
+			.lightness-spectrum-0, .lightness-spectrum-1, .saturation-spectrum-0, .saturation-spectrum-1 {
+				width: @advanced-color-box-width-phone / 2;
+			}
 
 			// highlight band
 
@@ -543,6 +606,39 @@ pre {
 			}
 			.saved-color-col {
 				width: 125px;
+			}
+		
+			// advanced colors
+
+			.advanced-content {
+				li {
+					min-height:70px;
+				}
+				.color-preview {
+					height:50px;
+					width:@advanced-color-box-width-phone;
+					margin-left:-10px;
+					.color-select.btn.advanced {
+						display:inline;
+						margin-top:7px;
+					}
+				}
+
+				.spectrum-saturation {
+					.highlight-band {
+						left:@advanced-color-box-width-phone - (@color-band-width-phone + 2);
+					}
+				}
+
+				.spectrum-lightness .highlight-band {
+					left: (@advanced-color-box-width-phone / 2) - ((@color-band-width-phone + 2) / 2);
+				}
+
+				.color-box {
+					width:@advanced-color-box-width-phone;
+					left:5px;
+				}
+			
 			}
 		}
 }

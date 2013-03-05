@@ -49,19 +49,25 @@ pre{margin-top:4px;}
 .footer{font-size:14px;line-height:16px;margin:5px auto;text-align:center;padding-top:15px;border-top:1px dashed #999999;}
 .pretend-mobile div.pick-a-color-markup .hex-pound{padding:8px 5px 0px 5px;min-height:30px;vertical-align:middle;}
 .pretend-mobile div.pick-a-color-markup .add-on{padding:8px 5px 0px 5px;}
-.pretend-mobile div.pick-a-color-markup .color-text-input{min-width:200px;min-height:30px;font-size:16px;}
+.pretend-mobile div.pick-a-color-markup .color-text-input{min-width:200px;font-size:16px;padding:9px;}
 .pretend-mobile div.pick-a-color-markup #appendedDropdownButton{height:40px;}
-.pretend-mobile div.pick-a-color-markup .color-dropdown{min-height:40px;}
-.pretend-mobile div.pick-a-color-markup .color-preview{height:30px;width:30px;}
+.pretend-mobile div.pick-a-color-markup .color-dropdown{height:40px;padding:3px 5px;}
+.pretend-mobile div.pick-a-color-markup .color-preview{height:30px;width:30px;margin-bottom:0px;}
 .pretend-mobile div.pick-a-color-markup .caret{margin-bottom:20px;}
-.pretend-mobile div.pick-a-color-markup .color-menu{left:-232px;min-width:285px;}.pretend-mobile div.pick-a-color-markup .color-menu.small{left:-66px;}
+.pretend-mobile div.pick-a-color-markup .color-menu{left:-232px;width:285px;}.pretend-mobile div.pick-a-color-markup .color-menu.small{left:-66px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-preview{height:35px;width:35px;}
 .pretend-mobile div.pick-a-color-markup .color-menu li.color-item>a{min-height:40px;}
 .pretend-mobile div.pick-a-color-markup .color-menu li.color-item:hover a{background-color:#fff;}
 .pretend-mobile div.pick-a-color-markup .color-menu .btn.color-select{height:37px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-label{margin-left:8px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-box{width:160px;height:35px;}
-.pretend-mobile div.pick-a-color-markup .color-menu .ie-spectrum{width:80px;height:35px;}
+.pretend-mobile div.pick-a-color-markup .color-menu .ie-spectrum{width:80px;height:35px;}.pretend-mobile div.pick-a-color-markup .color-menu .ie-spectrum.hue{width:45.5px;}
+.pretend-mobile div.pick-a-color-markup .color-menu .lightness-spectrum-0,.pretend-mobile div.pick-a-color-markup .color-menu .lightness-spectrum-1,.pretend-mobile div.pick-a-color-markup .color-menu .saturation-spectrum-0,.pretend-mobile div.pick-a-color-markup .color-menu .saturation-spectrum-1{width:135px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .highlight-band{width:21px;left:69.5px;height:34px;}.pretend-mobile div.pick-a-color-markup .color-menu .highlight-band .highlight-band-stripe{margin:4px 1px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .spectrum-white .highlight-band,.pretend-mobile div.pick-a-color-markup .color-menu .spectrum-black .highlight-band{left:0px;}
 .pretend-mobile div.pick-a-color-markup .saved-color-col{width:125px;}
+.pretend-mobile div.pick-a-color-markup .advanced-content li{min-height:70px;}
+.pretend-mobile div.pick-a-color-markup .advanced-content .color-preview{height:50px;width:270px;margin-left:-10px;}.pretend-mobile div.pick-a-color-markup .advanced-content .color-preview .color-select.btn.advanced{display:inline;margin-top:7px;}
+.pretend-mobile div.pick-a-color-markup .advanced-content .spectrum-saturation .highlight-band{left:247px;}
+.pretend-mobile div.pick-a-color-markup .advanced-content .spectrum-lightness .highlight-band{left:123.5px;}
+.pretend-mobile div.pick-a-color-markup .advanced-content .color-box{width:270px;left:5px;}

@@ -23,11 +23,16 @@ $(document).ready(function () {
 
   $(".pick-a-color-no-spectrum").pickAColor({
     showSpectrum            : false,
-    showSavedColors         : false
+    showSavedColors         : false,
+    showAdvanced            : false
   });
   
   $(".pick-a-color-no-saved").pickAColor({
     showSavedColors         : false
+  });
+  
+  $(".pick-a-color-no-advanced").pickAColor({
+    showAdvanced         : false
   });
   
   $(".pick-a-color-per-el").pickAColor({

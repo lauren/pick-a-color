@@ -12,7 +12,7 @@
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/pick-a-color-docs.css" rel="stylesheet">
-    <link href="css/pick-a-color-1.0.0.min.css" rel="stylesheet">
+    <link href="css/pick-a-color-1.1.0.min.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -126,8 +126,8 @@
 								<p class="small">Easy-to-use preset colors that can be lightened and darkened.</p>
 							</div>
 							<div class="span6">
-								<h5><i class="icon-mobile-phone icon-large"></i> Chunky mobile styles</h5>
-								<p class="small">Dragging is easy, even on a touch device.</p>
+								<h5><i class="icon-cogs icon-large"></i> Advanced color palate</h5>
+								<p class="small">Let users manipulate saturation, spectrum, and hue to get any color.</p>
 							</div>
 						</div>
 
@@ -182,12 +182,12 @@
 						<li>
 							<a href="/pick-a-color/pick-a-color.zip" onClick="_gaq.push(['_trackEvent', 'download', 'github']);">Download the required files</a>. Add them to your CSS and JS folders and include them in your document as follows:<br/>
 							In the <code>&lt;head&gt;</code>:
-								<pre>&lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;
-&lt;link rel="stylesheet" href="css/pick-a-color.min.css"&gt;</pre>
+								<pre>&lt;link rel="stylesheet" href="css/bootstrap-2.2.2.min.css"&gt;
+&lt;link rel="stylesheet" href="css/pick-a-color-1.1.0.min.css"&gt;</pre>
 							Before the ending <code>&lt;/body&gt;</code>:
 								<pre>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
-&lt;script src="js/tinycolor-0.9.12.min.js"&gt;&lt;/script&gt;
-&lt;script src="js/color-picker.js"&gt;&lt;/script&gt;</pre>
+&lt;script src="js/tinycolor-0.9.14.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/pick-a-color-1.1.0.js"&gt;&lt;/script&gt;</pre>
 						<li>
 							Add this to your HTML wherever you want a Pick-A-Color:
 							<pre>&lt;div class="pick-a-color" id="YOUR_ID" data-YOUR_ID="YOUR_DEFAULT"&gt;YOUR_DEFAULT&lt;/div&gt;</pre>
@@ -228,8 +228,8 @@
  &lt;head&gt;		
   &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
   &lt;meta http-equiv="x-ua-compatible" content="IE=10"&gt;	  
-  &lt;link rel="stylesheet" href="css/bootstrap.min.css"&gt;
-  &lt;link rel="stylesheet" href="css/pick-a-color.css"&gt;	  	
+  &lt;link rel="stylesheet" href="css/bootstrap-2.2.2.min.css"&gt;
+  &lt;link rel="stylesheet" href="css/pick-a-color-1.1.0.min.css"&gt;	  	
  &lt;/head&gt;
  &lt;body&gt;
   &lt;div class="pick-a-color" id="border-color" data-border-color="222"&gt;222&lt;/div&gt;
@@ -239,9 +239,9 @@
   &lt;div class="pick-a-color" id="data-contrast-color" data-contrast-color="eee"&gt;eee&lt;/div&gt;
   &lt;div class="pick-a-color"&gt;&lt;/div&gt;
 	
-  &lt;script src="js/jquery-1.9.0.min.js"&gt;&lt;/script&gt;
-  &lt;script src="js/tinycolor-min.js"&gt;&lt;/script&gt;
-  &lt;script src="js/pick-a-color.js"&gt;&lt;/script&gt;	
+  &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
+  &lt;script src="js/tinycolor-0.9.14.min.js"&gt;&lt;/script&gt;
+  &lt;script src="js/pick-a-color-1.1.0.js"&gt;&lt;/script&gt;	
 
   &lt;script type="text/javascript"&gt;
 
@@ -273,7 +273,7 @@
  				</div>
 			</div>
 			
-			<div class="row-fluid options" id="about">
+			<div class="row-fluid options">
 				<div class="span4">
 
 					<h5>showSpectrum</h5> 
@@ -286,16 +286,39 @@
 
 					<h6>showSpectrum: true</h6>
 					
-					<div class="pick-a-color" id="spectrum-demo" data-desktop-demo="f60">f60</div>
+					<div class="pick-a-color" id="spectrum-demo" data-desktop-demo="f60">fff</div>
 					
 					<h6>showSpectrum: false</h6>
 					
-					<div class="pick-a-color-no-spectrum" id="no-spectrum-demo" data-desktop-demo="f00">ff0</div>
+					<div class="pick-a-color-no-spectrum" id="no-spectrum-demo" data-desktop-demo="f00">f00</div>
 				
 				</div>				
 			</div>
 			
-			<div class="row-fluid options" id="about">
+			<div class="row-fluid options">
+				<div class="span4">
+
+					<h5>showAdvanced</h5> 
+
+					<p>Specifies whether or not there is a tab called "Advanced" that allows users to modify hue, lightness, and saturation to make any color their hearts desire.</p>
+					
+				</div>
+
+				<div class="span8">
+
+					<h6>showAdvanced: true</h6>
+					
+					<div class="pick-a-color" id="advanced-demo" data-desktop-demo="f60">f60</div>
+					
+					<h6>showAdvanced: false</h6>
+					
+					<div class="pick-a-color-no-advanced" id="no-advanced-demo" data-desktop-demo="f00">ff0</div>
+				
+				</div>				
+			</div>
+			
+			
+			<div class="row-fluid options">
 				<div class="span4">
 
 					<h5>showSavedColors</h5>
@@ -317,7 +340,7 @@
 				</div>				
 			</div>
 
-			<div class="row-fluid options" id="about">
+			<div class="row-fluid options">
 				
 				<div class="span8">
 
@@ -332,7 +355,7 @@
 					
  			</div>
 
-			<div class="row-fluid options" id="about">
+			<div class="row-fluid options">
 
 				<div class="span4">
 
@@ -348,7 +371,7 @@
 
 					<div class="pick-a-color" id="saved-colors-fade-demo" data-desktop-demo="800080">800080</div>
 
-					<h6>showSavedColors: false</h6>
+					<h6>fadeMenuToggle: false</h6>
 
 					<div class="pick-a-color-no-fade" id="no-saved-colors-no-fade-demo" data-desktop-demo="000">000</div>
 					
@@ -365,13 +388,13 @@
 					<p>I've tested Pick-a-Color in these browsers:</p>
 
 					<ul class="docs">
-						<li>Google Chrome 24.0.1312.57 (Mac OSX, Windows 8, Windows XP, iOS 6.0.2)</li>
+						<li>Google Chrome 24.0.1312.57 - 25.0.1364.99 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)</li>
 						<li>Safari 6.0.2 (Mac OSX and iOS 6.0.2)</li>
-						<li>Internet Explorer 10 (Windows 8)</li>
-						<li>Internet Explorer 9 Mode (via IE10 on Windows 8)</li>
+						<li>Internet Explorer 10 (Windows 7)</li>
+						<li>Internet Explorer 9 (Windows 7)</li>
 						<li>Internet Explorer 8 (Windows XP)</li>
-						<li>Firefox 18.0.1 (Mac OSX and Windows 8)</li>
-						<li>Opera 12.13 (Mac OSX and Windows 8)</li>
+						<li>Firefox 18.0.1 - 19.0 (Mac OSX and Windows 7)</li>
+						<li>Opera 12.13 - 12.14 (Mac OSX and Windows 7)</li>
 					</ul>
 
 					<p>Minor issues in these browsers are documented <a href="https://github.com/lauren/pick-a-color/issues" onClick="_gaq.push(['_trackEvent', 'view_tickets', 'github']);">here</a>.</p>
@@ -406,8 +429,8 @@
 
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/tinycolor-0.9.12.min.js"></script>
-    <script src="js/pick-a-color-1.0.0.min.js"></script>
+    <script src="js/tinycolor-0.9.14.min.js"></script>
+    <script src="js/pick-a-color-1.1.0.min.js"></script>
     <script src="js/pick-a-color-docs.min.js"></script>
 
 		<script type="text/javascript">

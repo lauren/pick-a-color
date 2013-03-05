@@ -4,11 +4,11 @@
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
 
-//// variables 
+//// variables
 
-// basic colors 
+// basic colors
 
-// basic colors 
+// basic colors
 
 @white:#ffffff;
 
@@ -45,7 +45,7 @@
 // widths
 
 @color-box-width: 200px;
-@color-box-width-phone: 160px; 
+@color-box-width-phone: 160px;
 @color-band-width: 11px;
 @color-band-width-phone: 21px;
 @advanced-color-box-width: 300px;
@@ -110,13 +110,13 @@
 	        border-top-right-radius: @radius;
   .shadows(@shadow);
 }
- 
+
 .two-color-spectrum (@start: @white, @stop: @black) {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, @start), color-stop(1.0, @stop));
   background-image: -moz-linear-gradient(left center, @start 0%, @stop 100%);
-  background-image: -webkit-linear-gradient(left, @start, @stop); 
-  background-image: -o-linear-gradient(left, @start, @stop); 
-  background-image: linear-gradient(to right, @start, @stop); 
+  background-image: -webkit-linear-gradient(left, @start, @stop);
+  background-image: -o-linear-gradient(left, @start, @stop);
+  background-image: linear-gradient(to right, @start, @stop);
   background-repeat: repeat-x;
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start),argb(@stop))); // IE9 and down
 }
@@ -124,36 +124,36 @@
 .three-color-spectrum (@mid: @red) {
 	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@mid,50%)), color-stop(0.5, @mid), color-stop(1.0, darken(@mid,50%)));
 	background-image: -moz-linear-gradient(left center, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
-	background-image: -webkit-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
-  background-image: -o-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
-  background-image: linear-gradient(to right, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%); 
+	background-image: -webkit-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
+  background-image: -o-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
+  background-image: linear-gradient(to right, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
   background-repeat: repeat-x;
 }
 
 .full-spectrum (@one: @red, @two: @yellow, @three: @brightGreen, @four: @teal, @five: @blue, @six: @lightPurple, @seven: @red) {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, @one), color-stop(17%, @two), color-stop(34%,@three), color-stop(51%, @four), color-stop(68%, @five), color-stop(85%, @six), color-stop(100%, @seven));
   background-image: -moz-linear-gradient(left center, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
-  background-image: -webkit-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
-  background-image: -o-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
-  background-image: linear-gradient(to right, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%); 
+  background-image: -webkit-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
+  background-image: -o-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
+  background-image: linear-gradient(to right, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
   background-repeat: repeat-x;
 }
 
 .lightness-spectrum (@color: @red) {
 	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@color,50%)), color-stop(0.5, @color), color-stop(1.0, darken(@color,50%)));
 	background-image: -moz-linear-gradient(left center, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
-	background-image: -webkit-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
-  background-image: -o-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
-  background-image: linear-gradient(to right, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%); 
+	background-image: -webkit-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
+  background-image: -o-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
+  background-image: linear-gradient(to right, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
   background-repeat: repeat-x;
 }
 
 .saturation-spectrum (@color: @red) {
 	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, desaturate(@color,100%)), color-stop(0.5, @color), color-stop(1.0, saturate(@color,100%)));
 	background-image: -moz-linear-gradient(left center, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
-	background-image: -webkit-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
-  background-image: -o-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
-  background-image: linear-gradient(to right, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%); 
+	background-image: -webkit-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
+  background-image: -o-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
+  background-image: linear-gradient(to right, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
   background-repeat: repeat-x;
 }
 
@@ -173,15 +173,21 @@
 	.two-color-spectrum(desaturate(@color,100%),desaturate(@color,50%));
 	.left-rounded-corners;
 	width: @advanced-color-box-width / 2;
+	@media screen and (max-width: 979px) {
+		width:@advanced-color-box-width-phone / 2;
+	}
 }
 
 .saturation-spectrum-1(@color) {
 	.two-color-spectrum(desaturate(@color,50%),@color);
 	.right-rounded-corners;
 	width: @advanced-color-box-width / 2;
+	@media screen and (max-width: 979px) {
+		width:@advanced-color-box-width-phone / 2;
+	}
 }
 
-//// actual styles 
+//// actual styles
 
 // input field
 
@@ -223,8 +229,8 @@ div.pick-a-color-markup {
 		vertical-align:middle;
 		@media screen and (max-width: 979px) {
 			min-width:200px;
-			min-height:30px;
 			font-size:16px;
+			padding:9px;
 		}
 	}
 
@@ -240,11 +246,11 @@ div.pick-a-color-markup {
 		vertical-align: top;
 	}
 
-	.color-dropdown { 
+	.color-dropdown {
 	  height:30px;
 	  padding:3px 5px;
 		@media screen and (max-width: 979px) {
-			min-height:40px;
+			height:40px;
 		}
 	}
 
@@ -273,39 +279,39 @@ div.pick-a-color-markup {
 		}
 	}
 
-	// basic menu of colors 
+	// basic menu of colors
 
 	.color-menu {
 		text-align:left;
 	  padding:5px 0px; /*overwriting bootstrap default */
 		width:330px;
 		font-size:14px;
-	
+
 		@media screen and (max-width: 979px) {
 			left:-232px;
 			width:285px;
 		}
-	
+
 		&.small {
-			min-width:100px;
+			width:100px;
 			@media screen and (max-width: 979px) {
-				left:-66px;
+				left:-105px;
 			}
 		}
-		
+
 		/* resets for ul / li styles */
-		
+
 		ul {
 			padding:0px;
 			margin:0px;
 		}
-		
+
 		li {
 			list-style-type:none;
 			padding:0px;
 			margin:0px;
 		}
-	
+
 		.color-preview {
 		  vertical-align:middle;
 		  margin:0px;
@@ -313,7 +319,7 @@ div.pick-a-color-markup {
 			height: 35px;
 			width: 35px;
 			}
-	
+
 			&.current-color, &.white {
 			  background-color:@white;
 			}
@@ -408,7 +414,7 @@ div.pick-a-color-markup {
 		}
 	}
 
-	// color gradients 
+	// color gradients
 
 	.color-box {
 	  height:20px;
@@ -474,6 +480,9 @@ div.pick-a-color-markup {
 		display:inline-block;
 		&.hue {
 			width:(@advanced-color-box-width/6) + .5px;
+			@media screen and (max-width: 979px) {
+				width: (@advanced-color-box-width-phone/6) + .5px;
+			}
 		}
 		@media screen and (max-width: 979px) {
 			width:@color-box-width-phone/2;
@@ -481,7 +490,7 @@ div.pick-a-color-markup {
 		}
 		top:-1;
 	}
-	
+
 	.red-spectrum-0, .lightness-spectrum-0 {
 		.spectrum-0(@red);
 	}
@@ -489,9 +498,12 @@ div.pick-a-color-markup {
 	.red-spectrum-1, .lightness-spectrum-1 {
 		.spectrum-1(@red);
 	}
-	
+
 	.lightness-spectrum-0, .lightness-spectrum-1 {
 		width: @advanced-color-box-width / 2;
+		@media screen and (max-width: 979px) {
+			width: @advanced-color-box-width-phone / 2;
+		}
 	}
 
 	.orange-spectrum-0 {
@@ -533,7 +545,7 @@ div.pick-a-color-markup {
 	.purple-spectrum-1 {
 		.spectrum-1(@purple);
 	}
-	
+
 	.saturation-spectrum-0 {
 		.saturation-spectrum-0(@red);
 	}
@@ -541,33 +553,33 @@ div.pick-a-color-markup {
 	.saturation-spectrum-1 {
 		.saturation-spectrum-1(@red);
 	}
-	
+
 	.hue-spectrum-0 {
 		.two-color-spectrum(@red,@yellow);
 	}
-	
+
 	.hue-spectrum-1 {
 		.two-color-spectrum(@yellow,@brightGreen);
 	}
-	
+
 	.hue-spectrum-2 {
 		.two-color-spectrum(@brightGreen,@teal);
 		left:-1px;
 		position:relative;
 	}
-	
+
 	.hue-spectrum-3 {
 		.two-color-spectrum(@teal,@blue);
 		left:-1px;
 		position:relative;
 	}
-	
+
 	.hue-spectrum-4 {
 		.two-color-spectrum(@blue,@lightPurple);
 		left:-1px;
 		position:relative;
 	}
-	
+
 	.hue-spectrum-5 {
 		.two-color-spectrum(@lightPurple,@red);
 		left:-2px;
@@ -582,7 +594,7 @@ div.pick-a-color-markup {
 		width:@color-band-width;
 		display:inline-block;
 		cursor:pointer;
-		cursor: -webkit-grab; 
+		cursor: -webkit-grab;
 		cursor: -moz-grab;
 		position:absolute;
 		top:-1px;
@@ -604,11 +616,11 @@ div.pick-a-color-markup {
 		display:inline-block;
 		.shadows(1px 0px 2px 0px #ffffff;);
 		@media screen and (max-width: 979px) {
-			margin: 4px 1px;
+			margin: 4px 2px;
 		}
 	}
 
-	// tabbed navigation 
+	// tabbed navigation
 
 	.color-menu-tabs {
 		padding:5px 3px 3px 10px;
@@ -645,7 +657,7 @@ div.pick-a-color-markup {
 		display:none;
 	}
 
-	// saved colors tab 
+	// saved colors tab
 
 	.savedColors-content {
 		padding:5px 15px;
@@ -666,9 +678,9 @@ div.pick-a-color-markup {
 			width:125px;
 		}
 	}
-	
+
 	// advanced colors
-	
+
 	.advanced-content {
 		ul {
 			margin-top:10px;
@@ -706,18 +718,18 @@ div.pick-a-color-markup {
 				margin-left:-10px;
 			}
 		}
-		
+
 		.spectrum-hue {
 			.full-spectrum;
 			.highlight-band {
 				left:0px;
 			}
 		}
-		
+
 		.spectrum-lightness {
 			.lightness-spectrum;
 		}
-		
+
 		.spectrum-saturation {
 			.saturation-spectrum;
 			.highlight-band {
@@ -727,20 +739,20 @@ div.pick-a-color-markup {
 				}
 			}
 		}
-		
+
 		.spectrum-lightness .highlight-band {
 			left: (@advanced-color-box-width / 2) - ((@color-band-width + 2) / 2);
 			@media screen and (max-width: 979px) {
 				left: (@advanced-color-box-width-phone / 2) - ((@color-band-width-phone + 2) / 2);
 			}
 		}
-		
+
 		.lightness-text, .hue-text, .saturation-text, .preview-text {
 			vertical-align:middle;
 			text-align:center;
 			display:block;
 		}
-		
+
 		.color-box {
 			left:15px;
 			top:25px;
@@ -750,11 +762,11 @@ div.pick-a-color-markup {
 				left:5px;
 			}
 		}
-		
+
 		.preview-item {
 			height:80px;
 		}
-		
+
 	}
 }
 

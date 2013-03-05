@@ -16,7 +16,7 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 **Saved colors:** Saves up to 16 recently used colors. Colors are stored in localStorage or cookies.
 
-**Advanced:** Advanced tab lets users modify hue, saturation, and lightness to make any color at all.
+**Advanced:** Advanced tab lets users modify hue, saturation, and lightness to make any color their hearts desire.
 
 **Basic color palate:** Easy-to-use preset colors that can be lightened and darkened.
 
@@ -155,7 +155,7 @@ Specifies whether or not there is a tab called "Saved Colors" that keeps track o
 
 #### showAdvanced
 
-Specifies whether there is a tab called "Advanced" that allows users to modify hue, lightness, and saturation to make any color under the sun.
+Specifies whether there is a tab called "Advanced" that allows users to modify hue, lightness, and saturation to make any color their hearts desire.
 
 ##### saveColorsPerElement (for showSavedColors only)
 
@@ -173,13 +173,13 @@ Specifies whether the dropdown menu should fade in and out when it's opened and 
 
 I've tested Pick-a-Color in these browsers:
 
-* Google Chrome 24.0.1312.57 - 25.0.1364.99 (Mac OSX, Windows 8, Windows XP, iOS 6.0.2)
+* Google Chrome 24.0.1312.57 - 25.0.1364.99 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)
 * Safari 6.0.2 (Mac OSX and iOS 6.0.2)
-* Internet Explorer 10 (Windows 8)
-* Internet Explorer 9 Mode (via IE10 on Windows 8)
+* Internet Explorer 10 (Windows 7)
+* Internet Explorer 9 (Windows 7)
 * Internet Explorer 8 (Windows XP)
-* Firefox 18.0.1 - 19.0 (Mac OSX and Windows 8)
-* Opera 12.13 (Mac OSX and Windows 8)
+* Firefox 18.0.1 - 19.0 (Mac OSX and Windows 7)
+* Opera 12.13 - 12.14 (Mac OSX and Windows 7)
 
 Minor issues in these browsers are documented here: https://github.com/lauren/pick-a-color/issues
 

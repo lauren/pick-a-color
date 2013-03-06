@@ -141,7 +141,7 @@ $(".pick-a-color").pickAColor({
    showSavedColors         : true,
    saveColorsPerElement    : false,
    fadeMenuToggle          : true,
-	 showAdvanced						 : true
+   showAdvanced						 : true
  });
 ```
 

@@ -44,7 +44,7 @@ OK! Let's do this color picking thing!
 
 ## How to Use
 
-1) Download the required files: http://lauren.github.com/pick-a-color/pick-a-color.zip. Add them to your CSS and JS folders and include them in your document as follows:
+1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add them to your CSS and JS folders and include them in your document as follows:
 
 **In the `<head>`:**
 

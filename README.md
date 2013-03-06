@@ -73,7 +73,7 @@ For instance, yours might look like this:
 <div class="pick-a-color" id="border-color" data-border-color="222">222</div>
 ```
 		
-		You can change the class of your div, but make sure to match it in your JavaScript in the next step...
+You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
 3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
@@ -141,7 +141,7 @@ $(".pick-a-color").pickAColor({
    showSavedColors         : true,
    saveColorsPerElement    : false,
    fadeMenuToggle          : true,
-   showAdvanced						 : true
+   showAdvanced            : true
  });
 ```
 

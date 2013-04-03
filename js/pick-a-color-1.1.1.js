@@ -46,7 +46,8 @@
         saveColorsPerElement  : false,
         fadeMenuToggle        : true,
         showAdvanced          : true,
-        showBasicColors       : true
+        showBasicColors       : true,
+        showHexInput          : true
       }, options);
 
       var useTabs = (settings.showSavedColors || settings.showAdvanced) && settings.showBasicColors,
@@ -56,8 +57,13 @@
       // so much markup
 
       var markupBeforeInput = function () {
-        return $("<div>").addClass("input-prepend input-append pick-a-color-markup").
-          append($("<span>").addClass("hex-pound").text("#"));
+        var $div = $("<div>").addClass("input-prepend input-append pick-a-color-markup");
+
+        if (settings.showHexInput) {
+          $div = $div.append($("<span>").addClass("hex-pound").text("#"));
+        }
+
+        return $div;
       };
 
       var markupAfterInput = function () {
@@ -234,7 +240,8 @@
 
           $this_el.html(function (){
             return markupBeforeInput().append(function () {
-              return $('<input id="appendedPrependedDropdownButton" type="text" value="' +
+              var inputType = settings.showHexInput ? 'text' : 'hidden';
+              return $('<input id="appendedPrependedDropdownButton" type="'+ inputType +'" value="' +
                 myColorVars.defaultColor + '"/>').addClass("color-text-input");
             }).append(markupAfterInput());
           });

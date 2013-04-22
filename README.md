@@ -137,11 +137,13 @@ If you'd like to change any of my default options, you can specify your preferre
 
 ```javascript
 $(".pick-a-color").pickAColor({
-   showSpectrum            : true,
-   showSavedColors         : true,
-   saveColorsPerElement    : false,
-   fadeMenuToggle          : true,
-   showAdvanced            : true
+        showSpectrum          : true,
+        showSavedColors       : true,
+        saveColorsPerElement  : false,
+        fadeMenuToggle        : true,
+        showAdvanced          : true,
+        showBasicColors       : true,
+        showHexInput          : true
  });
 ```
 
@@ -168,6 +170,37 @@ I recommend setting this to `false`. Imagine you're a user filling out a big for
 #### fadeMenuToggle
 
 Specifies whether the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile devices, in which Pick-a-Color never ever ever uses a fade because WOW they look terrible in mobile browsers.
+
+#### showBasicColors
+Speifies whether or not the dropdown menu should show a list of basic colors that the user can select from.
+
+#### showHexInput
+Whether or not to show the hex text input. If false the input has an input type of 'hidden'.
+
+### Preset Colors
+If you want to change the default basic colors you can do so by passing an object as the second argument to the pickAColor function. 
+
+```javascript
+$(".pick-a-color").pickAColor({
+        showSpectrum          : true,
+        showSavedColors       : true,
+        saveColorsPerElement  : false,
+        fadeMenuToggle        : true,
+        showAdvanced          : true,
+        showBasicColors       : true,
+        showHexInput          : true
+ }, 
+ {
+	white     : 'fff',
+	red       : 'f00',
+	orange    : 'f60',
+	yellow    : 'ff0',
+	green     : '008000',
+	blue      : '00f',
+	purple    : '800080',
+	black     : '000'
+ });
+```
 
 ## Tested Browsers
 

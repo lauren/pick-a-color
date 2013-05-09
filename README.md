@@ -7,7 +7,6 @@ There are some great color picker plugins out there, but most cater to the needs
 
 Pick-a-Color is designed to be easy for anyone to use. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
 
-
 ### Features 
 
 #### For your site's users
@@ -143,7 +142,17 @@ $(".pick-a-color").pickAColor({
         fadeMenuToggle        : true,
         showAdvanced          : true,
         showBasicColors       : true,
-        showHexInput          : true
+        showHexInput          : true,
+        basicColors           : {
+          white     : 'fff',
+          red       : 'f00',
+          orange    : 'f60',
+          yellow    : 'ff0',
+          green     : '008000',
+          blue      : '00f',
+          purple    : '800080',
+          black     : '000'
+        }
  });
 ```
 
@@ -157,7 +166,7 @@ Specifies whether or not there is a tab called "Saved Colors" that keeps track o
 
 #### showAdvanced
 
-Specifies whether there is a tab called "Advanced" that allows users to modify hue, lightness, and saturation to make any color their hearts desire.
+Specifies whether or not there is a tab called "Advanced" that allows users to modify hue, lightness, and saturation to make any color their hearts desire.
 
 ##### saveColorsPerElement (for showSavedColors only)
 
@@ -169,38 +178,19 @@ I recommend setting this to `false`. Imagine you're a user filling out a big for
 
 #### fadeMenuToggle
 
-Specifies whether the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile devices, in which Pick-a-Color never ever ever uses a fade because WOW they look terrible in mobile browsers.
+Specifies whether or not the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile devices, in which Pick-a-Color never ever ever uses a fade because WOW they look terrible in mobile browsers.
 
 #### showBasicColors
-Speifies whether or not the dropdown menu should show a list of basic colors that the user can select from.
+
+Specifies whether or not the dropdown should show a list of basic colors that the user can select from.
 
 #### showHexInput
-Whether or not to show the hex text input. If false the input has an input type of 'hidden'.
 
-### Preset Colors
-If you want to change the default basic colors you can do so by passing an object as the second argument to the pickAColor function. 
+Specifies whether or not to show the hex text input. If false the input has an input type of 'hidden'.
 
-```javascript
-$(".pick-a-color").pickAColor({
-        showSpectrum          : true,
-        showSavedColors       : true,
-        saveColorsPerElement  : false,
-        fadeMenuToggle        : true,
-        showAdvanced          : true,
-        showBasicColors       : true,
-        showHexInput          : true
- }, 
- {
-	white     : 'fff',
-	red       : 'f00',
-	orange    : 'f60',
-	yellow    : 'ff0',
-	green     : '008000',
-	blue      : '00f',
-	purple    : '800080',
-	black     : '000'
- });
-```
+### basicColors
+
+Specifies the set of colors to be shown in the Basic Colors tab.
 
 ## Tested Browsers
 

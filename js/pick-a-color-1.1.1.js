@@ -6,20 +6,7 @@
 ;(function ($) {
     "use strict";
 
-    $.fn.pickAColor = function (options, presetColors) {
-
-      if (!presetColors) {
-        presetColors = {
-          white     : 'fff',
-          red       : 'f00',
-          orange    : 'f60',
-          yellow    : 'ff0',
-          green     : '008000',
-          blue      : '00f',
-          purple    : '800080',
-          black     : '000'
-        }
-      };
+    $.fn.pickAColor = function (options) {
 
       // capabilities
 
@@ -47,7 +34,17 @@
         fadeMenuToggle        : true,
         showAdvanced          : true,
         showBasicColors       : true,
-        showHexInput          : true
+        showHexInput          : true,
+        basicColors           : {
+          white     : 'fff',
+          red       : 'f00',
+          orange    : 'f60',
+          yellow    : 'ff0',
+          green     : '008000',
+          blue      : '00f',
+          purple    : '800080',
+          black     : '000'
+        }
       }, options);
 
       var useTabs = (settings.showSavedColors || settings.showAdvanced) && settings.showBasicColors,
@@ -97,7 +94,7 @@
               text("Tap spectrum or drag band to change color"));
           }
           var $listContainer = $("<ul>").addClass("basic-colors-list");
-          $.each(presetColors, function (index,value) {
+          $.each(settings.basicColors, function (index,value) {
             var $thisColor = $("<li>").addClass("color-item"),
                 $thisLink = $("<a>").addClass(index + " color-link"),
                 $colorPreview =  $("<span>").addClass("color-preview " + index),
@@ -450,7 +447,7 @@
             // get the class of the parent color box and slice off "spectrum"
             var $this_parent = $thisEl.parent(),
                 colorName = $this_parent.attr("class").split("-")[2],
-                colorHex = presetColors[colorName],
+                colorHex = settings.basicColors[colorName],
                 colorHsl = tinycolor(colorHex).toHsl();
                 switch(colorHex) {
                   case "fff":

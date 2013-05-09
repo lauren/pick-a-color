@@ -142,17 +142,7 @@ $(".pick-a-color").pickAColor({
         fadeMenuToggle        : true,
         showAdvanced          : true,
         showBasicColors       : true,
-        showHexInput          : true,
-        basicColors           : {
-          white     : 'fff',
-          red       : 'f00',
-          orange    : 'f60',
-          yellow    : 'ff0',
-          green     : '008000',
-          blue      : '00f',
-          purple    : '800080',
-          black     : '000'
-        }
+        showHexInput          : true
  });
 ```
 
@@ -187,10 +177,6 @@ Specifies whether or not the dropdown should show a list of basic colors that th
 #### showHexInput
 
 Specifies whether or not to show the hex text input. If false the input has an input type of 'hidden'.
-
-### basicColors
-
-Specifies the set of colors to be shown in the Basic Colors tab.
 
 ## Tested Browsers
 

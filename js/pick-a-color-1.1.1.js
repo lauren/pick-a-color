@@ -82,13 +82,15 @@
           $dropdownContainer.addClass("small");
         }
         if (useTabs) {
+          var $tabContainer = $("<div>").addClass("color-menu-tabs");
           if (settings.showBasicColors) {
-            var $tabContainer = $("<div>").addClass("color-menu-tabs");
             $tabContainer.append($("<span>").addClass("basicColors-tab tab tab-active").
               append($("<a>").text("Basic Colors"))); 
           }
           if (settings.showSavedColors) {
-            $tabContainer.append($("<span>").addClass("savedColors-tab tab").
+            settings.showBasicColors ? $tabContainer.append($("<span>").
+            addClass("savedColors-tab tab").append($("<a>").text("Saved Colors"))) : 
+            $tabContainer.append($("<span>").addClass("savedColors-tab tab tab-active").
             append($("<a>").text("Saved Colors")));
           }
           if (settings.showAdvanced) {

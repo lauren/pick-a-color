@@ -75,6 +75,7 @@
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
         if (!settings.showHexInput) {
           $dropdownButton.addClass("no-hex");
+          $dropdownContainer.addClass("no-hex");
         }
         $markup.append($dropdownButton.append($dropdownColorPreview).append($dropdownCaret));
         if (!useTabs && !settings.showSpectrum) {

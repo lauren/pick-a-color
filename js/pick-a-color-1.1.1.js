@@ -68,11 +68,15 @@
       };
 
       var markupAfterInput = function () {
-        var $markup = $("<div>").addClass("btn-group").
-          append($("<button>").addClass("btn color-dropdown dropdown-toggle").
-          append($("<span>").addClass("color-preview current-color")).
-          append($("<span>").addClass("caret"))),
+        var $markup = $("<div>").addClass("btn-group"),
+            $dropdownButton = $("<button>").addClass("btn color-dropdown dropdown-toggle"),
+            $dropdownColorPreview = $("<span>").addClass("color-preview current-color"),
+            $dropdownCaret = $("<span>").addClass("caret"),
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
+        if (!settings.showHexInput) {
+          $dropdownButton.addClass("no-hex");
+        }
+        $markup.append($dropdownButton.append($dropdownColorPreview).append($dropdownCaret));
         if (!useTabs && !settings.showSpectrum) {
           $dropdownContainer.addClass("small");
         }

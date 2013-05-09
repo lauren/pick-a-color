@@ -1,14 +1,9 @@
-/*
-* Pick-a-Color CSS v1.1.0
-* Copyright 2013 Lauren Sperber and Broadstreet Ads
-* https://github.com/lauren/pick-a-color/blob/master/LICENSE
-*/
 div.pick-a-color-markup{margin:0px;padding:0px;}div.pick-a-color-markup .hex-pound{display:inline-block;height:20px;font-size:14px;font-weight:normal;text-align:center;text-shadow:0 1px 0 #ffffff;background-color:#eeeeee;border:1px solid #ccc;margin-right:-1px;-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px;padding:4px 5px;vertical-align:top;}@media screen and (max-width:979px){div.pick-a-color-markup .hex-pound{padding:8px 5px 0px 5px;min-height:30px;vertical-align:middle;}}
 @media screen and (max-width:979px){div.pick-a-color-markup .add-on{padding:8px 5px 0px 5px;}}
 div.pick-a-color-markup .color-text-input{text-align:left;width:200px;vertical-align:middle;}@media screen and (max-width:979px){div.pick-a-color-markup .color-text-input{min-width:200px;font-size:16px;padding:9px;}}
 @media screen and (max-width:979px){div.pick-a-color-markup #appendedDropdownButton{height:40px;}}
-div.pick-a-color-markup .btn-group{vertical-align:top;}
-div.pick-a-color-markup .color-dropdown{height:30px;padding:3px 5px;}@media screen and (max-width:979px){div.pick-a-color-markup .color-dropdown{height:40px;}}
+div.pick-a-color-markup .btn-group{vertical-align:top;}div.pick-a-color-markup .btn-group .color-dropdown{height:30px;padding:3px 5px;}div.pick-a-color-markup .btn-group .color-dropdown.no-hex{-webkit-border-top-left-radius:4px;-webkit-border-bottom-left-radius:4px;-moz-border-radius-topleft:4px;-moz-border-radius-bottomleft:4px;border-top-left-radius:4px;border-bottom-left-radius:4px;}
+@media screen and (max-width:979px){div.pick-a-color-markup .btn-group .color-dropdown{height:40px;}}
 div.pick-a-color-markup .color-preview{border:1px solid #cccccc;-webkit-border-radius:4px;-moz-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);-moz-box-shadow:inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);box-shadow:inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07);height:20px;width:20px;display:inline-block;cursor:pointer;}div.pick-a-color-markup .color-preview.current-color{margin-bottom:1px;margin-right:3px;}
 @media screen and (max-width:979px){div.pick-a-color-markup .color-preview{height:30px;width:30px;}}
 div.pick-a-color-markup .caret{vertical-align:bottom;margin-bottom:15px;}@media screen and (max-width:979px){div.pick-a-color-markup .caret{margin-bottom:20px;}}

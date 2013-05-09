@@ -244,16 +244,19 @@ div.pick-a-color-markup {
 
 	.btn-group {
 		vertical-align: top;
-	}
-
-	.color-dropdown {
-	  height:30px;
-	  padding:3px 5px;
-		@media screen and (max-width: 979px) {
-			height:40px;
+		
+		.color-dropdown {
+		  height:30px;
+		  padding:3px 5px;
+		  &.no-hex {
+		    .left-rounded-corners;
+		  }
+			@media screen and (max-width: 979px) {
+				height:40px;
+			}
 		}
 	}
-
+	
 	.color-preview {
 		.borders-shadows;
 	  height:20px;

@@ -46,12 +46,14 @@
           black     : '000'
         }
       }, options);
+      
+      if (!settings.showSavedColors && !settings.showAdvanced && !settings.showBasicColors) {
+        settings.showBasicColors = true; // override showBasicColors if no tabs are shown
+      }
 
       var useTabs = (settings.showSavedColors && settings.showAdvanced) ||
         (settings.showBasicColors && settings.showSavedColors) ||
-        (settings.showBasicColors && settings.showAdvanced),
-        largeWidth = useTabs || (settings.showBasicColors && settings.showSpectrum) ||
-          ((settings.showSavedColors || settings.showAdvanced) && !settings.showBasicColors);
+        (settings.showBasicColors && settings.showAdvanced);
 
       // so much markup
 
@@ -140,7 +142,7 @@
         }
 
         if (settings.showAdvanced) {
-          var activeClass = settings.showBasicColors && !settings.showSavedColors ? 'inactive-content' : 'active-content';
+          var activeClass = settings.showBasicColors || settings.showSavedColors ? 'inactive-content' : 'active-content';
           var $advanced = $("<div>").addClass("advanced-content").addClass(activeClass).
                 append($("<h6>").addClass("advanced-instructions").text("Tap spectrum or drag band to change color")),
               $advancedList = $("<ul>").addClass("advanced-list"),

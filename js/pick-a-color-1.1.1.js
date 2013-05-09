@@ -47,7 +47,9 @@
         }
       }, options);
 
-      var useTabs = (settings.showSavedColors || settings.showAdvanced) && settings.showBasicColors,
+      var useTabs = (settings.showSavedColors && settings.showAdvanced) ||
+        (settings.showBasicColors && settings.showSavedColors) ||
+        (settings.showBasicColors && settings.showAdvanced),
         largeWidth = useTabs || (settings.showBasicColors && settings.showSpectrum) ||
           ((settings.showSavedColors || settings.showAdvanced) && !settings.showBasicColors);
 
@@ -69,13 +71,15 @@
           append($("<span>").addClass("color-preview current-color")).
           append($("<span>").addClass("caret"))),
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
-        if (!largeWidth) {
+        if (!useTabs && !settings.showSpectrum) {
           $dropdownContainer.addClass("small");
         }
         if (useTabs) {
-          var $tabContainer = $("<div>").addClass("color-menu-tabs");
-          $tabContainer.append($("<span>").addClass("basicColors-tab tab tab-active").
-            append($("<a>").text("Basic Colors")));
+          if (settings.showBasicColors) {
+            var $tabContainer = $("<div>").addClass("color-menu-tabs");
+            $tabContainer.append($("<span>").addClass("basicColors-tab tab tab-active").
+              append($("<a>").text("Basic Colors"))); 
+          }
           if (settings.showSavedColors) {
             $tabContainer.append($("<span>").addClass("savedColors-tab tab").
             append($("<a>").text("Saved Colors")));

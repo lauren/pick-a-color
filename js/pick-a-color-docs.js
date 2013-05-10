@@ -44,4 +44,12 @@ $(document).ready(function () {
     fadeMenuToggle          : false
   });
   
+  $(".pick-a-color-no-input").pickAColor({
+    showHexInput            : false
+  });
+  
+  $(".pick-a-color-no-basic").pickAColor({
+    showBasicColors         : false
+  });
+  
 });

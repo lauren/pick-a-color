@@ -12,7 +12,7 @@
     <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/pick-a-color-docs.css" rel="stylesheet">
-    <link href="css/pick-a-color-1.1.0.min.css" rel="stylesheet">
+    <link href="css/pick-a-color-1.1.1.min.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -361,7 +361,7 @@
 
 					<h5>fadeMenuToggle</h5>
 
-					<p>Specifies whether the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile devices, in which Pick-a-Color never ever ever uses a fade because WOW they look terrible in mobile browsers.</p>
+					<p>Specifies whether or not the dropdown menu should fade in and out when it's opened and closed. This setting is overridden for mobile devices, in which Pick-a-Color never ever ever uses a fade because WOW they look terrible in mobile browsers.</p>
 				
 				</div>
 
@@ -369,11 +369,57 @@
 					
 					<h6>fadeMenuToggle: true</h6>
 
-					<div class="pick-a-color" id="saved-colors-fade-demo" data-desktop-demo="800080">800080</div>
+					<div class="pick-a-color" id="fade-demo" data-desktop-demo="800080">800080</div>
 
 					<h6>fadeMenuToggle: false</h6>
 
-					<div class="pick-a-color-no-fade" id="no-saved-colors-no-fade-demo" data-desktop-demo="000">000</div>
+					<div class="pick-a-color-no-fade" id="no-fade-demo" data-desktop-demo="000">000</div>
+					
+				</div>
+			</div>
+			
+			<div class="row-fluid options">
+
+				<div class="span4">
+
+					<h5>showHexInput</h5>
+
+					<p>Specifies whether or not to show the hex text input. If false the input has an input type of 'hidden'.</p>
+				
+				</div>
+
+				<div class="span8">
+					
+					<h6>showHexInput: true</h6>
+
+					<div class="pick-a-color" id="show-hex-demo" data-desktop-demo="800080">800080</div>
+
+					<h6>showHexInput: false</h6>
+
+					<div class="pick-a-color-no-input" id="no-hex-demo" data-desktop-demo="000">000</div>
+					
+				</div>
+			</div>
+			
+			<div class="row-fluid options">
+
+				<div class="span4">
+
+					<h5>showBasicColors</h5>
+
+					<p>Specifies whether or not the dropdown should show a list of basic colors that the user can select from.</p>
+				
+				</div>
+
+				<div class="span8">
+					
+					<h6>showBasicColors: true</h6>
+
+					<div class="pick-a-color" id="basic-colors-demo" data-desktop-demo="800080">800080</div>
+
+					<h6>showBasicColors: false</h6>
+
+					<div class="pick-a-color-no-basic" id="no-basic-colors-demo" data-desktop-demo="000">000</div>
 					
 				</div>
 			</div>
@@ -430,7 +476,7 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/tinycolor-0.9.14.min.js"></script>
-    <script src="js/pick-a-color-1.1.0.min.js"></script>
+    <script src="js/pick-a-color-1.1.1.min.js"></script>
     <script src="js/pick-a-color-docs.min.js"></script>
 
 		<script type="text/javascript">

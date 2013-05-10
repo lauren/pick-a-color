@@ -51,9 +51,9 @@ pre{margin-top:4px;}
 .pretend-mobile div.pick-a-color-markup .add-on{padding:8px 5px 0px 5px;}
 .pretend-mobile div.pick-a-color-markup .color-text-input{min-width:200px;font-size:16px;padding:9px;}
 .pretend-mobile div.pick-a-color-markup #appendedDropdownButton{height:40px;}
-.pretend-mobile div.pick-a-color-markup .color-dropdown{height:40px;padding:3px 5px;}
-.pretend-mobile div.pick-a-color-markup .color-preview{height:30px;width:30px;margin-bottom:0px;}
-.pretend-mobile div.pick-a-color-markup .caret{margin-bottom:20px;}
+.pretend-mobile div.pick-a-color-markup .btn-group .color-dropdown{height:40px;padding:3px 5px;}
+.pretend-mobile div.pick-a-color-markup .btn-group .color-preview{height:30px;width:30px;margin-bottom:0px;}
+.pretend-mobile div.pick-a-color-markup .btn-group .caret{margin-bottom:20px;}
 .pretend-mobile div.pick-a-color-markup .color-menu{left:-239px;width:293px;}.pretend-mobile div.pick-a-color-markup .color-menu.small{left:-66px;}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-preview{height:35px;width:35px;}
 .pretend-mobile div.pick-a-color-markup .color-menu li.color-item>a{min-height:40px;}

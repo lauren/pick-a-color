@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.2
+* Pick-a-Color JS v1.1.3
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -242,8 +242,12 @@
       var methods = {
 
         initialize: function () {
-          var $this_el = $(this);
-          var $myContainer = $this_el.parents(".pick-a-color-markup");
+          var $this_el = $(this),
+              $myInitializer = $this_el.parent().parent(),
+              myId = $myInitializer.context.id;
+              
+          console.log($myInitializer);
+          console.log(myId);
 
           // get the default color from the content or data attribute
           myColorVars.defaultColor = $this_el.text() === "" ? "000" : $this_el.text();
@@ -253,7 +257,7 @@
             return markupBeforeInput().append(function () {
               var inputType = settings.showHexInput ? 'text' : 'hidden';
               return $('<input id="appendedPrependedDropdownButton" type="'+ inputType +'" value="' +
-                myColorVars.defaultColor + '"/>').addClass("color-text-input");
+                myColorVars.defaultColor + '" name="' + myId + '"/>').addClass("color-text-input");
             }).append(markupAfterInput());
           });
         },

@@ -49,7 +49,7 @@ OK! Let's do this color picking thing!
 
 ```html
 <link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
-<link rel="stylesheet" href="css/pick-a-color-1.1.0.min.css">
+<link rel="stylesheet" href="css/pick-a-color-1.1.3.min.css">
 ```
 
 **Before the ending `</body>`:**
@@ -57,7 +57,7 @@ OK! Let's do this color picking thing!
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="js/tinycolor-0.9.14.min.js"></script>
-<script src="js/pick-a-color-1.1.0.min.js"></script>
+<script src="js/pick-a-color-1.1.3.min.js"></script>
 ```
 		
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
@@ -71,8 +71,10 @@ For instance, yours might look like this:
 ```html
 <div class="pick-a-color" id="border-color" data-border-color="222">222</div>
 ```
-		
-You can change the class of your div, but make sure to match it in your JavaScript in the next step...
+
+Notes:
+i) The `id` of your div will become the `name` attribute of your color value input field.		
+ii) You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
 3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
@@ -100,21 +102,21 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="x-ua-compatible" content="IE=10">	  
 		<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
-		<link rel="stylesheet" href="css/pick-a-color-1.1.0.min.css">
+		<link rel="stylesheet" href="css/pick-a-color-1.1.3.min.css">
 	</head>
 
 	<body>
 
 		<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
 		<div class="pick-a-color" id="font-color" data-font-color="aaa">aaa</div>
-		<div class="pick-a-color" id="data-background-color" data-background-color="a1beef">a1beef</div>
-		<div class="pick-a-color" id="data-highlight-color" data-highlight-color="551033">551033</div>
-		<div class="pick-a-color" id="data-contrast-color" data-contrast-color="eee">eee</div>
+		<div class="pick-a-color" id="background-color" data-background-color="a1beef">a1beef</div>
+		<div class="pick-a-color" id="highlight-color" data-highlight-color="551033">551033</div>
+		<div class="pick-a-color" id="contrast-color" data-contrast-color="eee">eee</div>
 		<div class="pick-a-color"></div>
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/tinycolor-0.9.14.min.js"></script>
-		<script src="js/pick-a-color-1.1.0.min.js"></script>
+		<script src="js/pick-a-color-1.1.3.min.js"></script>
 
 		<script type="text/javascript">
 

@@ -73,7 +73,9 @@ For instance, yours might look like this:
 ```
 
 Notes:
+
 i) The `id` of your div will become the `name` attribute of your color value input field.		
+
 ii) You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
 3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 

@@ -245,9 +245,6 @@
           var $this_el = $(this),
               $myInitializer = $this_el.parent().parent(),
               myId = $myInitializer.context.id;
-              
-          console.log($myInitializer);
-          console.log(myId);
 
           // get the default color from the content or data attribute
           myColorVars.defaultColor = $this_el.text() === "" ? "000" : $this_el.text();

@@ -633,11 +633,12 @@
         // must be called with apply and relies on an arguments array like:
         // [{els, savedColorsInfo}]
         selectFromBasicColors: function () {
-          var selectedColor = $(this).find("span:first").css("background-color");
-          selectedColor = tinycolor(selectedColor).toHex();
-          var myElements = arguments[0].els,
+          var selectedColor = $(this).find("span:first").css("background-color"),
+              myElements = arguments[0].els,
               mySavedColorsInfo = arguments[0].savedColorsInfo;
+          selectedColor = tinycolor(selectedColor).toHex();
           $(myElements.colorTextInput).val(selectedColor);
+          $(myElements.colorTextInput).trigger("change");
           methods.updatePreview(myElements.colorTextInput);
           methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
           methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
@@ -889,7 +890,8 @@
         };
 
         var mostRecentClick, // for storing click events when needed
-            windowTopPosition; // for storing the position of the top of the window when needed
+            windowTopPosition, // for storing the position of the top of the window when needed
+            advancedStatus;
 
         if (useTabs) {
           myElements.tabs = myElements.thisEl.find(".tab");
@@ -928,7 +930,7 @@
           }
         }
         if (settings.showAdvanced) {
-          var advancedStatus = {
+          advancedStatus = {
             h: 0,
             s: 1,
             l: 0.5
@@ -1081,6 +1083,7 @@
           $(myElements.advancedPreview).click( function () {
             var selectedColor = tinycolor($(this).css("background-color")).toHex();
             $(myElements.colorTextInput).val(selectedColor);
+            $(myElements.colorTextInput).trigger("change");
             methods.updatePreview(myElements.colorTextInput);
             methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
             methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
@@ -1103,6 +1106,7 @@
                 $thisEl.parent().attr("class").split("#")[1] :
                 $thisEl.attr("class").split("#")[1];
               $(myElements.colorTextInput).val(selectedColor);
+              $(myElements.colorTextInput).trigger("change");
               methods.updatePreview(myElements.colorTextInput);
               methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu);
               methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);

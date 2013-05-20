@@ -38,13 +38,17 @@
 
 		  $(".pick-a-color").pickAColor({
 			  showSpectrum            : false,
-		    showSavedColors         : false,
+		    showSavedColors         : true,
 		    saveColorsPerElement    : false,
 		    fadeMenuToggle          : true,
-				showAdvanced						: false,
-				showHexInput            : true,
+				showAdvanced						: true,
+				showHexInput            : false,
 				showBasicColors         : true
 			});
+			
+			$(".pick-a-color input").on("change", function () {
+				console.log($(this).val());
+			})
 
 		});
 	

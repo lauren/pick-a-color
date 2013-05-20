@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.3
+* Pick-a-Color JS v1.1.4
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -14,7 +14,7 @@
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
             typeof JSON === 'object', // don't use LS if JSON is not available (IE, ahem)
-          isIE = /*@cc_on!@*/false, // OH NOES!
+          isIE = document.all && !window.atob, // OH NOES!
           myCookies = document.cookie,
           tenYearsInMilliseconds = 315360000000, // shut up I need it for the cookie
 
@@ -693,7 +693,7 @@
               mid = "#" + tinycolor("hsl(" + hue + ",50%," + lightnessString).toHex(),
               end = "#" + tinycolor("hsl(" + hue + ",100%," + lightnessString).toHex(),
               fullSpectrumString = "",
-              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index,value) {
+              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient"], function(index,value) {
                 fullSpectrumString += "background-image: " + value + "(left, " + start + " 0%, " + mid + " 50%, " + end + " 100%);";
               }),
               ieSpectrum0 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + start + "', endColorstr='" +
@@ -702,6 +702,7 @@
               end + "', GradientType=1)";
             fullSpectrumString =
               "background-image: -moz-linear-gradient(left center, " + start + " 0%, " + mid + " 50%, " + end + " 100%);" +
+              "background-image: linear-gradient(to right, " + start + " 0%, " + mid + " 50%, " + end + " 100%); " +
               "background-image: -webkit-gradient(linear, left top, right top," +
                 "color-stop(0, " + start + ")," + "color-stop(0.5, " + mid + ")," + "color-stop(1, " + end + "));" +
               fullSpectrumString;
@@ -768,14 +769,17 @@
               ieSpectrum5 = "progid:DXImageTransform.Microsoft.gradient(startColorstr='" + color6 + "', endColorstr='" +
               color7 + "', GradientType=1)",
               fullSpectrumString = "",
-              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient","linear-gradient"], function(index,value) {
+              standard = $.each(["-webkit-linear-gradient","-o-linear-gradient"], function(index,value) {
                 fullSpectrumString += "background-image: " + value + "(left, " + color1 + " 0%, " + color2 + " 17%, " +
                   color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " + color6 + " 85%, " + color7 + " 100%);";
             });
           fullSpectrumString += "background-image: -webkit-gradient(linear, left top, right top," +
             "color-stop(0%, " + color1 + ")," + "color-stop(17%, " + color2 + ")," + "color-stop(34%, " + color3 + ")," +
             "color-stop(51%, " + color4 + ")," + "color-stop(68%, " + color5 + ")," + "color-stop(85%, " + color6 + ")," +
-            "color-stop(100%, " + color7 + "));" + "background-image: -moz-linear-gradient(left center, " +
+            "color-stop(100%, " + color7 + "));" + 
+            "background-image: linear-gradient(to right, " + color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%," + 
+            color4 + " 51%," + color5 + " 68%," + color6 + " 85%," + color7 + " 100%); " +
+            "background-image: -moz-linear-gradient(left center, " +
             color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " +
             color6 + " 85%, " + color7 + " 100%);";
           if (isIE) {
@@ -793,6 +797,7 @@
             $spectrum5.css("filter",ieSpectrum5);
           } else {
             spectrum.attr("style",fullSpectrumString);
+            
           }
         },
 

@@ -134,6 +134,18 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 </html>
 ```
 
+### Events
+
+Each time a user chooses a new color (or enters one manually), there will be a `change` event on the input field. 
+
+Here's sample code for accessing the new color from a Pick-a-Color initialized with the ID `border-color` and the class `pick-a-color`:
+
+```javascript
+$("#border-color.pick-a-color input").on("change", function () {
+	console.log($(this).val());
+});
+```
+
 ### Options
 
 If you'd like to change any of my default options, you can specify your preferred settings like this:

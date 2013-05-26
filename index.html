@@ -262,6 +262,22 @@
 			
 			<div class="row-fluid">
 				<div class="span8">
+					
+					<h4>Events</h4>
+			
+			    <p>Each time a user chooses a new color (or enters one manually), there will be a <code>change</code> event on the input field.</p>
+			
+			    <p>Here's sample code for accessing the new color from a Pick-a-Color initialized with the ID <code>border-color</code> and the class <code>pick-a-color</code>:</p>
+
+			    <pre>$("#border-color.pick-a-color input").on("change", function () {
+  console.log($(this).val());
+});</pre>
+
+        </div>
+      </div>
+		
+			<div class="row-fluid">
+				<div class="span8">
 
 					<h4>Options</h4>
 

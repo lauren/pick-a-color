@@ -27,7 +27,7 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 **No conflicts:** Anonymous JavasScript function and namespaced CSS won't mess up your code.
 
-**Simple initialization:** As little as three lines of HTML and one line of JavaScript.
+**Simple initialization:** As little as one line of HTML and one line of JavaScript.
 
 **Done:** You didn't have to write your own color picker. 'Nuff said.
 
@@ -49,7 +49,7 @@ OK! Let's do this color picking thing!
 
 ```html
 <link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
-<link rel="stylesheet" href="css/pick-a-color-1.1.3.min.css">
+<link rel="stylesheet" href="css/pick-a-color-1.1.5.min.css">
 ```
 
 **Before the ending `</body>`:**
@@ -57,26 +57,29 @@ OK! Let's do this color picking thing!
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="js/tinycolor-0.9.14.min.js"></script>
-<script src="js/pick-a-color-1.1.3.min.js"></script>
+<script src="js/pick-a-color-1.1.5.min.js"></script>
 ```
 		
-2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR_ID` with your unique identifier for the color picker ("border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
+2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR-NAME` with your unique identifier for the color picker (e.g. "border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
-<div class="pick-a-color" id="YOUR_ID" data-YOUR_ID="YOUR_DEFAULT">YOUR_DEFAULT</div>
+<input id="appendedPrependedDropdownButton" type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="color-text-input pick-a-color">
+
 ```
     
 For instance, yours might look like this:
 
 ```html
-<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
+<input id="appendedPrependedDropdownButton" type="text" value="222" name="border-color" class="color-text-input pick-a-color">
 ```
 
 Notes:
 
-i) The `id` of your div will become the `name` attribute of your color value input field.		
+i) The `id` of your `input` <strong>must</strong> be "appendedPrependedDropdownButton" to work with Bootstrap styling. If you provide a different `id`, Pick-a-Color will override it. This means that you should rely on the `name` attribute for identifying values in different Pick-a-Colors when you submit a form.
 
-ii) You can change the class of your div, but make sure to match it in your JavaScript in the next step...
+ii) If you don't provide a `name` attribute, one will be added in the pattern "pick-a-color-INT."
+
+iii) You can change the class of your div, but make sure to match it in your JavaScript in the next step...
 
 3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
@@ -104,21 +107,22 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="x-ua-compatible" content="IE=10">	  
 		<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
-		<link rel="stylesheet" href="css/pick-a-color-1.1.3.min.css">
+		<link rel="stylesheet" href="css/pick-a-color-1.1.5.min.css">
 	</head>
 
 	<body>
 
-		<div class="pick-a-color" id="border-color" data-border-color="222">222</div>
-		<div class="pick-a-color" id="font-color" data-font-color="aaa">aaa</div>
-		<div class="pick-a-color" id="background-color" data-background-color="a1beef">a1beef</div>
-		<div class="pick-a-color" id="highlight-color" data-highlight-color="551033">551033</div>
-		<div class="pick-a-color" id="contrast-color" data-contrast-color="eee">eee</div>
-		<div class="pick-a-color"></div>
+		<input id="appendedPrependedDropdownButton" type="text" value="222" name="border-color" class="pick-a-color">
+		<input id="appendedPrependedDropdownButton" type="text" value="aaa" name="font-color" class="pick-a-color">
+		<input id="appendedPrependedDropdownButton" type="text" value="a1beef" name="backgound-color" class="pick-a-color">
+		<input id="appendedPrependedDropdownButton" type="text" value="551033" name="highlight-color" class="pick-a-color">
+		<input id="appendedPrependedDropdownButton" type="text" value="eee" name="contrast-color" class="pick-a-color">
+		<input id="appendedPrependedDropdownButton" type="text" class="pick-a-color">
+		<input id="rebelId" type="text" class="pick-a-color">
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/tinycolor-0.9.14.min.js"></script>
-		<script src="js/pick-a-color-1.1.3.min.js"></script>
+		<script src="js/pick-a-color-1.1.5.min.js"></script>
 
 		<script type="text/javascript">
 
@@ -138,10 +142,10 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 
 Each time a user chooses a new color (or enters one manually), there will be a `change` event on the input field. 
 
-Here's sample code for accessing the new color from a Pick-a-Color initialized with the ID `border-color` and the class `pick-a-color`:
+Here's sample code for accessing the new color from a Pick-a-Color initialized with the name `border-color`:
 
 ```javascript
-$("#border-color.pick-a-color input").on("change", function () {
+$("#border-color input").on("change", function () {
 	console.log($(this).val());
 });
 ```

@@ -253,8 +253,9 @@
           }
           myId = $thisEl.attr("name");
           
-          // enforce bootstrap appendedPrependedInput ID
+          // enforce bootstrap #appendedPrependedInput ID and .pick-a-color class on input
           $thisEl.attr("id","appendedPrependedDropdownButton");
+          $thisEl.addClass("pick-a-color");
           
           // convert default color to valid hex value
           myColorVars.defaultColor = tinycolor($thisEl.val()).toHex();

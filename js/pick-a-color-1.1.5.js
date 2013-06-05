@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.4
+* Pick-a-Color JS v1.1.5
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */

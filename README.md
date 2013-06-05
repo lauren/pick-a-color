@@ -63,14 +63,14 @@ OK! Let's do this color picking thing!
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR-NAME` with your unique identifier for the color picker (e.g. "border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
-<input id="appendedPrependedDropdownButton" type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="color-text-input pick-a-color">
+<input id="appendedPrependedDropdownButton" type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color">
 
 ```
     
 For instance, yours might look like this:
 
 ```html
-<input id="appendedPrependedDropdownButton" type="text" value="222" name="border-color" class="color-text-input pick-a-color">
+<input id="appendedPrependedDropdownButton" type="text" value="222" name="border-color" class="pick-a-color">
 ```
 
 Notes:
@@ -79,7 +79,7 @@ i) The `id` of your `input` <strong>must</strong> be "appendedPrependedDropdownB
 
 ii) If you don't provide a `name` attribute, one will be added in the pattern "pick-a-color-INT."
 
-iii) You can change the class of your div, but make sure to match it in your JavaScript in the next step...
+iii) You can change the class of your `input`, but make sure to match it in your JavaScript in the next step and be aware that the class "pick-a-color" will be added regardless...
 
 3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 

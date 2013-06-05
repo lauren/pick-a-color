@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.5
+* Pick-a-Color JS v1.1.4
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -14,7 +14,7 @@
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
             typeof JSON === 'object', // don't use LS if JSON is not available (IE, ahem)
-          isIELT10 = document.all && !window.atob, // OH NOES!
+          isIE = document.all && !window.atob, // OH NOES!
           myCookies = document.cookie,
           tenYearsInMilliseconds = 315360000000, // shut up I need it for the cookie
 
@@ -57,6 +57,16 @@
         (settings.showBasicColors && settings.showAdvanced);
 
       // so much markup
+
+      var markupBeforeInput = function () {
+        var $div = $("<div>").addClass("input-prepend input-append pick-a-color-markup");
+
+        if (settings.showHexInput) {
+          $div = $div.append($("<span>").addClass("hex-pound").text("#"));
+        }
+
+        return $div;
+      };
 
       var markupAfterInput = function () {
         var $markup = $("<div>").addClass("btn-group"),
@@ -113,7 +123,7 @@
 
             if (settings.showSpectrum) {
               var $thisSpectrum = $("<span>").addClass("color-box spectrum-" + index);
-              if (isIELT10) {
+              if (isIE) {
                 $.each([0,1], function (i) {
                   if (value !== "fff" && index !== "000")
                   $thisSpectrum.append($("<span>").addClass(index + "-spectrum-" + i +
@@ -148,7 +158,7 @@
               $hueContent = $("<span>").addClass("hue-text").
                 text("Hue: ").append($("<span>").addClass("hue-value").text("0"));
           var $hueSpectrum = $("<span>").addClass("color-box spectrum-hue");
-          if (isIELT10) {
+          if (isIE) {
             $.each([0,1,2,3,4,5,6], function (i) {
               $hueSpectrum.append($("<span>").addClass("hue-spectrum-" + i +
               " ie-spectrum hue"));
@@ -163,7 +173,7 @@
               $lightnessSpectrum = $("<span>").addClass("color-box spectrum-lightness"),
               $lightnessContent = $("<span>").addClass("lightness-text").
             text("Lightness: ").append($("<span>").addClass("lightness-value").text("50%"));
-          if (isIELT10) {
+          if (isIE) {
             $.each([0,1], function (i) {
               $lightnessSpectrum.append($("<span>").addClass("lightness-spectrum-" + i +
               " ie-spectrum"));
@@ -177,7 +187,7 @@
             append($lightnessContent).append($lightnessSpectrum.append($lightnessHighlightBand)));
           var $saturationItem = $("<li>").addClass("saturation-item"),
               $saturationSpectrum = $("<span>").addClass("color-box spectrum-saturation");
-          if (isIELT10) {
+          if (isIE) {
             $.each([0,1], function (i) {
               $saturationSpectrum.append($("<span>").addClass("saturation-spectrum-" + i +
               " ie-spectrum"));
@@ -231,42 +241,27 @@
 
       var methods = {
 
-        initialize: function (index) {
-          var $thisEl = $(this),
-              $thisParent,
-              myId,
-              defaultColor;
-          
-          // if there's no name on the input field, create one, then use it as the myID
-          if (!$thisEl.attr("name")) {
-            $thisEl.attr("name","pick-a-color-" + index);
-          }
-          myId = $thisEl.attr("name");
-          
-          // enforce bootstrap #appendedPrependedInput ID and .pick-a-color class on input
-          $thisEl.attr("id","appendedPrependedDropdownButton");
-          $thisEl.addClass("pick-a-color");
-          
-          // convert default color to valid hex value
-          myColorVars.defaultColor = tinycolor($thisEl.val()).toHex();
+        initialize: function () {
+          var $this_el = $(this),
+              $myInitializer = $this_el.parent().parent(),
+              myId = $myInitializer.context.id;
+
+          // get the default color from the content or data attribute
+          myColorVars.defaultColor = $this_el.text() === "" ? "000" : $this_el.text();
           myColorVars.typedColor = myColorVars.defaultColor;
-          $thisEl.val(myColorVars.defaultColor);
-          
-          // wrap initializing input field with unique div and add hex symbol and post-input markup
-          $($thisEl).wrap('<div class="input-prepend input-append pick-a-color-markup" id="' + myId + '">');
-          $thisParent = $($thisEl.parent());
-          settings.showHexInput ? $thisParent.prepend('<span class="hex-pound">#</span>').append(markupAfterInput()) 
-            : $thisParent.append(markupAfterInput());;
-          
-          // hide input for noinput option
-          if (!settings.showHexInput) {
-            $thisEl.attr("type","hidden");
-          }
+
+          $this_el.html(function (){
+            return markupBeforeInput().append(function () {
+              var inputType = settings.showHexInput ? 'text' : 'hidden';
+              return $('<input id="appendedPrependedDropdownButton" type="'+ inputType +'" value="' +
+                myColorVars.defaultColor + '" name="' + myId + '"/>').addClass("color-text-input");
+            }).append(markupAfterInput());
+          });
         },
 
-        updatePreview: function ($thisEl) {
-          myColorVars.typedColor = tinycolor($thisEl.val()).toHex();
-          $thisEl.siblings(".btn-group").find(".current-color").css("background-color",
+        updatePreview: function ($this_el) {
+          myColorVars.typedColor = tinycolor($this_el.val()).toHex();
+          $this_el.siblings(".btn-group").find(".current-color").css("background-color",
             "#" + myColorVars.typedColor);
         },
 
@@ -642,9 +637,9 @@
               myElements = arguments[0].els,
               mySavedColorsInfo = arguments[0].savedColorsInfo;
           selectedColor = tinycolor(selectedColor).toHex();
-          $(myElements.thisEl).val(selectedColor);
-          $(myElements.thisEl).trigger("change");
-          methods.updatePreview(myElements.thisEl);
+          $(myElements.colorTextInput).val(selectedColor);
+          $(myElements.colorTextInput).trigger("change");
+          methods.updatePreview(myElements.colorTextInput);
           methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
           methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
         },
@@ -711,7 +706,7 @@
               "background-image: -webkit-gradient(linear, left top, right top," +
                 "color-stop(0, " + start + ")," + "color-stop(0.5, " + mid + ")," + "color-stop(1, " + end + "));" +
               fullSpectrumString;
-          if (isIELT10) {
+          if (isIE) {
             var $spectrum0 = $(spectrum).find(".saturation-spectrum-0");
             var $spectrum1 = $(spectrum).find(".saturation-spectrum-1");
             $spectrum0.css("filter",ieSpectrum0);
@@ -741,7 +736,7 @@
             "background-image: -webkit-gradient(linear, left top, right top," +
             " color-stop(0, " + start + ")," + " color-stop(0.5, " + mid + ")," + " color-stop(1, " + end + ")); " +
             fullSpectrumString;
-          if (isIELT10) {
+          if (isIE) {
             var $spectrum0 = $(spectrum).find(".lightness-spectrum-0");
             var $spectrum1 = $(spectrum).find(".lightness-spectrum-1");
             $spectrum0.css("filter",ieSpectrum0);
@@ -787,7 +782,7 @@
             "background-image: -moz-linear-gradient(left center, " +
             color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " +
             color6 + " 85%, " + color7 + " 100%);";
-          if (isIELT10) {
+          if (isIE) {
             var $spectrum0 = $(spectrum).find(".hue-spectrum-0"),
                 $spectrum1 = $(spectrum).find(".hue-spectrum-1"),
                 $spectrum2 = $(spectrum).find(".hue-spectrum-2"),
@@ -880,24 +875,23 @@
 
       };
 
-      return this.each(function (index) {
+      return this.each(function () {
 
-        methods.initialize.apply(this,[index]);
-        
+        methods.initialize.apply(this);
         // commonly used DOM elements for each color picker
+
         var myElements = {
           thisEl: $(this),
-          thisWrapper: $(this).parent(),
           colorTextInput: $(this).find("input"),
-          colorMenuLinks: $(this).parent().find(".color-menu li a"),
-          colorPreviewButton: $(this).parent().find(".btn-group"),
-          colorMenu: $(this).parent().find(".color-menu"),
-          colorSpectrums: $(this).parent().find(".color-box"),
-          basicSpectrums: $(this).parent().find(".basicColors-content .color-box"),
-          touchInstructions: $(this).parent().find(".color-menu-instructions"),
-          advancedInstructions: $(this).parent().find(".advanced-instructions"),
-          highlightBands: $(this).parent().find(".highlight-band"),
-          basicHighlightBands: $(this).parent().find(".basicColors-content .highlight-band")
+          colorMenuLinks: $(this).find(".color-menu li a"),
+          colorPreviewButton: $(this).find(".btn-group"),
+          colorMenu: $(this).find(".color-menu"),
+          colorSpectrums: $(this).find(".color-box"),
+          basicSpectrums: $(this).find(".basicColors-content .color-box"),
+          touchInstructions: $(this).find(".color-menu-instructions"),
+          advancedInstructions: $(this).find(".advanced-instructions"),
+          highlightBands: $(this).find(".highlight-band"),
+          basicHighlightBands: $(this).find(".basicColors-content .highlight-band")
         };
 
         var mostRecentClick, // for storing click events when needed
@@ -905,11 +899,11 @@
             advancedStatus;
 
         if (useTabs) {
-          myElements.tabs = myElements.thisWrapper.find(".tab");
+          myElements.tabs = myElements.thisEl.find(".tab");
         }
 
         if (settings.showSavedColors) {
-          myElements.savedColorsContent = myElements.thisWrapper.find(".savedColors-content");
+          myElements.savedColorsContent = myElements.thisEl.find(".savedColors-content");
           if (settings.saveColorsPerElement) { // when saving colors for each color picker...
             var mySavedColorsInfo = {
               colors: [],
@@ -947,25 +941,25 @@
             l: 0.5
           };
 
-          myElements.advancedSpectrums = myElements.thisWrapper.find(".advanced-list").find(".color-box");
-          myElements.advancedHighlightBands = myElements.thisWrapper.find(".advanced-list").find(".highlight-band");
-          myElements.hueSpectrum = myElements.thisWrapper.find(".spectrum-hue");
-          myElements.lightnessSpectrum = myElements.thisWrapper.find(".spectrum-lightness");
-          myElements.saturationSpectrum = myElements.thisWrapper.find(".spectrum-saturation");
-          myElements.hueHighlightBand = myElements.thisWrapper.find(".spectrum-hue .highlight-band");
-          myElements.lightnessHighlightBand = myElements.thisWrapper.find(".spectrum-lightness .highlight-band");
-          myElements.saturationHighlightBand = myElements.thisWrapper.find(".spectrum-saturation .highlight-band");
-          myElements.advancedPreview = myElements.thisWrapper.find(".advanced-content .color-preview");
+          myElements.advancedSpectrums = myElements.thisEl.find(".advanced-list").find(".color-box");
+          myElements.advancedHighlightBands = myElements.thisEl.find(".advanced-list").find(".highlight-band");
+          myElements.hueSpectrum = myElements.thisEl.find(".spectrum-hue");
+          myElements.lightnessSpectrum = myElements.thisEl.find(".spectrum-lightness");
+          myElements.saturationSpectrum = myElements.thisEl.find(".spectrum-saturation");
+          myElements.hueHighlightBand = myElements.thisEl.find(".spectrum-hue .highlight-band");
+          myElements.lightnessHighlightBand = myElements.thisEl.find(".spectrum-lightness .highlight-band");
+          myElements.saturationHighlightBand = myElements.thisEl.find(".spectrum-saturation .highlight-band");
+          myElements.advancedPreview = myElements.thisEl.find(".advanced-content .color-preview");
         }
 
         // add the default color to saved colors
         methods.addToSavedColors(myColorVars.defaultColor,mySavedColorsInfo,myElements.savedColorsContent);
-        methods.updatePreview(myElements.thisEl);
+        methods.updatePreview(myElements.colorTextInput);
 
         //input field focus: clear content
         // input field blur: update preview, restore previous content if no value entered
 
-        myElements.thisEl.focus(function () {
+        myElements.colorTextInput.focus(function () {
           var $thisEl = $(this);
           myColorVars.typedColor = $thisEl.val(); // update with the current
           $thisEl.val(""); //clear the field on focus
@@ -998,7 +992,7 @@
         myElements.colorMenu.on(clickEvent, function (e) {
           e.stopPropagation();
         });
-        myElements.thisEl.on(clickEvent, function(e) {
+        myElements.colorTextInput.on(clickEvent, function(e) {
           e.stopPropagation();
         });
 
@@ -1093,9 +1087,9 @@
 
           $(myElements.advancedPreview).click( function () {
             var selectedColor = tinycolor($(this).css("background-color")).toHex();
-            $(myElements.thisEl).val(selectedColor);
-            $(myElements.thisEl).trigger("change");
-            methods.updatePreview(myElements.thisEl);
+            $(myElements.colorTextInput).val(selectedColor);
+            $(myElements.colorTextInput).trigger("change");
+            methods.updatePreview(myElements.colorTextInput);
             methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
             methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
           })
@@ -1116,9 +1110,9 @@
               var selectedColor = $thisEl.is("SPAN") ?
                 $thisEl.parent().attr("class").split("#")[1] :
                 $thisEl.attr("class").split("#")[1];
-              $(myElements.thisEl).val(selectedColor);
-              $(myElements.thisEl).trigger("change");
-              methods.updatePreview(myElements.thisEl);
+              $(myElements.colorTextInput).val(selectedColor);
+              $(myElements.colorTextInput).trigger("change");
+              methods.updatePreview(myElements.colorTextInput);
               methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu);
               methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
             }

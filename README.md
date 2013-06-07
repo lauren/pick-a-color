@@ -64,7 +64,6 @@ OK! Let's do this color picking thing!
 
 ```html
 <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color" id="appendedPrependedDropdownButton">
-
 ```
     
 For instance, yours might look like this:
@@ -72,7 +71,7 @@ For instance, yours might look like this:
 ```html
 <input type="text" value="222" name="border-color" class="pick-a-color" 
 id="appendedPrependedDropdownButton">
-`` `
+```
 
 Notes:
 

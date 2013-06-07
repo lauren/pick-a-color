@@ -63,15 +63,16 @@ OK! Let's do this color picking thing!
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR-NAME` with your unique identifier for the color picker (e.g. "border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
-<input id="appendedPrependedDropdownButton" type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color">
+<input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color" id="appendedPrependedDropdownButton">
 
 ```
     
 For instance, yours might look like this:
 
 ```html
-<input id="appendedPrependedDropdownButton" type="text" value="222" name="border-color" class="pick-a-color">
-```
+<input type="text" value="222" name="border-color" class="pick-a-color" 
+id="appendedPrependedDropdownButton">
+`` `
 
 Notes:
 
@@ -112,13 +113,13 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 
 	<body>
 
-		<input id="appendedPrependedDropdownButton" type="text" value="222" name="border-color" class="pick-a-color">
-		<input id="appendedPrependedDropdownButton" type="text" value="aaa" name="font-color" class="pick-a-color">
-		<input id="appendedPrependedDropdownButton" type="text" value="a1beef" name="backgound-color" class="pick-a-color">
-		<input id="appendedPrependedDropdownButton" type="text" value="551033" name="highlight-color" class="pick-a-color">
-		<input id="appendedPrependedDropdownButton" type="text" value="eee" name="contrast-color" class="pick-a-color">
-		<input id="appendedPrependedDropdownButton" type="text" class="pick-a-color">
-		<input id="rebelId" type="text" class="pick-a-color">
+		<input type="text" value="222" name="border-color" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input type="text" value="aaa" name="font-color" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input type="text" value="a1beef" name="backgound-color" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input type="text" value="551033" name="highlight-color" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input type="text" value="eee" name="contrast-color" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input type="text" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input id="rebelId" type="text" class="pick-a-color" id="appendedPrependedDropdownButton">
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/tinycolor-0.9.14.min.js"></script>

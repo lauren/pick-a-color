@@ -77,7 +77,7 @@ Notes:
 
 i) The `id` of your `input` <strong>must</strong> be "appendedPrependedDropdownButton" to work with Bootstrap styling. If you provide a different `id`, Pick-a-Color will override it. This means that you should rely on the `name` attribute for identifying values in different Pick-a-Colors when you submit a form.
 
-ii) If you don't provide a `name` attribute, one will be added in the pattern "pick-a-color-INT."
+ii) If you don't provide a `name` attribute, one will be added in the pattern "pick-a-color-INT," where INT is (unoriginally enough) the index of your Pick-a-Color on the page, starting from 0.
 
 iii) You can change the class of your `input`, but make sure to match it in your JavaScript in the next step and be aware that the class "pick-a-color" will be added regardless...
 

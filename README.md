@@ -63,23 +63,20 @@ OK! Let's do this color picking thing!
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR-NAME` with your unique identifier for the color picker (e.g. "border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
-<input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color" id="appendedPrependedDropdownButton">
+<input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color">
 ```
     
 For instance, yours might look like this:
 
 ```html
-<input type="text" value="222" name="border-color" class="pick-a-color" 
-id="appendedPrependedDropdownButton">
+<input type="text" value="222" name="border-color" class="pick-a-color">
 ```
 
 Notes:
 
-i) The `id` of your `input` <strong>must</strong> be "appendedPrependedDropdownButton" to work with Bootstrap styling. If you provide a different `id`, Pick-a-Color will override it. This means that you should rely on the `name` attribute for identifying values in different Pick-a-Colors when you submit a form.
+i) If you don't provide a `name` attribute, one will be added in the pattern "pick-a-color-INT," where INT is (unoriginally enough) the index of your Pick-a-Color on the page, starting from 0.
 
-ii) If you don't provide a `name` attribute, one will be added in the pattern "pick-a-color-INT," where INT is (unoriginally enough) the index of your Pick-a-Color on the page, starting from 0.
-
-iii) You can change the class of your `input`, but make sure to match it in your JavaScript in the next step and be aware that the class "pick-a-color" will be added regardless...
+ii) You can change the class of your `input`, but make sure to match it in your JavaScript in the next step and be aware that the class "pick-a-color" will be added regardless...
 
 3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
 
@@ -112,13 +109,13 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 
 	<body>
 
-		<input type="text" value="222" name="border-color" class="pick-a-color" id="appendedPrependedDropdownButton">
-		<input type="text" value="aaa" name="font-color" class="pick-a-color" id="appendedPrependedDropdownButton">
-		<input type="text" value="a1beef" name="backgound-color" class="pick-a-color" id="appendedPrependedDropdownButton">
-		<input type="text" value="551033" name="highlight-color" class="pick-a-color" id="appendedPrependedDropdownButton">
-		<input type="text" value="eee" name="contrast-color" class="pick-a-color" id="appendedPrependedDropdownButton">
-		<input type="text" class="pick-a-color" id="appendedPrependedDropdownButton">
-		<input id="rebelId" type="text" class="pick-a-color" id="appendedPrependedDropdownButton">
+		<input type="text" value="222" name="border-color" class="pick-a-color">
+		<input type="text" value="aaa" name="font-color" class="pick-a-color">
+		<input type="text" value="a1beef" name="backgound-color" class="pick-a-color">
+		<input type="text" value="551033" name="highlight-color" class="pick-a-color">
+		<input type="text" value="eee" name="contrast-color" class="pick-a-color">
+		<input type="text" class="pick-a-color">
+		<input type="text" class="pick-a-color">
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/tinycolor-0.9.14.min.js"></script>

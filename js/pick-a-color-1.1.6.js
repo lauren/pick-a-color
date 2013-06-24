@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.5
+* Pick-a-Color JS v1.1.6
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -243,8 +243,7 @@
           }
           myId = $thisEl.attr("name");
           
-          // enforce bootstrap #appendedPrependedInput ID and .pick-a-color class on input
-          $thisEl.attr("id","appendedPrependedDropdownButton");
+          // enforce .pick-a-color class on input
           $thisEl.addClass("pick-a-color");
           
           // convert default color to valid hex value

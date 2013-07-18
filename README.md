@@ -1,4 +1,4 @@
-[!http://lauren.github.io/pick-a-color/images/apple-touch-icon-57-precomposed.png](http://lauren.github.io/pick-a-color) [Pick-a-Color: a jQuery color picker for Twitter Bootstrap](http://lauren.github.io/pick-a-color)
+[![Pick-a-Color Logo](http://lauren.github.io/pick-a-color/images/apple-touch-icon-57-precomposed.png)](http://lauren.github.io/pick-a-color) [Pick-a-Color: a jQuery color picker for Twitter Bootstrap](http://lauren.github.io/pick-a-color)
 ============
 
 For a documentation-reading experience that includes rainbow gradients and live examples, check out the official docs at [http://lauren.github.io/pick-a-color](http://lauren.github.io/pick-a-color).
@@ -7,7 +7,7 @@ There are some great color picker plugins out there, but most cater to the needs
 
 Pick-a-Color is designed to be easy for anyone to use. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.
 
-### Features 
+### Features
 
 #### For your site's users
 
@@ -35,7 +35,7 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 I'm [Lauren](http://laurensperber.com). I originally wrote Pick-a-Color for my friends at [Broadstreet Ads](http://broadstreetads.com) because they needed a color picker that was easy for people at online publishing companies to use.
 
-If you have any bugs to report in Pick-a-Color, let me know by making a ticket here: https://github.com/lauren/pick-a-color/issues/new 
+If you have any bugs to report in Pick-a-Color, let me know by making a ticket here: https://github.com/lauren/pick-a-color/issues/new
 
 Pick-a-Color is available under the MIT License: https://github.com/lauren/pick-a-color/blob/master/LICENSE
 
@@ -59,13 +59,13 @@ OK! Let's do this color picking thing!
 <script src="js/tinycolor-0.9.14.min.js"></script>
 <script src="js/pick-a-color-1.1.5.min.js"></script>
 ```
-		
+
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR-NAME` with your unique identifier for the color picker (e.g. "border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
 <input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color">
 ```
-    
+
 For instance, yours might look like this:
 
 ```html
@@ -78,19 +78,19 @@ i) If you don't provide a `name` attribute, one will be added in the pattern "pi
 
 ii) You can change the class of your `input`, but make sure to match it in your JavaScript in the next step and be aware that the class "pick-a-color" will be added regardless...
 
-3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div: 
+3) Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of your div:
 
 ```javascript
 $(".pick-a-color").pickAColor();
 ```
-		
+
 4) To optimize IE and mobile support, I recommend adding these tags to your `<head>`:
-	
+
 ```html
 <meta http-equiv="x-ua-compatible" content="IE=10">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
-		
+
 Ta-da! You have a color picker! You might even have several!
 
 ### Sample HTML
@@ -100,9 +100,9 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 ```html
 <!doctype html>
 <html>
-	<head>		
+	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="x-ua-compatible" content="IE=10">	  
+		<meta http-equiv="x-ua-compatible" content="IE=10">
 		<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
 		<link rel="stylesheet" href="css/pick-a-color-1.1.5.min.css">
 	</head>
@@ -130,14 +130,14 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 			});
 
 		</script>
-		
+
 	</body>
 </html>
 ```
 
 ### Events
 
-Each time a user chooses a new color (or enters one manually), there will be a `change` event on the input field. 
+Each time a user chooses a new color (or enters one manually), there will be a `change` event on the input field.
 
 Here's sample code for accessing the new color from a Pick-a-Color initialized with the name `border-color`:
 
@@ -163,13 +163,13 @@ $(".pick-a-color").pickAColor({
  });
 ```
 
-#### showSpectrum 
+#### showSpectrum
 
-Specifies whether or not there is a spectrum next to each basic color allowing users to lighten and darken it. 
+Specifies whether or not there is a spectrum next to each basic color allowing users to lighten and darken it.
 
 #### showSavedColors
 
-Specifies whether or not there is a tab called "Saved Colors" that keeps track of the last 16 colors a user customized. 
+Specifies whether or not there is a tab called "Saved Colors" that keeps track of the last 16 colors a user customized.
 
 #### showAdvanced
 
@@ -214,15 +214,15 @@ The only major platform I haven't been able to test yet is Android. I'm working 
 ### Notes on IE Support
 
 I highly recommend using the X-UA-COMPATIBLE tag in your html `<head>` to ensure that Internet Explorer 8 and higher use their own "Browser Mode" instead of switching to the Browser Mode of a previous version. It works like this:
-	
+
 ```html
 <meta http-equiv="x-ua-compatible" content="IE=10">
 ```
-		
+
 ### Notes on Mobile Support
 
 You must use a viewport tag in your html `<head>` for content to be displayed at the correct size in a mobile browser. It works like this:
-	
+
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```

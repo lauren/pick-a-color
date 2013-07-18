@@ -1,7 +1,7 @@
-Pick-a-Color: a jQuery color picker for Twitter Bootstrap
+[!http://lauren.github.io/pick-a-color/images/apple-touch-icon-57-precomposed.png](http://lauren.github.io/pick-a-color) [Pick-a-Color: a jQuery color picker for Twitter Bootstrap](http://lauren.github.io/pick-a-color)
 ============
 
-For a documentation-reading experience that includes rainbow gradients and live examples, check out the official docs at [http://lauren.github.com/pick-a-color](http://lauren.github.com/pick-a-color).
+For a documentation-reading experience that includes rainbow gradients and live examples, check out the official docs at [http://lauren.github.io/pick-a-color](http://lauren.github.io/pick-a-color).
 
 There are some great color picker plugins out there, but most cater to the needs of techies and designers, providing complicated controls to access every color imaginable.
 

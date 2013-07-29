@@ -226,3 +226,13 @@ You must use a viewport tag in your html `<head>` for content to be displayed at
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
+
+## Contributing
+
+I ♥ pull requests. Here's how to contribute:
+
+1. Fork and pull repo.
+2. If you don't have node, [install it](http://howtonode.org/how-to-install-nodejs).
+3. From the repo directory, `npm install --save-dev`
+4. `grunt watch`: This will automatically JSHint, concatenate, and minify the JavaScript and automatically compile and minify the LESS every time you save. Watch for JSHint errors and correct them.
+5. Code!

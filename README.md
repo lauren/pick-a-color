@@ -237,3 +237,5 @@ I ♥ pull requests. Here's how to contribute:
 4. Update version number in package.json and pick-a-color.jquery.json. Otherwise, grunt will overwrite the current version with your changes. 
 5. `grunt watch`: This will automatically JSHint, concatenate, and minify the JavaScript and automatically compile and minify the LESS every time you save. Watch for JSHint errors and correct them.
 6. Code!
+7. Use sample.html to check your changes.
+8. Copy /build/{previous-ver}/sample.html to /build/{your-ver}/sample.html and update the version number in your JS and CSS links.

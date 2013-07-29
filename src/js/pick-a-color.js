@@ -13,10 +13,8 @@
       var supportsTouch = 'ontouchstart' in window,
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
-            typeof JSON === 'object', // don't use LS if JSON is not available (IE, ahem)
+            typeof JSON === 'object', // don't use LS if JSON is not available
           isIELT10 = document.all && !window.atob, // OH NOES!
-          myCookies = document.cookie,
-          tenYearsInMilliseconds = 315360000000, // shut up I need it for the cookie
 
           startEvent    = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
           moveEvent     = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
@@ -27,7 +25,7 @@
 
       // settings
 
-      var settings = $.extend( {}, {
+      var settings = $.extend({
         showSpectrum          : true,
         showSavedColors       : true,
         saveColorsPerElement  : false,
@@ -47,7 +45,7 @@
         }
       }, options);
 
-      // override showBasicColors if it and showAdvanced are both false      
+      // override showBasicColors showAdvanced isn't shown      
       if (!settings.showAdvanced && !settings.showBasicColors) {
         settings.showBasicColors = true;
       }
@@ -212,8 +210,8 @@
         if (supportsLocalStorage && localStorage.allSavedColors) { // look for them in LS
           allSavedColors = JSON.parse(localStorage.allSavedColors);
           // if there's a saved_colors cookie...
-        } else if (myCookies.match("pickAColorSavedColors-allSavedColors=")) {
-          var theseCookies = myCookies.split(";"); // split cookies into an array...
+        } else if (document.cookie.match("pickAColorSavedColors-allSavedColors=")) {
+          var theseCookies = document.cookie.split(";"); // split cookies into an array...
 
           $.each(theseCookies, function (index) { // find the savedColors cookie!
             if (theseCookies[index].match("pickAColorSavedColors-allSavedColors=")) {
@@ -575,6 +573,7 @@
 
         setSavedColorsCookie: function (savedColors,savedColorsDataAttr) {
           var now = new Date(),
+              tenYearsInMilliseconds = 315360000000,
               expiresOn = new Date(now.getTime() + tenYearsInMilliseconds);
           expiresOn = expiresOn.toGMTString();
 
@@ -938,9 +937,9 @@
                 mySavedColorsInfo.dataAttr]);
 
             // otherwise, get them from cookies
-            } else if (myCookies.match("pickAColorSavedColors-" +
+            } else if (document.cookie.match("pickAColorSavedColors-" +
               mySavedColorsInfo.dataAttr)) {
-              var theseCookies = myCookies.split(";"); // an array of cookies...
+              var theseCookies = document.cookie.split(";"); // an array of cookies...
               for (var i=0; i < theseCookies.length; i++) {
                 if (theseCookies[i].match(mySavedColorsInfo.dataAttr)) {
                   mySavedColorsInfo.colors = theseCookies[i].split("=")[1].split(",");

@@ -35,7 +35,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      all: ['Gruntfile.js', 'src/*.js', 'build/%= pkg.version %>/js/*.js'],
+      all: ['Gruntfile.js', 'src/*/*.js'],
       options: {
         laxbreak: true,
         force: true

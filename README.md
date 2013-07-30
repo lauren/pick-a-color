@@ -43,6 +43,8 @@ OK! Let's do this color picking thing!
 
 ## How to Use
 
+### Compiled CSS For Use With Default Bootstrap Settings
+
 1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add them to your CSS and JS folders and include them in your document as follows:
 
 **In the `<head>`:**
@@ -92,6 +94,30 @@ $(".pick-a-color").pickAColor();
 ```
 
 Ta-da! You have a color picker! You might even have several!
+
+### Pre-Compiled LESS for Use with Customized Bootstrap
+
+1) Download the source: https://github.com/lauren/pick-a-color/archive/master.zip.
+
+2) Add `src/less/pick-a-color.less` to your LESS folder. 
+
+3) Update the import statements in lines 7 and 8 of `pick-a-color.less` from:
+
+```
+@import "bootstrap-src/variables.less"; 
+@import "bootstrap-src/mixins.less";
+```
+
+To:
+
+```
+@import "PATH/TO/YOUR/variables.less"; 
+@import "PATH/TO/YOUR/mixins.less";
+```
+
+4) Compile `pick-a-color.less` using your customized variables.
+
+5) Return to Step 1 of instructions for use of the compiled CSS.
 
 ### Sample HTML
 
@@ -199,12 +225,12 @@ Specifies whether or not to show the hex text input. If false the input has an i
 
 I've tested Pick-a-Color in these browsers:
 
-* Google Chrome 24.0.1312.57 - 25.0.1364.99 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)
-* Safari 6.0.2 (Mac OSX and iOS 6.0.2)
+* Google Chrome 24.0.1312.57 - 28.0.1500.95 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)
+* Safari 6.0.2 - 6.0.4 (Mac OSX and iOS 6.0.2)
 * Internet Explorer 10 (Windows 7)
 * Internet Explorer 9 (Windows 7)
 * Internet Explorer 8 (Windows XP)
-* Firefox 18.0.1 - 19.0 (Mac OSX and Windows 7)
+* Firefox 18.0.1 - 22.0 (Mac OSX and Windows 7)
 * Opera 12.13 - 12.14 (Mac OSX and Windows 7)
 
 Minor issues in these browsers are documented here: https://github.com/lauren/pick-a-color/issues

@@ -1,46 +1,28 @@
 /*
-* Pick-a-Color LESS v1.1.5
+* Pick-a-Color LESS v1.1.7
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
+
+@import "bootstrap-src/variables.less"; 
+@import "bootstrap-src/mixins.less";
 
 //// variables
 
 // basic colors
 
-// basic colors
-
-@white:#ffffff;
-
-@red:hsl(0,100%,50%);
-
-@orange:hsl(24, 100%, 50%);
-
-@yellow:hsl(60, 100%, 50%);
-
-@green:hsl(120, 100%, 25%);
-
-@brightGreen:hsl(120, 100%, 50%);
-
-@blue:hsl(240, 100%, 50%);
-
-@teal:hsl(180, 100%, 50%);
-
-@indigo:hsl(275, 100%, 25%);
-
-@violet:hsl(300, 76%, 72%);
-
-@lightPurple:hsl(300, 100%, 50%);
-
-@purple:hsl(300, 100%, 25%);
-
-@black:#000000;
-
-@bw_midpoint:lighten(@black,50%);
-
-@border_gray:#ccc;
-
-@dark_gray:lighten(@black,15%);
+@pacRed:hsl(0,100%,50%);
+@pacOrange:hsl(24, 100%, 50%);
+@pacYellow:hsl(60, 100%, 50%);
+@pacGreen:hsl(120, 100%, 25%);
+@pacBrightGreen:hsl(120, 100%, 50%);
+@pacBlue:hsl(240, 100%, 50%);
+@pacTeal:hsl(180, 100%, 50%);
+@pacIndigo:hsl(275, 100%, 25%);
+@pacViolet:hsl(300, 76%, 72%);
+@pacLightPurple:hsl(300, 100%, 50%);
+@pacPurple:hsl(300, 100%, 25%);
+@pacBwMidpoint:lighten(@black,50%);
 
 // widths
 
@@ -51,77 +33,25 @@
 @advanced-color-box-width: 300px;
 @advanced-color-box-width-phone: 270px;
 
+@defaultRadius: 4px;
+@defaultShadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.075);
 
 //// mixins
 
-.rounded-corners (@radius: 4px) {
-	-webkit-border-radius: @radius;
-	   -moz-border-radius: @radius;
-			 -o-border-radius: @radius;
-	        border-radius: @radius;
-}
-
-.left-rounded-corners (@radius: 4px) {
-   -webkit-border-top-left-radius: @radius;
--webkit-border-bottom-left-radius: @radius;
-       -moz-border-radius-topleft: @radius;
-    -moz-border-radius-bottomleft: @radius;
-           border-top-left-radius: @radius;
-        border-bottom-left-radius: @radius;
-}
-
-.right-rounded-corners (@radius: 4px) {
-   -webkit-border-top-right-radius: @radius;
--webkit-border-bottom-right-radius: @radius;
-       -moz-border-radius-topright: @radius;
-    -moz-border-radius-bottomright: @radius;
-           border-top-right-radius: @radius;
-        border-bottom-right-radius: @radius;
-}
-
-.shadows (@shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.075)) {
-	-webkit-box-shadow: @shadow;
-	   -moz-box-shadow: @shadow;
-	        box-shadow: @shadow;
-}
-
-.transition(@transition) {
-  -webkit-transition: @transition;
-     -moz-transition: @transition;
-       -o-transition: @transition;
-          transition: @transition;
-}
-
-.borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid,@shadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.07)) {
+.borders-shadows (@radius: 4px, @width: 1px, @color: @btnBorder, @style: solid, @shadow: @defaultShadow) {
 	border: @width @style @color;
-	.rounded-corners(@radius);
-  .shadows(@shadow);
+	.border-radius(@radius);
+  .box-shadow(@shadow);
 }
 
-.tab-borders-shadows (@radius: 4px,@width: 1px,@color: @border_gray,@style: solid,@shadow: inset 0px 0px rgba(0, 0, 0, 0.075)) {
+.tab-borders-shadows (@radius: 4px, @width: 1px, @color: @btnBorder, @style: solid) {
 	border-top:@width @style @color;
 	border-right:@width @style @color;
 	border-left:@width @style @color;
-	 -webkit-border-top-left-radius: @radius;
-	-webkit-border-top-right-radius: @radius;
-	     -moz-border-radius-topleft: @radius;
-	    -moz-border-radius-topright: @radius;
-           border-top-left-radius: @radius;
-	        border-top-right-radius: @radius;
-  .shadows(@shadow);
+	.border-top-radius(@radius);
 }
 
-.two-color-spectrum (@start: @white, @stop: @black) {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, @start), color-stop(1.0, @stop));
-  background-image: -moz-linear-gradient(left center, @start 0%, @stop 100%);
-  background-image: -webkit-linear-gradient(left, @start, @stop);
-  background-image: -o-linear-gradient(left, @start, @stop);
-  background-image: linear-gradient(to right, @start, @stop);
-  background-repeat: repeat-x;
-  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@start),argb(@stop))); // IE9 and down
-}
-
-.three-color-spectrum (@mid: @red) {
+.three-color-spectrum (@mid: @pacRed) {
 	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@mid,50%)), color-stop(0.5, @mid), color-stop(1.0, darken(@mid,50%)));
 	background-image: -moz-linear-gradient(left center, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
 	background-image: -webkit-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
@@ -130,7 +60,7 @@
   background-repeat: repeat-x;
 }
 
-.full-spectrum (@one: @red, @two: @yellow, @three: @brightGreen, @four: @teal, @five: @blue, @six: @lightPurple, @seven: @red) {
+.full-spectrum (@one: @pacRed, @two: @pacYellow, @three: @pacBrightGreen, @four: @pacTeal, @five: @pacBlue, @six: @pacLightPurple, @seven: @pacRed) {
   background-image: -webkit-gradient(linear, left top, right top, color-stop(0%, @one), color-stop(17%, @two), color-stop(34%,@three), color-stop(51%, @four), color-stop(68%, @five), color-stop(85%, @six), color-stop(100%, @seven));
   background-image: -moz-linear-gradient(left center, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
   background-image: -webkit-linear-gradient(left, @one 0%, @two 17%, @three 24%, @four 51%, @five 68%, @six 85%, @seven 100%);
@@ -139,16 +69,7 @@
   background-repeat: repeat-x;
 }
 
-.lightness-spectrum (@color: @red) {
-	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@color,50%)), color-stop(0.5, @color), color-stop(1.0, darken(@color,50%)));
-	background-image: -moz-linear-gradient(left center, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
-	background-image: -webkit-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
-  background-image: -o-linear-gradient(left, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
-  background-image: linear-gradient(to right, lighten(@color,50%) 0%, @color 50%, darken(@color,50%) 100%);
-  background-repeat: repeat-x;
-}
-
-.saturation-spectrum (@color: @red) {
+.saturation-spectrum (@color: @pacRed) {
 	background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, desaturate(@color,100%)), color-stop(0.5, @color), color-stop(1.0, saturate(@color,100%)));
 	background-image: -moz-linear-gradient(left center, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
 	background-image: -webkit-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
@@ -160,18 +81,18 @@
 // IE spectrums
 
 .spectrum-0(@color) {
-	.two-color-spectrum(lighten(@color,50%),@color);
-	.left-rounded-corners;
+	#gradient.horizontal(lighten(@color,50%),@color);
+	.border-left-radius(@defaultRadius);
 }
 
 .spectrum-1(@color) {
-	.two-color-spectrum(@color,darken(@color,50%));
-	.right-rounded-corners;
+	#gradient.horizontal(@color,darken(@color,50%));
+	.border-right-radius(@defaultRadius);
 }
 
 .saturation-spectrum-0(@color) {
-	.two-color-spectrum(desaturate(@color,100%),desaturate(@color,50%));
-	.left-rounded-corners;
+	#gradient.horizontal(desaturate(@color,100%),desaturate(@color,50%));
+	.border-left-radius(@defaultRadius);
 	width: @advanced-color-box-width / 2;
 	@media screen and (max-width: 979px) {
 		width:@advanced-color-box-width-phone / 2;
@@ -179,8 +100,8 @@
 }
 
 .saturation-spectrum-1(@color) {
-	.two-color-spectrum(desaturate(@color,50%),@color);
-	.right-rounded-corners;
+	#gradient.horizontal(desaturate(@color,50%),@color);
+	.border-right-radius(@defaultRadius);
 	width: @advanced-color-box-width / 2;
 	@media screen and (max-width: 979px) {
 		width:@advanced-color-box-width-phone / 2;
@@ -192,64 +113,29 @@
 // input field
 
 div.pick-a-color-markup {
-	margin:0px;
-	padding:0px;
 
 	.hex-pound {
-	 	display: inline-block;
-	  height:20px;
-	  font-size: 14px;
-	  font-weight: normal;
-	  text-align: center;
-	  text-shadow: 0 1px 0 #ffffff;
-	  background-color: #eeeeee;
-	  border: 1px solid #ccc;
-	  margin-right: -1px;
-	  -webkit-border-radius: 4px 0 0 4px;
-	     -moz-border-radius: 4px 0 0 4px;
-	          border-radius: 4px 0 0 4px;
-	  padding: 4px 5px;
-		vertical-align:top;
 		@media screen and (max-width: 979px) {
 			padding:8px 5px 0px 5px;
 			min-height:30px;
-			vertical-align:middle;
-		}
-	}
-
-	.add-on {
-		@media screen and (max-width: 979px) {
-			padding:8px 5px 0px 5px;
 		}
 	}
 
 	.pick-a-color {
-		text-align:left;
-		width:200px;
-		vertical-align:middle;
 		@media screen and (max-width: 979px) {
-			min-width:200px;
-			font-size:16px;
+			font-size:@fontSizeLarge;
 			padding:9px;
-		}
-	}
-
-	#appendedDropdownButton {
-		@media screen and (max-width: 979px) {
-			height:40px;
 		}
 	}
 
 	// button to open picker
 
-	.btn-group {
-		vertical-align: top;
-		
+	.btn-group {		
 		.color-dropdown {
-		  height:30px;
+		  // height:30px;
 		  padding:3px 5px;
 		  &.no-hex {
-		    .left-rounded-corners;
+		    .border-left-radius(@defaultRadius);
 		  }
 			@media screen and (max-width: 979px) {
 				height:40px;
@@ -259,26 +145,17 @@ div.pick-a-color-markup {
 	
 	.color-preview {
 		.borders-shadows;
-	  height:20px;
-	  width:20px;
+	  height:1.429em;
+	  width:1.429em;
 	  display:inline-block;
 	  cursor:pointer;
+	  margin-right: 5px;
 		&.current-color {
-			margin-bottom:1px;
-			margin-right:3px;
+			margin-bottom: -5px;
 		}
 		@media screen and (max-width: 979px) {
-			height:30px;
-			width:30px;
-		}
-
-	}
-
-	.caret {
-	  vertical-align:bottom;
-	  margin-bottom:15px;
-		@media screen and (max-width: 979px) {
-			margin-bottom:20px;
+			height:1.875em;
+			width:1.875em;
 		}
 	}
 
@@ -288,10 +165,10 @@ div.pick-a-color-markup {
 		text-align:left;
 	  padding:5px 0px; /*overwriting bootstrap default */
 		width:330px;
-		font-size:14px;
+		font-size: 14px;
 
 		@media screen and (max-width: 979px) {
-			left:-239px;
+			left:-242px;
 			width:293px;
 		}
 
@@ -332,35 +209,35 @@ div.pick-a-color-markup {
 			}
 
 			&.red {
-			  background-color:@red;
+			  background-color:@pacRed;
 			}
 
 			&.orange {
-			  background-color:@orange;
+			  background-color:@pacOrange;
 			}
 
 			&.yellow {
-			  background-color:@yellow;
+			  background-color:@pacYellow;
 			}
 
 			&.green {
-			  background-color:@green;
+			  background-color:@pacGreen;
 			}
 
 			&.blue {
-			  background-color:@blue;
+			  background-color:@pacBlue;
 			}
 
 			&.indigo {
-			  background-color:@indigo;
+			  background-color:@pacIndigo;
 			}
 
 			&.violet {
-			  background-color:@violet;
+			  background-color:@pacViolet;
 			}
 
 			&.purple {
-			  background-color:@purple;
+			  background-color:@pacPurple;
 			}
 
 			&.black {
@@ -393,7 +270,7 @@ div.pick-a-color-markup {
 			height:22px;
 			padding:0px 5px;
 			margin-top:0px;
-			.rounded-corners;
+			.border-radius(@defaultRadius);
 			@media screen and (max-width: 979px) {
 				height:37px;
 			}
@@ -407,7 +284,7 @@ div.pick-a-color-markup {
 		@media screen and (min-width: 979px) {
 			display:none;
 		}
-		font-size:14px;
+		font-size: 14px;
 		font-weight:normal;
 	}
 
@@ -441,41 +318,41 @@ div.pick-a-color-markup {
 	}
 
 	.spectrum-white {
-	  .two-color-spectrum(@white,@bw_midpoint);
+	  #gradient.horizontal(@white,@pacBwMidpoint);
 		.highlight-band {
 		left:0px;
 		}
 	}
 
 	.spectrum-red {
-		.three-color-spectrum(@red);
+		.three-color-spectrum(@pacRed);
 	}
 
 	.spectrum-orange {
-		.three-color-spectrum(@orange);
+		.three-color-spectrum(@pacOrange);
 	}
 
 	.spectrum-yellow {
-		.three-color-spectrum(@yellow);
+		.three-color-spectrum(@pacYellow);
 	}
 
 	.spectrum-green {
-		.three-color-spectrum(@green);
+		.three-color-spectrum(@pacGreen);
 	}
 
 	.spectrum-blue {
-		.three-color-spectrum(@blue);
+		.three-color-spectrum(@pacBlue);
 	}
 
 	.spectrum-purple {
-		.three-color-spectrum(@purple);
+		.three-color-spectrum(@pacPurple);
 	}
 
 	.spectrum-black {
-	  .two-color-spectrum(@black,@bw_midpoint);
+	  #gradient.horizontal(@black,@pacBwMidpoint);
 		.highlight-band {
 			left:0px;
-			border: 1px solid @bw_midpoint;
+			border: 1px solid @pacBwMidpoint;
 		}
 	}
 
@@ -499,11 +376,11 @@ div.pick-a-color-markup {
 	}
 
 	.red-spectrum-0, .lightness-spectrum-0 {
-		.spectrum-0(@red);
+		.spectrum-0(@pacRed);
 	}
 
 	.red-spectrum-1, .lightness-spectrum-1 {
-		.spectrum-1(@red);
+		.spectrum-1(@pacRed);
 	}
 
 	.lightness-spectrum-0, .lightness-spectrum-1 {
@@ -514,81 +391,81 @@ div.pick-a-color-markup {
 	}
 
 	.orange-spectrum-0 {
-		.spectrum-0(@orange);
+		.spectrum-0(@pacOrange);
 	}
 
 	.orange-spectrum-1 {
-		.spectrum-1(@orange);
+		.spectrum-1(@pacOrange);
 	}
 
 	.yellow-spectrum-0 {
-		.spectrum-0(@yellow);
+		.spectrum-0(@pacYellow);
 	}
 
 	.yellow-spectrum-1 {
-		.spectrum-1(@yellow);
+		.spectrum-1(@pacYellow);
 	}
 
 	.green-spectrum-0 {
-		.spectrum-0(@green);
+		.spectrum-0(@pacGreen);
 	}
 
 	.green-spectrum-1 {
-		.spectrum-1(@green);
+		.spectrum-1(@pacGreen);
 	}
 
 	.blue-spectrum-0 {
-		.spectrum-0(@blue);
+		.spectrum-0(@pacBlue);
 	}
 
 	.blue-spectrum-1 {
-		.spectrum-1(@blue);
+		.spectrum-1(@pacBlue);
 	}
 
 	.purple-spectrum-0 {
-		.spectrum-0(@purple);
+		.spectrum-0(@pacPurple);
 	}
 
 	.purple-spectrum-1 {
-		.spectrum-1(@purple);
+		.spectrum-1(@pacPurple);
 	}
 
 	.saturation-spectrum-0 {
-		.saturation-spectrum-0(@red);
+		.saturation-spectrum-0(@pacRed);
 	}
 
 	.saturation-spectrum-1 {
-		.saturation-spectrum-1(@red);
+		.saturation-spectrum-1(@pacRed);
 	}
 
 	.hue-spectrum-0 {
-		.two-color-spectrum(@red,@yellow);
+		#gradient.horizontal(@pacRed,@pacYellow);
 	}
 
 	.hue-spectrum-1 {
-		.two-color-spectrum(@yellow,@brightGreen);
+		#gradient.horizontal(@pacYellow,@pacBrightGreen);
 	}
 
 	.hue-spectrum-2 {
-		.two-color-spectrum(@brightGreen,@teal);
+		#gradient.horizontal(@pacBrightGreen,@pacTeal);
 		left:-1px;
 		position:relative;
 	}
 
 	.hue-spectrum-3 {
-		.two-color-spectrum(@teal,@blue);
+		#gradient.horizontal(@pacTeal,@pacBlue);
 		left:-1px;
 		position:relative;
 	}
 
 	.hue-spectrum-4 {
-		.two-color-spectrum(@blue,@lightPurple);
+		#gradient.horizontal(@pacBlue,@pacLightPurple);
 		left:-1px;
 		position:relative;
 	}
 
 	.hue-spectrum-5 {
-		.two-color-spectrum(@lightPurple,@red);
+		#gradient.horizontal(@pacLightPurple,@pacRed);
 		left:-2px;
 		position:relative;
 	}
@@ -596,7 +473,7 @@ div.pick-a-color-markup {
 	// highlight band
 
 	.highlight-band {
-		.borders-shadows(2px,1px,@dark_gray,solid, 1px 1px 1px #333);
+		.borders-shadows(2px,1px,@grayDarker,solid, 1px 1px 1px #333);
 		height:19px;
 		width:@color-band-width;
 		display:inline-block;
@@ -621,7 +498,7 @@ div.pick-a-color-markup {
 		opacity: 0.40;
 		margin: 2px 1px;
 		display:inline-block;
-		.shadows(1px 0px 2px 0px #ffffff);
+		.box-shadow(1px 0px 2px 0px #ffffff);
 		@media screen and (max-width: 979px) {
 			margin: 4px 2px;
 		}
@@ -633,7 +510,7 @@ div.pick-a-color-markup {
 		padding:5px 3px 3px 10px;
 		font-size: 12px;
 		color: #333;
-		border-bottom:1px solid @border_gray;
+		border-bottom:1px solid @btnBorder;
 		margin-bottom:5px;
 		.tab {
 			padding:5px;
@@ -672,7 +549,7 @@ div.pick-a-color-markup {
 		li.color-item > a {
 		margin-left:7px;
 		padding-left:8px;
-		.rounded-corners;
+		.border-radius(@defaultRadius);
 		}
 	}
 
@@ -707,7 +584,7 @@ div.pick-a-color-markup {
 			width: @advanced-color-box-width;
 			float:left;
 			margin:0px 0px 10px 0px;
-			background-color: @red;
+			background-color: @pacRed;
 			text-align:center;
 			.color-select.btn.advanced {
 				margin-top:15px;
@@ -734,7 +611,7 @@ div.pick-a-color-markup {
 		}
 
 		.spectrum-lightness {
-			.lightness-spectrum;
+			.three-color-spectrum(@pacRed);
 		}
 
 		.spectrum-saturation {
@@ -776,4 +653,3 @@ div.pick-a-color-markup {
 
 	}
 }
-

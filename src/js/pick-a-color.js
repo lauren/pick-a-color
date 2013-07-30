@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.6
+* Pick-a-Color JS v1.1.7
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -251,7 +251,7 @@
           $($thisEl).wrap('<div class="input-prepend input-append pick-a-color-markup" id="' + myId + '">');
           $thisParent = $($thisEl.parent());
           if (settings.showHexInput) {
-            $thisParent.prepend('<span class="hex-pound">#</span>').append(markupAfterInput());
+            $thisParent.prepend('<span class="hex-pound add-on">#</span>').append(markupAfterInput());
           } else {
             $thisParent.append(markupAfterInput());
           }
@@ -472,7 +472,7 @@
 
           if (tab === "basic") {
             // get the class of the parent color box and slice off "spectrum"
-            var colorName = $this_parent.attr("class").split("-")[2],
+            var colorName = $thisParent.attr("class").split("-")[2],
                 colorHex = settings.basicColors[colorName];
             colorHsl = tinycolor(colorHex).toHsl();
             switch(colorHex) {
@@ -508,9 +508,9 @@
               highlightedLightness = (parseInt(highlightedLightnessString.split("%")[0], 10)) / 100;
 
           if (tab === "basic") {
-            $this_parent.siblings(".color-preview").css("background-color",highlightedHex);
+            $thisParent.siblings(".color-preview").css("background-color",highlightedHex);
             // replace the color label with a 'select' button
-            $this_parent.prev('.color-label').replaceWith(
+            $thisParent.prev('.color-label').replaceWith(
               '<button class="color-select btn btn-mini" type="button">Select</button>');
             if (spectrumType !== "darkenRight") {
               methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);

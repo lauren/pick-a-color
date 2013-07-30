@@ -15,7 +15,7 @@ $(document).ready(function () {
       targetLocation = elLocation;
     }
     $('html, body').animate({
-    	scrollTop: targetLocation
+      scrollTop: targetLocation
     }, 500);
   });
     

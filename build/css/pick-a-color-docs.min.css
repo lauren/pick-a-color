@@ -16,7 +16,7 @@ h6{font-size:15.299999999999999px}
 ul.docs li,ol.docs li{font-size:18px;line-height:22px;margin-bottom:5px;margin-top:5px}
 ol.docs li{margin-bottom:25px}
 pre{margin-top:4px}
-@media screen and (max-width:767px){.btn.btn-large [class^="icon-"],.btn.btn-large [class*=" icon-"]{margin-right:5px}}
+@media screen and (max-width:767px){[class^="icon-"],[class*=" icon-"]{margin-right:5px}}
 .navbar{margin:0px auto;vertical-align:top;position:fixed;top:0;z-index:1100;left:0;right:0;width:1000px;padding:0px}@media screen and (min-width:1200px){.navbar{width:1230px}}@media screen and (max-width:979px) and (min-width:768px){.navbar{width:784px}}@media screen and (max-width:767px){.navbar{right:0;left:0;width:auto;position:relative}}.navbar .navbar-inner{background-image:none;filter:none;background-color:#fff;-webkit-border-top-left-radius:0;-moz-border-radius-topleft:0;border-top-left-radius:0;-webkit-border-top-right-radius:0;-moz-border-radius-topright:0;border-top-right-radius:0;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);-moz-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (max-width:767px){.navbar .navbar-inner{-webkit-border-radius:0;-moz-border-radius:0;-o-border-radius:0;border-radius:0}}
 .navbar .nav{margin:0 auto;width:510px;float:right;vertical-align:bottom;margin-top:15px}@media screen and (max-width:978px){.navbar .nav{width:150px;text-align:right;margin:0px}}
 .navbar .container{width:auto}

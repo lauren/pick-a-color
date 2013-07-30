@@ -50,7 +50,7 @@ pre{margin-top:4px}
 .footer{font-size:14px;line-height:16px;margin:5px auto;text-align:center;padding-top:15px;border-top:1px dashed #999}
 .pretend-mobile div.pick-a-color-markup .hex-pound{padding:8px 5px 0px 5px;min-height:30px;vertical-align:middle}
 .pretend-mobile div.pick-a-color-markup .add-on{padding:8px 5px 0px 5px}
-.pretend-mobile div.pick-a-color-markup .pick-a-color{min-width:200px;font-size:16px;padding:9px}
+.pretend-mobile div.pick-a-color-markup .pick-a-color{font-size:16px;padding:9px}
 .pretend-mobile div.pick-a-color-markup #appendedDropdownButton{height:40px}
 .pretend-mobile div.pick-a-color-markup .btn-group .color-dropdown{height:40px;padding:3px 5px}
 .pretend-mobile div.pick-a-color-markup .btn-group .color-preview{height:30px;width:30px;margin-bottom:0px}

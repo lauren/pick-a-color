@@ -17,9 +17,7 @@ module.exports = function(grunt) {
       production: {
         options: {
           compress: true,
-          options: {
-            paths: ["src/less/css"]
-          },
+          paths: ["src/less/css"]
         },
         files: {
           "build/<%= pkg.version %>/css/<%= pkg.name %>-<%= pkg.version %>.min.css": "src/less/<%= pkg.name %>.less",

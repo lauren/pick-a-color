@@ -11,11 +11,13 @@ module.exports = function(grunt) {
         files: {
           'build/js/<%= pkg.name %>.min.js': ['src/js/<%= pkg.name %>.js']
         }
-      }    },
+      }    
+    },
     less: {
       production: {
         options: {
-          compress: true
+          compress: true,
+          paths: ["src/less/css"]
         },
         files: {
           "build/css/<%= pkg.name %>.min.css": "src/less/<%= pkg.name %>.less"

@@ -177,6 +177,8 @@
 				<div class="span8">      
 
 					<h2 id="how">How To Use</h2>
+
+					<h3>Compiled CSS For Use With Default Bootstrap Settings</h3>
 			
 					<ol class="docs">
 						<li>
@@ -203,20 +205,41 @@
 	            </ol>
 						</li>
 
-							<li>
-								Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of the div(s) where you want a Pick-a-Color: 
-								<pre>$(".pick-a-color").pickAColor();</pre>
-							</li>
+						<li>
+							Add this to your JavaScript somewhere after the DOM is ready. Make sure the class selector matches the class of the div(s) where you want a Pick-a-Color: 
+							<pre>$(".pick-a-color").pickAColor();</pre>
+						</li>
+						
+						<li>
+							To optimize IE and mobile support, I recommend adding these tags to your <code>&lt;head&gt;</code>:
 							
-							<li>
-								To optimize IE and mobile support, I recommend adding these tags to your <code>&lt;head&gt;</code>:
-								
-								<pre>&lt;meta http-equiv="x-ua-compatible" content="IE=10"&gt;
+							<pre>&lt;meta http-equiv="x-ua-compatible" content="IE=10"&gt;
 &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</li>
-						</ol>
+					</ol>
 
 					<p>Ta-da! You have a color picker! You might even have several!</p>
 
+					<h3>https://github.com/lauren/pick-a-color/archive/master.zip</h3>
+			
+					<ol class="docs">
+						<li>
+							<a href="https://github.com/lauren/pick-a-color/archive/master.zip" onClick="_gaq.push(['_trackEvent', 'download', 'github']);">Download the source</a>.
+						<li>Add <code>src/less/pick-a-color.less</code> to your LESS folder.</li>
+
+						<li>
+							Update the import statements in lines 7 and 8 of pick-a-color.less from: 
+							<pre>@import "bootstrap-src/variables.less"; 
+@import "bootstrap-src/mixins.less";</pre>
+							To:
+							<pre>@import "PATH/TO/YOUR/variables.less"; 
+@import "PATH/TO/YOUR/mixins.less";</pre>
+						</li>
+							
+						<li>Compile <code>pick-a-color.less</code> using your customized variables.</li>
+						<li>Return to Step 1 of instructions for use of the compiled CSS.</li>
+					</ol>
+
+					<p>Ta-da! You have a color picker! You might even have several!</p>
 					<h4>Sample HTML</h4>
 
 					<p>Here's an example of how a simple HTML page using Pick-a-Color might look:</p>

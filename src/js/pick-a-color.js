@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.7
+* Pick-a-Color JS v1.1.8
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -33,6 +33,7 @@
         showAdvanced          : true,
         showBasicColors       : true,
         showHexInput          : true,
+        allowBlank            : false,
         basicColors           : {
           white     : 'fff',
           red       : 'f00',
@@ -243,9 +244,18 @@
           $thisEl.addClass("pick-a-color");
           
           // convert default color to valid hex value
-          myColorVars.defaultColor = tinycolor($thisEl.val()).toHex();
-          myColorVars.typedColor = myColorVars.defaultColor;
-          $thisEl.val(myColorVars.defaultColor);
+          if (settings.allowBlank) {
+            // convert to Hex only if the field init value is not blank
+            if (!$thisEl.val().match(/^\s+$|^$/)) {
+              myColorVars.defaultColor = tinycolor($thisEl.val()).toHex();
+              myColorVars.typedColor = myColorVars.defaultColor;
+              $thisEl.val(myColorVars.defaultColor);
+            }
+          } else {
+            myColorVars.defaultColor = tinycolor($thisEl.val()).toHex();
+            myColorVars.typedColor = myColorVars.defaultColor;
+            $thisEl.val(myColorVars.defaultColor);
+          }
           
           // wrap initializing input field with unique div and add hex symbol and post-input markup
           $($thisEl).wrap('<div class="input-prepend input-append pick-a-color-markup" id="' + myId + '">');
@@ -263,9 +273,20 @@
         },
 
         updatePreview: function ($thisEl) {
-          myColorVars.typedColor = tinycolor($thisEl.val()).toHex();
-          $thisEl.siblings(".btn-group").find(".current-color").css("background-color",
-            "#" + myColorVars.typedColor);
+          if (!settings.allowBlank) {
+            myColorVars.typedColor = tinycolor($thisEl.val()).toHex();
+            $thisEl.siblings(".btn-group").find(".current-color").css("background-color",
+              "#" + myColorVars.typedColor);
+          } else {
+            myColorVars.typedColor = $thisEl.val().match(/^\s+$|^$/) ? '' : tinycolor($thisEl.val()).toHex();
+            if (myColorVars.typedColor === '') {
+              $thisEl.siblings(".btn-group").find(".current-color").css("background",
+                "none");
+            } else {
+              $thisEl.siblings(".btn-group").find(".current-color").css("background-color",
+                "#" + myColorVars.typedColor);
+            }
+          }
         },
 
         // must be called with apply and an arguments array like [{thisEvent}]
@@ -625,7 +646,7 @@
         // when settings.saveColorsPerElement, colors are saved to both mySavedColors and
         // allSavedColors so they will be avail to color pickers with no savedColorsDataAttr
         addToSavedColors: function (color,mySavedColorsInfo,$mySavedColorsContent) {
-          if (settings.showSavedColors) { // make sure we're saving colors
+          if (settings.showSavedColors && color !== undefined) { // make sure we're saving colors
             if (color[0] != "#") {
               color = "#" + color;
             }
@@ -979,14 +1000,18 @@
         myElements.thisEl.focus(function () {
           var $thisEl = $(this);
           myColorVars.typedColor = $thisEl.val(); // update with the current
-          $thisEl.val(""); //clear the field on focus
+          if (!settings.allowBlank) {
+            $thisEl.val(""); //clear the field on focus
+          }
           methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
         }).blur(function () {
           var $thisEl = $(this);
           myColorVars.newValue = $thisEl.val(); // on blur, check the field's value
           // if the field is empty, put the original value back in the field
           if (myColorVars.newValue.match(/^\s+$|^$/)) {
-            $thisEl.val(myColorVars.typedColor);
+            if (!settings.allowBlank) {
+              $thisEl.val(myColorVars.typedColor);
+            }
           } else { // otherwise...
             myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
             $thisEl.val(myColorVars.newValue); // put the new value in the field

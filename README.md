@@ -185,7 +185,8 @@ $(".pick-a-color").pickAColor({
         fadeMenuToggle        : true,
         showAdvanced          : true,
         showBasicColors       : true,
-        showHexInput          : true
+        showHexInput          : true,
+        allowBlank            : true
  });
 ```
 
@@ -215,11 +216,11 @@ Specifies whether or not the dropdown menu should fade in and out when it's open
 
 #### showBasicColors
 
-Specifies whether or not the dropdown should show a list of basic colors that the user can select from.
+Specifies whether or not the dropdown should show a list of basic colors that the user can select from. Thanks to [Ryan Johnson](https://github.com/rsjohnson) for adding this feature!
 
 #### showHexInput
 
-Specifies whether or not to show the hex text input. If false the input has an input type of 'hidden'.
+Specifies whether or not to show the hex text input. If false the input has an input type of 'hidden'. Thanks to [Ryan Johnson](https://github.com/rsjohnson) for adding this feature!
 
 #### allowBlank
 

@@ -223,7 +223,7 @@ Specifies whether or not to show the hex text input. If false the input has an i
 
 #### allowBlank
 
-Specifies whether or not the field can be left blank. Use this if the color input is not a required field. Thanks to San[https://github.com/san] for adding this feature!
+Specifies whether or not the field can be left blank. Use this if the color input is not a required field. Thanks to [San](https://github.com/san) for adding this feature!
 
 ## Tested Browsers
 

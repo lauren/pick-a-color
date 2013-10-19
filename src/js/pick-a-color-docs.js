@@ -51,5 +51,9 @@ $(document).ready(function () {
   $(".pick-a-color-no-basic").pickAColor({
     showBasicColors         : false
   });
+
+  $(".pick-a-color-allow-blank").pickAColor({
+    allowBlank              : true
+  });
   
 });

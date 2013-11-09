@@ -11,8 +11,6 @@
 
 // basic colors
 
-@black: #000;
-@white: #fff;
 @pacRed:hsl(0,100%,50%);
 @pacOrange:hsl(24, 100%, 50%);
 @pacYellow:hsl(60, 100%, 50%);
@@ -35,18 +33,18 @@
 @advanced-color-box-width: 300px;
 @advanced-color-box-width-phone: 270px;
 
-@border-radius-base: 4px;
+@defaultRadius: 4px;
 @defaultShadow: inset 0px 0px 2px 2px rgba(0, 0, 0, 0.075);
 
 //// mixins
 
-.borders-shadows (@radius: 4px, @width: 1px, @color: @btn-default-border, @style: solid, @shadow: @defaultShadow) {
+.borders-shadows (@radius: 4px, @width: 1px, @color: @btnBorder, @style: solid, @shadow: @defaultShadow) {
 	border: @width @style @color;
-	border-radius: @radius;
+	.border-radius(@radius);
   .box-shadow(@shadow);
 }
 
-.tab-borders-shadows (@radius: 4px, @width: 1px, @color: @btn-default-border, @style: solid) {
+.tab-borders-shadows (@radius: 4px, @width: 1px, @color: @btnBorder, @style: solid) {
 	border-top:@width @style @color;
 	border-right:@width @style @color;
 	border-left:@width @style @color;
@@ -84,17 +82,17 @@
 
 .spectrum-0(@color) {
 	#gradient.horizontal(lighten(@color,50%),@color);
-	.border-left-radius(@border-radius-base);
+	.border-left-radius(@defaultRadius);
 }
 
 .spectrum-1(@color) {
 	#gradient.horizontal(@color,darken(@color,50%));
-	.border-right-radius(@border-radius-base);
+	.border-right-radius(@defaultRadius);
 }
 
 .saturation-spectrum-0(@color) {
 	#gradient.horizontal(desaturate(@color,100%),desaturate(@color,50%));
-	.border-left-radius(@border-radius-base);
+	.border-left-radius(@defaultRadius);
 	width: @advanced-color-box-width / 2;
 	@media screen and (max-width: 979px) {
 		width:@advanced-color-box-width-phone / 2;
@@ -103,7 +101,7 @@
 
 .saturation-spectrum-1(@color) {
 	#gradient.horizontal(desaturate(@color,50%),@color);
-	.border-right-radius(@border-radius-base);
+	.border-right-radius(@defaultRadius);
 	width: @advanced-color-box-width / 2;
 	@media screen and (max-width: 979px) {
 		width:@advanced-color-box-width-phone / 2;
@@ -125,7 +123,7 @@ div.pick-a-color-markup {
 
 	.pick-a-color {
 		@media screen and (max-width: 979px) {
-			font-size:@font-size-large;
+			font-size:@fontSizeLarge;
 			padding:9px;
 		}
 	}
@@ -137,7 +135,7 @@ div.pick-a-color-markup {
 		  // height:30px;
 		  padding:3px 5px;
 		  &.no-hex {
-		    .border-left-radius(@border-radius-base);
+		    .border-left-radius(@defaultRadius);
 		  }
 			@media screen and (max-width: 979px) {
 				height:40px;
@@ -272,7 +270,7 @@ div.pick-a-color-markup {
 			height:22px;
 			padding:0px 5px;
 			margin-top:0px;
-			border-radius: @border-radius-base;
+			.border-radius(@defaultRadius);
 			@media screen and (max-width: 979px) {
 				height:37px;
 			}
@@ -475,7 +473,7 @@ div.pick-a-color-markup {
 	// highlight band
 
 	.highlight-band {
-		.borders-shadows(2px,1px,@gray-darker,solid, 1px 1px 1px #333);
+		.borders-shadows(2px,1px,@grayDarker,solid, 1px 1px 1px #333);
 		height:19px;
 		width:@color-band-width;
 		display:inline-block;
@@ -512,7 +510,7 @@ div.pick-a-color-markup {
 		padding:5px 3px 3px 10px;
 		font-size: 12px;
 		color: #333;
-		border-bottom:1px solid @btn-default-border;
+		border-bottom:1px solid @btnBorder;
 		margin-bottom:5px;
 		.tab {
 			padding:5px;
@@ -551,7 +549,7 @@ div.pick-a-color-markup {
 		li.color-item > a {
 		margin-left:7px;
 		padding-left:8px;
-		border-radius: @border-radius-base;
+		.border-radius(@defaultRadius);
 		}
 	}
 

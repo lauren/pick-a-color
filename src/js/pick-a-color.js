@@ -58,8 +58,8 @@
       // so much markup
 
       var markupAfterInput = function () {
-        var $markup = $("<div>").addClass("btn-group"),
-            $dropdownButton = $("<button type='button'>").addClass("btn color-dropdown dropdown-toggle"),
+        var $markup = $("<div>").addClass("input-group-btn"),
+            $dropdownButton = $("<button type='button'>").addClass("btn btn-default color-dropdown dropdown-toggle"),
             $dropdownColorPreview = $("<span>").addClass("color-preview current-color"),
             $dropdownCaret = $("<span>").addClass("caret"),
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
@@ -258,10 +258,10 @@
           }
           
           // wrap initializing input field with unique div and add hex symbol and post-input markup
-          $($thisEl).wrap('<div class="input-prepend input-append pick-a-color-markup" id="' + myId + '">');
+          $($thisEl).wrap('<div class="input-group pick-a-color-markup" id="' + myId + '">');
           $thisParent = $($thisEl.parent());
           if (settings.showHexInput) {
-            $thisParent.prepend('<span class="hex-pound add-on">#</span>').append(markupAfterInput());
+            $thisParent.prepend('<span class="hex-pound input-group-addon">#</span>').append(markupAfterInput());
           } else {
             $thisParent.append(markupAfterInput());
           }
@@ -273,17 +273,20 @@
         },
 
         updatePreview: function ($thisEl) {
+          console.log(settings.allowBlank);
+          console.log($thisEl);
+          console.log($thisEl.siblings(".input-group-btn"));
           if (!settings.allowBlank) {
             myColorVars.typedColor = tinycolor($thisEl.val()).toHex();
-            $thisEl.siblings(".btn-group").find(".current-color").css("background-color",
+            $thisEl.siblings(".input-group-btn").find(".current-color").css("background-color",
               "#" + myColorVars.typedColor);
           } else {
             myColorVars.typedColor = $thisEl.val().match(/^\s+$|^$/) ? '' : tinycolor($thisEl.val()).toHex();
             if (myColorVars.typedColor === '') {
-              $thisEl.siblings(".btn-group").find(".current-color").css("background",
+              $thisEl.siblings(".input-group-btn").find(".current-color").css("background",
                 "none");
             } else {
-              $thisEl.siblings(".btn-group").find(".current-color").css("background-color",
+              $thisEl.siblings(".input-group-btn").find(".current-color").css("background-color",
                 "#" + myColorVars.typedColor);
             }
           }
@@ -302,7 +305,7 @@
 
             if ($thisEl.css("display") === "block") { // if one is open,
               // find its color preview button
-              var thisColorPreviewButton = $thisEl.parents(".btn-group");
+              var thisColorPreviewButton = $thisEl.parents(".input-group-btn");
               methods.closeDropdown(thisColorPreviewButton,$thisEl); // close it
             }
           });
@@ -338,7 +341,7 @@
 
         toggleDropdown: function (element) {
           var $container = $(element).parents(".pick-a-color-markup"),
-              $button = $container.find(".btn-group"),
+              $button = $container.find(".input-group-btn"),
               $menu = $container.find(".color-menu");
           if ($menu.css("display") === "none") {
             methods.openDropdown($button,$menu);
@@ -921,7 +924,7 @@
           thisWrapper: $(this).parent(),
           colorTextInput: $(this).find("input"),
           colorMenuLinks: $(this).parent().find(".color-menu li a"),
-          colorPreviewButton: $(this).parent().find(".btn-group"),
+          colorPreviewButton: $(this).parent().find(".input-group-btn"),
           colorMenu: $(this).parent().find(".color-menu"),
           colorSpectrums: $(this).parent().find(".color-box"),
           basicSpectrums: $(this).parent().find(".basicColors-content .color-box"),

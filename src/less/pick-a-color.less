@@ -117,30 +117,37 @@
 div.pick-a-color-markup {
 
   .hex-pound {
+  	padding-left: 8px;
+  	padding-right: 8px;
     @media screen and (max-width: 979px) {
-      padding:8px 5px 0px 5px;
+      padding:3px 5px 0px 5px;
       min-height:30px;
     }
   }
 
   .pick-a-color {
+  	padding: 5px;
     @media screen and (max-width: 979px) {
       font-size:@font-size-large;
       padding:9px;
+      width: 222px;
     }
   }
 
   // button to open picker
 
-  .btn-group {    
+  .input-group-btn {
+  	width: 100%;
     .color-dropdown {
-      // height:30px;
-      padding:3px 5px;
+      padding:6px 5px;
       &.no-hex {
         .border-left-radius(@border-radius-base);
       }
+      &:focus {
+      	background-color: #fff;
+      }
       @media screen and (max-width: 979px) {
-        height:40px;
+        height:47px;
       }
     }
   }
@@ -194,7 +201,7 @@ div.pick-a-color-markup {
 
     li {
       list-style-type:none;
-      padding:0px;
+      padding:5px 0px;
       margin:0px;
     }
 
@@ -251,32 +258,42 @@ div.pick-a-color-markup {
         padding: 5px 15px 3px 15px;
         cursor: default;
         min-height:25px;
+        color: #333;
+        &:hover {
+        	background-color: #fff;
+        }
         @media screen and (max-width: 979px) {
           min-height:40px;
         }
       }
       li:hover a {
-        background-color:#eee;
-        .transition(background-color .5s ease-in);
         color: #333;
         background-image:none;
         filter:none;
+        text-decoration: none;
+        font-weight: bold;
         @media screen and (max-width: 979px) {
           background-color: #fff;
+          font-weight: normal;
         }
       }
     }
 
     .btn.color-select {
       margin: 0px 5px;
-      height:22px;
+      height:20px;
       padding:0px 5px;
       margin-top:0px;
+      line-height: 1.5px;
       border-radius: @border-radius-base;
       @media screen and (max-width: 979px) {
-        height:37px;
+        height:35px;
       }
     }
+  }
+
+  .caret {
+  	margin-bottom: 9px;
   }
 
   .color-menu-instructions, .advanced-instructions {
@@ -559,9 +576,9 @@ div.pick-a-color-markup {
     position:relative;
     left:-15px;
     float:left;
-    width:150px;
+    width:149px;
     @media screen and (max-width: 979px) {
-      width:125px;
+      width:130px;
     }
   }
 

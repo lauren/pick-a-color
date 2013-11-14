@@ -116,6 +116,10 @@
 
 div.pick-a-color-markup {
 
+	* {
+		.box-sizing(border-box);
+	}
+
   .hex-pound {
   	padding-left: 8px;
   	padding-right: 8px;
@@ -127,10 +131,12 @@ div.pick-a-color-markup {
 
   .pick-a-color {
   	padding: 5px;
+  	height: 34px;
     @media screen and (max-width: 979px) {
       font-size:@font-size-large;
       padding:9px;
       width: 222px;
+      height: 47px;
     }
   }
 
@@ -293,7 +299,7 @@ div.pick-a-color-markup {
   }
 
   .caret {
-  	margin-bottom: 9px;
+  	margin-bottom: 3px;
   }
 
   .color-menu-instructions, .advanced-instructions {
@@ -532,7 +538,7 @@ div.pick-a-color-markup {
     border-bottom:1px solid @btn-default-border;
     margin-bottom:5px;
     .tab {
-      padding:5px;
+      padding:4px 5px;
       margin:5px;
       border-left:1px solid #fff;
       border-right:1px solid #fff;
@@ -671,4 +677,12 @@ div.pick-a-color-markup {
     }
 
   }
+}
+
+@-moz-document url-prefix() {
+	@media screen and (max-width: 979px) {
+	  div.pick-a-color-markup .color-menu {
+	  	left: 0px;
+		}
+	}
 }

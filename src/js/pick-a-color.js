@@ -273,9 +273,6 @@
         },
 
         updatePreview: function ($thisEl) {
-          console.log(settings.allowBlank);
-          console.log($thisEl);
-          console.log($thisEl.siblings(".input-group-btn"));
           if (!settings.allowBlank) {
             myColorVars.typedColor = tinycolor($thisEl.val()).toHex();
             $thisEl.siblings(".input-group-btn").find(".current-color").css("background-color",

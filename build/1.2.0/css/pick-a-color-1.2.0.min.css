@@ -7,7 +7,7 @@
 @media screen and (max-width:979px){.pick-a-color-markup .input-group-btn .color-dropdown{height:47px}}
 .pick-a-color-markup .color-preview{border:1px solid #ccc;border-radius:4px;-webkit-box-shadow:inset 0 0 2px 2px rgba(0,0,0,0.075);box-shadow:inset 0 0 2px 2px rgba(0,0,0,0.075);height:1.429em;width:1.429em;display:inline-block;cursor:pointer;margin-right:5px}.pick-a-color-markup .color-preview.current-color{margin-bottom:-5px}
 @media screen and (max-width:979px){.pick-a-color-markup .color-preview{height:1.875em;width:1.875em}}
-.pick-a-color-markup .color-menu{text-align:left;padding:5px 0px;width:330px;font-size:14px;}@media screen and (max-width:979px){.pick-a-color-markup .color-menu{left:-242px;width:293px}}.pick-a-color-markup .color-menu.small{width:100px}@media screen and (max-width:979px){.pick-a-color-markup .color-menu.small{left:-105px}}
+.pick-a-color-markup .color-menu{text-align:left;padding:5px 0px;width:330px;font-size:14px;left:auto;}@media screen and (max-width:979px){.pick-a-color-markup .color-menu{left:-242px;width:293px}}.pick-a-color-markup .color-menu.small{width:100px}@media screen and (max-width:979px){.pick-a-color-markup .color-menu.small{left:-105px}}
 .pick-a-color-markup .color-menu.no-hex{left:0px}
 .pick-a-color-markup .color-menu ul{padding:0px;margin:0px}
 .pick-a-color-markup .color-menu li{list-style-type:none;padding:5px 0px;margin:0px}

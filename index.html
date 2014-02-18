@@ -94,12 +94,12 @@
 				<div class="col-sm-6 col-md-4 col-md-offset-2 hidden-xs demo">
 					<h3>Desktop <i class="icon-laptop"></i> <i class="icon-desktop"></i></h3>
 					<p class="small">For browsers 980px or wider:</p>
-					<input type="text" value="fff" name="desktop-demo" class="pick-a-color">
+					<input type="text" value="fff" name="desktop-demo" class="pick-a-color form-control">
 									</div>
 			  <div class="col-sm-12 col-md-4 pretend-mobile demo">
 					<h3>Mobile <i class="icon-mobile-phone"></i> <i class="icon-tablet"></i></h3>
 					<p class="small">For browsers 979px or narrower:</p>
-					<input type="text" value="f00" name="mobile-demo" class="pick-a-color">
+					<input type="text" value="f00" name="mobile-demo" class="pick-a-color form-control">
 					<p class="small hidden-desktop">To see how it looks in desktop browsers, check this site from a regular computer.</p>
 				</div>
 			</div>
@@ -200,11 +200,11 @@
 &lt;script src="js/pick-a-color-1.1.8.min.js"&gt;&lt;/script&gt;</pre>
 						<li>
 							Add this to your HTML wherever you want a Pick-A-Color:
-							<pre>&lt;input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color"&gt;</pre>
+							<pre>&lt;input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control"&gt;</pre>
 
 							Replace <code>YOUR-NAME</code> with your unique identifier for the color picker (e.g. "border-color" or "background-color") and <code>YOUR-DEFAULT</code> with the default color you'd like to show in the color picker. For instance, yours might look like this:
 
-							<pre>&lt;input type="text" value="000" name="border-color" class="pick-a-color"&gt;</pre> 
+							<pre>&lt;input type="text" value="000" name="border-color" class="pick-a-color form-control"&gt;</pre> 
               
               Notes:
               <ol class="docs">
@@ -268,11 +268,11 @@
  &lt;/head&gt;
  &lt;body&gt;
 
-  &lt;input type="text" value="222" name="border-color" class="pick-a-color"&gt;
-  &lt;input type="text" value="aaa" name="font-color" class="pick-a-color"&gt;
-  &lt;input type="text" value="551033" name="highlight-color" class="pick-a-color"&gt;
-  &lt;input type="text" value="eee" name="contrast-color" class="pick-a-color"&gt;
-  &lt;input type="text" class="pick-a-color"&gt;
+  &lt;input type="text" value="222" name="border-color" class="pick-a-color form-control"&gt;
+  &lt;input type="text" value="aaa" name="font-color" class="pick-a-color form-control"&gt;
+  &lt;input type="text" value="551033" name="highlight-color" class="pick-a-color form-control"&gt;
+  &lt;input type="text" value="eee" name="contrast-color" class="pick-a-color form-control"&gt;
+  &lt;input type="text" class="pick-a-color form-control"&gt;
 	
   &lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
   &lt;script src="js/tinycolor-0.9.14.min.js"&gt;&lt;/script&gt;
@@ -340,11 +340,11 @@
 
 					<h6>showSpectrum: true</h6>
 					
-					<input type="text" value="fff" name="spectrum-demo" class="pick-a-color">
+					<input type="text" value="fff" name="spectrum-demo" class="pick-a-color form-control">
 					
 					<h6>showSpectrum: false</h6>
 					
-					<input type="text" value="f00" name="no-spectrum-demo" class="pick-a-color-no-spectrum">
+					<input type="text" value="f00" name="no-spectrum-demo" class="pick-a-color-no-spectrum form-control">
 									
 				</div>				
 			</div>
@@ -362,11 +362,11 @@
 
 					<h6>showAdvanced: true</h6>
 					
-					<input type="text" value="f60" name="advanced-demo" class="pick-a-color">
+					<input type="text" value="f60" name="advanced-demo" class="pick-a-color form-control">
 										
 					<h6>showAdvanced: false</h6>
 					
-					<input type="text" value="ff0" name="advanced-demo" class="pick-a-color-no-advanced">
+					<input type="text" value="ff0" name="advanced-demo" class="pick-a-color-no-advanced form-control">
 									
 				</div>				
 			</div>
@@ -385,11 +385,11 @@
 					
 					<h6>showSavedColors: true</h6>
 					
-					<input type="text" value="008000" name="saved-colors-demo" class="pick-a-color">
+					<input type="text" value="008000" name="saved-colors-demo" class="pick-a-color form-control">
 										
 					<h6>showSavedColors: false</h6>
 					
-					<input type="text" value="00f" name="no-saved-colors-demo" class="pick-a-color-no-saved">
+					<input type="text" value="00f" name="no-saved-colors-demo" class="pick-a-color-no-saved form-control">
 										
 				</div>				
 			</div>
@@ -423,11 +423,11 @@
 					
 					<h6>fadeMenuToggle: true</h6>
 
-					<input type="text" value="800080" name="fade-demo" class="pick-a-color">
+					<input type="text" value="800080" name="fade-demo" class="pick-a-color form-control">
 
 					<h6>fadeMenuToggle: false</h6>
 
-					<input type="text" value="000" name="no-fade-demo" class="pick-a-color-no-fade">
+					<input type="text" value="000" name="no-fade-demo" class="pick-a-color-no-fade form-control">
 					
 				</div>
 			</div>
@@ -446,11 +446,11 @@
 					
 					<h6>showHexInput: true</h6>
 
-					<input type="text" value="ffffff" name="show-hex-demo" class="pick-a-color">
+					<input type="text" value="ffffff" name="show-hex-demo" class="pick-a-color form-control">
 
 					<h6>showHexInput: false</h6>
 
-					<input type="text" value="f00" name="no-hex-demo" class="pick-a-color-no-input">
+					<input type="text" value="f00" name="no-hex-demo" class="pick-a-color-no-input form-control">
 					
 				</div>
 			</div>
@@ -469,11 +469,11 @@
 					
 					<h6>showBasicColors: true</h6>
 					
-					<input type="text" value="f60" name="basic-colors-demo" class="pick-a-color">
+					<input type="text" value="f60" name="basic-colors-demo" class="pick-a-color form-control">
 					
 					<h6>showBasicColors: false</h6>
 
-					<input type="text" value="ff0" name="no-basic-colors-demo" class="pick-a-color-no-basic">
+					<input type="text" value="ff0" name="no-basic-colors-demo" class="pick-a-color-no-basic form-control">
 					
 				</div>
 			</div>
@@ -491,11 +491,11 @@
           
           <h6>allowBlank: true</h6>
           
-          <input type="text" name="allow-blank-demo" class="pick-a-color-allow-blank">
+          <input type="text" name="allow-blank-demo" class="pick-a-color-allow-blank form-control">
                     
           <h6>allowBlank: false</h6>
           
-          <input type="text" value="008000" name="no-allow-blank" class="pick-a-color">
+          <input type="text" value="008000" name="no-allow-blank" class="pick-a-color form-control">
                     
         </div>        
       </div>

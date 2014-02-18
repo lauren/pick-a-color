@@ -29,6 +29,11 @@
 
 @pacLightPurple: #ff00ff;
 
+// Bootstrap 2.3.2 colors
+
+@purple: #7a43b6;
+@white: #fff;
+
 @fontsize: 18px;
 @lineheight: 22px;
 @defaultRadius: 4px;
@@ -84,7 +89,7 @@ body {
 	background-color:#fff;
 	padding:40px 20px;
 	margin-top:-20px;
-	.border-radius(@defaultRadius);
+	border-radius: @defaultRadius;
 	border: 1px solid #d4d4d4;
 	.box-shadow(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
 	@media screen and (max-width: 768px) {
@@ -119,6 +124,9 @@ h6 {
 
 h1 { 
 	font-size: @fontsize * 2.75; 
+	@media screen and (max-width: 991px) and (min-width: 769px) {
+		font-size: 30px;
+	}
 	@media screen and (max-width: 768px) {
 		font-size: @fontsize * 1.6;
 	}
@@ -189,10 +197,13 @@ pre {
 	right: 0;
 	width:1000px;
 	padding:0px;
+	background-color: @white;
+	border: none;
+	.box-shadow(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
 	@media screen and (min-width: 1200px) {
 		width:1230px;
 	}
-	@media screen and (max-width: 979px) and (min-width: 768px) {
+	@media screen and (max-width: 991px) and (min-width: 768px) {
 		width: 784px;
 	}
 	@media screen and (max-width: 767px) {
@@ -209,8 +220,11 @@ pre {
 		.border-top-radius(0px);
 		.box-shadow(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
 		@media screen and (max-width: 767px) {
-			.border-radius(@radius:0px);
+			border-radius: 0px;
 		}
+	}
+	.navbar-toggle {
+		padding: 9px 4px 10px 9px;
 	}
 	.nav {
 		margin:0 auto;
@@ -218,10 +232,10 @@ pre {
 		float:right;
 		vertical-align:bottom;
 		margin-top:15px;
-		@media screen and (max-width: 978px) {
-			width:150px;
-			text-align:right;
-			margin:0px;
+    @media screen and (max-width: 767px) {
+      width:150px;
+      text-align:right;
+      margin:0px;
 		}
 	}
 	.container {
@@ -235,6 +249,9 @@ pre {
 		padding:0px;
 		line-height:24px;
 		margin-top:15px;
+		@media screen and (max-width: 767px) {
+			margin-top: 10px;
+		}
 	}
 	.pick-a-color-brand {
 		color: @gray;
@@ -257,9 +274,9 @@ pre {
 		display:block;
 		position:relative;
 		left:-10%;
-		@media screen and (max-width: 968px) {
-			display:none;
-		}
+		@media screen and (max-width: 767px) {
+      display:none;
+    }
 	}
 	.active {
 		&.about .underline {
@@ -331,14 +348,23 @@ pre {
 
 .logo {
 	.vertical-full-spectrum;
-	.border-radius(@defaultRadius);
+	border-radius: @defaultRadius;
 	height:36px;
 	width:36px;
 	display:inline-block;
+	@media screen and (max-width: 991px) {
+		vertical-align: middle;
+	}
 	@media screen and (max-width: 767px) {
 		height:22px;
 		width:22px;
 		margin-right: 5px;
+	}
+}
+
+.name {
+	@media screen and (max-width: 991px) {
+		vertical-align: middle;
 	}
 }
 
@@ -348,7 +374,6 @@ pre {
 }
 
 .demo {
-	margin:20px auto 50px auto;
 	text-align:center;
 	.pick-a-color{
 		margin:0 auto;	
@@ -378,17 +403,19 @@ pre {
 	margin:5px auto;
 	text-align:center;
 	padding-top:15px;
-	border-top:1px dashed @grayLight;
+	border-top:1px dashed @gray-light;
 }
 
 /* demonstrate mobile styles */
 
 .pretend-mobile {
 
+	.box-sizing(border-box);
+
 	div.pick-a-color-markup {
 
 		.hex-pound {
-			padding:8px 5px 0px 5px;
+			padding:3px 5px 0px 5px;
 			min-height:30px;
 			vertical-align:middle;
 		}
@@ -400,23 +427,24 @@ pre {
 		.pick-a-color {
 			font-size:16px;
 			padding:9px;
+			height: 47px;
 		}
 
-		#appendedDropdownButton {
-			height:40px;
+		.color-dropdown {
+			height: 47px;
 		}
 
 		// button to open picker
 
-		.btn-group {
+		.input-group-btn {
 		  .color-dropdown { 
-				height:40px;
-				padding:3px 5px;
+				height:47px;
+				padding:9px 5px;
 			}
 
 			.color-preview {
-				height:30px;
-				width:30px;
+				height:1.875em;
+				width:1.875em;
 				margin-bottom:0px;
 			}
 
@@ -428,8 +456,9 @@ pre {
 		// basic menu of colors 
 
 		.color-menu {
-			left:-239px;
-			width:293px;
+			left:0px;
+			width:100%;
+			min-width: 290px;
 
 			&.small {
 				left:-66px;
@@ -446,10 +475,11 @@ pre {
 
 			li.color-item:hover a {
 				background-color: #fff;
+				font-weight: normal;
 			}
 			
 			.btn.color-select {
-				height:37px;
+				height:35px;
 			}
 
 			.color-label {
@@ -493,7 +523,7 @@ pre {
 
 			}
 			.saved-color-col {
-				width: 125px;
+				width: 128px;
 			}
 		
 			// advanced colors

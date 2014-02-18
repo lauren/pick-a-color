@@ -8,8 +8,7 @@
     <meta name="description" content="Pick-a-Color is a jQuery color picker that's easy to use&mdash;even for people who aren't techies or designers. It's mobile-friendly, too. The interface is based on Twitter Bootstrap styles so it looks lovely with the styles of almost any site.">
     <meta name="author" content="Lauren Sperber">
 
-    <link href="dependencies/css/bootstrap-2.2.2.min.css" rel="stylesheet">
-    <link href="dependencies/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="dependencies/css/bootstrap-3.0.0.min.css" rel="stylesheet">
     <link href="dependencies/css/font-awesome.min.css" rel="stylesheet">
     <link href="build/css/pick-a-color-docs.min.css" rel="stylesheet">
     <link href="build/css/pick-a-color.min.css" rel="stylesheet">
@@ -28,54 +27,54 @@
 
   <body data-spy="scroll" data-target=".navbar" data-offset="100">
 
-    <div class="navbar">
-      <div class="navbar-inner">
-				<div class="branding">
-					<h1 class="title">
-						<a class="pick-a-color-brand" href="#">
-							<span class="logo"></span>
-							Pick-a-Color
-						</a>
-					</h1>
-				</div>
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-	            <li class="active about">
-								<a href="#about">About</a>
-								<span class="underline"></span>
-							</li>
-              <li class="features">
-								<a href="#features">Features</a>
-								<span class="underline"></span>
-							</li>
-              <li class="how">
-								<a href="#how">How To Use</a>
-								<span class="underline"></span>
-							</li>
-              <li class="details">
-								<a href="#details">Details</a>
-								<span class="underline"></span>
-							</li>
-              <li class="github">
-								<a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">GitHub</a>
-								<span class="underline"></span>
-							</li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
+    <div class="navbar navbar-default" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-links">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+  			<div class="branding">
+  				<h1 class="title">
+  					<a class="pick-a-color-brand" href="#">
+  						<span class="logo"></span>
+  						<span class="name">Pick-a-Color</span>
+  					</a>
+  				</h1>
+  			</div>
       </div>
+      <div class="navbar-collapse collapse" id="nav-links">
+        <ul class="nav navbar-nav">
+          <li class="active about">
+						<a href="#about">About</a>
+						<span class="underline"></span>
+					</li>
+          <li class="features">
+						<a href="#features">Features</a>
+						<span class="underline"></span>
+					</li>
+          <li class="how">
+						<a href="#how">How To Use</a>
+						<span class="underline"></span>
+					</li>
+          <li class="details">
+						<a href="#details">Details</a>
+						<span class="underline"></span>
+					</li>
+          <li class="github">
+						<a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">GitHub</a>
+						<span class="underline"></span>
+					</li>
+        </ul>
+      </div><!--/.nav-collapse -->
     </div>
 
     <div class="container">
 	
-			<div class="row-fluid" id="about">
+			<div class="row" id="about">
 
-				<div class="span12 intro">
+				<div class="col-md-12 intro">
 					<h2 class="name">Pick-a-Color</h2>
 					<h3 class="tag">an easy-to-use jQuery color picker for Twitter Bootstrap</h3>
 					<a class="btn btn-success btn-large" href="https://github.com/lauren/pick-a-color/archive/master.zip"
@@ -83,7 +82,7 @@
 	          <i class="icon-download-alt icon-large"></i>
 	          Download Pick-a-Color
 					</a>
-	        <a class="btn btn-large" href="https://github.com/lauren/pick-a-color" target="_blank"
+	        <a class="btn btn-default btn-large" href="https://github.com/lauren/pick-a-color" target="_blank"
 	           onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">
 	          <i class="icon-github-alt icon-large"></i>
 	          View Source Code
@@ -91,13 +90,13 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid">
-				<div class="span6 visible-desktop demo">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-md-offset-2 hidden-xs demo">
 					<h3>Desktop <i class="icon-laptop"></i> <i class="icon-desktop"></i></h3>
 					<p class="small">For browsers 980px or wider:</p>
 					<input type="text" value="fff" name="desktop-demo" class="pick-a-color">
 									</div>
-			  <div class="span6 pretend-mobile demo">
+			  <div class="col-sm-12 col-md-4 pretend-mobile demo">
 					<h3>Mobile <i class="icon-mobile-phone"></i> <i class="icon-tablet"></i></h3>
 					<p class="small">For browsers 979px or narrower:</p>
 					<input type="text" value="f00" name="mobile-demo" class="pick-a-color">
@@ -107,50 +106,50 @@
 			
 			<h2 id="features">Features</h2>
 			
-			<div class="row-fluid">				
-				<div class="span6">		      
+			<div class="row">				
+				<div class="col-md-6">		      
 					<h3>For your users</h3>
-						<div class="row-fluid">
-							<div class="span6">
+						<div class="row">
+							<div class="col-md-6">
 								<h5><i class="icon-edit icon-large"></i> Flexible text entry</h5>
 								<p class="small">Accepts HEX, RGB, HSL, HSV, HSVA, and names, thanks to Brian Grinstead's amazing <a href="https://github.com/bgrins/TinyColor" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'tiny_color']);">Tiny Color</a>.</small>
 							</div>
-							<div class="span6">
+							<div class="col-md-6">
 								<h5><i class="icon-save icon-large"></i> Saved colors</h5>
 								<p class="small">Saves up to 16 recently used colors. Colors are stored in localStorage or cookies.<p>
 							</div>
 						</div>
-						<div class="row-fluid">
-							<div class="span6">
+						<div class="row">
+							<div class="col-md-6">
 								<h5><i class="icon-tint icon-large"></i> Basic color palate</h5>
 								<p class="small">Easy-to-use preset colors that can be lightened and darkened.</p>
 							</div>
-							<div class="span6">
+							<div class="col-md-6">
 								<h5><i class="icon-cogs icon-large"></i> Advanced color palate</h5>
 								<p class="small">Let users manipulate saturation, spectrum, and hue to get any color.</p>
 							</div>
 						</div>
 
 				</div>
-			  <div class="span6">
+			  <div class="col-md-6">
 					<h3>For you</h3>
 					
-					<div class="row-fluid">
-						<div class="span6">
+					<div class="row">
+						<div class="col-md-6">
 							<h5><i class="icon-certificate icon-large"></i> Tested</h5>
 							<p class="small">Tested in Chrome (Mac/PC/iOS), Safari (Mac/iOS), IE 8+, Firefox (Mac/PC), and Opera (Mac/PC).</p>
 						</div>
-						<div class="span6">
+						<div class="col-md-6">
 							<h5><i class=" icon-exclamation-sign icon-large"></i> No conflicts</h5>
 							<p class="small">Anonymous JavasScript function and namespaced CSS won't mess up your code.</p>
 						</div>
 					</div>
-					<div class="row-fluid">
-						<div class="span6">
+					<div class="row">
+						<div class="col-md-6">
 							<h5><i class="icon-magic icon-large"></i> Simple initialization</h5>
 							<p class="small">As little as three lines of HTML and one line of JavaScript.</p>
 						</div>
-						<div class="span6">
+						<div class="col-md-6">
 							<h5><i class="icon-gift icon-large"></i> Done</h5>
 							<p class="small">You didn't have to write your own color picker. 'Nuff said.</p>
 						</div>
@@ -159,8 +158,8 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid">
-				<div class="span8">
+			<div class="row">
+				<div class="col-md-8">
 					<h3>What? Who? Why?</h3>
 					<p>I'm <a href="http://laurensperber.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'lauren_sperber']);">Lauren Sperber</a>. I originally wrote Pick-a-Color for my friends at <a href="http://broadstreetads.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'broadstreet_ads']);">Broadstreet Ads</a> because they needed a color picker that was easy for people at online publishing companies to use.</p>
 
@@ -173,23 +172,32 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid">
-				<div class="span8">      
+			<div class="row">
+				<div class="col-md-8">      
 
 					<h2 id="how">How To Use</h2>
 
 					<h3>Compiled CSS For Use With Default Bootstrap Settings</h3>
-			
+
 					<ol class="docs">
 						<li>
-							<a href="https://github.com/lauren/pick-a-color/archive/master.zip" onClick="_gaq.push(['_trackEvent', 'download', 'github']);">Download the required files</a>. Add them to your CSS and JS folders and include them in your document as follows:<br/>
+							<a href="https://github.com/lauren/pick-a-color/archive/master.zip" onClick="_gaq.push(['_trackEvent', 'download', 'github']);">Download the required files</a>. Add them to your CSS and JS folders and include them in your document as follows:<br/><br/>
+              <em>For Bootstrap 3, use Pick-a-Color 1.2.0:</em><br/>
 							In the <code>&lt;head&gt;</code>:
+                <pre>&lt;link rel="stylesheet" href="css/bootstrap-3.0.0.min.css"&gt;
+&lt;link rel="stylesheet" href="css/pick-a-color-1.2.0.min.css"&gt;</pre>
+              Before the ending <code>&lt;/body&gt;</code>:
+                <pre>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/tinycolor-0.9.14.min.js"&gt;&lt;/script&gt;
+&lt;script src="js/pick-a-color-1.2.0.min.js"&gt;&lt;/script&gt;</pre>
+              <em>For Bootstrap 2, use Pick-a-Color 1.1.8:</em><br/>
+              In the <code>&lt;head&gt;</code>:
 								<pre>&lt;link rel="stylesheet" href="css/bootstrap-2.2.2.min.css"&gt;
-&lt;link rel="stylesheet" href="css/pick-a-color-1.1.5.min.css"&gt;</pre>
+&lt;link rel="stylesheet" href="css/pick-a-color-1.1.8.min.css"&gt;</pre>
 							Before the ending <code>&lt;/body&gt;</code>:
 								<pre>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="js/tinycolor-0.9.14.min.js"&gt;&lt;/script&gt;
-&lt;script src="js/pick-a-color-1.1.5.min.js"&gt;&lt;/script&gt;</pre>
+&lt;script src="js/pick-a-color-1.1.8.min.js"&gt;&lt;/script&gt;</pre>
 						<li>
 							Add this to your HTML wherever you want a Pick-A-Color:
 							<pre>&lt;input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color"&gt;</pre>
@@ -219,7 +227,7 @@
 
 					<p>Ta-da! You have a color picker! You might even have several!</p>
 
-					<h3>https://github.com/lauren/pick-a-color/archive/master.zip</h3>
+					<h3>Source LESS for Use With Customized Bootstrap Builds</h3>
 			
 					<ol class="docs">
 						<li>
@@ -247,8 +255,8 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid">
-				<div class="span12">
+			<div class="row">
+				<div class="col-md-12">
 
 					<pre>&lt;!doctype html&gt;
 &lt;html&gt;
@@ -283,8 +291,8 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid">
-				<div class="span8">
+			<div class="row">
+				<div class="col-md-8">
 					
 					<h4>Events</h4>
 			
@@ -299,8 +307,8 @@
         </div>
       </div>
 		
-			<div class="row-fluid">
-				<div class="span8">
+			<div class="row">
+				<div class="col-md-8">
 
 					<h4>Options</h4>
 
@@ -319,8 +327,8 @@
  				</div>
 			</div>
 			
-			<div class="row-fluid options">
-				<div class="span4">
+			<div class="row options">
+				<div class="col-md-4">
 
 					<h5>showSpectrum</h5> 
 
@@ -328,7 +336,7 @@
 					
 				</div>
 
-				<div class="span8">
+				<div class="col-md-4">
 
 					<h6>showSpectrum: true</h6>
 					
@@ -341,8 +349,8 @@
 				</div>				
 			</div>
 			
-			<div class="row-fluid options">
-				<div class="span4">
+			<div class="row options">
+				<div class="col-md-4">
 
 					<h5>showAdvanced</h5> 
 
@@ -350,7 +358,7 @@
 					
 				</div>
 
-				<div class="span8">
+				<div class="col-md-4">
 
 					<h6>showAdvanced: true</h6>
 					
@@ -364,8 +372,8 @@
 			</div>
 			
 			
-			<div class="row-fluid options">
-				<div class="span4">
+			<div class="row options">
+				<div class="col-md-4">
 
 					<h5>showSavedColors</h5>
 
@@ -373,7 +381,7 @@
 
 				</div>				
 
-				<div class="span8">
+				<div class="col-md-4">
 					
 					<h6>showSavedColors: true</h6>
 					
@@ -386,9 +394,9 @@
 				</div>				
 			</div>
 
-			<div class="row-fluid options">
+			<div class="row options">
 				
-				<div class="span8">
+				<div class="col-md-8">
 
 					<h5>saveColorsPerElement (for <code>showSavedColors: true</code> only)</h5>
 
@@ -401,9 +409,9 @@
 					
  			</div>
 
-			<div class="row-fluid options">
+			<div class="row options">
 
-				<div class="span4">
+				<div class="col-md-4">
 
 					<h5>fadeMenuToggle</h5>
 
@@ -411,7 +419,7 @@
 				
 				</div>
 
-				<div class="span8">
+				<div class="col-md-4">
 					
 					<h6>fadeMenuToggle: true</h6>
 
@@ -424,9 +432,9 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid options">
+			<div class="row options">
 
-				<div class="span4">
+				<div class="col-md-4">
 
 					<h5>showHexInput</h5>
 
@@ -434,7 +442,7 @@
 				
 				</div>
 
-				<div class="span8">
+				<div class="col-md-4">
 					
 					<h6>showHexInput: true</h6>
 
@@ -447,9 +455,9 @@
 				</div>
 			</div>
 			
-			<div class="row-fluid options">
+			<div class="row options">
 
-				<div class="span4">
+				<div class="col-md-4">
 
 					<h5>showBasicColors</h5>
 
@@ -457,7 +465,7 @@
 				
 				</div>
 
-				<div class="span8">
+				<div class="col-md-4">
 					
 					<h6>showBasicColors: true</h6>
 					
@@ -470,8 +478,8 @@
 				</div>
 			</div>
 
-      <div class="row-fluid options">
-        <div class="span4">
+      <div class="row options">
+        <div class="col-md-4">
 
           <h5>allowBlank</h5>
 
@@ -479,7 +487,7 @@
 
         </div>        
 
-        <div class="span8">
+        <div class="col-md-4">
           
           <h6>allowBlank: true</h6>
           
@@ -492,9 +500,9 @@
         </div>        
       </div>
 		
-			<div class="row-fluid">
+			<div class="row">
 
-				<div class="span8">
+				<div class="col-md-8">
 					<h2 id="details">Details</h2>
 					
 					<h3>Tested Browsers</h3>
@@ -502,12 +510,12 @@
 					<p>I've tested Pick-a-Color in these browsers:</p>
 
 					<ul class="docs">
-						<li>Google Chrome 24.0.1312.57 - 25.0.1364.99 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)</li>
-						<li>Safari 6.0.2 (Mac OSX and iOS 6.0.2)</li>
+						<li>Google Chrome 24.0.1312.57 - 32.0.1700.107 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)</li>
+						<li>Safari 6.0.2 - 6.1.0 (Mac OSX and iOS)</li>
 						<li>Internet Explorer 10 (Windows 7)</li>
 						<li>Internet Explorer 9 (Windows 7)</li>
 						<li>Internet Explorer 8 (Windows XP)</li>
-						<li>Firefox 18.0.1 - 19.0 (Mac OSX and Windows 7)</li>
+						<li>Firefox 18.0.1 - 26.0 (Mac OSX and Windows 7)</li>
 						<li>Opera 12.13 - 12.14 (Mac OSX and Windows 7)</li>
 					</ul>
 

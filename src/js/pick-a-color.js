@@ -1019,6 +1019,7 @@
             // save to saved colors
             methods.addToSavedColors(myColorVars.newValue,mySavedColorsInfo,myElements.savedColorsContent);
           }
+          methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
           methods.updatePreview($thisEl); // update preview
         });
 

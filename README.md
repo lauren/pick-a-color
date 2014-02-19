@@ -45,13 +45,15 @@ OK! Let's do this color picking thing!
 
 ### Compiled CSS For Use With Default Bootstrap Settings
 
-1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add them to your CSS and JS folders and include them in your document as follows:
+1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add the CSS and JS from the latest release in /build to your CSS and JS folders and include them in your document as follows:
+
+#### For Bootstrap 3, use Pick-a-Color 1.2.0:
 
 **In the `<head>`:**
 
 ```html
-<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
-<link rel="stylesheet" href="css/pick-a-color-1.1.5.min.css">
+<link rel="stylesheet" href="css/bootstrap-3.0.0.min.css">
+<link rel="stylesheet" href="css/pick-a-color-1.2.0.min.css">
 ```
 
 **Before the ending `</body>`:**
@@ -59,19 +61,36 @@ OK! Let's do this color picking thing!
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="js/tinycolor-0.9.14.min.js"></script>
-<script src="js/pick-a-color-1.1.5.min.js"></script>
+<script src="js/pick-a-color-1.2.0.min.js"></script>
+```
+
+#### For Bootstrap 2, use Pick-a-Color 1.1.8:
+
+**In the `<head>`:**
+
+```html
+<link rel="stylesheet" href="css/bootstrap-2.2.2.min.css">
+<link rel="stylesheet" href="css/pick-a-color-1.1.8.min.css">
+```
+
+**Before the ending `</body>`:**
+
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="js/tinycolor-0.9.14.min.js"></script>
+<script src="js/pick-a-color-1.1.8.min.js"></script>
 ```
 
 2) Add this to your HTML wherever you want a Pick-A-Color. Replace `YOUR-NAME` with your unique identifier for the color picker (e.g. "border-color" or "background-color") and `YOUR-DEFAULT` with the default color you'd like to show in the color picker:
 
 ```html
-<input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color">
+<input type="text" value="YOUR-DEFAULT" name="YOUR-NAME" class="pick-a-color form-control">
 ```
 
 For instance, yours might look like this:
 
 ```html
-<input type="text" value="222" name="border-color" class="pick-a-color">
+<input type="text" value="222" name="border-color" class="pick-a-color form-control">
 ```
 
 Notes:
@@ -95,7 +114,7 @@ $(".pick-a-color").pickAColor();
 
 Ta-da! You have a color picker! You might even have several!
 
-### Pre-Compiled LESS for Use with Customized Bootstrap
+### Source LESS for Use with Customized Bootstrap
 
 1) Download the source: https://github.com/lauren/pick-a-color/archive/master.zip.
 
@@ -135,13 +154,13 @@ Here's an example of how a simple HTML page using Pick-a-Color might look:
 
 	<body>
 
-		<input type="text" value="222" name="border-color" class="pick-a-color">
-		<input type="text" value="aaa" name="font-color" class="pick-a-color">
-		<input type="text" value="a1beef" name="backgound-color" class="pick-a-color">
-		<input type="text" value="551033" name="highlight-color" class="pick-a-color">
-		<input type="text" value="eee" name="contrast-color" class="pick-a-color">
-		<input type="text" class="pick-a-color">
-		<input type="text" class="pick-a-color">
+		<input type="text" value="222" name="border-color" class="pick-a-color form-control">
+		<input type="text" value="aaa" name="font-color" class="pick-a-color form-control">
+		<input type="text" value="a1beef" name="backgound-color" class="pick-a-color form-control">
+		<input type="text" value="551033" name="highlight-color" class="pick-a-color form-control">
+		<input type="text" value="eee" name="contrast-color" class="pick-a-color form-control">
+		<input type="text" class="pick-a-color form-control">
+		<input type="text" class="pick-a-color form-control">
 
 		<script src="js/jquery-1.9.1.min.js"></script>
 		<script src="js/tinycolor-0.9.14.min.js"></script>
@@ -230,12 +249,12 @@ Specifies whether or not the field can be left blank. Use this if the color inpu
 
 I've tested Pick-a-Color in these browsers:
 
-* Google Chrome 24.0.1312.57 - 28.0.1500.95 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)
-* Safari 6.0.2 - 6.0.4 (Mac OSX and iOS 6.0.2)
+* Google Chrome 24.0.1312.57 - 32.0.1700.107 (Mac OSX, Windows 7, Windows XP, iOS 6.0.2)
+* Safari 6.0.1 - 6.1.0 (Mac OSX and iOS 6.0.2)
 * Internet Explorer 10 (Windows 7)
 * Internet Explorer 9 (Windows 7)
 * Internet Explorer 8 (Windows XP)
-* Firefox 18.0.1 - 22.0 (Mac OSX and Windows 7)
+* Firefox 18.0.1 - 26.0 (Mac OSX and Windows 7)
 * Opera 12.13 - 12.14 (Mac OSX and Windows 7)
 
 Minor issues in these browsers are documented here: https://github.com/lauren/pick-a-color/issues

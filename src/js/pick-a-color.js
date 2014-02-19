@@ -338,9 +338,10 @@
 
         toggleDropdown: function (element) {
           var $container = $(element).parents(".pick-a-color-markup"),
+              $input = $container.find("input"),
               $button = $container.find(".input-group-btn"),
               $menu = $container.find(".color-menu");
-          if ($menu.css("display") === "none") {
+          if (!$input.is(":disabled") && $menu.css("display") === "none") {
             methods.openDropdown($button,$menu);
           } else {
             methods.closeDropdown($button,$menu);

@@ -47,7 +47,7 @@ OK! Let's do this color picking thing!
 
 1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add the CSS and JS from the latest release in /build to your CSS and JS folders and include them in your document as follows:
 
-#### For Bootstrap 3, use Pick-a-Color 1.2.0:
+#### For Bootstrap 3, use Pick-a-Color 1.2.2:
 
 **In the `<head>`:**
 
@@ -61,7 +61,7 @@ OK! Let's do this color picking thing!
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="js/tinycolor-0.9.14.min.js"></script>
-<script src="js/pick-a-color-1.2.0.min.js"></script>
+<script src="js/pick-a-color-1.2.2.min.js"></script>
 ```
 
 #### For Bootstrap 2, use Pick-a-Color 1.1.8:

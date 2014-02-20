@@ -16,10 +16,10 @@
             typeof JSON === 'object', // don't use LS if JSON is not available
           isIELT10 = document.all && !window.atob, // OH NOES!
 
-          startEvent    = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
-          moveEvent     = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
-          endEvent      = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor",
-          clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
+          startEvent    = "mousedown.pickAColor",
+          moveEvent     = "mousemove.pickAColor",
+          endEvent      = "mouseup.pickAColor",
+          clickEvent    = "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
 
@@ -191,7 +191,7 @@
           var $previewItem = $("<li>").addClass("preview-item").append($("<span>").
               addClass("preview-text").text("Preview")),
             $preview = $("<span>").addClass("color-preview advanced").
-              append("<button class='color-select btn btn-mini advanced' type='button'>Select</button>");
+              append("<button class='color-select btn btn-mini advanced' type='button'>Pick</button>");
           $advancedList.append($previewItem.append($preview));
           $dropdownContainer.append($advanced.append($advancedList));
         }
@@ -531,9 +531,9 @@
 
           if (tab === "basic") {
             $thisParent.siblings(".color-preview").css("background-color",highlightedHex);
-            // replace the color label with a 'select' button
+            // replace the color label with a 'pick' button
             $thisParent.prev('.color-label').replaceWith(
-              '<button class="color-select btn btn-mini" type="button">Select</button>');
+              '<button class="color-select btn btn-mini" type="button">Pick</button>');
             if (spectrumType !== "darkenRight") {
               methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
             }
@@ -697,7 +697,7 @@
           var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand, [{type: "basic"}]);
           methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
           // update touch instructions
-          myElements.touchInstructions.html("Press 'select' to choose this color");
+          myElements.touchInstructions.html("Press 'pick' to choose this color");
         },
 
         // bind to mousedown/touchstart, execute provied function if the top of the

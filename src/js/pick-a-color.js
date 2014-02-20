@@ -14,14 +14,7 @@
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
             typeof JSON === 'object', // don't use LS if JSON is not available
-          isIELT10 = document.all && !window.atob, // OH NOES!
-
-          startEvent    = "mousedown.pickAColor",
-          moveEvent     = "mousemove.pickAColor",
-          endEvent      = "mouseup.pickAColor",
-          clickEvent    = "click.pickAColor",
-          dragEvent     = "dragging.pickAColor",
-          endDragEvent  = "endDrag.pickAColor";
+          isIELT10 = document.all && !window.atob; // OH NOES!
 
       // settings
 
@@ -436,28 +429,28 @@
         },
 
         horizontallyDraggable: function () {
-          $(this).on(startEvent, function (event) {
+          $(this).on("mousedown.pickAColor touchstart.pickAColor", function (event) {
             event.preventDefault();
             var $this_el = $(event.delegateTarget);
             $this_el.css("cursor","-webkit-grabbing");
             $this_el.css("cursor","-moz-grabbing");
             var dimensions = methods.getMoveableArea($this_el);
 
-            $(document).on(moveEvent, function (e) {
-              $this_el.trigger(dragEvent);
+            $(document).on("mousemove.pickAColor touchmove.pickAColor", function (e) {
+              $this_el.trigger("dragging.pickAColor");
               methods.moveHighlightBand($this_el, dimensions, e);
-            }).on(endEvent, function(event) {
-              $(document).off(moveEvent); // for desktop
-              $(document).off(dragEvent);
+            }).on("mouseup.pickAColor touchend.pickAColor", function(event) {
+              $(document).off("mousemove.pickAColor touchmove.pickAColor"); // for desktop
+              $(document).off("dragging.pickAColor");
               $this_el.css("cursor","-webkit-grab");
               $this_el.css("cursor","-moz-grab");
-              $this_el.trigger(endDragEvent);
-              $(document).off(endEvent);
+              $this_el.trigger("endDrag.pickAColor");
+              $(document).off("mouseup.pickAColor touchend.pickAColor");
             });
-          }).on(endEvent, function(event) {
+          }).on("mouseup.pickAColor touchend.pickAColor", function(event) {
             event.stopPropagation();
-            $(document).off(moveEvent); // for mobile
-            $(document).off(dragEvent);
+            $(document).off("mousemove.pickAColor touchmove.pickAColor"); // for mobile
+            $(document).off("dragging.pickAColor");
           });
         },
 
@@ -700,8 +693,8 @@
           myElements.touchInstructions.html("Press 'pick' to choose this color");
         },
 
-        // bind to mousedown/touchstart, execute provied function if the top of the
-        // window has not moved when there is a mouseup/touchend
+        // bind to mousedown.pickAColor/touchstart.pickAColor, execute provied function if the top of the
+        // window has not moved when there is a mouseup.pickAColor/touchend.pickAColor
         // must be called with apply and an arguments array like:
         // [{thisFunction, theseArguments}]
         executeUnlessScrolled: function () {
@@ -709,10 +702,10 @@
               theseArguments = arguments[0].theseArguments,
               windowTopPosition,
               mostRecentClick;
-          $(this).on(startEvent, function (e) {
+          $(this).on("mousedown.pickAColor touchstart.pickAColor", function (e) {
             windowTopPosition = $(window).scrollTop(); // save to see if user is scrolling in mobile
             mostRecentClick = e;
-          }).on(clickEvent, function (event) {
+          }).on("click.pickAColor", function (event) {
             var distance = windowTopPosition - $(window).scrollTop();
             if (supportsTouch && (Math.abs(distance) > 0)) {
               return false;
@@ -1031,12 +1024,12 @@
         methods.executeUnlessScrolled.apply($(document), [{"thisFunction": methods.closeDropdownIfOpen,
           "theseArguments": {"button": myElements.colorPreviewButton, "menu": myElements.colorMenu}}]);
 
-        // prevent click/touchend to color-menu or color-text input from closing dropdown
+        // prevent click/touchend.pickAColor to color-menu or color-text input from closing dropdown
 
-        myElements.colorMenu.on(clickEvent, function (e) {
+        myElements.colorMenu.on("click.pickAColor", function (e) {
           e.stopPropagation();
         });
-        myElements.thisEl.on(clickEvent, function(e) {
+        myElements.thisEl.on("click.pickAColor", function(e) {
           e.stopPropagation();
         });
 
@@ -1061,10 +1054,10 @@
           methods.executeUnlessScrolled.apply(myElements.basicSpectrums, [{"thisFunction": methods.tapSpectrum,
             "theseArguments": {"savedColorsInfo": mySavedColorsInfo, "els": myElements}}]);
 
-          $(myElements.basicHighlightBands).on(dragEvent,function (event) {
+          $(myElements.basicHighlightBands).on("dragging.pickAColor",function (event) {
             var $thisEl = event.target;
             methods.calculateHighlightedColor.apply(this, [{type: "basic"}]);
-          }).on(endDragEvent, function (event) {
+          }).on("endDrag.pickAColor", function (event) {
             var $thisEl = event.delegateTarget;
             var finalColor = methods.calculateHighlightedColor.apply($thisEl, [{type: "basic"}]);
             methods.addToSavedColors(finalColor,mySavedColorsInfo,myElements.savedColorsContent);
@@ -1077,23 +1070,23 @@
           // for dragging advanced sliders
 
 
-          $(myElements.hueHighlightBand).on(dragEvent, function(event) {
+          $(myElements.hueHighlightBand).on("dragging.pickAColor", function(event) {
             advancedStatus.h = methods.getHighlightedHue.apply(this, [advancedStatus]);
           });
 
-          $(myElements.lightnessHighlightBand).on(dragEvent, function() {
+          $(myElements.lightnessHighlightBand).on("dragging.pickAColor", function() {
             methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
-          }).on(endEvent, function () {
+          }).on("mouseup.pickAColor touchend.pickAColor", function () {
             advancedStatus.l = methods.calculateHighlightedColor.apply(this, [{"type": "advanced", "hsl": advancedStatus}]);
           });
 
-          $(myElements.saturationHighlightBand).on(dragEvent, function() {
+          $(myElements.saturationHighlightBand).on("dragging.pickAColor", function() {
             methods.getHighlightedSaturation.apply(this, [advancedStatus]);
-          }).on(endDragEvent, function () {
+          }).on("endDrag.pickAColor", function () {
             advancedStatus.s = methods.getHighlightedSaturation.apply(this, [advancedStatus]);
           });
 
-          $(myElements.advancedHighlightBand).on(endDragEvent, function () {
+          $(myElements.advancedHighlightBand).on("endDrag.pickAColor", function () {
             methods.updateAdvancedInstructions(myElements.advancedInstructions);
           });
 

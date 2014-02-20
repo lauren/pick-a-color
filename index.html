@@ -28,46 +28,48 @@
   <body data-spy="scroll" data-target=".navbar" data-offset="100">
 
     <div class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-links">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-  			<div class="branding">
-  				<h1 class="title">
-  					<a class="pick-a-color-brand" href="#">
-  						<span class="logo"></span>
-  						<span class="name">Pick-a-Color</span>
-  					</a>
-  				</h1>
-  			</div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-links">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+    			<div class="branding">
+    				<h1 class="title">
+    					<a class="pick-a-color-brand" href="#">
+    						<span class="logo"></span>
+    						<span class="name">Pick-a-Color</span>
+    					</a>
+    				</h1>
+    			</div>
+        </div>
+        <div class="navbar-collapse collapse" id="nav-links">
+          <ul class="nav navbar-nav">
+            <li class="active about">
+  						<a href="#about">About</a>
+  						<span class="underline"></span>
+  					</li>
+            <li class="features">
+  						<a href="#features">Features</a>
+  						<span class="underline"></span>
+  					</li>
+            <li class="how">
+  						<a href="#how">How To Use</a>
+  						<span class="underline"></span>
+  					</li>
+            <li class="details">
+  						<a href="#details">Details</a>
+  						<span class="underline"></span>
+  					</li>
+            <li class="github">
+  						<a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">GitHub</a>
+  						<span class="underline"></span>
+  					</li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-      <div class="navbar-collapse collapse" id="nav-links">
-        <ul class="nav navbar-nav">
-          <li class="active about">
-						<a href="#about">About</a>
-						<span class="underline"></span>
-					</li>
-          <li class="features">
-						<a href="#features">Features</a>
-						<span class="underline"></span>
-					</li>
-          <li class="how">
-						<a href="#how">How To Use</a>
-						<span class="underline"></span>
-					</li>
-          <li class="details">
-						<a href="#details">Details</a>
-						<span class="underline"></span>
-					</li>
-          <li class="github">
-						<a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">GitHub</a>
-						<span class="underline"></span>
-					</li>
-        </ul>
-      </div><!--/.nav-collapse -->
     </div>
 
     <div class="container">
@@ -162,13 +164,29 @@
 			<div class="row">
 				<div class="col-md-8">
 					<h3>What? Who? Why?</h3>
-					<p>I'm <a href="http://laurensperber.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'lauren_sperber']);">Lauren Sperber</a>. I originally wrote Pick-a-Color for my friends at <a href="http://broadstreetads.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'broadstreet_ads']);">Broadstreet Ads</a> because they needed a color picker that was easy for people at online publishing companies to use.</p>
+					<p>I'm <a href="http://laurensperber.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'lauren_sperber']);">Lauren</a>. I originally wrote Pick-a-Color for my friends at <a href="http://broadstreetads.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'broadstreet_ads']);">Broadstreet Ads</a> because they needed a color picker that was easy for people at online publishing companies to use.</p>
 
 					<p>If you have any bugs to report in Pick-a-Color, let me know <a href="https://github.com/lauren/pick-a-color/issues/new" onClick="_gaq.push(['_trackEvent', 'report_issue', 'github']);">by making a ticket</a>.</p>
 
 					<p>Pick-a-Color is available under the <a href="https://github.com/lauren/pick-a-color/blob/master/LICENSE" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'github', 'license']);">MIT License</a>.</p>
+          
+          <p>
+            <iframe src="http://ghbtns.com/github-btn.html?user=lauren&repo=pick-a-color&type=watch&count=true"
+            allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+
+            <iframe src="http://ghbtns.com/github-btn.html?user=lauren&repo=pick-a-color&type=fork&count=true"
+            allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+
+            <iframe src="http://ghbtns.com/github-btn.html?user=lauren&type=follow&count=true"
+            allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>
+
+            <a href="https://twitter.com/laurensperber" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @laurensperber</a>
+
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lauren.github.io/pick-a-color/" data-via="laurensperber" data-text="Pick-a-Color: an easy-to-use jQuery color picker for Twitter Bootstrap" data-related="laurensperber" data-counturl="http://lauren.github.io/pick-a-color/" data-lang="en">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </p>
 					
-			<p>OK! Let's do this color picking thing!</p>
+          <p>OK! Let's do this color picking thing!</p>
 			
 				</div>
 			</div>
@@ -545,7 +563,21 @@
 				<p><a href="https://github.com/lauren/pick-a-color" onClick="_gaq.push(['_trackEvent', 'view_source', 'github']);">Pick-A-Color</a> &copy; 2013 <a href="http://laurensperber.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'lauren_sperber']);">Lauren Sperber</a> and <a href="http://broadstreetads.com" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'broadstreet_ads']);">Broadstreet Ads</a> | Pick-A-Color License: <a href="http://opensource.org/licenses/MIT" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'license', 'mit']);">MIT</a></p>
 				<p><a href="https://github.com/bgrins/TinyColor" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'tiny_color']);">TinyColor</a> &copy; 2012 <a href="http://briangrinstead.com/" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'brian_grinstead']);">Brian Grinstead</a> | TinyColor License: <a href="https://github.com/bgrins/TinyColor/blob/master/LICENSE" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'license', 'mit']);">MIT</a></p>
 				<p><a href="http://fortawesome.github.com/Font-Awesome/" onClick="_gaq.push(['_trackEvent', 'outbound_link', 'font_awesome']);">Font Awesome</a> icons by Dave Gandy</p>
-			</div>
+        <p>
+          <iframe src="http://ghbtns.com/github-btn.html?user=lauren&repo=pick-a-color&type=watch&count=true"
+          allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+
+          <iframe src="http://ghbtns.com/github-btn.html?user=lauren&repo=pick-a-color&type=fork&count=true"
+          allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+
+          <iframe src="http://ghbtns.com/github-btn.html?user=lauren&type=follow&count=true"
+          allowtransparency="true" frameborder="0" scrolling="0" width="165" height="20"></iframe>
+
+          <a href="https://twitter.com/laurensperber" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @laurensperber</a>
+
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lauren.github.io/pick-a-color/" data-via="laurensperber" data-text="Pick-a-Color: an easy-to-use jQuery color picker for Twitter Bootstrap" data-related="laurensperber" data-counturl="http://lauren.github.io/pick-a-color/" data-lang="en">Tweet</a>
+        </p>
+			</div
 
     </div> 
 

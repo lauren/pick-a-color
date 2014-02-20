@@ -1,12 +1,12 @@
 
-body{padding-top:70px;font-weight:200;font-size:18px;line-height:22px;color:#555;background-image:-webkit-gradient(linear, left top, left top, color-stop(0, #f00), color-stop(20%, #f60), color-stop(40%, #ff0), color-stop(60%, #008000), color-stop(80%, #00f), color-stop(100%, #7a43b6));background-image:-moz-linear-gradient(top, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-image:-webkit-linear-gradient(top, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-image:-o-linear-gradient(top, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-image:linear-gradient(to bottom, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff0000', endColorstr='#ff7a43b6', GradientType=0);padding-bottom:50px}@media screen and (max-width:768px){body{padding-top:0px;width:100%;padding:0px}}body>.container{background-color:#fff;padding:40px 20px;margin-top:-20px;border-radius:4px;border:1px solid #d4d4d4;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (max-width:768px){body>.container{width:auto;left:0;right:0;position:relative;margin:-5px 0 0 0}}
+body{padding-top:70px;font-weight:200;font-size:18px;line-height:22px;color:#555;background-image:-webkit-gradient(linear, left top, left top, color-stop(0, #f00), color-stop(20%, #f60), color-stop(40%, #ff0), color-stop(60%, #008000), color-stop(80%, #00f), color-stop(100%, #7a43b6));background-image:-moz-linear-gradient(top, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-image:-webkit-linear-gradient(top, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-image:-o-linear-gradient(top, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-image:linear-gradient(to bottom, #f00 0, #f60 20%, #ff0 40%, #008000 60%, #00f 80%, #7a43b6 100%);background-repeat:repeat-x;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff0000', endColorstr='#ff7a43b6', GradientType=0);padding-bottom:50px}@media screen and (max-width:768px){body{padding-top:0px;width:100%;padding:0px}}body>.container{background-color:#fff;padding:40px 20px;margin-top:-20px;border:1px solid #d4d4d4;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (max-width:768px){body>.container{width:auto;left:0;right:0;position:relative;margin:-5px 0 0 0}}
 body p{margin-bottom:15px}
 h1,h2,h3,h4{font-weight:200}
 h1,h2,h3{line-height:48.400000000000006px}
 h4{line-height:33px}
 h6{padding:0px}
 h1{font-size:49.5px}@media screen and (max-width:991px) and (min-width:769px){h1{font-size:30px}}@media screen and (max-width:768px){h1{font-size:28.8px}}
-h2{font-size:40.5px}
+h2{font-size:40.5px;margin-top:25px}
 h2.name{font-size:72px}@media screen and (max-width:450px){h2.name{font-size:54px}}
 h3{font-size:31.5px}
 h3.tag{font-size:21.599999999999998px;line-height:22px}
@@ -18,10 +18,9 @@ ul.docs li,ol.docs li{font-size:18px;line-height:22px;margin-bottom:5px;margin-t
 ol.docs li{margin-bottom:25px}
 pre{margin-top:4px}
 @media screen and (max-width:767px){[class^="icon-"],[class*=" icon-"]{margin-right:5px}}
-.navbar{margin:0px auto;vertical-align:top;position:fixed;top:0;z-index:1100;left:0;right:0;width:1000px;padding:0px;background-color:#fff;border:none;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (min-width:1200px){.navbar{width:1230px}}@media screen and (max-width:991px) and (min-width:768px){.navbar{width:784px}}@media screen and (max-width:767px){.navbar{right:0;left:0;width:auto;position:relative}}.navbar .navbar-inner{background-image:none;filter:none;background-color:#fff;border-top-right-radius:0;border-top-left-radius:0;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (max-width:767px){.navbar .navbar-inner{border-radius:0px}}
+.navbar{margin:0px auto;vertical-align:top;position:fixed;top:0;z-index:1100;left:0;right:0;padding:0px;background-color:#fff;border:none;border-radius:0px;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (max-width:767px){.navbar{right:0;left:0;width:auto;position:relative}}.navbar .navbar-inner{background-image:none;filter:none;background-color:#fff;border-top-right-radius:0;border-top-left-radius:0;-webkit-box-shadow:0 3px 30px rgba(50,50,50,0.75);box-shadow:0 3px 30px rgba(50,50,50,0.75)}@media screen and (max-width:767px){.navbar .navbar-inner{border-radius:0px}}
 .navbar .navbar-toggle{padding:9px 4px 10px 9px}
-.navbar .nav{margin:0 auto;width:510px;float:right;vertical-align:bottom;margin-top:15px}@media screen and (max-width:767px){.navbar .nav{width:150px;text-align:right;margin:0px}}
-.navbar .container{width:auto}
+.navbar .nav{margin:0 auto;float:right;vertical-align:bottom;margin-top:15px}@media screen and (max-width:767px){.navbar .nav{width:150px;text-align:right;margin:0px}}
 .navbar .branding{float:left;padding-left:9px}
 .navbar .title{padding:0px;line-height:24px;margin-top:15px}@media screen and (max-width:767px){.navbar .title{margin-top:10px}}
 .navbar .pick-a-color-brand{color:#555}.navbar .pick-a-color-brand:hover{text-decoration:none}
@@ -58,7 +57,7 @@ pre{margin-top:4px}
 .pretend-mobile div.pick-a-color-markup .input-group-btn .color-dropdown{height:47px;padding:9px 5px}
 .pretend-mobile div.pick-a-color-markup .input-group-btn .color-preview{height:1.875em;width:1.875em;margin-bottom:0px}
 .pretend-mobile div.pick-a-color-markup .input-group-btn .caret{margin-bottom:20px}
-.pretend-mobile div.pick-a-color-markup .color-menu{left:0px;width:100%;min-width:290px}.pretend-mobile div.pick-a-color-markup .color-menu.small{left:-66px}
+.pretend-mobile div.pick-a-color-markup .color-menu{left:-239px;width:100%;min-width:290px}.pretend-mobile div.pick-a-color-markup .color-menu.small{left:-66px}
 .pretend-mobile div.pick-a-color-markup .color-menu .color-preview{height:35px;width:35px}
 .pretend-mobile div.pick-a-color-markup .color-menu li.color-item>a{min-height:40px}
 .pretend-mobile div.pick-a-color-markup .color-menu li.color-item:hover a{background-color:#fff;font-weight:normal}

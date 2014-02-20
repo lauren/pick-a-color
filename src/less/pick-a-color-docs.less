@@ -89,16 +89,15 @@ body {
 	background-color:#fff;
 	padding:40px 20px;
 	margin-top:-20px;
-	border-radius: @defaultRadius;
 	border: 1px solid #d4d4d4;
 	.box-shadow(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
-	@media screen and (max-width: 768px) {
-		width: auto;
-		left:0;
-		right:0;
-		position:relative;
-		margin:-5px 0px 0px 0px;
-	}
+		@media screen and (max-width: 768px) {
+			width: auto;
+			left:0;
+			right:0;
+			position:relative;
+			margin:-5px 0px 0px 0px;
+		}
 	}
 	
 	p {
@@ -133,6 +132,7 @@ h1 {
 } 
 h2 { 
 	font-size: @fontsize * 2.25; 
+	margin-top: 25px;
 	} 
 h2.name { 
 	font-size: @fontsize * 4; 
@@ -195,17 +195,11 @@ pre {
 	z-index:1100;
 	left: 0;
 	right: 0;
-	width:1000px;
 	padding:0px;
 	background-color: @white;
 	border: none;
+	border-radius: 0px;
 	.box-shadow(@shadow: 0px 3px 30px rgba(50, 50, 50, 0.75));
-	@media screen and (min-width: 1200px) {
-		width:1230px;
-	}
-	@media screen and (max-width: 991px) and (min-width: 768px) {
-		width: 784px;
-	}
 	@media screen and (max-width: 767px) {
 		right:0;
 		left:0;
@@ -228,7 +222,6 @@ pre {
 	}
 	.nav {
 		margin:0 auto;
-		width:510px;
 		float:right;
 		vertical-align:bottom;
 		margin-top:15px;
@@ -237,9 +230,6 @@ pre {
       text-align:right;
       margin:0px;
 		}
-	}
-	.container {
-		width:auto;
 	}
 	.branding {
 		float:left;
@@ -456,7 +446,7 @@ pre {
 		// basic menu of colors 
 
 		.color-menu {
-			left:0px;
+			left:-239px;
 			width:100%;
 			min-width: 290px;
 

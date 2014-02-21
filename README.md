@@ -43,6 +43,10 @@ OK! Let's do this color picking thing!
 
 ## How to Use
 
+### Bower
+
+`bower install pick-a-color`
+
 ### Compiled CSS For Use With Default Bootstrap Settings
 
 1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add the CSS and JS from the latest release in /build to your CSS and JS folders and include them in your document as follows:

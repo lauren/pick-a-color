@@ -1,5 +1,6 @@
 {
-  "name": "color-picker",
+  "name": "pick-a-color",
+  "keywords": ["color picker", "jquery color picker", "bootstrap color picker"],
   "version": "1.2.2",
   "main": ["build/1.2.2/js/pick-a-color-1.2.2.min.js", "build/1.2.0/css/pick-a-color-1.2.0.min.css"],
   "ignore": [

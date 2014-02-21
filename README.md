@@ -17,7 +17,7 @@ Pick-a-Color is designed to be easy for anyone to use. The interface is based on
 
 **Advanced:** Advanced tab lets users modify hue, saturation, and lightness to make any color their hearts desire.
 
-**Basic color palate:** Easy-to-use preset colors that can be lightened and darkened.
+**Basic color palette:** Easy-to-use preset colors that can be lightened and darkened.
 
 **Chunky mobile styles:** Dragging is easy, even on a touch device.
 

@@ -1,0 +1,18 @@
+{
+  "name": "color-picker",
+  "version": "1.2.2",
+  "main": ["build/1.2.2/js/pick-a-color-1.2.2.min.js", "build/1.2.0/css/pick-a-color-1.2.0.min.css"],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.0.0",
+    "jquery": "1.9.1",
+    "tinycolor": "0.9.15"
+  }
+}

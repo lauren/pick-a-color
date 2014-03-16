@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color LESS v1.1.7
+* Pick-a-Color LESS v1.2.x
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -96,7 +96,7 @@
   #gradient.horizontal(desaturate(@color,100%),desaturate(@color,50%));
   .border-left-radius(@border-radius-base);
   width: @advanced-color-box-width / 2;
-  @media screen and (max-width: 979px) {
+  @media screen and (max-width: (@screen-md - 1px)) {
     width:@advanced-color-box-width-phone / 2;
   }
 }
@@ -105,7 +105,7 @@
   #gradient.horizontal(desaturate(@color,50%),@color);
   .border-right-radius(@border-radius-base);
   width: @advanced-color-box-width / 2;
-  @media screen and (max-width: 979px) {
+  @media screen and (max-width: (@screen-md - 1px)) {
     width:@advanced-color-box-width-phone / 2;
   }
 }
@@ -123,7 +123,7 @@
   .hex-pound {
   	padding-left: 8px;
   	padding-right: 8px;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       padding:3px 5px 0px 5px;
       min-height:30px;
     }
@@ -131,9 +131,7 @@
 
   .pick-a-color {
   	padding: 5px;
-  	height: 34px;
-    width: 100%;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       width: 100%;
       font-size:@font-size-large;
       padding:9px;
@@ -153,7 +151,7 @@
       &:focus {
       	background-color: #fff;
       }
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         height:47px;
       }
     }
@@ -169,7 +167,7 @@
     &.current-color {
       margin-bottom: -5px;
     }
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       height:1.875em;
       width:1.875em;
     }
@@ -184,14 +182,14 @@
     font-size: 14px;
     left: auto;
 
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       left:-242px;
       width:293px;
     }
 
     &.small {
       width:100px;
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         left:-105px;
       }
     }
@@ -216,7 +214,7 @@
     .color-preview {
       vertical-align:middle;
       margin:0px;
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
       height: 35px;
       width: 35px;
       }
@@ -270,7 +268,7 @@
         &:hover {
         	background-color: #fff;
         }
-        @media screen and (max-width: 979px) {
+        @media screen and (max-width: (@screen-md - 1px)) {
           min-height:40px;
         }
       }
@@ -280,7 +278,7 @@
         filter:none;
         text-decoration: none;
         font-weight: bold;
-        @media screen and (max-width: 979px) {
+        @media screen and (max-width: (@screen-md - 1px)) {
           background-color: #fff;
           font-weight: normal;
         }
@@ -294,7 +292,7 @@
       margin-top:0px;
       line-height: 1.5px;
       border-radius: @border-radius-base;
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         height:35px;
       }
     }
@@ -308,7 +306,7 @@
     text-align: center;
     padding:0px 6px;
     margin:0px;
-    @media screen and (min-width: 979px) {
+    @media screen and (min-width: @screen-md) {
       display:none;
     }
     font-size: 14px;
@@ -320,7 +318,7 @@
     margin:0px;
     margin-left:10px;
     cursor:pointer;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
     margin-left:8px;
     }
   }
@@ -334,7 +332,7 @@
     left:115px;
     .borders-shadows;
     cursor:pointer;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       width:@color-box-width-phone;
       height:35px;
     }
@@ -391,11 +389,11 @@
     display:inline-block;
     &.hue {
       width:(@advanced-color-box-width/6) + .5px;
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         width: (@advanced-color-box-width-phone/6) + .5px;
       }
     }
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       width:@color-box-width-phone/2;
       height:35px;
     }
@@ -412,7 +410,7 @@
 
   .lightness-spectrum-0, .lightness-spectrum-1 {
     width: @advanced-color-box-width / 2;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       width: @advanced-color-box-width-phone / 2;
     }
   }
@@ -511,7 +509,7 @@
     top:-1px;
     left:(@color-box-width/2) - (@color-band-width/2);
     text-align:center;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       width:@color-band-width-phone;
       left:(@color-box-width-phone/2) - (@color-band-width-phone/2);
       height:34px;
@@ -526,7 +524,7 @@
     margin: 2px 1px;
     display:inline-block;
     .box-shadow(1px 0px 2px 0px #ffffff);
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       margin: 4px 2px;
     }
   }
@@ -587,7 +585,7 @@
     left:-15px;
     float:left;
     width:149px;
-    @media screen and (max-width: 979px) {
+    @media screen and (max-width: (@screen-md - 1px)) {
       width:130px;
     }
   }
@@ -604,7 +602,7 @@
       min-height:25px;
       height:50px;
       position:relative;
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         min-height:70px;
       }
     }
@@ -618,7 +616,7 @@
       .color-select.btn.advanced {
         margin-top:15px;
         display:none;
-        @media screen and (max-width:979px) {
+        @media screen and (max-width:(@screen-md - 1px)) {
           display:inline;
           margin-top:7px;
         }
@@ -626,7 +624,7 @@
       &:hover .color-select.btn.advanced {
         display:inline;
       }
-      @media screen and (max-width:979px) {
+      @media screen and (max-width:(@screen-md - 1px)) {
         width:@advanced-color-box-width-phone;
         margin-left:-10px;
       }
@@ -647,7 +645,7 @@
       .saturation-spectrum;
       .highlight-band {
         left:@advanced-color-box-width - (@color-band-width + 2);
-        @media screen and (max-width: 979px) {
+        @media screen and (max-width: (@screen-md - 1px)) {
           left:@advanced-color-box-width-phone - (@color-band-width-phone + 2);
         }
       }
@@ -655,7 +653,7 @@
 
     .spectrum-lightness .highlight-band {
       left: (@advanced-color-box-width / 2) - ((@color-band-width + 2) / 2);
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         left: (@advanced-color-box-width-phone / 2) - ((@color-band-width-phone + 2) / 2);
       }
     }
@@ -670,7 +668,7 @@
       left:15px;
       top:25px;
       width:@advanced-color-box-width;
-      @media screen and (max-width: 979px) {
+      @media screen and (max-width: (@screen-md - 1px)) {
         width:@advanced-color-box-width-phone;
         left:10px;
       }
@@ -684,7 +682,7 @@
 }
 
 @-moz-document url-prefix() {
-	@media screen and (max-width: 979px) {
+	@media screen and (max-width: (@screen-md - 1px)) {
 	  div.pick-a-color-markup .color-menu {
 	  	left: 0px;
 		}

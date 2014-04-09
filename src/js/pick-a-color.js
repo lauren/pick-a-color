@@ -58,7 +58,7 @@
             Saturation      : "Saturation: ",
             Preview         : "Preview"
 		},
-		it : {
+        it : {
             basic           : "Colori di base",
             saved           : "Colori salvati",
             advanced        : "Avanzato",

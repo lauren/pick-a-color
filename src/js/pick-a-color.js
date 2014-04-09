@@ -46,25 +46,23 @@
         },
 	lang            : 'en',
 	i18n            : {
-		en : {
-			basic           : "Basic Colors",
-			saved           : "Saved Colors",
-			advanced        : "Advanced",
-			spectrum        : "Tap spectrum or drag band to change color",
+        en : {
+            basic           : "Basic Colors",
+            saved           : "Saved Colors",
+            advanced        : "Advanced",
+            spectrum        : "Tap spectrum or drag band to change color",
             showSavedColor  : "Type in a color or use the spectrums to lighten or darken an existing color.",
             showAdvanced    : "Tap spectrum or drag band to change color",
             Hue             : "Hue: ",
             Lightness       : "Lightness: ",
             Saturation      : "Saturation: ",
             Preview         : "Preview"
-
-
 		},
 		it : {
-			basic           : "Colori di base",
-			saved           : "Colori salvati",
+            basic           : "Colori di base",
+            saved           : "Colori salvati",
             advanced        : "Avanzato",
-			spectrum        : "Sposta la barra per cambiare colore",
+            spectrum        : "Sposta la barra per cambiare colore",
             showSavedColor  : "Digita il colore o usa lo spettro per cambiare un colore esistente.",
             showAdvanced    : "Sposta la barra cambiare colore",
             Hue             : "Tinta: ",
@@ -82,7 +80,6 @@
                 black   : "nero"
             }
 		}
-
 	},
       }, options);
 

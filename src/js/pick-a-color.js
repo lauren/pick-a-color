@@ -1,5 +1,5 @@
 /*
-* Pick-a-Color JS v1.1.8
+* Pick-a-Color JS v1.2.3
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
@@ -34,6 +34,7 @@
         showBasicColors       : true,
         showHexInput          : true,
         allowBlank            : false,
+        inlineDropdown        : false,
         basicColors           : {
           white     : 'fff',
           red       : 'f00',
@@ -63,6 +64,9 @@
             $dropdownColorPreview = $("<span>").addClass("color-preview current-color"),
             $dropdownCaret = $("<span>").addClass("caret"),
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
+        if (settings.inlineDropdown) {
+          $dropdownContainer.addClass("color-menu--inline");
+        }
         if (!settings.showHexInput) {
           $dropdownButton.addClass("no-hex");
           $dropdownContainer.addClass("no-hex");

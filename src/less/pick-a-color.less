@@ -182,6 +182,13 @@
     font-size: 14px;
     left: auto;
 
+    &.color-menu--inline {
+      left: -285px;
+      @media screen and (max-width: (@screen-md - 1px)) {
+        left:-242px;
+      }
+    }
+
     @media screen and (max-width: (@screen-md - 1px)) {
       left:-242px;
       width:293px;

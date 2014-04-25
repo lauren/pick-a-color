@@ -249,6 +249,10 @@ Specifies whether or not to show the hex text input. If false the input has an i
 
 Specifies whether or not the field can be left blank. Use this if the color input is not a required field. Thanks to [San](https://github.com/san) for adding this feature!
 
+#### inlineDropdown
+
+Specifies whether the dropdown should be shown below the input field (instead of the default, to the right) on desktop browsers.
+
 ## Tested Browsers
 
 I've tested Pick-a-Color in these browsers:

@@ -207,14 +207,14 @@
 					<ol class="docs">
 						<li>
 							<a href="https://github.com/lauren/pick-a-color/archive/master.zip" onClick="_gaq.push(['_trackEvent', 'download', 'github']);">Download the required files</a>. Add the CSS and JS from the latest release in /build to your CSS an JS folders and include them in your document as follows:<br/><br/>
-              <em>For Bootstrap 3, use Pick-a-Color 1.2.2:</em><br/>
+              <em>For Bootstrap 3, use Pick-a-Color 1.2.3:</em><br/>
 							In the <code>&lt;head&gt;</code>:
                 <pre>&lt;link rel="stylesheet" href="css/bootstrap-3.0.0.min.css"&gt;
-&lt;link rel="stylesheet" href="css/pick-a-color-1.2.0.min.css"&gt;</pre>
+&lt;link rel="stylesheet" href="css/pick-a-color-1.2.3.min.css"&gt;</pre>
               Before the ending <code>&lt;/body&gt;</code>:
                 <pre>&lt;script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"&gt;&lt;/script&gt;
 &lt;script src="js/tinycolor-0.9.14.min.js"&gt;&lt;/script&gt;
-&lt;script src="js/pick-a-color-1.2.2.min.js"&gt;&lt;/script&gt;</pre>
+&lt;script src="js/pick-a-color-1.2.3.min.js"&gt;&lt;/script&gt;</pre>
               <em>For Bootstrap 2, use Pick-a-Color 1.1.8:</em><br/>
               In the <code>&lt;head&gt;</code>:
 								<pre>&lt;link rel="stylesheet" href="css/bootstrap-2.2.2.min.css"&gt;
@@ -346,7 +346,8 @@
   fadeMenuToggle          : true,
   showHexInput            : true,
   showBasicColors         : true,
-  allowBlank              : false
+  allowBlank              : false,
+  inlineDropdown          : false
 });</pre>
 
  				</div>
@@ -519,6 +520,28 @@
           <input type="text" name="allow-blank-demo" class="pick-a-color-allow-blank form-control">
                     
           <h6>allowBlank: false</h6>
+          
+          <input type="text" value="008000" name="no-allow-blank" class="pick-a-color form-control">
+                    
+        </div>        
+      </div>
+
+      <div class="row options">
+        <div class="col-md-4">
+
+          <h5>inlineDropdown</h5>
+
+          <p>Specifies whether the dropdown will be shown underneath the input field (instead of the default, to the right of the field) on desktop browsers.</p>
+
+        </div>        
+
+        <div class="col-md-4">
+          
+          <h6>inlineDropdown: true</h6>
+          
+          <input type="text" name="allow-blank-demo" class="pick-a-color-inline-dropdown form-control">
+                    
+          <h6>inlineDropdown: false</h6>
           
           <input type="text" value="008000" name="no-allow-blank" class="pick-a-color form-control">
                     

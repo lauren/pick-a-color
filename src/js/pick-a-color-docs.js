@@ -55,5 +55,9 @@ $(document).ready(function () {
   $(".pick-a-color-allow-blank").pickAColor({
     allowBlank              : true
   });
+
+  $(".pick-a-color-inline-dropdown").pickAColor({
+    inlineDropdown              : true
+  });
   
 });

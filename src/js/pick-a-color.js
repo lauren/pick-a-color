@@ -33,6 +33,7 @@
         showAdvanced          : true,
         showBasicColors       : true,
         showHexInput          : true,
+        allowHexFocus         : true,
         allowBlank            : false,
         inlineDropdown        : false,
         basicColors           : {
@@ -1002,30 +1003,33 @@
         //input field focus: clear content
         // input field blur: update preview, restore previous content if no value entered
 
-        myElements.thisEl.focus(function () {
-          var $thisEl = $(this);
-          myColorVars.typedColor = $thisEl.val(); // update with the current
-          if (!settings.allowBlank) {
-            $thisEl.val(""); //clear the field on focus
-          }
-          methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
-        }).blur(function () {
-          var $thisEl = $(this);
-          myColorVars.newValue = $thisEl.val(); // on blur, check the field's value
-          // if the field is empty, put the original value back in the field
-          if (myColorVars.newValue.match(/^\s+$|^$/)) {
+
+        if (settings.allowHexFocus) {
+          myElements.thisEl.focus(function () {
+            var $thisEl = $(this);
+            myColorVars.typedColor = $thisEl.val(); // update with the current
             if (!settings.allowBlank) {
-              $thisEl.val(myColorVars.typedColor);
+              $thisEl.val(""); //clear the field on focus
             }
-          } else { // otherwise...
-            myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
-            $thisEl.val(myColorVars.newValue); // put the new value in the field
-            // save to saved colors
-            methods.addToSavedColors(myColorVars.newValue,mySavedColorsInfo,myElements.savedColorsContent);
-          }
-          methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
-          methods.updatePreview($thisEl); // update preview
-        });
+            methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
+          }).blur(function () {
+            var $thisEl = $(this);
+            myColorVars.newValue = $thisEl.val(); // on blur, check the field's value
+            // if the field is empty, put the original value back in the field
+            if (myColorVars.newValue.match(/^\s+$|^$/)) {
+              if (!settings.allowBlank) {
+                $thisEl.val(myColorVars.typedColor);
+              }
+            } else { // otherwise...
+              myColorVars.newValue = tinycolor(myColorVars.newValue).toHex(); // convert to hex
+              $thisEl.val(myColorVars.newValue); // put the new value in the field
+              // save to saved colors
+              methods.addToSavedColors(myColorVars.newValue,mySavedColorsInfo,myElements.savedColorsContent);
+            }
+            methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
+            methods.updatePreview($thisEl); // update preview
+          });
+        }
 
         // toggle visibility of dropdown menu when you click or press the preview button
         methods.executeUnlessScrolled.apply(myElements.colorPreviewButton,

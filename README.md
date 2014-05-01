@@ -209,6 +209,7 @@ $(".pick-a-color").pickAColor({
         showAdvanced          : true,
         showBasicColors       : true,
         showHexInput          : true,
+        allowHexFocus         : true,
         allowBlank            : true
  });
 ```
@@ -244,6 +245,10 @@ Specifies whether or not the dropdown should show a list of basic colors that th
 #### showHexInput
 
 Specifies whether or not to show the hex text input. If false the input has an input type of 'hidden'. Thanks to [Ryan Johnson](https://github.com/rsjohnson) for adding this feature!
+
+#### allowHexFocus
+
+Specifies whether or not focusing in the hex text input will show the dropdown menu. Thanks to [weisjohn](https://github.com/weisjohn) for adding this feature!
 
 #### allowBlank
 

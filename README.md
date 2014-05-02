@@ -51,13 +51,13 @@ OK! Let's do this color picking thing!
 
 1) Download the required files: https://github.com/lauren/pick-a-color/archive/master.zip. Add the CSS and JS from the latest release in /build to your CSS and JS folders and include them in your document as follows:
 
-#### For Bootstrap 3, use Pick-a-Color 1.2.3:
+#### For Bootstrap 3, use Pick-a-Color 1.2.4:
 
 **In the `<head>`:**
 
 ```html
 <link rel="stylesheet" href="css/bootstrap-3.0.0.min.css">
-<link rel="stylesheet" href="css/pick-a-color-1.2.3.min.css">
+<link rel="stylesheet" href="css/pick-a-color-1.2.4.min.css">
 ```
 
 **Before the ending `</body>`:**
@@ -65,7 +65,7 @@ OK! Let's do this color picking thing!
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="js/tinycolor-0.9.14.min.js"></script>
-<script src="js/pick-a-color-1.2.3.min.js"></script>
+<script src="js/pick-a-color-1.2.4.min.js"></script>
 ```
 
 #### For Bootstrap 2, use Pick-a-Color 1.1.8:
@@ -252,6 +252,10 @@ Specifies whether or not the field can be left blank. Use this if the color inpu
 #### inlineDropdown
 
 Specifies whether the dropdown should be shown below the input field (instead of the default, to the right) on desktop browsers.
+
+#### autoSelect
+
+Specifies whether the color is automatically selected (instead of the default, which need the user to click the 'select' button) on desktop browsers. Thanks to [Conrado Gomes](https://github.com/conradoqg) for adding this feature!
 
 ## Tested Browsers
 

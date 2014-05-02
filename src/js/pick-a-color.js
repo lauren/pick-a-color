@@ -36,6 +36,7 @@
         allowHexFocus         : true,
         allowBlank            : false,
         inlineDropdown        : false,
+        allowButtonTab        : true,
         basicColors           : {
           white     : 'fff',
           red       : 'f00',
@@ -65,6 +66,11 @@
             $dropdownColorPreview = $("<span>").addClass("color-preview current-color"),
             $dropdownCaret = $("<span>").addClass("caret"),
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
+
+        if (!settings.allowButtonTab) {
+          $dropdownButton.attr('tabIndex', '-1');
+        }
+
         if (settings.inlineDropdown) {
           $dropdownContainer.addClass("color-menu--inline");
         }

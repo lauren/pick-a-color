@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+	<head>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <meta http-equiv="x-ua-compatible" content="IE=10">	  
+
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="../build/css/pick-a-color.min.css">	  
+		
+		<style type="text/css">
+		
+			.pick-a-color-markup {
+				margin:20px 0px;
+			}
+
+			.container {
+				margin: 0px 5px;
+				width: 50%;
+			}
+			
+		</style>	
+		
+	</head>
+	
+	<body>
+		
+		<div class="container">
+			<input type="text" value="222" name="border-color" class="pick-a-color form-control">
+			<input type="text" value="aaa" name="font-color" class="pick-a-color form-control">
+			<input type="text" value="a1beef" name="backgound-color" class="pick-a-color form-control">
+			<input type="text" value="551033" name="highlight-color" class="pick-a-color form-control">
+			<input type="text" value="eee" name="contrast-color" class="pick-a-color form-control">
+			<input type="text" class="pick-a-color form-control" disabled>
+			<input type="text" class="pick-a-color form-control">
+		</div>
+		
+	<script src="js/jquery.min.js"></script>
+	<script src="js/tinycolor.js"></script>
+	<script src="../build/js/pick-a-color.min.js"></script>	
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function () {
+
+			$(".pick-a-color").pickAColor({
+			  showSpectrum            : true,
+				showSavedColors         : true,
+				saveColorsPerElement    : true,
+				fadeMenuToggle          : true,
+				showAdvanced						: true,
+				showBasicColors         : true,
+				showHexInput            : true,
+				allowBlank							: true
+			});
+			
+		});
+	
+		</script>
+				
+	</body>
+	
+</html>

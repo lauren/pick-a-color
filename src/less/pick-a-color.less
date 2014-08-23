@@ -143,12 +143,13 @@
 
   .input-group-btn {
     .color-dropdown {
-      padding: 6px 5px;
+      padding-left: 5px;
+      padding-right: 5px;
       &.no-hex {
         .border-left-radius(@border-radius-base);
       }
       &:focus {
-        background-color: #fff;
+        background-color: @body-bg;
       }
       @media screen and (max-width: (@screen-md - 1px)) {
         height: 47px;
@@ -270,22 +271,22 @@
         padding: 5px 15px 3px 15px;
         cursor: default;
         min-height: 25px;
-        color: #333;
+        color: @text-color;
         &:hover {
-          background-color: #fff;
+          background-color: transparent;
         }
         @media screen and (max-width: (@screen-md - 1px)) {
           min-height: 40px;
         }
       }
       li:hover a {
-        color: #333;
+        color: @text-color;
         background-image: none;
         filter: none;
         text-decoration: none;
         font-weight: bold;
         @media screen and (max-width: (@screen-md - 1px)) {
-          background-color: #fff;
+          background-color: transparent;
           font-weight: normal;
         }
       }
@@ -295,11 +296,19 @@
       margin: 0px 5px;
       height: 20px;
       padding: 0px 5px;
-      margin-top: 0px;
       line-height: 1.5px;
       border-radius: @border-radius-base;
+      color: @btn-default-color;
+      background-color: @btn-default-bg;
+      font-weight: @btn-font-weight;
+      .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+
       @media screen and (max-width: (@screen-md - 1px)) {
         height: 35px;
+      }
+      &:hover {
+        color: @btn-default-color;
+        text-decoration: none;
       }
     }
   }
@@ -540,28 +549,31 @@
   .color-menu-tabs {
     padding: 5px 3px 3px 10px;
     font-size: 12px;
-    color: #333;
+    color: @text-color;
     border-bottom: 1px solid @btn-default-border;
-    margin-bottom: 5px;
+    margin-bottom: -1px;
     .tab {
       padding: 4px 5px;
       margin: 5px;
-      border-left: 1px solid #fff;
-      border-right: 1px solid #fff;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
       cursor: pointer;
-      background-color: #fff;
       &:hover {
-        padding-bottom: 6px;
+        padding-bottom: 3px;
+        color: @nav-tabs-active-link-hover-color;
+        background-color: @nav-tabs-active-link-hover-bg;
         .tab-borders-shadows;
       }
     }
     a {
-      color: #333;
+      color: @text-color;
       text-decoration: none;
     }
     .tab-active {
-      border-bottom: 3px solid #fff;
-      padding-bottom: 5px;
+      color: @nav-tabs-active-link-hover-color;
+      background-color: @nav-tabs-active-link-hover-bg;
+      border: 1px solid @nav-tabs-active-link-hover-border-color;
+      border-bottom: 3px solid transparent;
       .tab-borders-shadows;
     }
   }

@@ -3,8 +3,7 @@
 * Copyright 2013 Lauren Sperber and Broadstreet Ads
 * https://github.com/lauren/pick-a-color/blob/master/LICENSE
 */
-
-@import "bootstrap-src/variables.less"; 
+@import "bootstrap-src/variables.less";
 @import "bootstrap-src/mixins.less";
 
 //// variables
@@ -13,18 +12,18 @@
 
 @black: #000;
 @white: #fff;
-@pacRed:hsl(0,100%,50%);
-@pacOrange:hsl(24, 100%, 50%);
-@pacYellow:hsl(60, 100%, 50%);
-@pacGreen:hsl(120, 100%, 25%);
-@pacBrightGreen:hsl(120, 100%, 50%);
-@pacBlue:hsl(240, 100%, 50%);
-@pacTeal:hsl(180, 100%, 50%);
-@pacIndigo:hsl(275, 100%, 25%);
-@pacViolet:hsl(300, 76%, 72%);
-@pacLightPurple:hsl(300, 100%, 50%);
-@pacPurple:hsl(300, 100%, 25%);
-@pacBwMidpoint:lighten(@black,50%);
+@pacRed: hsl(0, 100%, 50%);
+@pacOrange: hsl(24, 100%, 50%);
+@pacYellow: hsl(60, 100%, 50%);
+@pacGreen: hsl(120, 100%, 25%);
+@pacBrightGreen: hsl(120, 100%, 50%);
+@pacBlue: hsl(240, 100%, 50%);
+@pacTeal: hsl(180, 100%, 50%);
+@pacIndigo: hsl(275, 100%, 25%);
+@pacViolet: hsl(300, 76%, 72%);
+@pacLightPurple: hsl(300, 100%, 50%);
+@pacPurple: hsl(300, 100%, 25%);
+@pacBwMidpoint: lighten(@black, 50%);
 
 // widths
 
@@ -47,18 +46,18 @@
 }
 
 .tab-borders-shadows (@radius: 4px, @width: 1px, @color: @btn-default-border, @style: solid) {
-  border-top:@width @style @color;
-  border-right:@width @style @color;
-  border-left:@width @style @color;
+  border-top: @width @style @color;
+  border-right: @width @style @color;
+  border-left: @width @style @color;
   .border-top-radius(@radius);
 }
 
 .three-color-spectrum (@mid: @pacRed) {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@mid,50%)), color-stop(0.5, @mid), color-stop(1.0, darken(@mid,50%)));
-  background-image: -moz-linear-gradient(left center, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
-  background-image: -webkit-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
-  background-image: -o-linear-gradient(left, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
-  background-image: linear-gradient(to right, lighten(@mid,50%) 0%, @mid 50%, darken(@mid,50%) 100%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, lighten(@mid, 50%)), color-stop(0.5, @mid), color-stop(1.0, darken(@mid, 50%)));
+  background-image: -moz-linear-gradient(left center, lighten(@mid, 50%) 0%, @mid 50%, darken(@mid, 50%) 100%);
+  background-image: -webkit-linear-gradient(left, lighten(@mid, 50%) 0%, @mid 50%, darken(@mid, 50%) 100%);
+  background-image: -o-linear-gradient(left, lighten(@mid, 50%) 0%, @mid 50%, darken(@mid, 50%) 100%);
+  background-image: linear-gradient(to right, lighten(@mid, 50%) 0%, @mid 50%, darken(@mid, 50%) 100%);
   background-repeat: repeat-x;
 }
 
@@ -72,41 +71,41 @@
 }
 
 .saturation-spectrum (@color: @pacRed) {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, desaturate(@color,100%)), color-stop(0.5, @color), color-stop(1.0, saturate(@color,100%)));
-  background-image: -moz-linear-gradient(left center, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
-  background-image: -webkit-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
-  background-image: -o-linear-gradient(left, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
-  background-image: linear-gradient(to right, desaturate(@color,100%) 0%, @color 50%, saturate(@color,100%) 100%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(0.0, desaturate(@color, 100%)), color-stop(0.5, @color), color-stop(1.0, saturate(@color, 100%)));
+  background-image: -moz-linear-gradient(left center, desaturate(@color, 100%) 0%, @color 50%, saturate(@color, 100%) 100%);
+  background-image: -webkit-linear-gradient(left, desaturate(@color, 100%) 0%, @color 50%, saturate(@color, 100%) 100%);
+  background-image: -o-linear-gradient(left, desaturate(@color, 100%) 0%, @color 50%, saturate(@color, 100%) 100%);
+  background-image: linear-gradient(to right, desaturate(@color, 100%) 0%, @color 50%, saturate(@color, 100%) 100%);
   background-repeat: repeat-x;
 }
 
 // IE spectrums
 
 .spectrum-0(@color) {
-  #gradient.horizontal(lighten(@color,50%),@color);
+  #gradient.horizontal(lighten(@color, 50%), @color);
   .border-left-radius(@border-radius-base);
 }
 
 .spectrum-1(@color) {
-  #gradient.horizontal(@color,darken(@color,50%));
+  #gradient.horizontal(@color, darken(@color, 50%));
   .border-right-radius(@border-radius-base);
 }
 
 .saturation-spectrum-0(@color) {
-  #gradient.horizontal(desaturate(@color,100%),desaturate(@color,50%));
+  #gradient.horizontal(desaturate(@color, 100%), desaturate(@color, 50%));
   .border-left-radius(@border-radius-base);
   width: @advanced-color-box-width / 2;
   @media screen and (max-width: (@screen-md - 1px)) {
-    width:@advanced-color-box-width-phone / 2;
+    width: @advanced-color-box-width-phone / 2;
   }
 }
 
 .saturation-spectrum-1(@color) {
-  #gradient.horizontal(desaturate(@color,50%),@color);
+  #gradient.horizontal(desaturate(@color, 50%), @color);
   .border-right-radius(@border-radius-base);
   width: @advanced-color-box-width / 2;
   @media screen and (max-width: (@screen-md - 1px)) {
-    width:@advanced-color-box-width-phone / 2;
+    width: @advanced-color-box-width-phone / 2;
   }
 }
 
@@ -116,25 +115,25 @@
 
 .pick-a-color-markup {
 
-	* {
-		.box-sizing(border-box);
-	}
+  * {
+    .box-sizing(border-box);
+  }
 
   .hex-pound {
-  	padding-left: 8px;
-  	padding-right: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
     @media screen and (max-width: (@screen-md - 1px)) {
-      padding:3px 5px 0px 5px;
-      min-height:30px;
+      padding: 3px 5px 0px 5px;
+      min-height: 30px;
     }
   }
 
   .pick-a-color {
-  	padding: 5px;
+    padding: 5px;
     @media screen and (max-width: (@screen-md - 1px)) {
       width: 100%;
-      font-size:@font-size-large;
-      padding:9px;
+      font-size: @font-size-large;
+      padding: 9px;
       min-width: 222px;
       height: 47px;
     }
@@ -144,149 +143,150 @@
 
   .input-group-btn {
     .color-dropdown {
-      padding:6px 5px;
+      padding-left: 5px;
+      padding-right: 5px;
       &.no-hex {
         .border-left-radius(@border-radius-base);
       }
       &:focus {
-      	background-color: #fff;
+        background-color: @body-bg;
       }
       @media screen and (max-width: (@screen-md - 1px)) {
-        height:47px;
+        height: 47px;
       }
     }
   }
-  
+
   .color-preview {
     .borders-shadows;
-    height:1.429em;
-    width:1.429em;
-    display:inline-block;
-    cursor:pointer;
+    height: 1.429em;
+    width: 1.429em;
+    display: inline-block;
+    cursor: pointer;
     margin-right: 5px;
     &.current-color {
       margin-bottom: -5px;
     }
     @media screen and (max-width: (@screen-md - 1px)) {
-      height:1.875em;
-      width:1.875em;
+      height: 1.875em;
+      width: 1.875em;
     }
   }
 
   // basic menu of colors
 
   .color-menu {
-    text-align:left;
-    padding:5px 0px; /*overwriting bootstrap default */
-    width:330px;
+    text-align: left;
+    padding: 5px 0px; /*overwriting bootstrap default */
+    width: 330px;
     font-size: 14px;
     left: auto;
 
     &.color-menu--inline {
       left: -285px;
       @media screen and (max-width: (@screen-md - 1px)) {
-        left:-242px;
+        left: -242px;
       }
     }
 
     @media screen and (max-width: (@screen-md - 1px)) {
-      left:-242px;
-      width:293px;
+      left: -242px;
+      width: 293px;
     }
 
     &.small {
-      width:100px;
+      width: 100px;
       @media screen and (max-width: (@screen-md - 1px)) {
-        left:-105px;
+        left: -105px;
       }
     }
-    
+
     &.no-hex {
-      left:0px;
+      left: 0px;
     }
 
     /* resets for ul / li styles */
 
     ul {
-      padding:0px;
-      margin:0px;
+      padding: 0px;
+      margin: 0px;
     }
 
     li {
-      list-style-type:none;
-      padding:5px 0px;
-      margin:0px;
+      list-style-type: none;
+      padding: 5px 0px;
+      margin: 0px;
     }
 
     .color-preview {
-      vertical-align:middle;
-      margin:0px;
+      vertical-align: middle;
+      margin: 0px;
       @media screen and (max-width: (@screen-md - 1px)) {
-      height: 35px;
-      width: 35px;
+        height: 35px;
+        width: 35px;
       }
 
       &.current-color, &.white {
-        background-color:@white;
+        background-color: @white;
       }
 
       &.red {
-        background-color:@pacRed;
+        background-color: @pacRed;
       }
 
       &.orange {
-        background-color:@pacOrange;
+        background-color: @pacOrange;
       }
 
       &.yellow {
-        background-color:@pacYellow;
+        background-color: @pacYellow;
       }
 
       &.green {
-        background-color:@pacGreen;
+        background-color: @pacGreen;
       }
 
       &.blue {
-        background-color:@pacBlue;
+        background-color: @pacBlue;
       }
 
       &.indigo {
-        background-color:@pacIndigo;
+        background-color: @pacIndigo;
       }
 
       &.violet {
-        background-color:@pacViolet;
+        background-color: @pacViolet;
       }
 
       &.purple {
-        background-color:@pacPurple;
+        background-color: @pacPurple;
       }
 
       &.black {
-        background-color:@black;
+        background-color: @black;
       }
     }
     .basicColors-content, .savedColors-content {
       li > a {
         padding: 5px 15px 3px 15px;
         cursor: default;
-        min-height:25px;
-        color: #333;
+        min-height: 25px;
+        color: @text-color;
         &:hover {
-        	background-color: #fff;
+          background-color: transparent;
         }
         @media screen and (max-width: (@screen-md - 1px)) {
-          min-height:40px;
+          min-height: 40px;
         }
       }
       li:hover a {
-        color: #333;
-        background-image:none;
-        filter:none;
+        color: @text-color;
+        background-image: none;
+        filter: none;
         text-decoration: none;
         font-weight: bold;
         @media screen and (max-width: (@screen-md - 1px)) {
-          background-color: #fff;
+          background-color: transparent;
           font-weight: normal;
         }
       }
@@ -294,65 +294,73 @@
 
     .btn.color-select {
       margin: 0px 5px;
-      height:20px;
-      padding:0px 5px;
-      margin-top:0px;
+      height: 20px;
+      padding: 0px 5px;
       line-height: 1.5px;
       border-radius: @border-radius-base;
+      color: @btn-default-color;
+      background-color: @btn-default-bg;
+      font-weight: @btn-font-weight;
+      .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+
       @media screen and (max-width: (@screen-md - 1px)) {
-        height:35px;
+        height: 35px;
+      }
+      &:hover {
+        color: @btn-default-color;
+        text-decoration: none;
       }
     }
   }
 
   .caret {
-  	margin-bottom: 3px;
+    margin-bottom: 3px;
   }
 
   .color-menu-instructions, .advanced-instructions {
     text-align: center;
-    padding:0px 6px;
-    margin:0px;
+    padding: 0px 6px;
+    margin: 0px;
     @media screen and (min-width: @screen-md) {
-      display:none;
+      display: none;
     }
     font-size: 14px;
-    font-weight:normal;
+    font-weight: normal;
   }
 
   .color-label {
-    vertical-align:middle;
-    margin:0px;
-    margin-left:10px;
-    cursor:pointer;
+    vertical-align: middle;
+    margin: 0px;
+    margin-left: 10px;
+    cursor: pointer;
     @media screen and (max-width: (@screen-md - 1px)) {
-    margin-left:8px;
+      margin-left: 8px;
     }
   }
 
   // color gradients
 
   .color-box {
-    height:20px;
-    width:@color-box-width;
-    position:absolute;
-    left:115px;
+    height: 20px;
+    width: @color-box-width;
+    position: absolute;
+    left: 115px;
     .borders-shadows;
-    cursor:pointer;
+    cursor: pointer;
     @media screen and (max-width: (@screen-md - 1px)) {
-      width:@color-box-width-phone;
-      height:35px;
+      width: @color-box-width-phone;
+      height: 35px;
     }
   }
 
   .black .highlight-band-stripe {
-    background-color:@white;
+    background-color: @white;
   }
 
   .spectrum-white {
-    #gradient.horizontal(@white,@pacBwMidpoint);
+    #gradient.horizontal(@white, @pacBwMidpoint);
     .highlight-band {
-    left:0px;
+      left: 0px;
     }
   }
 
@@ -381,9 +389,9 @@
   }
 
   .spectrum-black {
-    #gradient.horizontal(@black,@pacBwMidpoint);
+    #gradient.horizontal(@black, @pacBwMidpoint);
     .highlight-band {
-      left:0px;
+      left: 0px;
       border: 1px solid @pacBwMidpoint;
     }
   }
@@ -391,20 +399,20 @@
   // IE spectrums
 
   .ie-spectrum {
-    height:20px;
-    width:@color-box-width/2;
-    display:inline-block;
+    height: 20px;
+    width: @color-box-width/2;
+    display: inline-block;
     &.hue {
-      width:(@advanced-color-box-width/6) + .5px;
+      width: (@advanced-color-box-width/6) + .5px;
       @media screen and (max-width: (@screen-md - 1px)) {
         width: (@advanced-color-box-width-phone/6) + .5px;
       }
     }
     @media screen and (max-width: (@screen-md - 1px)) {
-      width:@color-box-width-phone/2;
-      height:35px;
+      width: @color-box-width-phone/2;
+      height: 35px;
     }
-    top:-1;
+    top: -1;
   }
 
   .red-spectrum-0, .lightness-spectrum-0 {
@@ -471,65 +479,65 @@
   }
 
   .hue-spectrum-0 {
-    #gradient.horizontal(@pacRed,@pacYellow);
+    #gradient.horizontal(@pacRed, @pacYellow);
   }
 
   .hue-spectrum-1 {
-    #gradient.horizontal(@pacYellow,@pacBrightGreen);
+    #gradient.horizontal(@pacYellow, @pacBrightGreen);
   }
 
   .hue-spectrum-2 {
-    #gradient.horizontal(@pacBrightGreen,@pacTeal);
-    left:-1px;
-    position:relative;
+    #gradient.horizontal(@pacBrightGreen, @pacTeal);
+    left: -1px;
+    position: relative;
   }
 
   .hue-spectrum-3 {
-    #gradient.horizontal(@pacTeal,@pacBlue);
-    left:-1px;
-    position:relative;
+    #gradient.horizontal(@pacTeal, @pacBlue);
+    left: -1px;
+    position: relative;
   }
 
   .hue-spectrum-4 {
-    #gradient.horizontal(@pacBlue,@pacLightPurple);
-    left:-1px;
-    position:relative;
+    #gradient.horizontal(@pacBlue, @pacLightPurple);
+    left: -1px;
+    position: relative;
   }
 
   .hue-spectrum-5 {
-    #gradient.horizontal(@pacLightPurple,@pacRed);
-    left:-2px;
-    position:relative;
+    #gradient.horizontal(@pacLightPurple, @pacRed);
+    left: -2px;
+    position: relative;
   }
 
   // highlight band
 
   .highlight-band {
-    .borders-shadows(2px,1px,@gray-darker,solid, 1px 1px 1px #333);
-    height:19px;
-    width:@color-band-width;
-    display:inline-block;
-    cursor:pointer;
+    .borders-shadows(2px, 1px, @gray-darker, solid, 1px 1px 1px #333);
+    height: 19px;
+    width: @color-band-width;
+    display: inline-block;
+    cursor: pointer;
     cursor: -webkit-grab;
     cursor: -moz-grab;
-    position:absolute;
-    top:-1px;
-    left:(@color-box-width/2) - (@color-band-width/2);
-    text-align:center;
+    position: absolute;
+    top: -1px;
+    left: (@color-box-width/2) - (@color-band-width/2);
+    text-align: center;
     @media screen and (max-width: (@screen-md - 1px)) {
-      width:@color-band-width-phone;
-      left:(@color-box-width-phone/2) - (@color-band-width-phone/2);
-      height:34px;
+      width: @color-band-width-phone;
+      left: (@color-box-width-phone/2) - (@color-band-width-phone/2);
+      height: 34px;
     }
   }
 
   .highlight-band-stripe {
     min-height: 80%;
     min-width: 1px;
-    background-color:@black;
+    background-color: @black;
     opacity: 0.40;
     margin: 2px 1px;
-    display:inline-block;
+    display: inline-block;
     .box-shadow(1px 0px 2px 0px #ffffff);
     @media screen and (max-width: (@screen-md - 1px)) {
       margin: 4px 2px;
@@ -539,30 +547,33 @@
   // tabbed navigation
 
   .color-menu-tabs {
-    padding:5px 3px 3px 10px;
+    padding: 5px 3px 3px 10px;
     font-size: 12px;
-    color: #333;
-    border-bottom:1px solid @btn-default-border;
-    margin-bottom:5px;
+    color: @text-color;
+    border-bottom: 1px solid @btn-default-border;
+    margin-bottom: -1px;
     .tab {
-      padding:4px 5px;
-      margin:5px;
-      border-left:1px solid #fff;
-      border-right:1px solid #fff;
-      cursor:pointer;
-      background-color:#fff;
+      padding: 4px 5px;
+      margin: 5px;
+      border-left: 1px solid transparent;
+      border-right: 1px solid transparent;
+      cursor: pointer;
       &:hover {
-        padding-bottom: 6px;
+        padding-bottom: 3px;
+        color: @nav-tabs-active-link-hover-color;
+        background-color: @nav-tabs-active-link-hover-bg;
         .tab-borders-shadows;
       }
     }
     a {
-      color: #333;
-      text-decoration:none;
+      color: @text-color;
+      text-decoration: none;
     }
     .tab-active {
-      border-bottom:3px solid #fff;
-      padding-bottom: 5px;
+      color: @nav-tabs-active-link-hover-color;
+      background-color: @nav-tabs-active-link-hover-bg;
+      border: 1px solid @nav-tabs-active-link-hover-border-color;
+      border-bottom: 3px solid transparent;
       .tab-borders-shadows;
     }
   }
@@ -572,28 +583,28 @@
   }
 
   .inactive-content {
-    display:none;
+    display: none;
   }
 
   // saved colors tab
 
   .savedColors-content {
-    padding:5px 15px;
-    white-space:normal;
+    padding: 5px 15px;
+    white-space: normal;
     li.color-item > a {
-    margin-left:7px;
-    padding-left:8px;
-    border-radius: @border-radius-base;
+      margin-left: 7px;
+      padding-left: 8px;
+      border-radius: @border-radius-base;
     }
   }
 
   .saved-color-col {
-    position:relative;
-    left:-15px;
-    float:left;
-    width:149px;
+    position: relative;
+    left: -15px;
+    float: left;
+    width: 149px;
     @media screen and (max-width: (@screen-md - 1px)) {
-      width:130px;
+      width: 130px;
     }
   }
 
@@ -601,46 +612,46 @@
 
   .advanced-content {
     ul {
-      margin-top:10px;
+      margin-top: 10px;
     }
     li {
       padding: 5px 15px 3px 15px;
       cursor: default;
-      min-height:25px;
-      height:50px;
-      position:relative;
+      min-height: 25px;
+      height: 50px;
+      position: relative;
       @media screen and (max-width: (@screen-md - 1px)) {
-        min-height:70px;
+        min-height: 70px;
       }
     }
     .color-preview {
-      height:50px;
+      height: 50px;
       width: @advanced-color-box-width;
-      float:left;
-      margin:0px 0px 10px 0px;
+      float: left;
+      margin: 0px 0px 10px 0px;
       background-color: @pacRed;
-      text-align:center;
+      text-align: center;
       .color-select.btn.advanced {
-        margin-top:15px;
-        display:none;
-        @media screen and (max-width:(@screen-md - 1px)) {
-          display:inline;
-          margin-top:7px;
+        margin-top: 15px;
+        display: none;
+        @media screen and (max-width: (@screen-md - 1px)) {
+          display: inline;
+          margin-top: 7px;
         }
       }
       &:hover .color-select.btn.advanced {
-        display:inline;
+        display: inline;
       }
-      @media screen and (max-width:(@screen-md - 1px)) {
-        width:@advanced-color-box-width-phone;
-        margin-left:-10px;
+      @media screen and (max-width: (@screen-md - 1px)) {
+        width: @advanced-color-box-width-phone;
+        margin-left: -10px;
       }
     }
 
     .spectrum-hue {
       .full-spectrum;
       .highlight-band {
-        left:0px;
+        left: 0px;
       }
     }
 
@@ -651,9 +662,9 @@
     .spectrum-saturation {
       .saturation-spectrum;
       .highlight-band {
-        left:@advanced-color-box-width - (@color-band-width + 2);
+        left: @advanced-color-box-width - (@color-band-width + 2);
         @media screen and (max-width: (@screen-md - 1px)) {
-          left:@advanced-color-box-width-phone - (@color-band-width-phone + 2);
+          left: @advanced-color-box-width-phone - (@color-band-width-phone + 2);
         }
       }
     }
@@ -666,32 +677,32 @@
     }
 
     .lightness-text, .hue-text, .saturation-text, .preview-text {
-      vertical-align:middle;
-      text-align:center;
-      display:block;
+      vertical-align: middle;
+      text-align: center;
+      display: block;
     }
 
     .color-box {
-      left:15px;
-      top:25px;
-      width:@advanced-color-box-width;
+      left: 15px;
+      top: 25px;
+      width: @advanced-color-box-width;
       @media screen and (max-width: (@screen-md - 1px)) {
-        width:@advanced-color-box-width-phone;
-        left:10px;
+        width: @advanced-color-box-width-phone;
+        left: 10px;
       }
     }
 
     .preview-item {
-      height:80px;
+      height: 80px;
     }
 
   }
 }
 
 @-moz-document url-prefix() {
-	@media screen and (max-width: (@screen-md - 1px)) {
-	  div.pick-a-color-markup .color-menu {
-	  	left: 0px;
-		}
-	}
+  @media screen and (max-width: (@screen-md - 1px)) {
+    div.pick-a-color-markup .color-menu {
+      left: 0px;
+    }
+  }
 }

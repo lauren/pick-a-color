@@ -47,7 +47,7 @@
         }
       }, options);
 
-      // override showBasicColors showAdvanced isn't shown      
+      // override showBasicColors showAdvanced isn't shown
       if (!settings.showAdvanced && !settings.showBasicColors) {
         settings.showBasicColors = true;
       }
@@ -80,7 +80,7 @@
               savedColorsClass = settings.showBasicColors ? "savedColors-tab tab" : "savedColors-tab tab tab-active";
           if (settings.showBasicColors) {
             $tabContainer.append($("<span>").addClass("basicColors-tab tab tab-active").
-              append($("<a>").text("Basic Colors"))); 
+              append($("<a>").text("Basic Colors")));
           }
           if (settings.showSavedColors) {
             $tabContainer.append($("<span>").addClass(savedColorsClass).append($("<a>").text("Saved Colors")));
@@ -209,7 +209,7 @@
           rowsInDropdown     : 8,
           maxColsInDropdown  : 2
       };
-      
+
       if (settings.showSavedColors) { // if we're saving colors...
         var allSavedColors = []; // make an array for all saved colors
         if (supportsLocalStorage && localStorage.allSavedColors) { // look for them in LS
@@ -237,16 +237,16 @@
               $thisParent,
               myId,
               defaultColor;
-          
+
           // if there's no name on the input field, create one, then use it as the myID
           if (!$thisEl.attr("name")) {
             $thisEl.attr("name","pick-a-color-" + index);
           }
           myId = $thisEl.attr("name");
-          
+
           // enforce .pick-a-color class on input
           $thisEl.addClass("pick-a-color");
-          
+
           // convert default color to valid hex value
           if (settings.allowBlank) {
             // convert to Hex only if the field init value is not blank
@@ -260,7 +260,7 @@
             myColorVars.typedColor = myColorVars.defaultColor;
             $thisEl.val(myColorVars.defaultColor);
           }
-          
+
           // wrap initializing input field with unique div and add hex symbol and post-input markup
           $($thisEl).wrap('<div class="input-group pick-a-color-markup" id="' + myId + '">');
           $thisParent = $($thisEl.parent());
@@ -269,7 +269,7 @@
           } else {
             $thisParent.append(markupAfterInput());
           }
-          
+
           // hide input for noinput option
           if (!settings.showHexInput) {
             $thisEl.attr("type","hidden");
@@ -277,18 +277,43 @@
         },
 
         updatePreview: function ($thisEl) {
+          function updatePreviewElements(color) {
+            // Update "current-color" preview square.
+            $thisEl.siblings(".input-group-btn")
+                   .find(".current-color")
+                   .css("background-color", "#" + color);
+
+            // Update preview and HSL sliders in advanced tab.
+            if (settings.showAdvanced) {
+              $thisEl.parent()
+                     .find(".advanced-content .color-preview")
+                     .css("background-color", "#" + color);
+
+              // TODO: update HSL sliders. Don't appear to currently
+              //       be any methods for programatically moving the sliders
+              //       (based on an input color), there are only event
+              //       listeners for when they're manually moved.
+
+              //$thisEl.parent()
+              //       .find(".spectrum-hue .highlight-band");
+              //$thisEl.parent()
+              //       .find(".spectrum-lightness .highlight-band");
+              //$thisEl.parent()
+              //       .find(".spectrum-saturation .highlight-band");
+            }
+          }
+
           if (!settings.allowBlank) {
             myColorVars.typedColor = tinycolor($thisEl.val()).toHex();
-            $thisEl.siblings(".input-group-btn").find(".current-color").css("background-color",
-              "#" + myColorVars.typedColor);
+            updatePreviewElements(myColorVars.typedColor);
           } else {
             myColorVars.typedColor = $thisEl.val().match(/^\s+$|^$/) ? '' : tinycolor($thisEl.val()).toHex();
             if (myColorVars.typedColor === '') {
-              $thisEl.siblings(".input-group-btn").find(".current-color").css("background",
-                "none");
+              $thisEl.siblings(".input-group-btn")
+                     .find(".current-color")
+                     .css("background", "none");
             } else {
-              $thisEl.siblings(".input-group-btn").find(".current-color").css("background-color",
-                "#" + myColorVars.typedColor);
+              updatePreviewElements(myColorVars.typedColor);
             }
           }
         },
@@ -817,8 +842,8 @@
           fullSpectrumString += "background-image: -webkit-gradient(linear, left top, right top," +
             "color-stop(0%, " + color1 + ")," + "color-stop(17%, " + color2 + ")," + "color-stop(34%, " + color3 + ")," +
             "color-stop(51%, " + color4 + ")," + "color-stop(68%, " + color5 + ")," + "color-stop(85%, " + color6 + ")," +
-            "color-stop(100%, " + color7 + "));" + 
-            "background-image: linear-gradient(to right, " + color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%," + 
+            "color-stop(100%, " + color7 + "));" +
+            "background-image: linear-gradient(to right, " + color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%," +
             color4 + " 51%," + color5 + " 68%," + color6 + " 85%," + color7 + " 100%); " +
             "background-image: -moz-linear-gradient(left center, " +
             color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " +
@@ -838,7 +863,7 @@
             $spectrum5.css("filter",ieSpectrum5);
           } else {
             spectrum.attr("style",fullSpectrumString);
-            
+
           }
         },
 
@@ -919,7 +944,7 @@
       return this.each(function (index) {
 
         methods.initialize.apply(this,[index]);
-        
+
         // commonly used DOM elements for each color picker
         var myElements = {
           thisEl: $(this),

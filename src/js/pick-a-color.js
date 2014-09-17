@@ -441,6 +441,7 @@
 
         horizontallyDraggable: function () {
           $(this).on(startEvent, function (event) {
+            event.stopPropagation();
             event.preventDefault();
             var $this_el = $(event.delegateTarget);
             $this_el.css("cursor","-webkit-grabbing");

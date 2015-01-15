@@ -235,7 +235,7 @@
 
           // methods
     
-          var methods = {
+          var methods = $.fn.pickAColor.methods = {
     
             initialize: function (index) {
               var $thisEl = $(this),
@@ -1183,6 +1183,16 @@
     
           });
       } else {
+          
+          // needed to expose updatePreview method :
+          // ... var methods = $.fn.pickAColor.methods = { ...
+          // and to pass a JSON options like this:
+          // {method:"val", value: "fff000"}
+          if (options.method === "val") {
+              $(this).val(options.value).trigger("change");
+              $.fn.pickAColor.methods.updatePreview(this);
+          }
+          
           return this;
       }
     };

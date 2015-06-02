@@ -7,7 +7,7 @@
 				"input",
 				"bootstrap"
     ],
-    "version": "1.2.3",
+    "version": "1.2.4_dev",
     "author": {
         "name": "Lauren Sperber",
         "url": "http://lauren.github.com/pick-a-color/"
@@ -17,7 +17,7 @@
             "name": "Lauren Sperber",
             "email": "lauren.sperber@gmail.com",
             "url": "http://laurensperber.com"
-        }
+        },        
     ],
     "licenses": [
         {

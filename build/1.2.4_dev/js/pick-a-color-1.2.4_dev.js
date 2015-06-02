@@ -38,6 +38,7 @@
         recommendedColors       : [],
         allowBlank            : false,
         inlineDropdown        : false,
+        dropup                : false,
         basicColors           : {
           white     : 'fff',
           red       : 'f00',
@@ -69,6 +70,9 @@
             $dropdownContainer = $("<div>").addClass("color-menu dropdown-menu");
         if (settings.inlineDropdown) {
           $dropdownContainer.addClass("color-menu--inline");
+        }
+        if (settings.dropup) {
+          $markup.addClass("dropup")
         }
         if (!settings.showHexInput) {
           $dropdownButton.addClass("no-hex");

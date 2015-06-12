@@ -10,7 +10,7 @@
 
       // capabilities
 
-      var supportsTouch = 'ontouchstart' in window,
+      var supportsTouch = false,
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
             typeof JSON === 'object', // don't use LS if JSON is not available

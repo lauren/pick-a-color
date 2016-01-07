@@ -392,6 +392,7 @@
           var button = arguments[0].button,
               menu = arguments[0].menu;
           if (menu.css("display") === "block") {
+            menu.find('.color-preview').click();
             methods.closeDropdown(button,menu);
           }
         },

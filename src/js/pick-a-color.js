@@ -7,6 +7,9 @@
     "use strict";
 
     $.fn.pickAColor = function (options) {
+      if (! $(this).hasClass("pick-a-color-started")) {
+        $(this).addClass('pick-a-color-started');
+
 
       // capabilities
 
@@ -1180,6 +1183,7 @@
 
       });
 
+      }
     };
 
 })(jQuery);

@@ -550,6 +550,9 @@
               methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
             }
           } else {
+            var $inputElem = $advancedPreview.parent().parent().parent().parent().parent().parent().parent().find("input");
+            $inputElem.val(highlightedHex.substring(1));
+            $inputElem.trigger("change");
             $advancedPreview.css("background-color",highlightedHex);
             $lightnessValue.text(highlightedLightnessString);
             methods.updateSaturationStyles($saturationSpectrum,currentHue,highlightedLightness);
@@ -878,6 +881,9 @@
           color = "#" + tinycolor(color).toHex();
 
           $advancedPreview.css("background-color",color);
+          var $inputElem = $thisEl.parent().parent().parent().parent().parent().parent().parent().find("input");
+          $inputElem.val(color.substring(1));
+          $inputElem.trigger("change");
           $hueValue.text(hue);
           methods.updateLightnessStyles($lightnessSpectrum,hue,currentSaturation);
           methods.updateSaturationStyles($saturationSpectrum,hue,currentLightness);
@@ -911,6 +917,9 @@
           color = "#" + tinycolor(color).toHex();
 
           $advancedPreview.css("background-color",color);
+          var $inputElem = $thisEl.parent().parent().parent().parent().parent().parent().parent().find("input");
+          $inputElem.val(color.substring(1));
+          $inputElem.trigger("change");
           $saturationValue.text(saturationString);
           methods.updateLightnessStyles($lightnessSpectrum,currentHue,saturation);
           methods.updateHueStyles($hueSpectrum,saturation,currentLightness);

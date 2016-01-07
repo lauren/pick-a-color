@@ -207,7 +207,6 @@
       };
 
       var myColorVars = {};
-      var sharedVars = {};
 
       var myStyleVars = {
           rowsInDropdown     : 8,
@@ -1000,7 +999,6 @@
           highlightBands: $(this).parent().find(".highlight-band"),
           basicHighlightBands: $(this).parent().find(".basicColors-content .highlight-band")
         };
-        sharedVars.myElements = myElements;
 
         var mostRecentClick, // for storing click events when needed
             windowTopPosition, // for storing the position of the top of the window when needed

@@ -207,6 +207,7 @@
       };
 
       var myColorVars = {};
+      var sharedVars = {};
 
       var myStyleVars = {
           rowsInDropdown     : 8,
@@ -298,6 +299,53 @@
               $thisEl.siblings(".input-group-btn").find(".current-color").css("background-color",
                 "#" + myColorVars.typedColor);
             }
+          }
+          if (myColorVars.hasOwnProperty('advancedStatus')) {
+            var newColor = $thisEl.val();
+            var hsl = tinycolor(newColor).toHsl();
+            var $advancedContainer = $thisEl.parent();
+            var spectrumWidth = parseInt($advancedContainer.find(".color-box").first().width(),10);
+
+            //Set Hue
+            var $hueSpectrum = $advancedContainer.find(".spectrum-hue");
+            var $hueBand = $hueSpectrum.find(".highlight-band");
+            var hbWidth = $hueBand.outerWidth();
+            var halfHBWidth = hbWidth / 2;
+            //inverse of hsl equation in getHighlightedHue
+            var position = hsl.h/360*spectrumWidth;
+            $hueBand.css("left", position - halfHBWidth);
+
+            //Set Saturation
+            var $satSpectrum = $advancedContainer.find(".spectrum-saturation");
+            var $satBand = $satSpectrum.find(".highlight-band");
+            var sbWidth = $satBand.outerWidth();
+            var halfSBWidth = sbWidth / 2;
+            //inverse of hsl equation in getHighlightedSaturation
+            var position = hsl.s*spectrumWidth;
+            $satBand.css("left", position - halfSBWidth);
+
+            //Set Lightness
+            var $lightSpectrum = $advancedContainer.find(".spectrum-lightness");
+            var $lightBand = $lightSpectrum.find(".highlight-band");
+            var lbWidth = $lightBand.outerWidth();
+            var halfLBWidth = lbWidth / 2;
+            //I made this up.  It looks like hsl.l += multiplier, which is
+            //calculated in getColorMultiplier.  This is just tweaking lightness
+            //but I want to just set it.  So taking an educated guess.
+            var position = (1.0-hsl.l)*spectrumWidth;
+            $lightBand.css("left", position - halfLBWidth);
+
+            //Make sure all variables are updated correctly
+            methods.updateSaturationStyles($satSpectrum,hsl.h,hsl.l);
+            methods.updateHueStyles($hueSpectrum,hsl.s,hsl.l);
+            methods.updateLightnessStyles($lightSpectrum,hsl.h,hsl.s);
+            var $advancedPreview = $advancedContainer.find(".color-preview");
+            $advancedPreview.css("background-color",newColor);
+
+            //Probably good to do
+            myColorVars.advancedStatus.h = hsl.h;
+            myColorVars.advancedStatus.s = hsl.s;
+            myColorVars.advancedStatus.l = hsl.l;
           }
         },
 
@@ -951,11 +999,14 @@
           highlightBands: $(this).parent().find(".highlight-band"),
           basicHighlightBands: $(this).parent().find(".basicColors-content .highlight-band")
         };
+        sharedVars.myElements = myElements;
 
         var mostRecentClick, // for storing click events when needed
             windowTopPosition, // for storing the position of the top of the window when needed
             advancedStatus,
             mySavedColorsInfo;
+        advancedStatus = {};
+        myColorVars.advancedStatus = advancedStatus;
 
         if (useTabs) {
           myElements.tabs = myElements.thisWrapper.find(".tab");
@@ -994,11 +1045,9 @@
           }
         }
         if (settings.showAdvanced) {
-          advancedStatus = {
-            h: 0,
-            s: 1,
-            l: 0.5
-          };
+          advancedStatus.h = 180;
+          advancedStatus.s = 1;
+          advancedStatus.l = 0.5;
 
           myElements.advancedSpectrums = myElements.thisWrapper.find(".advanced-list").find(".color-box");
           myElements.advancedHighlightBands = myElements.thisWrapper.find(".advanced-list").find(".highlight-band");

@@ -13,7 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "3.0.0",
+    "bootstrap": "~3.3.x",
     "jquery": "1.9.1",
     "tinycolor": "0.9.15"
   }

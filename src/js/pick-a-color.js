@@ -10,7 +10,8 @@
 
       // capabilities
 
-      var supportsTouch = 'ontouchstart' in window,
+      //var supportsTouch = 'ontouchstart' in window,
+      var supportsTouch = false,
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
             typeof JSON === 'object', // don't use LS if JSON is not available
@@ -22,7 +23,7 @@
           clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
-
+            
       // settings
 
       var settings = $.extend({
@@ -274,6 +275,7 @@
           if (!settings.showHexInput) {
             $thisEl.attr("type","hidden");
           }
+
         },
 
         updatePreview: function ($thisEl) {
@@ -677,7 +679,6 @@
           selectedColor = tinycolor(selectedColor).toHex();
           $(myElements.thisEl).val(selectedColor);
           $(myElements.thisEl).trigger("change");
-          methods.updatePreview(myElements.thisEl);
           methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
           methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
         },
@@ -1005,10 +1006,12 @@
         myElements.thisEl.focus(function () {
           var $thisEl = $(this);
           myColorVars.typedColor = $thisEl.val(); // update with the current
+          /*
           if (!settings.allowBlank) {
             $thisEl.val(""); //clear the field on focus
           }
-          methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
+          */
+          //methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
         }).blur(function () {
           var $thisEl = $(this);
           myColorVars.newValue = $thisEl.val(); // on blur, check the field's value
@@ -1023,7 +1026,7 @@
             // save to saved colors
             methods.addToSavedColors(myColorVars.newValue,mySavedColorsInfo,myElements.savedColorsContent);
           }
-          methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
+          //methods.toggleDropdown(myElements.colorPreviewButton,myElements.ColorMenu);
           methods.updatePreview($thisEl); // update preview
         });
 
@@ -1137,7 +1140,6 @@
             var selectedColor = tinycolor($(this).css("background-color")).toHex();
             $(myElements.thisEl).val(selectedColor);
             $(myElements.thisEl).trigger("change");
-            methods.updatePreview(myElements.thisEl);
             methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
             methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu); // close the dropdown
           });
@@ -1160,7 +1162,6 @@
                 $thisEl.attr("class").split("#")[1];
               $(myElements.thisEl).val(selectedColor);
               $(myElements.thisEl).trigger("change");
-              methods.updatePreview(myElements.thisEl);
               methods.closeDropdown(myElements.colorPreviewButton,myElements.colorMenu);
               methods.addToSavedColors(selectedColor,mySavedColorsInfo,myElements.savedColorsContent);
             }

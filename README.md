@@ -45,7 +45,7 @@ OK! Let's do this color picking thing!
 
 ### Bower
 
-`bower install pick-a-color`
+`bower install pick-a-color-m`
 
 ### Compiled CSS For Use With Default Bootstrap Settings
 

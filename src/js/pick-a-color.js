@@ -11,17 +11,20 @@
       // capabilities
 
       var supportsTouch = 'ontouchstart' in window,
+          mobileDevice = ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) ? true : false,
           smallScreen = (parseInt($(window).width(),10) < 767) ? true : false,
           supportsLocalStorage = 'localStorage' in window && window.localStorage !== null &&
             typeof JSON === 'object', // don't use LS if JSON is not available
           isIELT10 = document.all && !window.atob, // OH NOES!
 
-          startEvent    = supportsTouch ? "touchstart.pickAColor"  : "mousedown.pickAColor",
-          moveEvent     = supportsTouch ? "touchmove.pickAColor"   : "mousemove.pickAColor",
-          endEvent      = supportsTouch ? "touchend.pickAColor"    : "mouseup.pickAColor",
-          clickEvent    = supportsTouch ? "touchend.pickAColor"    : "click.pickAColor",
+          startEvent    = (supportsTouch && mobileDevice) ? "touchstart.pickAColor"  : "mousedown.pickAColor",
+          moveEvent     = (supportsTouch && mobileDevice) ? "touchmove.pickAColor"   : "mousemove.pickAColor",
+          endEvent      = (supportsTouch && mobileDevice) ? "touchend.pickAColor"    : "mouseup.pickAColor",
+          clickEvent    = (supportsTouch && mobileDevice) ? "touchend.pickAColor"    : "click.pickAColor",
           dragEvent     = "dragging.pickAColor",
           endDragEvent  = "endDrag.pickAColor";
+
+
 
       // settings
 

@@ -243,6 +243,15 @@
             $thisEl.attr("name","pick-a-color-" + index);
           }
           myId = $thisEl.attr("name");
+            
+          //bail if the element is already initialised
+          if (!$thisEl.attr("init")) {
+            //not initialised so set a flag so we don't try to init again.
+            $thisEl.attr("init","true");
+          } else {
+            //initialised already so exit
+            return false;
+          }            
           
           // enforce .pick-a-color class on input
           $thisEl.addClass("pick-a-color");

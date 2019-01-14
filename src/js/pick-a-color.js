@@ -552,7 +552,7 @@
             $thisParent.siblings(".color-preview").css("background-color",highlightedHex);
             // replace the color label with a 'select' button
             $thisParent.prev('.color-label').replaceWith(
-              '<button class="color-select btn btn-mini" type="button">Select</button>');
+              '<button class="color-select btn btn-mini" type="button">' + settings.translate.select + '</button>');
             if (spectrumType !== "darkenRight") {
               methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
             }

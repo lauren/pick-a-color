@@ -55,7 +55,8 @@
           colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
           lightness: 'Lightness: ',
           saturation: 'Saturation: ',
-          hue: 'Hue: '
+          hue: 'Hue: ',
+          select: 'Select'
         }
       }, options);
 
@@ -207,7 +208,7 @@
           var $previewItem = $("<li>").addClass("preview-item").append($("<span>").
               addClass("preview-text").text(settings.translate.preview)),
             $preview = $("<span>").addClass("color-preview advanced").
-              append("<button class='color-select btn btn-mini advanced' type='button'>Select</button>");
+              append("<button class='color-select btn btn-mini advanced' type='button'>" + settings.translate.select + "</button>");
           $advancedList.append($previewItem.append($preview));
           $dropdownContainer.append($advanced.append($advancedList));
         }

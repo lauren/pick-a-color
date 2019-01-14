@@ -269,7 +269,8 @@ $(".pick-a-color").pickAColor({
                   colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
                   lightness: 'Lightness: ',
                   saturation: 'Saturation: ',
-                  hue: 'Hue: '
+                  hue: 'Hue: ',
+                  select: 'Select'
                 }
  });
 ```

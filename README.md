@@ -260,12 +260,16 @@ If you'd like to translate the texts:
 ```javascript
 $(".pick-a-color").pickAColor({
         translate : {
-                  basicColors : 'Basic',
+                  basicColors : 'Basic Colors',
                   advanced : 'Advanced',
-                  savedColors : 'Saved',
+                  savedColors : 'Saved Colors',
                   preview: 'Preview',
                   menuInstruction: 'Tap spectrum or drag band to change color',
+                  advancedInstruction: 'Tap spectrum or drag band to change color',
                   colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
+                  lightness: 'Lightness: ',
+                  saturation: 'Saturation: ',
+                  hue: 'Hue: '
                 }
  });
 ```

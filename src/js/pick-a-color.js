@@ -53,6 +53,8 @@
           menuInstruction: 'Tap spectrum or drag band to change color',
           advancedInstruction: 'Tap spectrum or drag band to change color',
           colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
+          touchInstruction: "Press 'select' to choose this color",
+          instructionsEl: 'Press the color preview to choose this color',
           lightness: 'Lightness: ',
           saturation: 'Saturation: ',
           hue: 'Hue: ',
@@ -714,7 +716,7 @@
           var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand, [{type: "basic"}]);
           methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
           // update touch instructions
-          myElements.touchInstructions.html("Press 'select' to choose this color");
+          myElements.touchInstructions.html(settings.translate.touchInstruction);
         },
 
         // bind to mousedown/touchstart, execute provied function if the top of the
@@ -924,7 +926,7 @@
         },
 
         updateAdvancedInstructions: function (instructionsEl) {
-          instructionsEl.html("Press the color preview to choose this color");
+          instructionsEl.html(settings.translate.instructionsEl);
         }
 
       };

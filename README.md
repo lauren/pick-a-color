@@ -267,6 +267,8 @@ $(".pick-a-color").pickAColor({
                   menuInstruction: 'Tap spectrum or drag band to change color',
                   advancedInstruction: 'Tap spectrum or drag band to change color',
                   colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
+                  touchInstruction: "Press 'select' to choose this color",
+                  instructionsEl: 'Press the color preview to choose this color',
                   lightness: 'Lightness: ',
                   saturation: 'Saturation: ',
                   hue: 'Hue: ',

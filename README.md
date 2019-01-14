@@ -253,6 +253,23 @@ Specifies whether or not the field can be left blank. Use this if the color inpu
 
 Specifies whether the dropdown should be shown below the input field (instead of the default, to the right) on desktop browsers.
 
+### Translate
+
+If you'd like to translate the texts:
+
+```javascript
+$(".pick-a-color").pickAColor({
+        translate : {
+                  basicColors : 'Basic',
+                  advanced : 'Advanced',
+                  savedColors : 'Saved',
+                  preview: 'Preview',
+                  menuInstruction: 'Tap spectrum or drag band to change color',
+                  colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
+                }
+ });
+```
+
 ## Tested Browsers
 
 I've tested Pick-a-Color in these browsers:

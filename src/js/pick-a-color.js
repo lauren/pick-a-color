@@ -51,7 +51,11 @@
           savedColors : 'Saved Colors',
           preview: 'Preview',
           menuInstruction: 'Tap spectrum or drag band to change color',
+          advancedInstruction: 'Tap spectrum or drag band to change color',
           colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
+          lightness: 'Lightness: ',
+          saturation: 'Saturation: ',
+          hue: 'Hue: '
         }
       }, options);
 
@@ -151,11 +155,11 @@
         if (settings.showAdvanced) {
           var advancedColorsActiveClass = settings.showBasicColors || settings.showSavedColors ? 'inactive-content' : 'active-content';
           var $advanced = $("<div>").addClass("advanced-content").addClass(advancedColorsActiveClass).
-                append($("<h6>").addClass("advanced-instructions").text("Tap spectrum or drag band to change color")),
+                append($("<h6>").addClass("advanced-instructions").text(settings.translate.advancedInstruction)),
               $advancedList = $("<ul>").addClass("advanced-list"),
               $hueItem = $("<li>").addClass("hue-item"),
               $hueContent = $("<span>").addClass("hue-text").
-                text("Hue: ").append($("<span>").addClass("hue-value").text("0"));
+                text(settings.translate.hue).append($("<span>").addClass("hue-value").text("0"));
           var $hueSpectrum = $("<span>").addClass("color-box spectrum-hue");
           if (isIELT10) {
             $.each([0,1,2,3,4,5,6], function (i) {
@@ -171,7 +175,7 @@
           var $lightnessItem = $("<li>").addClass("lightness-item"),
               $lightnessSpectrum = $("<span>").addClass("color-box spectrum-lightness"),
               $lightnessContent = $("<span>").addClass("lightness-text").
-            text("Lightness: ").append($("<span>").addClass("lightness-value").text("50%"));
+            text(settings.translate.lightness).append($("<span>").addClass("lightness-value").text("50%"));
           if (isIELT10) {
             $.each([0,1], function (i) {
               $lightnessSpectrum.append($("<span>").addClass("lightness-spectrum-" + i +
@@ -197,11 +201,11 @@
             $saturationHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
           });
           var $saturationContent = $("<span>").addClass("saturation-text").
-            text("Saturation: ").append($("<span>").addClass("saturation-value").text("100%"));
+            text(settings.translate.saturation).append($("<span>").addClass("saturation-value").text("100%"));
           $advancedList.append($saturationItem.append($saturationContent).append($saturationSpectrum.
             append($saturationHighlightBand)));
           var $previewItem = $("<li>").addClass("preview-item").append($("<span>").
-              addClass("preview-text").text("Preview")),
+              addClass("preview-text").text(settings.translate.preview)),
             $preview = $("<span>").addClass("color-preview advanced").
               append("<button class='color-select btn btn-mini advanced' type='button'>Select</button>");
           $advancedList.append($previewItem.append($preview));

@@ -44,10 +44,25 @@
           blue      : '00f',
           purple    : '800080',
           black     : '000'
+        },
+        translate : {
+          basicColors : 'Basic Colors',
+          advanced : 'Advanced',
+          savedColors : 'Saved Colors',
+          preview: 'Preview',
+          menuInstruction: 'Tap spectrum or drag band to change color',
+          advancedInstruction: 'Tap spectrum or drag band to change color',
+          colorsInstruction: 'Type in a color or use the spectrums to lighten or darken an existing color.',
+          touchInstruction: "Press 'select' to choose this color",
+          instructionsEl: 'Press the color preview to choose this color',
+          lightness: 'Lightness: ',
+          saturation: 'Saturation: ',
+          hue: 'Hue: ',
+          select: 'Select'
         }
       }, options);
 
-      // override showBasicColors showAdvanced isn't shown      
+      // override showBasicColors showAdvanced isn't shown
       if (!settings.showAdvanced && !settings.showBasicColors) {
         settings.showBasicColors = true;
       }
@@ -80,14 +95,14 @@
               savedColorsClass = settings.showBasicColors ? "savedColors-tab tab" : "savedColors-tab tab tab-active";
           if (settings.showBasicColors) {
             $tabContainer.append($("<span>").addClass("basicColors-tab tab tab-active").
-              append($("<a>").text("Basic Colors"))); 
+              append($("<a>").text(settings.translate.basicColors)));
           }
           if (settings.showSavedColors) {
-            $tabContainer.append($("<span>").addClass(savedColorsClass).append($("<a>").text("Saved Colors")));
+            $tabContainer.append($("<span>").addClass(savedColorsClass).append($("<a>").text(settings.translate.savedColors)));
           }
           if (settings.showAdvanced) {
             $tabContainer.append($("<span>").addClass("advanced-tab tab").
-            append($("<a>").text("Advanced")));
+            append($("<a>").text(settings.translate.advanced)));
           }
           $dropdownContainer.append($tabContainer);
         }
@@ -96,7 +111,7 @@
           var $basicColors = $("<div>").addClass("basicColors-content active-content");
           if (settings.showSpectrum) {
             $basicColors.append($("<h6>").addClass("color-menu-instructions").
-              text("Tap spectrum or drag band to change color"));
+              text(settings.translate.menuInstruction));
           }
           var $listContainer = $("<ul>").addClass("basic-colors-list");
           $.each(settings.basicColors, function (index,value) {
@@ -136,18 +151,18 @@
           var savedColorsActiveClass = settings.showBasicColors ? 'inactive-content' : 'active-content',
             $savedColors = $("<div>").addClass("savedColors-content").addClass(savedColorsActiveClass);
             $savedColors.append($("<p>").addClass("saved-colors-instructions").
-            text("Type in a color or use the spectrums to lighten or darken an existing color."));
+            text(settings.translate.colorsInstruction));
           $dropdownContainer.append($savedColors);
         }
 
         if (settings.showAdvanced) {
           var advancedColorsActiveClass = settings.showBasicColors || settings.showSavedColors ? 'inactive-content' : 'active-content';
           var $advanced = $("<div>").addClass("advanced-content").addClass(advancedColorsActiveClass).
-                append($("<h6>").addClass("advanced-instructions").text("Tap spectrum or drag band to change color")),
+                append($("<h6>").addClass("advanced-instructions").text(settings.translate.advancedInstruction)),
               $advancedList = $("<ul>").addClass("advanced-list"),
               $hueItem = $("<li>").addClass("hue-item"),
               $hueContent = $("<span>").addClass("hue-text").
-                text("Hue: ").append($("<span>").addClass("hue-value").text("0"));
+                text(settings.translate.hue).append($("<span>").addClass("hue-value").text("0"));
           var $hueSpectrum = $("<span>").addClass("color-box spectrum-hue");
           if (isIELT10) {
             $.each([0,1,2,3,4,5,6], function (i) {
@@ -163,7 +178,7 @@
           var $lightnessItem = $("<li>").addClass("lightness-item"),
               $lightnessSpectrum = $("<span>").addClass("color-box spectrum-lightness"),
               $lightnessContent = $("<span>").addClass("lightness-text").
-            text("Lightness: ").append($("<span>").addClass("lightness-value").text("50%"));
+            text(settings.translate.lightness).append($("<span>").addClass("lightness-value").text("50%"));
           if (isIELT10) {
             $.each([0,1], function (i) {
               $lightnessSpectrum.append($("<span>").addClass("lightness-spectrum-" + i +
@@ -189,13 +204,13 @@
             $saturationHighlightBand.append($("<span>").addClass("highlight-band-stripe"));
           });
           var $saturationContent = $("<span>").addClass("saturation-text").
-            text("Saturation: ").append($("<span>").addClass("saturation-value").text("100%"));
+            text(settings.translate.saturation).append($("<span>").addClass("saturation-value").text("100%"));
           $advancedList.append($saturationItem.append($saturationContent).append($saturationSpectrum.
             append($saturationHighlightBand)));
           var $previewItem = $("<li>").addClass("preview-item").append($("<span>").
-              addClass("preview-text").text("Preview")),
+              addClass("preview-text").text(settings.translate.preview)),
             $preview = $("<span>").addClass("color-preview advanced").
-              append("<button class='color-select btn btn-mini advanced' type='button'>Select</button>");
+              append("<button class='color-select btn btn-mini advanced' type='button'>" + settings.translate.select + "</button>");
           $advancedList.append($previewItem.append($preview));
           $dropdownContainer.append($advanced.append($advancedList));
         }
@@ -209,7 +224,7 @@
           rowsInDropdown     : 8,
           maxColsInDropdown  : 2
       };
-      
+
       if (settings.showSavedColors) { // if we're saving colors...
         var allSavedColors = []; // make an array for all saved colors
         if (supportsLocalStorage && localStorage.allSavedColors) { // look for them in LS
@@ -237,16 +252,16 @@
               $thisParent,
               myId,
               defaultColor;
-          
+
           // if there's no name on the input field, create one, then use it as the myID
           if (!$thisEl.attr("name")) {
             $thisEl.attr("name","pick-a-color-" + index);
           }
           myId = $thisEl.attr("name");
-          
+
           // enforce .pick-a-color class on input
           $thisEl.addClass("pick-a-color");
-          
+
           // convert default color to valid hex value
           if (settings.allowBlank) {
             // convert to Hex only if the field init value is not blank
@@ -260,7 +275,7 @@
             myColorVars.typedColor = myColorVars.defaultColor;
             $thisEl.val(myColorVars.defaultColor);
           }
-          
+
           // wrap initializing input field with unique div and add hex symbol and post-input markup
           $($thisEl).wrap('<div class="input-group pick-a-color-markup" id="' + myId + '">');
           $thisParent = $($thisEl.parent());
@@ -269,7 +284,7 @@
           } else {
             $thisParent.append(markupAfterInput());
           }
-          
+
           // hide input for noinput option
           if (!settings.showHexInput) {
             $thisEl.attr("type","hidden");
@@ -537,7 +552,7 @@
             $thisParent.siblings(".color-preview").css("background-color",highlightedHex);
             // replace the color label with a 'select' button
             $thisParent.prev('.color-label').replaceWith(
-              '<button class="color-select btn btn-mini" type="button">Select</button>');
+              '<button class="color-select btn btn-mini" type="button">' + settings.translate.select + '</button>');
             if (spectrumType !== "darkenRight") {
               methods.modifyHighlightBand($thisEl,colorMultiplier,spectrumType);
             }
@@ -701,7 +716,7 @@
           var highlightedColor = methods.calculateHighlightedColor.apply($highlightBand, [{type: "basic"}]);
           methods.addToSavedColors(highlightedColor,mySavedColorsInfo,myElements.savedColorsContent);
           // update touch instructions
-          myElements.touchInstructions.html("Press 'select' to choose this color");
+          myElements.touchInstructions.html(settings.translate.touchInstruction);
         },
 
         // bind to mousedown/touchstart, execute provied function if the top of the
@@ -817,8 +832,8 @@
           fullSpectrumString += "background-image: -webkit-gradient(linear, left top, right top," +
             "color-stop(0%, " + color1 + ")," + "color-stop(17%, " + color2 + ")," + "color-stop(34%, " + color3 + ")," +
             "color-stop(51%, " + color4 + ")," + "color-stop(68%, " + color5 + ")," + "color-stop(85%, " + color6 + ")," +
-            "color-stop(100%, " + color7 + "));" + 
-            "background-image: linear-gradient(to right, " + color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%," + 
+            "color-stop(100%, " + color7 + "));" +
+            "background-image: linear-gradient(to right, " + color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%," +
             color4 + " 51%," + color5 + " 68%," + color6 + " 85%," + color7 + " 100%); " +
             "background-image: -moz-linear-gradient(left center, " +
             color1 + " 0%, " + color2 + " 17%, " + color3 + " 24%, " + color4 + " 51%, " + color5 + " 68%, " +
@@ -838,7 +853,7 @@
             $spectrum5.css("filter",ieSpectrum5);
           } else {
             spectrum.attr("style",fullSpectrumString);
-            
+
           }
         },
 
@@ -911,7 +926,7 @@
         },
 
         updateAdvancedInstructions: function (instructionsEl) {
-          instructionsEl.html("Press the color preview to choose this color");
+          instructionsEl.html(settings.translate.instructionsEl);
         }
 
       };
@@ -919,7 +934,7 @@
       return this.each(function (index) {
 
         methods.initialize.apply(this,[index]);
-        
+
         // commonly used DOM elements for each color picker
         var myElements = {
           thisEl: $(this),
